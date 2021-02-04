@@ -1,0 +1,123 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_optix_UpdateGUI
+_optix_UpdateGUI:
+	ld	hl, -6
+	call	__frameset
+	ld	hl, (_optix_cursor+10)
+	call	__indcallhl
+	ld	bc, (ix + 9)
+	ld	de, 1
+	push	bc
+	pop	hl
+	or	a, a
+	sbc	hl, de
+	call	__setflag
+	jq	p, BB0_2
+	ld	bc, 0
+BB0_2:
+	ld	iy, (ix + 6)
+	ld	de, 2
+BB0_3:
+	push	bc
+	pop	hl
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB0_7
+	ld	hl, (iy + 3)
+	or	a, a
+	sbc	hl, de
+	jq	nz, BB0_6
+	ld	(ix + -3), iy
+	ld	hl, (ix + -3)
+	ld	iy, (hl)
+	ld	hl, (iy + 11)
+	push	iy
+	ld	(ix + -6), bc
+	call	__indcallhl
+	ld	de, 2
+	ld	iy, (ix + -3)
+	ld	bc, (ix + -6)
+	pop	hl
+BB0_6:
+	dec	bc
+	lea	iy, iy + 6
+	jq	BB0_3
+BB0_7:
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_optix_RenderGUI
+_optix_RenderGUI:
+	ld	hl, -6
+	call	__frameset
+	ld	iy, (ix + 6)
+	ld	de, (ix + 9)
+	ld	bc, 1
+	push	de
+	pop	hl
+	or	a, a
+	sbc	hl, bc
+	ex	de, hl
+	call	__setflag
+	jq	p, BB1_2
+	or	a, a
+	sbc	hl, hl
+BB1_2:
+BB1_3:
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB1_4
+	ld	(ix + -6), hl
+	ld	hl, (iy + 3)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	(ix + -3), iy
+	jq	nz, BB1_6
+	ld	hl, (ix + -3)
+	ld	iy, (hl)
+	ld	hl, (iy + 14)
+	push	iy
+	call	__indcallhl
+	ld	iy, (ix + -3)
+	pop	hl
+	jq	BB1_8
+BB1_6:
+	ld	de, 2
+	or	a, a
+	sbc	hl, de
+	jq	nz, BB1_9
+BB1_8:
+	ld	hl, (ix + -3)
+	ld	iy, (hl)
+	ld	hl, (iy + 14)
+	push	iy
+	call	__indcallhl
+	ld	iy, (ix + -3)
+	pop	hl
+BB1_9:
+	ld	hl, (ix + -6)
+	dec	hl
+	lea	iy, iy + 6
+	jq	BB1_3
+BB1_4:
+	ld	hl, (_optix_cursor+13)
+	ld	sp, ix
+	pop	ix
+	jp	(hl)
+	section	.text,"ax",@progbits
+
+	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
+	extern	__setflag
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	__frameset
+	extern	__indcallhl
+	extern	_optix_cursor

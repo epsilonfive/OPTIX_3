@@ -1,0 +1,32 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_optix_RenderText_default
+_optix_RenderText_default:
+	call	__frameset0
+	ld	iy, (ix + 6)
+	ld	a, (iy + 10)
+	ld	l, 1
+	xor	a, l
+	bit	0, a
+	jq	nz, BB0_2
+	ld	hl, (iy + 11)
+	ld	de, (iy)
+	ld	bc, (iy + 3)
+	push	bc
+	push	de
+	push	hl
+	call	_gfx_PrintStringXY
+	pop	hl
+	pop	hl
+	pop	hl
+BB0_2:
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	_gfx_PrintStringXY
+	extern	__frameset0

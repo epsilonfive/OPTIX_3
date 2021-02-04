@@ -2,7 +2,8 @@
 #define OPTIX_H
 
 //just some includes
-#include "button.h"
+#include "elements/button.h"
+#include "elements/text.h"
 #include "cursor.h"
 #include "globals.h"
 #include "loop.h"

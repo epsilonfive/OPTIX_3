@@ -1,0 +1,127 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_optix_InitializeCursor
+_optix_InitializeCursor:
+	ld	hl, 160
+	ld	de, 120
+	ld	bc, _optix_UpdateCursor_default
+	ld	iy, _optix_RenderCursor_default
+	ld	a, 1
+	ld	(_optix_cursor), hl
+	ld	(_optix_cursor+3), de
+	ld	(_optix_cursor+10), bc
+	ld	(_optix_cursor+13), iy
+	ld	(_optix_cursor+9), a
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_optix_UpdateCursor_default
+_optix_UpdateCursor_default:
+	ld	iy, -720866
+	ld.sis	bc, 8
+	ld	a, (_optix_cursor+9)
+	ld	e, 1
+	xor	a, e
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	call	__sand
+	bit	0, a
+	jq	z, BB1_1
+	ld	a, l
+	or	a, a
+	jq	nz, BB1_13
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	ld.sis	bc, 1
+	call	__sand
+	ld	a, l
+	xor	a, e
+	xor	a, e
+	bit	0, a
+	jq	nz, BB1_13
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	ld	a, l
+	bit	1, a
+	jq	nz, BB1_13
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	ret
+BB1_1:
+	ld	a, l
+	or	a, a
+	jq	z, BB1_3
+	ld	hl, (_optix_cursor+3)
+	ld	bc, -2
+	add	hl, bc
+	ld	(_optix_cursor+3), hl
+BB1_3:
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	ld.sis	bc, 1
+	call	__sand
+	ld	a, l
+	xor	a, e
+	bit	0, a
+	jq	nz, BB1_5
+	ld	hl, (_optix_cursor+3)
+	ld	de, 2
+	add	hl, de
+	ld	(_optix_cursor+3), hl
+BB1_5:
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	ld	a, l
+	bit	1, a
+	jq	z, BB1_7
+	ld	hl, (_optix_cursor)
+	ld	de, -2
+	add	hl, de
+	ld	(_optix_cursor), hl
+BB1_7:
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	ld	a, l
+	bit	2, a
+	jq	z, BB1_13
+	ld	hl, (_optix_cursor)
+	ld	de, 2
+	add	hl, de
+	ld	(_optix_cursor), hl
+BB1_13:
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_optix_RenderCursor_default
+_optix_RenderCursor_default:
+	ld	hl, -32
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	hl, (_optix_cursor)
+	ld	de, (_optix_cursor+3)
+	ld	bc, 5
+	push	bc
+	push	de
+	push	hl
+	call	_gfx_Circle
+	pop	hl
+	pop	hl
+	pop	hl
+	ret
+	section	.text,"ax",@progbits
+
+	section	.bss,"aw",@nobits
+	public	_optix_cursor
+_optix_cursor:
+	rb	16
+
+	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
+	extern	__Unwind_SjLj_Register
+	extern	__Unwind_SjLj_Unregister
+	extern	_gfx_Circle
+	extern	_gfx_SetColor
+	extern	__sand

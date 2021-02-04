@@ -5,6 +5,8 @@
 #include "globals.h"
 
 //defines
+#define OPTIX_CURSOR_SPEED     2
+//states
 #define OPTIX_CURSOR_NORMAL    0
 #define OPTIX_CURSOR_OVER_ITEM 1
 //cursor directions
@@ -31,6 +33,7 @@ typedef struct {
 extern optix_cursor_t optix_cursor;
 
 //functions
+void optix_InitializeCursor(void);
 void optix_UpdateCursor_default(void);
 void optix_RenderCursor_default(void);
 

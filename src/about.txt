@@ -1,0 +1,42 @@
+----------------------------------------------------------------------
+Name:   OPTIX CE 3.0.0
+Author: epsilon5
+About:  GUI library for the TI-84 Plus CE/TI-83 Premium CE calculators
+----------------------------------------------------------------------
+
+Structs
+-------
+optix_gui_stack: an item in the GUI to be rendered
+                 - contents:
+                 - ptr: a pointer to the item
+                 - type: the type of the item (button, text, sprite, menu, etc.)
+optix_transform: a general transform structure, used for many of the GUI elements
+                 - contents:
+                 - x: an x-coordinate
+                 - y: a y-coordinate
+                 - width: a width value
+                 - height: a height value
+optix_state:     a general state structure, containing information about the selection and visibility status of an elements
+                 - contents:
+                 - selected: whether or not this item is currently selected
+                 - visible: whether or not this item is visible; only visible items are updated
+optix_button:    a GUI button
+                 - contents:
+                 - optix_transform: used for the position and size
+                 - optix_state: used for the state
+                 - update: a function to be run to update the button
+                 - render: a function to be run to render the button
+                 - click_action: a function to be run when the button is pressed
+                 - pressed: whether or not the button has been pressed (used internally so that the button action is not
+                            many times when holding the selection key over a button)
+Commands
+--------
+void optix_InitializeCursor(void): initializes the cursor to be in in its default position in the middle of the screen,
+                                   to use optix_UpdateCursor_default as its update callback, and
+                                   optix_RenderCursor_default as its render callback
+finish this later, I don't feel like doing it now
+
+
+
+
+

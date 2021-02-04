@@ -3,15 +3,13 @@
 
 //includes
 #include "globals.h"
-#include "button.h"
 #include "cursor.h"
 
-typedef struct {
-    int num_buttons;
-    int num_scrollbars;
-    int num_windows;
-} optix_gui_control_t;
-extern optix_gui_control_t optix_gui_control;
+//definitions
+#define OPTIX_TEXT_TYPE   0
+#define OPTIX_SPRITE_TYPE 1
+#define OPTIX_BUTTON_TYPE 2
+#define OPTIX_MENU_TYPE   3
 
 //functions
 void optix_InitializeGUIState(void);

@@ -35,35 +35,50 @@ IV: Windows
 
 #include "main.h"
 
+//structs
+struct optix_gui_stack test_stack[STACK_NUM_ENTRIES];
+
+//functions
 void test_func(void *args) {
-    gfx_SetTextFGColor(255);
-    gfx_SetTextBGColor(0);
-    gfx_SetTextTransparentColor(0);
-    gfx_PrintStringXY("It worked!", 5, 100);
-    gfx_Blit(1);
-    while (!os_GetCSC());
+   //we don't need to do anything with args
+   gfx_PrintStringXY("It worked!", 5, 100);
+   gfx_Blit(1);
+   while (!os_GetCSC());
 }
 
 
 
 void main(void) {
-    gfx_Begin();
-    gfx_SetDraw(1);
-    //a test transform
-    optix_transform_temp.x = 0;
-    optix_transform_temp.y = 0;
-    optix_transform_temp.width = 40;
-    optix_transform_temp.height = 40;
-    optix_InitializeGUIState();
-    optix_InitializeCursor();
-    optix_AddButton(optix_transform_temp, optix_state_temp, optix_UpdateButton_default, optix_RenderButton_default, test_func, NULL);
-    dbg_sprintf(dbgout, "Buttons: %d", optix_gui_control.num_buttons);
-    while (!(kb_Data[6] & kb_Clear)) {
-        kb_Scan();
-        optix_UpdateGUI();
-        gfx_FillScreen(0);
-        optix_RenderGUI();
-        gfx_Blit(1);
-    }
-    gfx_End();
+   //test button
+   struct optix_button test_button =     {.transform = {.x = 0, .y = 0, .height = 40, .width = 40},                   //transform
+                                         .state = {.selected = false, .visible = true},                               //state
+                                         .update = optix_UpdateButton_default, .render = optix_RenderButton_default,  //functions
+                                         .click_action = test_func, .click_args = NULL};                              //on click
+   struct optix_button test_button2 =    {.transform = {.x = 0, .y = 100, .height = 40, .width = 100},                //transform
+                                         .state = {.selected = false, .visible = true},                               //state
+                                         .update = optix_UpdateButton_default, .render = optix_RenderButton_default,  //functions
+                                         .click_action = test_func, .click_args = NULL};                              //on click
+   struct optix_text test_text =         {.transform = {.x = 10, .y = 200, .height = 0, .width = 0},
+                                         .state = {.selected = false, .visible = true},
+                                         .text = "Test text", .render = optix_RenderText_default};
+   struct optix_gui_stack test_stack[] = {{.ptr = &test_button, .type = OPTIX_BUTTON_TYPE},
+                                         {.ptr = &test_button2, .type = OPTIX_BUTTON_TYPE},
+                                         {.ptr = &test_text,    .type = OPTIX_TEXT_TYPE}};                          //add more as needed
+   gfx_Begin();
+   gfx_SetDraw(1);
+   gfx_SetTextFGColor(255);
+   gfx_SetTextBGColor(0);
+   gfx_SetTextTransparentColor(0);
+   //optix_InitializeGUIState();
+   optix_InitializeCursor();
+   //optix_AddButton(optix_transform_temp, optix_state_temp, optix_UpdateButton_default, optix_RenderButton_default, test_func, NULL);
+   dbg_sprintf(dbgout, "Buttons: %d", optix_gui_control.num_buttons);
+   while (!(kb_Data[6] & kb_Clear)) {
+       kb_Scan();
+       optix_UpdateGUI(test_stack, 3);
+       gfx_FillScreen(0);
+       optix_RenderGUI(test_stack, 3);
+       gfx_Blit(1);
+   }
+   gfx_End();
 }
