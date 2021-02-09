@@ -4,24 +4,6 @@
 	public	_test_func
 _test_func:
 	call	__frameset0
-	ld	hl, L_.str
-	ld	de, 5
-	ld	bc, 100
-	push	bc
-	push	de
-	push	hl
-	call	_gfx_PrintStringXY
-	pop	hl
-	pop	hl
-	pop	hl
-	ld	hl, 1
-	push	hl
-	call	_gfx_Blit
-	pop	hl
-BB0_1:
-	call	_os_GetCSC
-	or	a, a
-	jq	z, BB0_1
 	pop	ix
 	ret
 	section	.text,"ax",@progbits
@@ -29,63 +11,164 @@ BB0_1:
 	section	.text,"ax",@progbits
 	public	_main
 _main:
-	ld	hl, -95
+	ld	hl, -107
 	call	__frameset
-	ld	iy, L___const.main.test_button
-	ld	hl, 24
-	lea	bc, ix + -24
-	ld	(ix + -95), bc
-	lea	de, ix + -48
-	ld	(ix + -92), de
-	lea	de, ix + -65
-	ld	(ix + -89), de
-	lea	de, ix + -83
-	ld	(ix + -86), de
-	push	hl
-	push	iy
+	ld	iy, L___const.main.test_button2
+	ld	bc, 28
+	lea	de, ix + -28
+	ld	(ix + -104), de
+	lea	hl, ix + -56
+	ld	(ix + -98), hl
+	lea	hl, ix + -80
+	ld	(ix + -101), hl
+	lea	hl, ix + -89
+	ld	(ix + -107), hl
 	push	bc
+	push	iy
+	push	de
 	call	_memcpy
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	hl, 24
+	ld	hl, 28
 	push	hl
 	ld	hl, L___const.main.test_button2
 	push	hl
-	ld	hl, (ix + -92)
+	ld	hl, (ix + -98)
 	push	hl
 	call	_memcpy
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	hl, 17
+	ld	hl, 24
 	push	hl
 	ld	hl, L___const.main.test_text
 	push	hl
-	ld	hl, (ix + -89)
+	ld	hl, (ix + -101)
 	push	hl
 	call	_memcpy
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	hl, (ix + -95)
-	ld	(ix + -83), hl
+	ld	hl, (ix + -104)
+	ld	(ix + -89), hl
+	ld	hl, (ix + -98)
+	ld	(ix + -86), hl
+	ld	de, 0
+	ld	(ix + -83), de
+	ld	hl, (ix + -101)
+	ld	(ix + -95), hl
+	ld	(ix + -92), de
+	push	de
+	push	hl
+	call	_optix_InitializeWidget
+	pop	hl
+	pop	hl
+	ld	hl, (ix + -101)
+	push	hl
+	call	_optix_InitializeTextTransform
+	pop	hl
+	ld	hl, 0
+	push	hl
+	ld	hl, _optix_RenderText_default
+	push	hl
+	ld	hl, (ix + -101)
+	push	hl
+	call	_optix_SetObjectCallbacks
+	pop	hl
+	pop	hl
+	pop	hl
 	ld	hl, 2
-	ld	(ix + -80), hl
-	ld	de, (ix + -92)
-	ld	(ix + -77), de
-	ld	(ix + -74), hl
-	ld	hl, (ix + -89)
-	ld	(ix + -71), hl
+	push	hl
+	ld	hl, (ix + -104)
+	push	hl
+	call	_optix_InitializeWidget
+	pop	hl
+	pop	hl
+	ld	hl, 40
+	push	hl
+	push	hl
 	or	a, a
 	sbc	hl, hl
-	ld	(ix + -68), hl
+	push	hl
+	push	hl
+	ld	hl, (ix + -104)
+	push	hl
+	call	_optix_SetObjectTransform
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, _optix_UpdateButton_default
+	push	hl
+	ld	hl, _optix_RenderButton_default
+	push	hl
+	ld	hl, (ix + -104)
+	push	hl
+	call	_optix_SetObjectCallbacks
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 2
+	push	hl
+	ld	hl, (ix + -98)
+	push	hl
+	call	_optix_InitializeWidget
+	pop	hl
+	pop	hl
+	ld	hl, 20
+	push	hl
+	ld	hl, 100
+	push	hl
+	push	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	ld	hl, (ix + -98)
+	push	hl
+	call	_optix_SetObjectTransform
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, _optix_UpdateButton_default
+	push	hl
+	ld	hl, _optix_RenderButton_default
+	push	hl
+	ld	hl, (ix + -98)
+	push	hl
+	call	_optix_SetObjectCallbacks
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	bc, (ix + -101)
+	inc	bc
+	ld	hl, (ix + -98)
+	inc	hl
+	ld	de, 1
+	push	de
+	push	de
+	push	hl
+	push	bc
+	call	_optix_AlignTransformToTransform
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	pea	ix + -95
+	ld	hl, (ix + -98)
+	push	hl
+	call	_optix_SetObjectChildren
+	pop	hl
+	pop	hl
 	call	_gfx_Begin
 	ld	hl, 1
 	push	hl
 	call	_gfx_SetDraw
 	pop	hl
-	ld	hl, -1
+	ld	hl, -32
 	push	hl
 	call	_gfx_SetTextFGColor
 	pop	hl
@@ -113,24 +196,18 @@ BB1_1:
 	bit	6, a
 	jq	nz, BB1_3
 	call	_kb_Scan
-	ld	hl, 3
-	push	hl
-	ld	hl, (ix + -86)
+	ld	hl, (ix + -107)
 	push	hl
 	call	_optix_UpdateGUI
-	pop	hl
 	pop	hl
 	or	a, a
 	sbc	hl, hl
 	push	hl
 	call	_gfx_FillScreen
 	pop	hl
-	ld	hl, 3
-	push	hl
-	ld	hl, (ix + -86)
+	ld	hl, (ix + -107)
 	push	hl
 	call	_optix_RenderGUI
-	pop	hl
 	pop	hl
 	ld	hl, 1
 	push	hl
@@ -145,79 +222,45 @@ BB1_3:
 	section	.text,"ax",@progbits
 
 	section	.rodata,"a",@progbits
-	private	L_.str
-L_.str:
-	db	"It worked!",000o
-
-	section	.rodata,"a",@progbits
-	private	L___const.main.test_button
-L___const.main.test_button:
-	dl	0
-	dl	0
-	dw	40
-	db	40
-	db	0
-	db	1
-	dl	_optix_UpdateButton_default
-	dl	_optix_RenderButton_default
-	dl	_test_func
-	dl	0
-	db	0
-
-	section	.rodata,"a",@progbits
 	private	L___const.main.test_button2
 L___const.main.test_button2:
-	dl	0
-	dl	100
-	dw	100
-	db	40
-	db	0
-	db	1
-	dl	_optix_UpdateButton_default
-	dl	_optix_RenderButton_default
+	db	21 dup 0
 	dl	_test_func
 	dl	0
 	db	0
 
 	section	.rodata,"a",@progbits
-	private	L_.str.1
-L_.str.1:
+	private	L_.str
+L_.str:
 	db	"Test text",000o
 
 	section	.rodata,"a",@progbits
 	private	L___const.main.test_text
 L___const.main.test_text:
-	dl	10
-	dl	200
-	dw	0
-	db	0
-	db	0
-	db	1
-	dl	L_.str.1
-	dl	_optix_RenderText_default
-
-	section	.bss,"aw",@nobits
-	public	_test_stack
-_test_stack:
-	rb	600
+	db	21 dup 0
+	dl	L_.str
 
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
 	extern	_gfx_SetTextTransparentColor
 	extern	_gfx_FillScreen
+	extern	__Unwind_SjLj_Register
 	extern	_gfx_Blit
+	extern	_optix_SetObjectTransform
 	extern	__frameset
 	extern	_optix_UpdateButton_default
 	extern	__Unwind_SjLj_Unregister
 	extern	_gfx_SetTextBGColor
-	extern	__Unwind_SjLj_Register
 	extern	_gfx_SetTextFGColor
-	extern	_gfx_Begin
 	extern	_optix_RenderButton_default
+	extern	_optix_InitializeWidget
+	extern	_gfx_Begin
 	extern	_kb_Scan
+	extern	_optix_SetObjectCallbacks
 	extern	_optix_UpdateGUI
+	extern	_optix_AlignTransformToTransform
 	extern	_optix_InitializeCursor
-	extern	_gfx_PrintStringXY
-	extern	_os_GetCSC
+	extern	_optix_InitializeTextTransform
+	extern	_optix_SetObjectChildren
 	extern	_optix_RenderText_default
 	extern	_gfx_End
 	extern	_optix_RenderGUI

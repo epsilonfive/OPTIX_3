@@ -1,31 +1,31 @@
 #include "loop.h"
 
-void optix_UpdateGUI(struct optix_gui_stack *stack, int numentries) {
-    int i;
+//takes an array of optix_widgets as an argument
+//please have a NULL as the last entry in this array, so we'll know when to stop
+void optix_UpdateGUI(struct optix_widget *stack[]) {
+    int i = 0;
+    dbg_sprintf(dbgout, "Updating GUI...\n");
     optix_cursor.update();
-    for (i = 0; i < numentries; i++) {
-        switch (stack[i].type) {
-            case OPTIX_BUTTON_TYPE:
-                ((struct optix_button *)stack[i].ptr)->update(stack[i].ptr);
-                break;
-            default:
-                break;
-        }
+    while (stack[i] != NULL) {
+        dbg_sprintf(dbgout, "Calling...\n");
+        if (stack[i]->update != NULL) stack[i]->update(stack[i]);
+        i++;
     }
+    dbg_sprintf(dbgout, "Updating finished after %d iterations.\n", i);
 }
 
-void optix_RenderGUI(struct optix_gui_stack *stack, int numentries) {
-    for (int i = 0; i < numentries; i++) {
-        switch (stack[i].type) {
-            case OPTIX_TEXT_TYPE:
-                ((struct optix_text *)stack[i].ptr)->render(stack[i].ptr);
-            case OPTIX_BUTTON_TYPE:
-                ((struct optix_button *)stack[i].ptr)->render(stack[i].ptr);
-                break;
-            default:
-                break;
-        }
+//takes an array of optix_widgets
+//please have a NULL as the last entry in this array, so we'll know when to stop
+void optix_RenderGUI(struct optix_widget *stack[]) {
+    int i = 0;
+    dbg_sprintf(dbgout, "Rendering GUI...\n");
+    while (stack[i] != NULL) {
+        if (stack[i]->render != NULL) stack[i]->render(stack[i]);
+        //cool recursion
+        if (stack[i]->child != NULL) optix_RenderGUI(stack[i]->child);
+        i++;
     }
     //the cursor should be on top of everything else
     optix_cursor.render();
+    dbg_sprintf(dbgout, "Rendering finished after %d iterations.\n", i);
 }

@@ -35,49 +35,48 @@ IV: Windows
 
 #include "main.h"
 
-//structs
-struct optix_gui_stack test_stack[STACK_NUM_ENTRIES];
-
 //functions
 void test_func(void *args) {
    //we don't need to do anything with args
-   gfx_PrintStringXY("It worked!", 5, 100);
-   gfx_Blit(1);
-   while (!os_GetCSC());
+   /*gfx_FillScreen(8);
+   gfx_Blit(1);*/
 }
-
-
 
 void main(void) {
    //test button
-   struct optix_button test_button =     {.transform = {.x = 0, .y = 0, .height = 40, .width = 40},                   //transform
-                                         .state = {.selected = false, .visible = true},                               //state
-                                         .update = optix_UpdateButton_default, .render = optix_RenderButton_default,  //functions
-                                         .click_action = test_func, .click_args = NULL};                              //on click
-   struct optix_button test_button2 =    {.transform = {.x = 0, .y = 100, .height = 40, .width = 100},                //transform
-                                         .state = {.selected = false, .visible = true},                               //state
-                                         .update = optix_UpdateButton_default, .render = optix_RenderButton_default,  //functions
-                                         .click_action = test_func, .click_args = NULL};                              //on click
-   struct optix_text test_text =         {.transform = {.x = 10, .y = 200, .height = 0, .width = 0},
-                                         .state = {.selected = false, .visible = true},
-                                         .text = "Test text", .render = optix_RenderText_default};
-   struct optix_gui_stack test_stack[] = {{.ptr = &test_button, .type = OPTIX_BUTTON_TYPE},
-                                         {.ptr = &test_button2, .type = OPTIX_BUTTON_TYPE},
-                                         {.ptr = &test_text,    .type = OPTIX_TEXT_TYPE}};                          //add more as needed
+   struct optix_button test_button =     {.click_action = test_func, .click_args = NULL};                                        //on click
+   struct optix_button test_button2 =    {.click_action = test_func, .click_args = NULL};                                        //on click
+   struct optix_text test_text =         {.text = "Test text"};
+   struct optix_widget *test_stack[] =   {&test_button.widget, &test_button2.widget, NULL};                         //add more as needed
+   struct optix_widget *test_button2_children[] = {&test_text.widget, NULL};
+   //try this
+   //configure the text
+   optix_InitializeWidget(&test_text.widget, OPTIX_TEXT_TYPE);
+   optix_InitializeTextTransform(&test_text);
+   optix_SetObjectCallbacks(&test_text.widget, optix_RenderText_default, NULL);
+   //configure the first button
+   optix_InitializeWidget(&test_button.widget, OPTIX_BUTTON_TYPE);
+   optix_SetObjectTransform(&test_button.widget, 0, 0, 40, 40);
+   optix_SetObjectCallbacks(&test_button.widget, optix_RenderButton_default, optix_UpdateButton_default);
+   //configure the second button
+   optix_InitializeWidget(&test_button2.widget, OPTIX_BUTTON_TYPE);
+   optix_SetObjectTransform(&test_button2.widget, 0, 100, 100, 20);
+   optix_SetObjectCallbacks(&test_button2.widget, optix_RenderButton_default, optix_UpdateButton_default);
+   //make that text a child of it
+   optix_AlignTransformToTransform(&test_text.widget.transform, &test_button2.widget.transform, OPTIX_CENTERING_CENTERED, OPTIX_CENTERING_CENTERED);
+   optix_SetObjectChildren(&test_button2.widget, test_button2_children);
+   //do the actual program
    gfx_Begin();
    gfx_SetDraw(1);
-   gfx_SetTextFGColor(255);
+   gfx_SetTextFGColor(224);
    gfx_SetTextBGColor(0);
    gfx_SetTextTransparentColor(0);
-   //optix_InitializeGUIState();
    optix_InitializeCursor();
-   //optix_AddButton(optix_transform_temp, optix_state_temp, optix_UpdateButton_default, optix_RenderButton_default, test_func, NULL);
-   dbg_sprintf(dbgout, "Buttons: %d", optix_gui_control.num_buttons);
    while (!(kb_Data[6] & kb_Clear)) {
        kb_Scan();
-       optix_UpdateGUI(test_stack, 3);
+       optix_UpdateGUI(test_stack);
        gfx_FillScreen(0);
-       optix_RenderGUI(test_stack, 3);
+       optix_RenderGUI(test_stack);
        gfx_Blit(1);
    }
    gfx_End();

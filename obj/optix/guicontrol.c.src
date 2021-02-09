@@ -6,6 +6,146 @@ _optix_InitializeGUIState:
 	ret
 	section	.text,"ax",@progbits
 
+	section	.text,"ax",@progbits
+	public	_optix_InitializeWidget
+_optix_InitializeWidget:
+	call	__frameset0
+	ld	iy, (ix + 6)
+	ld	a, (ix + 9)
+	ld	hl, 0
+	ld	(iy), a
+	ld	(iy + 18), hl
+	ld	(iy + 10), 0
+	ld	(iy + 11), 1
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_optix_SetObjectTransform
+_optix_SetObjectTransform:
+	call	__frameset0
+	ld	iy, (ix + 6)
+	ld	hl, (ix + 9)
+	ld	de, (ix + 12)
+	ld	c, (ix + 15)
+	ld	b, (ix + 16)
+	ld	a, (ix + 18)
+	ld	(iy + 1), hl
+	ld	(iy + 4), de
+	ld	(iy + 7), c
+	ld	(iy + 8), b
+	ld	(iy + 9), a
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_optix_SetObjectCallbacks
+_optix_SetObjectCallbacks:
+	call	__frameset0
+	ld	iy, (ix + 6)
+	ld	hl, (ix + 9)
+	ld	de, (ix + 12)
+	ld	(iy + 12), hl
+	ld	(iy + 15), de
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_optix_AlignTransformToTransform
+_optix_AlignTransformToTransform:
+	ld	hl, -3
+	call	__frameset
+	ld	iy, (ix + 9)
+	ld	a, 1
+	lea	hl, iy + 0
+	ld	hl, (hl)
+	ld	(ix + -3), hl
+	ld	l, (iy + 6)
+	ld	h, (iy + 7)
+	ld	c, a
+	call	__sshru
+	ld	de, 0
+	ld	e, l
+	ld	d, h
+	ld	hl, (ix + -3)
+	add	hl, de
+	ld	(ix + -3), hl
+	ld	iy, (ix + 6)
+	ld	l, (iy + 6)
+	ld	h, (iy + 7)
+	call	__sshru
+	ld	c, l
+	ld	b, h
+	ld	de, 0
+	push	de
+	pop	hl
+	ld	l, c
+	ld	h, b
+	push	de
+	pop	bc
+	ld	a, (ix + 12)
+	ld	c, a
+	call	__imulu
+	push	hl
+	pop	de
+	ld	hl, (ix + -3)
+	or	a, a
+	sbc	hl, de
+	ld	iy, (ix + 6)
+	ld	(iy), hl
+	ld	iy, (ix + 9)
+	ld	hl, (iy + 3)
+	ld	a, (iy + 8)
+	srl	a
+	ld	bc, 0
+	push	bc
+	pop	de
+	ld	e, a
+	add	hl, de
+	ld	(ix + -3), hl
+	ld	iy, (ix + 6)
+	ld	a, (iy + 8)
+	srl	a
+	push	bc
+	pop	de
+	push	de
+	pop	hl
+	ld	l, a
+	ld	a, (ix + 15)
+	ld	e, a
+	push	de
+	pop	bc
+	call	__imulu
+	push	hl
+	pop	de
+	ld	hl, (ix + -3)
+	or	a, a
+	sbc	hl, de
+	ld	iy, (ix + 6)
+	ld	(iy + 3), hl
+	pop	hl
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_optix_SetObjectChildren
+_optix_SetObjectChildren:
+	call	__frameset0
+	ld	iy, (ix + 6)
+	ld	hl, (ix + 9)
+	ld	(iy + 18), hl
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
 	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister
+	extern	__frameset
+	extern	__imulu
+	extern	__frameset0
+	extern	__sshru
