@@ -1,125 +1,809 @@
 	section	.text,"ax",@progbits
 	assume	adl = 1
+	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\cursor.c" md5 0x374d294e28d3e5d2b7317b8c0e3026a9
+	file	1 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\cursor.h" md5 0xaba21053390c1dc4f271d01f6aee76b0
+	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\cursor.c" md5 0x374d294e28d3e5d2b7317b8c0e3026a9
+	file	3 "D:\Data\Programming\TI\CEdev\include\stdint.h" md5 0x82cbaa55f693a5a19696046350717638
 	section	.text,"ax",@progbits
 	public	_optix_InitializeCursor
 _optix_InitializeCursor:
+	private	func_begin0
+func_begin0:
+	loc	2 6 0
+	cfi_sections .debug_frame
+	cfi_startproc
 	ld	hl, 160
 	ld	de, 120
+	private	tmp0
+tmp0:
+	loc	2 0 0 prologue_end
 	ld	bc, _optix_UpdateCursor_default
 	ld	iy, _optix_RenderCursor_default
 	ld	a, 1
+	loc	2 7 20
 	ld	(_optix_cursor), hl
+	loc	2 8 20
 	ld	(_optix_cursor+3), de
+	loc	2 9 25
 	ld	(_optix_cursor+10), bc
+	loc	2 10 25
 	ld	(_optix_cursor+13), iy
+	loc	2 11 25
 	ld	(_optix_cursor+9), a
+	loc	2 12 1
 	ret
+	private	tmp1
+tmp1:
 	section	.text,"ax",@progbits
+	private	func_end0
+func_end0:
+	cfi_endproc
 
 	section	.text,"ax",@progbits
 	public	_optix_UpdateCursor_default
 _optix_UpdateCursor_default:
+	private	func_begin1
+func_begin1:
+	loc	2 15 0
+	cfi_startproc
 	ld	iy, -720866
 	ld.sis	bc, 8
+	private	tmp2
+tmp2:
+	loc	2 16 22 prologue_end
 	ld	a, (_optix_cursor+9)
 	ld	e, 1
 	xor	a, e
+	loc	2 0 0 is_stmt 0
 	ld	l, (iy)
 	ld	h, (iy + 1)
 	call	__sand
+	private	tmp3
+tmp3:
+	loc	2 16 9
 	bit	0, a
 	jq	z, BB1_1
+	private	tmp4
+tmp4:
+	loc	2 24 13 is_stmt 1
 	ld	a, l
 	or	a, a
 	jq	nz, BB1_13
+	private	tmp5
+tmp5:
+	loc	2 25 18
 	ld	l, (iy)
 	ld	h, (iy + 1)
+	loc	2 25 29 is_stmt 0
 	ld.sis	bc, 1
 	call	__sand
+	private	tmp6
+tmp6:
 	ld	a, l
 	xor	a, e
+	private	tmp7
+tmp7:
+	loc	2 25 18
 	xor	a, e
 	bit	0, a
 	jq	nz, BB1_13
+	private	tmp8
+tmp8:
+	loc	2 26 18 is_stmt 1
 	ld	l, (iy)
 	ld	h, (iy + 1)
+	loc	2 26 29 is_stmt 0
 	ld	a, l
+	private	tmp9
+tmp9:
+	loc	2 26 18
 	bit	1, a
 	jq	nz, BB1_13
+	private	tmp10
+tmp10:
+	loc	2 27 18 is_stmt 1
 	ld	l, (iy)
 	ld	h, (iy + 1)
+	private	tmp11
+tmp11:
+	loc	2 27 18 is_stmt 0
 	ret
+	private	tmp12
+tmp12:
 BB1_1:
+	loc	2 17 13 is_stmt 1
 	ld	a, l
 	or	a, a
 	jq	z, BB1_3
+	private	tmp13
+tmp13:
+	loc	2 17 51 is_stmt 0
 	ld	hl, (_optix_cursor+3)
 	ld	bc, -2
 	add	hl, bc
 	ld	(_optix_cursor+3), hl
+	private	tmp14
+tmp14:
 BB1_3:
+	loc	2 18 13 is_stmt 1
 	ld	l, (iy)
 	ld	h, (iy + 1)
+	loc	2 18 24 is_stmt 0
 	ld.sis	bc, 1
 	call	__sand
+	private	tmp15
+tmp15:
 	ld	a, l
 	xor	a, e
+	private	tmp16
+tmp16:
+	loc	2 18 13
 	bit	0, a
 	jq	nz, BB1_5
+	private	tmp17
+tmp17:
+	loc	2 18 51
 	ld	hl, (_optix_cursor+3)
 	ld	de, 2
 	add	hl, de
 	ld	(_optix_cursor+3), hl
+	private	tmp18
+tmp18:
 BB1_5:
+	loc	2 19 13 is_stmt 1
 	ld	l, (iy)
 	ld	h, (iy + 1)
+	loc	2 19 24 is_stmt 0
 	ld	a, l
+	private	tmp19
+tmp19:
+	loc	2 19 13
 	bit	1, a
 	jq	z, BB1_7
+	private	tmp20
+tmp20:
+	loc	2 19 51
 	ld	hl, (_optix_cursor)
 	ld	de, -2
 	add	hl, de
 	ld	(_optix_cursor), hl
+	private	tmp21
+tmp21:
 BB1_7:
+	loc	2 20 13 is_stmt 1
 	ld	l, (iy)
 	ld	h, (iy + 1)
+	loc	2 20 24 is_stmt 0
 	ld	a, l
+	private	tmp22
+tmp22:
+	loc	2 20 13
 	bit	2, a
 	jq	z, BB1_13
+	private	tmp23
+tmp23:
+	loc	2 20 51
 	ld	hl, (_optix_cursor)
 	ld	de, 2
 	add	hl, de
 	ld	(_optix_cursor), hl
+	private	tmp24
+tmp24:
 BB1_13:
+	loc	2 31 1 is_stmt 1
 	ret
+	private	tmp25
+tmp25:
 	section	.text,"ax",@progbits
+	private	func_end1
+func_end1:
+	cfi_endproc
 
 	section	.text,"ax",@progbits
 	public	_optix_RenderCursor_default
 _optix_RenderCursor_default:
+	private	func_begin2
+func_begin2:
+	loc	2 33 0
+	cfi_startproc
 	ld	hl, -32
+	private	tmp26
+tmp26:
+	loc	2 35 5 prologue_end
 	push	hl
+	cfi_adjust_cfa_offset 3
 	call	_gfx_SetColor
+	private	tmp27
+tmp27:
 	pop	hl
+	cfi_adjust_cfa_offset -3
+	loc	2 36 29
 	ld	hl, (_optix_cursor)
+	loc	2 36 45 is_stmt 0
 	ld	de, (_optix_cursor+3)
+	loc	2 36 5
 	ld	bc, 5
 	push	bc
+	cfi_adjust_cfa_offset 3
 	push	de
+	cfi_adjust_cfa_offset 3
 	push	hl
+	cfi_adjust_cfa_offset 3
 	call	_gfx_Circle
+	private	tmp28
+tmp28:
 	pop	hl
+	cfi_adjust_cfa_offset -3
 	pop	hl
+	cfi_adjust_cfa_offset -3
 	pop	hl
+	cfi_adjust_cfa_offset -3
+	loc	2 37 1 is_stmt 1
 	ret
+	private	tmp29
+tmp29:
 	section	.text,"ax",@progbits
+	private	func_end2
+func_end2:
+	cfi_endproc
+	file	4 "D:\Data\Programming\TI\CEdev\include\graphx.h" md5 0x6fbdcd846ef31912194280a2afa35252
 
 	section	.bss,"aw",@nobits
 	public	_optix_cursor
 _optix_cursor:
 	rb	16
 
+	section	.debug_abbrev,"",@progbits
+	private	abbrev_start33
+abbrev_start33:
+	db	1
+	db	17
+	db	1
+	db	37
+	db	37
+	db	19
+	db	5
+	db	3
+	db	37
+	db	114
+	db	23
+	db	16
+	db	23
+	db	27
+	db	37
+	db	17
+	db	27
+	db	18
+	db	6
+	db	115
+	db	23
+	db	0
+	db	0
+	db	2
+	db	52
+	db	0
+	db	3
+	db	37
+	db	73
+	db	19
+	db	63
+	db	25
+	db	58
+	db	11
+	db	59
+	db	11
+	db	2
+	db	24
+	db	0
+	db	0
+	db	3
+	db	22
+	db	0
+	db	73
+	db	19
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	4
+	db	19
+	db	1
+	db	11
+	db	11
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	5
+	db	13
+	db	0
+	db	3
+	db	37
+	db	73
+	db	19
+	db	58
+	db	11
+	db	59
+	db	11
+	db	56
+	db	11
+	db	0
+	db	0
+	db	6
+	db	36
+	db	0
+	db	3
+	db	37
+	db	62
+	db	11
+	db	11
+	db	11
+	db	0
+	db	0
+	db	7
+	db	15
+	db	0
+	db	73
+	db	19
+	db	0
+	db	0
+	db	8
+	db	21
+	db	0
+	db	39
+	db	25
+	db	0
+	db	0
+	db	9
+	db	53
+	db	0
+	db	73
+	db	19
+	db	0
+	db	0
+	db	10
+	db	46
+	db	0
+	db	17
+	db	27
+	db	18
+	db	6
+	db	64
+	db	24
+	db	122
+	db	25
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	39
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	11
+	db	46
+	db	1
+	db	17
+	db	27
+	db	18
+	db	6
+	db	64
+	db	24
+	db	122
+	db	25
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	39
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	12
+	db	11
+	db	1
+	db	17
+	db	27
+	db	18
+	db	6
+	db	0
+	db	0
+	db	13
+	db	52
+	db	0
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	73
+	db	19
+	db	0
+	db	0
+	db	14
+	db	72
+	db	0
+	db	127
+	db	19
+	db	125
+	db	27
+	db	0
+	db	0
+	db	15
+	db	46
+	db	1
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	5
+	db	39
+	db	25
+	db	73
+	db	19
+	db	60
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	16
+	db	5
+	db	0
+	db	73
+	db	19
+	db	0
+	db	0
+	db	17
+	db	46
+	db	1
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	5
+	db	39
+	db	25
+	db	60
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	0
+	section	.debug_info,"",@progbits
+	private	cu_begin0
+cu_begin0:
+	dd	debug_info_end0-debug_info_start0
+	private	debug_info_start0
+debug_info_start0:
+	dw	5
+	db	1
+	db	3
+	dd	abbrev_start33
+	db	1
+	db	0
+	dw	12
+	db	1
+	dd	str_offsets_base0
+	dd	line_table_start0
+	db	2
+	db	1
+	dd	func_end2-func_begin0
+	dd	addr_table_base0
+	db	2
+	db	3
+	dd	46
+
+	db	2
+	db	3
+	db	2
+	db	161
+	db	0
+	db	3
+	dd	54
+	db	12
+	db	1
+	db	32
+	db	4
+	db	16
+	db	1
+	db	23
+	db	5
+	db	4
+	dd	113
+	db	1
+	db	24
+	db	0
+	db	5
+	db	6
+	dd	113
+	db	1
+	db	25
+	db	3
+	db	5
+	db	7
+	dd	113
+	db	1
+	db	27
+	db	6
+	db	5
+	db	8
+	dd	117
+	db	1
+	db	29
+	db	9
+	db	5
+	db	10
+	dd	121
+	db	1
+	db	30
+	db	10
+	db	5
+	db	11
+	dd	121
+	db	1
+	db	31
+	db	13
+	db	0
+	db	6
+	db	5
+	db	5
+	db	3
+	db	6
+	db	9
+	db	2
+	db	1
+	db	7
+	dd	126
+	db	8
+
+	db	3
+	dd	135
+	db	14
+	db	3
+	db	15
+	db	6
+	db	13
+	db	8
+	db	1
+	db	7
+	dd	144
+	db	9
+	dd	149
+	db	3
+	dd	157
+	db	16
+	db	3
+	db	39
+	db	6
+	db	15
+	db	7
+	db	2
+	db	10
+	db	1
+	dd	func_end0-func_begin0
+	db	1
+	db	87
+
+	db	20
+	db	2
+	db	6
+
+
+	db	11
+	db	2
+	dd	func_end1-func_begin1
+	db	1
+	db	87
+
+	db	21
+	db	2
+	db	15
+
+
+	db	12
+	db	3
+	dd	tmp12-tmp4
+	db	13
+	db	23
+	db	2
+	db	22
+	dd	113
+	db	0
+	db	0
+	db	11
+	db	4
+	dd	func_end2-func_begin2
+	db	1
+	db	87
+
+	db	22
+	db	2
+	db	33
+
+
+	db	14
+	dd	223
+	db	5
+	db	14
+	dd	238
+	db	6
+	db	0
+	db	15
+	db	17
+	db	4
+	dw	503
+
+	dd	135
+
+
+	db	16
+	dd	135
+	db	0
+	db	17
+	db	18
+	db	4
+	dw	711
+
+
+
+	db	16
+	dd	113
+	db	16
+	dd	113
+	db	16
+	dd	259
+	db	0
+	db	6
+	db	19
+	db	7
+	db	3
+	db	0
+	private	debug_info_end0
+debug_info_end0:
+	section	.debug_str_offsets,"",@progbits
+	dd	100
+	dw	5
+	dw	0
+	private	str_offsets_base0
+str_offsets_base0:
+	section	.debug_str,"MS",@progbits,1
+	private	info_string0
+info_string0:
+	db	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)",000o
+	private	info_string1
+info_string1:
+	db	"D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\cursor.c",000o
+	private	info_string2
+info_string2:
+	db	"D:\Data\Programming\TI\Projects\Main\OPTIX",000o
+	private	info_string3
+info_string3:
+	db	"optix_cursor",000o
+	private	info_string4
+info_string4:
+	db	"x",000o
+	private	info_string5
+info_string5:
+	db	"int",000o
+	private	info_string6
+info_string6:
+	db	"y",000o
+	private	info_string7
+info_string7:
+	db	"state",000o
+	private	info_string8
+info_string8:
+	db	"active",000o
+	private	info_string9
+info_string9:
+	db	"_Bool",000o
+	private	info_string10
+info_string10:
+	db	"update",000o
+	private	info_string11
+info_string11:
+	db	"render",000o
+	private	info_string12
+info_string12:
+	db	"optix_cursor_t",000o
+	private	info_string13
+info_string13:
+	db	"unsigned char",000o
+	private	info_string14
+info_string14:
+	db	"uint8_t",000o
+	private	info_string15
+info_string15:
+	db	"unsigned short",000o
+	private	info_string16
+info_string16:
+	db	"uint16_t",000o
+	private	info_string17
+info_string17:
+	db	"gfx_SetColor",000o
+	private	info_string18
+info_string18:
+	db	"gfx_Circle",000o
+	private	info_string19
+info_string19:
+	db	"unsigned int",000o
+	private	info_string20
+info_string20:
+	db	"optix_InitializeCursor",000o
+	private	info_string21
+info_string21:
+	db	"optix_UpdateCursor_default",000o
+	private	info_string22
+info_string22:
+	db	"optix_RenderCursor_default",000o
+	private	info_string23
+info_string23:
+	db	"cursor_direction",000o
+	section	.debug_str_offsets,"",@progbits
+	dd	info_string0
+	dd	info_string1
+	dd	info_string2
+	dd	info_string3
+	dd	info_string4
+	dd	info_string5
+	dd	info_string6
+	dd	info_string7
+	dd	info_string8
+	dd	info_string9
+	dd	info_string10
+	dd	info_string11
+	dd	info_string12
+	dd	info_string13
+	dd	info_string14
+	dd	info_string15
+	dd	info_string16
+	dd	info_string17
+	dd	info_string18
+	dd	info_string19
+	dd	info_string20
+	dd	info_string21
+	dd	info_string22
+	dd	info_string23
+	section	.debug_addr,"",@progbits
+	dd	debug_addr_end0-debug_addr_start0
+	private	debug_addr_start0
+debug_addr_start0:
+	dw	5
+	db	3
+	db	0
+	private	addr_table_base0
+addr_table_base0:
+	dl	_optix_cursor
+	dl	func_begin0
+	dl	func_begin1
+	dl	tmp4
+	dl	func_begin2
+	dl	tmp27
+	dl	tmp28
+	private	debug_addr_end0
+debug_addr_end0:
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
+	section	.debug_line,"",@progbits
+line_table_start0:
 	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister
 	extern	_gfx_Circle

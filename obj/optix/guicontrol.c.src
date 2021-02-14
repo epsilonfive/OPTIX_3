@@ -3,149 +3,144 @@
 	section	.text,"ax",@progbits
 	public	_optix_InitializeGUIState
 _optix_InitializeGUIState:
+	private	func_begin0
+func_begin0:
+	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\guicontrol.c" md5 0xaad1e74b8850dfd0bd6804f19b469628
+	file	1 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\guicontrol.c" md5 0xaad1e74b8850dfd0bd6804f19b469628
+	loc	1 6 0
+	cfi_sections .debug_frame
+	cfi_startproc
+	loc	1 10 1 prologue_end
 	ret
+	private	tmp0
+tmp0:
 	section	.text,"ax",@progbits
+	private	func_end0
+func_end0:
+	cfi_endproc
 
-	section	.text,"ax",@progbits
-	public	_optix_InitializeWidget
-_optix_InitializeWidget:
-	call	__frameset0
-	ld	iy, (ix + 6)
-	ld	a, (ix + 9)
-	ld	hl, 0
-	ld	(iy), a
-	ld	(iy + 18), hl
-	ld	(iy + 10), 0
-	ld	(iy + 11), 1
-	pop	ix
-	ret
-	section	.text,"ax",@progbits
+	section	.debug_abbrev,"",@progbits
+	private	abbrev_start1
+abbrev_start1:
+	db	1
+	db	17
+	db	1
+	db	37
+	db	37
+	db	19
+	db	5
+	db	3
+	db	37
+	db	114
+	db	23
+	db	16
+	db	23
+	db	27
+	db	37
+	db	17
+	db	27
+	db	18
+	db	6
+	db	115
+	db	23
+	db	0
+	db	0
+	db	2
+	db	46
+	db	0
+	db	17
+	db	27
+	db	18
+	db	6
+	db	64
+	db	24
+	db	122
+	db	25
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	39
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	0
+	section	.debug_info,"",@progbits
+	private	cu_begin0
+cu_begin0:
+	dd	debug_info_end0-debug_info_start0
+	private	debug_info_start0
+debug_info_start0:
+	dw	5
+	db	1
+	db	3
+	dd	abbrev_start1
+	db	1
+	db	0
+	dw	12
+	db	1
+	dd	str_offsets_base0
+	dd	line_table_start0
+	db	2
+	db	0
+	dd	func_end0-func_begin0
+	dd	addr_table_base0
+	db	2
+	db	0
+	dd	func_end0-func_begin0
+	db	1
+	db	87
 
-	section	.text,"ax",@progbits
-	public	_optix_SetObjectTransform
-_optix_SetObjectTransform:
-	call	__frameset0
-	ld	iy, (ix + 6)
-	ld	hl, (ix + 9)
-	ld	de, (ix + 12)
-	ld	c, (ix + 15)
-	ld	b, (ix + 16)
-	ld	a, (ix + 18)
-	ld	(iy + 1), hl
-	ld	(iy + 4), de
-	ld	(iy + 7), c
-	ld	(iy + 8), b
-	ld	(iy + 9), a
-	pop	ix
-	ret
-	section	.text,"ax",@progbits
+	db	3
+	db	1
+	db	6
 
-	section	.text,"ax",@progbits
-	public	_optix_SetObjectCallbacks
-_optix_SetObjectCallbacks:
-	call	__frameset0
-	ld	iy, (ix + 6)
-	ld	hl, (ix + 9)
-	ld	de, (ix + 12)
-	ld	(iy + 12), hl
-	ld	(iy + 15), de
-	pop	ix
-	ret
-	section	.text,"ax",@progbits
 
-	section	.text,"ax",@progbits
-	public	_optix_AlignTransformToTransform
-_optix_AlignTransformToTransform:
-	ld	hl, -3
-	call	__frameset
-	ld	iy, (ix + 9)
-	ld	a, 1
-	lea	hl, iy + 0
-	ld	hl, (hl)
-	ld	(ix + -3), hl
-	ld	l, (iy + 6)
-	ld	h, (iy + 7)
-	ld	c, a
-	call	__sshru
-	ld	de, 0
-	ld	e, l
-	ld	d, h
-	ld	hl, (ix + -3)
-	add	hl, de
-	ld	(ix + -3), hl
-	ld	iy, (ix + 6)
-	ld	l, (iy + 6)
-	ld	h, (iy + 7)
-	call	__sshru
-	ld	c, l
-	ld	b, h
-	ld	de, 0
-	push	de
-	pop	hl
-	ld	l, c
-	ld	h, b
-	push	de
-	pop	bc
-	ld	a, (ix + 12)
-	ld	c, a
-	call	__imulu
-	push	hl
-	pop	de
-	ld	hl, (ix + -3)
-	or	a, a
-	sbc	hl, de
-	ld	iy, (ix + 6)
-	ld	(iy), hl
-	ld	iy, (ix + 9)
-	ld	hl, (iy + 3)
-	ld	a, (iy + 8)
-	srl	a
-	ld	bc, 0
-	push	bc
-	pop	de
-	ld	e, a
-	add	hl, de
-	ld	(ix + -3), hl
-	ld	iy, (ix + 6)
-	ld	a, (iy + 8)
-	srl	a
-	push	bc
-	pop	de
-	push	de
-	pop	hl
-	ld	l, a
-	ld	a, (ix + 15)
-	ld	e, a
-	push	de
-	pop	bc
-	call	__imulu
-	push	hl
-	pop	de
-	ld	hl, (ix + -3)
-	or	a, a
-	sbc	hl, de
-	ld	iy, (ix + 6)
-	ld	(iy + 3), hl
-	pop	hl
-	pop	ix
-	ret
-	section	.text,"ax",@progbits
-
-	section	.text,"ax",@progbits
-	public	_optix_SetObjectChildren
-_optix_SetObjectChildren:
-	call	__frameset0
-	ld	iy, (ix + 6)
-	ld	hl, (ix + 9)
-	ld	(iy + 18), hl
-	pop	ix
-	ret
-	section	.text,"ax",@progbits
-
+	db	0
+	private	debug_info_end0
+debug_info_end0:
+	section	.debug_str_offsets,"",@progbits
+	dd	20
+	dw	5
+	dw	0
+	private	str_offsets_base0
+str_offsets_base0:
+	section	.debug_str,"MS",@progbits,1
+	private	info_string0
+info_string0:
+	db	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)",000o
+	private	info_string1
+info_string1:
+	db	"D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\guicontrol.c",000o
+	private	info_string2
+info_string2:
+	db	"D:\Data\Programming\TI\Projects\Main\OPTIX",000o
+	private	info_string3
+info_string3:
+	db	"optix_InitializeGUIState",000o
+	section	.debug_str_offsets,"",@progbits
+	dd	info_string0
+	dd	info_string1
+	dd	info_string2
+	dd	info_string3
+	section	.debug_addr,"",@progbits
+	dd	debug_addr_end0-debug_addr_start0
+	private	debug_addr_start0
+debug_addr_start0:
+	dw	5
+	db	3
+	db	0
+	private	addr_table_base0
+addr_table_base0:
+	dl	func_begin0
+	private	debug_addr_end0
+debug_addr_end0:
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
+	section	.debug_line,"",@progbits
+line_table_start0:
 	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister
-	extern	__frameset
-	extern	__imulu
-	extern	__frameset0
-	extern	__sshru

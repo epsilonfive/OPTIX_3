@@ -6,6 +6,9 @@
 struct optix_text {
     struct optix_widget widget;
     const char *text;
+    //probably should have these in here too
+    uint8_t x_centering;
+    uint8_t y_centering;
 };
 
 //functions

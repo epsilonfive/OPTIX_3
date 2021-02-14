@@ -17,11 +17,12 @@
 #include <math.h>
 //most things are definitely going to need this
 #include "guicontrol.h"
+//#include "util.h"
 
 //defines
 #define BUTTON_COLOR          255
-#define BUTTON_SELECTED_COLOR 8
-#define OUTLINE_COLOR         74
+#define BUTTON_SELECTED_COLOR 224
+#define OUTLINE_COLOR         255
 
 //transform, will be used for a lot of things
 struct optix_transform {
