@@ -5,6 +5,12 @@ void optix_AlignMenu(struct optix_menu *menu) {
     int i = 0;
     while (menu->widget.child[i] != NULL) {
         struct optix_widget *child = menu->widget.child[i];
+        //just continue if this won't be visible, but set it to invisible as well
+        if (i > menu->rows * menu->columns - 1) {
+            child->state.visible = false;
+            i++;
+            continue;
+        }
         if (child->type == OPTIX_BUTTON_TYPE) {
             child->transform.width = menu->widget.transform.width / menu->columns;
             child->transform.height = menu->widget.transform.height / menu->rows;
@@ -14,7 +20,6 @@ void optix_AlignMenu(struct optix_menu *menu) {
             if (child->child != NULL) {
                 int j = 0;
                 while (child->child[j] != NULL) {
-                    dbg_sprintf(dbgout, "Type is %d\n", child->child[j]->type);
                     if (child->child[j]->type == OPTIX_TEXT_TYPE) {
                         struct optix_text *child_text = (struct optix_text *) child->child[j];
                         optix_AlignTransformToTransform(child->child[j], child, child_text->x_centering, child_text->y_centering);
@@ -34,14 +39,14 @@ void optix_AlignMenu(struct optix_menu *menu) {
 void optix_UpdateMenu_default(struct optix_widget *widget) {
     struct optix_menu *menu = (struct optix_menu *) widget;
     bool found_selection = false;
+    int i = 0;
     //check if it overlaps with the cursor
-    if (gfx_CheckRectangleHotspot(widget->transform.x, widget->transform.y, widget->transform.width * menu->columns, widget->transform.height * menu->rows, 
-                                  optix_cursor.x, optix_cursor.y, 10, 10)) widget->state.selected = true;
-    if (widget->state.selected) {
-        //see which option is selected
-        int i = 0;
-        while (widget->child[i] != NULL) {
-            //we're hoping this is a button
+    if (optix_CheckTransformOverlap(&optix_cursor.widget, widget)) widget->state.selected = true;
+    else widget->state.selected = false;
+    //see which option is selected
+    while (widget->child[i] != NULL) {
+        //we're hoping this is a button
+        if (widget->state.selected) {
             if (found_selection) widget->child[i]->state.selected = false;
             else {
                 widget->child[i]->update(widget->child[i]);
@@ -54,17 +59,12 @@ void optix_UpdateMenu_default(struct optix_widget *widget) {
                     }
                 }
             }
-            i++;
-        }
+        } else widget->child[i]->state.selected = false;
+        i++;
     }
 }
 
 void optix_RenderMenu_default(struct optix_widget *widget) {
     struct optix_menu *menu = (struct optix_menu *) widget;
-    int i = 0;
-    while (widget->child[i] != NULL) {
-        //we're hoping this is a button
-        if (widget->child[i]->type == OPTIX_BUTTON_TYPE) widget->child[i]->render(widget->child[i]);
-        i++;
-    }
+    if (widget->child != NULL) optix_RenderStack(widget->child);
 }

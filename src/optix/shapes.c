@@ -6,3 +6,9 @@ void optix_OutlinedRectangle(uint16_t x, uint8_t y, uint16_t width, uint8_t heig
     gfx_SetColor(outline_color);
     gfx_Rectangle(x, y, width, height);
 }
+
+void optix_X(uint16_t x, uint8_t y, uint8_t side_length, uint8_t color) {
+    gfx_SetColor(color);
+    gfx_Line(x, y, x + side_length, y + side_length);
+    gfx_Line(x, y + side_length, x + side_length, y);
+}

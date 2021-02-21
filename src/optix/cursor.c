@@ -1,23 +1,42 @@
 #include "cursor.h"
 
-optix_cursor_t optix_cursor;
+struct optix_cursor_t optix_cursor = {
+    .widget = {
+        .transform = {
+            .x = LCD_WIDTH / 2,
+            .y = LCD_HEIGHT / 2,
+            .width =  OPTIX_CURSOR_WIDTH,
+            .height = OPTIX_CURSOR_HEIGHT,
+        },
+        .state = {.visible = true},
+        .update = optix_UpdateCursor_default,
+        .render = optix_RenderCursor_default,
+    },
+};
 
 //initialize
 void optix_InitializeCursor(void) {
-    optix_cursor.x = LCD_WIDTH / 2;
-    optix_cursor.y = LCD_HEIGHT / 2;
-    optix_cursor.update = optix_UpdateCursor_default;
-    optix_cursor.render = optix_RenderCursor_default;
-    optix_cursor.active = true;
+    struct optix_widget *widget = &optix_cursor.widget;
+    widget->transform.x = LCD_WIDTH / 2;
+    widget->transform.y = LCD_HEIGHT / 2;
+    widget->transform.width =  OPTIX_CURSOR_WIDTH;
+    widget->transform.height = OPTIX_CURSOR_HEIGHT;
+    widget->update = optix_UpdateCursor_default;
+    widget->render = optix_RenderCursor_default;
+    widget->state.visible = true;
 }
 
 //this will also handle the box-based mode
 void optix_UpdateCursor_default(void) {
-    if (optix_cursor.active) {
-        if (kb_Data[7] & kb_Up)    optix_cursor.y -= OPTIX_CURSOR_SPEED;
-        if (kb_Data[7] & kb_Down)  optix_cursor.y += OPTIX_CURSOR_SPEED;
-        if (kb_Data[7] & kb_Left)  optix_cursor.x -= OPTIX_CURSOR_SPEED;
-        if (kb_Data[7] & kb_Right) optix_cursor.x += OPTIX_CURSOR_SPEED;
+    //start by updating the last x and y position of the cursor
+    optix_cursor.last_x = optix_cursor.widget.transform.x;
+    optix_cursor.last_y = optix_cursor.widget.transform.y;
+    optix_cursor.state = OPTIX_CURSOR_NORMAL;
+    if (optix_cursor.widget.state.visible) {
+        if (kb_Data[7] & kb_Up)    optix_cursor.widget.transform.y -= OPTIX_CURSOR_SPEED;
+        if (kb_Data[7] & kb_Down)  optix_cursor.widget.transform.y += OPTIX_CURSOR_SPEED;
+        if (kb_Data[7] & kb_Left)  optix_cursor.widget.transform.x -= OPTIX_CURSOR_SPEED;
+        if (kb_Data[7] & kb_Right) optix_cursor.widget.transform.x += OPTIX_CURSOR_SPEED;
     } else {
         int cursor_direction;
         //kb_Scan will be called elsewhere
@@ -31,7 +50,11 @@ void optix_UpdateCursor_default(void) {
 }  
 
 void optix_RenderCursor_default(void) {
-    //just make it a circle for now
-    gfx_SetColor(224);
-    gfx_Circle(optix_cursor.x, optix_cursor.y, 5);
+    gfx_sprite_t *spr[3] = {
+        cursor_normal,
+        cursor_pointer,
+        cursor_move,
+    };
+    gfx_SetTransparentColor(255);
+    gfx_TransparentSprite_NoClip(spr[optix_cursor.state], optix_cursor.widget.transform.x, optix_cursor.widget.transform.y);
 }

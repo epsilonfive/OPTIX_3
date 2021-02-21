@@ -6,10 +6,6 @@ About:  GUI library for the TI-84 Plus CE/TI-83 Premium CE calculators
 
 Structs
 -------
-optix_gui_stack: an item in the GUI to be rendered
-                 - contents:
-                 - ptr: a pointer to the item
-                 - type: the type of the item (button, text, sprite, menu, etc.)
 optix_transform: a general transform structure, used for many of the GUI elements
                  - contents:
                  - x: an x-coordinate
@@ -20,13 +16,22 @@ optix_state:     a general state structure, containing information about the sel
                  - contents:
                  - selected: whether or not this item is currently selected
                  - visible: whether or not this item is visible; only visible items are updated
+optix_widget:    the first element of all of the GUI element structs
+                 - contents:
+                 - type: the type of the item (ex: OPTIX_BUTTON_TYPE, OPTIX_MENU_TYPE)
+                 - transform: an optix_transform
+                 - state: an optix_state
+                 - render: a render callback, taking an optix_widget * as an argument
+                 - update: an update callback, taking an optix_widget * as an argument
+                 - child: an array of optix_widget * that will be the children of the object (set to NULL if there are
+                          none, and end with a NULL if there are)
 optix_button:    a GUI button
                  - contents:
-                 - optix_transform: used for the position and size
-                 - optix_state: used for the state
-                 - update: a function to be run to update the button
-                 - render: a function to be run to render the button
+                 - widget: an optix_widget
                  - click_action: a function to be run when the button is pressed
+                 - click_args: the pointer to be passed to click_action on the button press, intended to be used to pass
+                               arguments on click_action, of any type that is desired (use a struct if there are more
+                               than one argument)
                  - pressed: whether or not the button has been pressed (used internally so that the button action is not
                             many times when holding the selection key over a button)
 Commands

@@ -8,3 +8,4 @@ void optix_InitializeGUIState(void) {
     //optix_gui_control.num_windows = 0;
     //optix_gui_control.num_scrollbars = 0;
 }
+

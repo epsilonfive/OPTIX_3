@@ -5,6 +5,8 @@
 #include "../globals.h"
 #include "../shapes.h"
 #include "../cursor.h"
+#include "../util.h"
+#include "../loop.h"
 
 //typedefs and things
 struct optix_button {

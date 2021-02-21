@@ -17,6 +17,7 @@
 #include <math.h>
 //most things are definitely going to need this
 #include "guicontrol.h"
+#include "colors.h"
 //#include "util.h"
 
 //defines

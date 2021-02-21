@@ -9,8 +9,8 @@ COMPRESSED ?= YES
 ARCHIVED ?= YES
 HAS_PRINTF ?= NO
 
-CFLAGS ?= -Wall -Wextra -Oz
-CXXFLAGS ?= -Wall -Wextra -Oz
+CFLAGS ?= -Wall -Wextra -Os
+CXXFLAGS ?= -Wall -Wextra -Os
 
 # ----------------------------
 

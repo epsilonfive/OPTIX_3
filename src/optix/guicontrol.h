@@ -3,14 +3,15 @@
 
 //includes
 //#include "globals.h"
-#include "cursor.h"
 
 //definitions
-#define OPTIX_TEXT_TYPE   0
-#define OPTIX_SPRITE_TYPE 1
-#define OPTIX_BUTTON_TYPE 2
-#define OPTIX_MENU_TYPE   3
-#define OPTIX_WINDOW_TYPE 4
+#define OPTIX_NUM_TYPES             6
+#define OPTIX_TEXT_TYPE             0
+#define OPTIX_SPRITE_TYPE           1
+#define OPTIX_BUTTON_TYPE           2
+#define OPTIX_MENU_TYPE             3
+#define OPTIX_WINDOW_TYPE           4
+#define OPTIX_WINDOW_TITLE_BAR_TYPE 5
 //centering types
 //always the same
 #define OPTIX_CENTERING_CENTERED 1

@@ -3,19 +3,8 @@
 	section	.text,"ax",@progbits
 	public	_optix_OutlinedRectangle
 _optix_OutlinedRectangle:
-	private	func_begin0
-func_begin0:
-	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\shapes.c" md5 0x7bb9c74af2bc5a93886e0efcad58aa2d
-	file	1 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\shapes.c" md5 0x7bb9c74af2bc5a93886e0efcad58aa2d
-	loc	1 3 0
-	cfi_sections .debug_frame
-	cfi_startproc
 	ld	hl, -13
 	call	__frameset
-	private	tmp0
-tmp0:
-	cfi_def_cfa ix, 6
-	cfi_offset ix, -6
 	ld	l, (ix + 6)
 	ld	h, (ix + 7)
 	ld	(ix + -3), l
@@ -31,44 +20,23 @@ tmp0:
 	ld	a, (ix + 18)
 	ld	l, (ix + 21)
 	ld	(ix + -4), l
-	private	tmp1
-tmp1:
-	loc	1 4 5 prologue_end
 	ld	l, a
-	private	tmp2
-tmp2:
 	push	hl
 	call	_gfx_SetColor
-	private	tmp3
-tmp3:
 	pop	hl
-	loc	1 5 23
 	or	a, a
 	sbc	hl, hl
 	push	hl
 	pop	de
 	ld	c, (ix + -3)
 	ld	b, (ix + -2)
-	private	tmp4
-tmp4:
 	ld	e, c
 	ld	d, b
-	private	tmp5
-tmp5:
-	loc	1 0 23 is_stmt 0
 	ld	(ix + -3), de
-	private	tmp6
-tmp6:
-	loc	1 5 26
 	push	hl
 	pop	de
 	ld	a, (ix + -13)
-	private	tmp7
-tmp7:
 	ld	e, a
-	private	tmp8
-tmp8:
-	loc	1 5 29
 	ld	(ix + -13), de
 	push	hl
 	pop	bc
@@ -77,653 +45,104 @@ tmp8:
 	ld	h, (ix + -9)
 	ex	(sp), hl
 	pop	iy
-	private	tmp9
-tmp9:
 	ld	c, iyl
 	ld	b, iyh
-	private	tmp10
-tmp10:
-	loc	1 5 36
 	ld	(ix + -10), bc
 	ld	a, (ix + -7)
-	private	tmp11
-tmp11:
 	ld	l, a
-	private	tmp12
-tmp12:
-	loc	1 5 5
 	ld	(ix + -7), hl
 	push	hl
-	private	tmp13
-tmp13:
 	push	bc
-	private	tmp14
-tmp14:
 	push	de
-	private	tmp15
-tmp15:
 	ld	hl, (ix + -3)
-	private	tmp16
-tmp16:
 	push	hl
-	private	tmp17
-tmp17:
 	call	_gfx_FillRectangle
-	private	tmp18
-tmp18:
 	pop	hl
 	pop	hl
 	pop	hl
 	pop	hl
-	loc	1 6 5 is_stmt 1
 	ld	a, (ix + -4)
-	private	tmp19
-tmp19:
 	ld	l, a
-	private	tmp20
-tmp20:
 	push	hl
 	call	_gfx_SetColor
-	private	tmp21
-tmp21:
 	pop	hl
-	loc	1 7 5
 	ld	hl, (ix + -3)
 	ld	(ix + 6), hl
 	ld	hl, (ix + -13)
-	private	tmp22
-tmp22:
 	ld	(ix + 9), hl
 	ld	hl, (ix + -10)
-	private	tmp23
-tmp23:
 	ld	(ix + 12), hl
 	ld	hl, (ix + -7)
-	private	tmp24
-tmp24:
 	ld	(ix + 15), hl
-	private	tmp25
-tmp25:
 	ld	sp, ix
 	pop	ix
-	cfi_def_cfa sp, 3
-	cfi_restore ix
 	jp	_gfx_Rectangle
-	private	tmp26
-tmp26:
 	section	.text,"ax",@progbits
-	private	func_end0
-func_end0:
-	cfi_endproc
-	file	2 "D:\Data\Programming\TI\CEdev\include\graphx.h" md5 0x6fbdcd846ef31912194280a2afa35252
 
-	file	3 "D:\Data\Programming\TI\CEdev\include\stdint.h" md5 0x82cbaa55f693a5a19696046350717638
-	section	.debug_loclists,"",@progbits
-	dd	debug_list_header_end0-debug_list_header_start0
-	private	debug_list_header_start0
-debug_list_header_start0:
-	dw	5
-	db	3
-	db	0
-	dd	6
-	private	loclists_table_base0
-loclists_table_base0:
-	dd	debug_loc0-loclists_table_base0
-	dd	debug_loc1-loclists_table_base0
-	dd	debug_loc2-loclists_table_base0
-	dd	debug_loc3-loclists_table_base0
-	dd	debug_loc4-loclists_table_base0
-	dd	debug_loc5-loclists_table_base0
-	private	debug_loc0
-debug_loc0:
-	db	4
-	uleb128	tmp1-func_begin0
-	uleb128	tmp19-func_begin0
-	db	2
-	db	116
-	db	9
-	db	4
-	uleb128	tmp19-func_begin0
-	uleb128	tmp20-func_begin0
-	db	4
-	db	83
-	db	157
-	db	8
-	db	8
-	db	4
-	uleb128	tmp20-func_begin0
-	uleb128	tmp21-func_begin0
-	db	1
-	db	82
-	db	0
-	private	debug_loc1
-debug_loc1:
-	db	4
-	uleb128	tmp1-func_begin0
-	uleb128	tmp2-func_begin0
-	db	4
-	db	83
-	db	157
-	db	8
-	db	8
-	db	4
-	uleb128	tmp2-func_begin0
-	uleb128	tmp3-func_begin0
-	db	1
-	db	82
-	db	0
-	private	debug_loc2
-debug_loc2:
-	db	4
-	uleb128	tmp1-func_begin0
-	uleb128	tmp11-func_begin0
-	db	2
-	db	116
-	db	6
-	db	4
-	uleb128	tmp11-func_begin0
-	uleb128	tmp12-func_begin0
-	db	4
-	db	83
-	db	157
-	db	8
-	db	8
-	db	4
-	uleb128	tmp12-func_begin0
-	uleb128	tmp13-func_begin0
-	db	1
-	db	82
-	db	4
-	uleb128	tmp13-func_begin0
-	uleb128	tmp24-func_begin0
-	db	2
-	db	116
-	db	6
-	db	4
-	uleb128	tmp24-func_begin0
-	uleb128	tmp26-func_begin0
-	db	1
-	db	82
-	db	0
-	private	debug_loc3
-debug_loc3:
-	db	4
-	uleb128	tmp1-func_begin0
-	uleb128	tmp9-func_begin0
-	db	2
-	db	116
-	db	3
-	db	4
-	uleb128	tmp9-func_begin0
-	uleb128	tmp10-func_begin0
-	db	1
-	db	85
-	db	4
-	uleb128	tmp10-func_begin0
-	uleb128	tmp14-func_begin0
-	db	1
-	db	80
-	db	4
-	uleb128	tmp14-func_begin0
-	uleb128	tmp23-func_begin0
-	db	2
-	db	116
-	db	3
-	db	4
-	uleb128	tmp23-func_begin0
-	uleb128	tmp24-func_begin0
-	db	1
-	db	82
-	db	0
-	private	debug_loc4
-debug_loc4:
-	db	4
-	uleb128	tmp1-func_begin0
-	uleb128	tmp7-func_begin0
-	db	2
-	db	116
-	db	0
-	db	4
-	uleb128	tmp7-func_begin0
-	uleb128	tmp8-func_begin0
-	db	4
-	db	83
-	db	157
-	db	8
-	db	8
-	db	4
-	uleb128	tmp8-func_begin0
-	uleb128	tmp15-func_begin0
-	db	1
-	db	81
-	db	4
-	uleb128	tmp15-func_begin0
-	uleb128	tmp22-func_begin0
-	db	2
-	db	116
-	db	0
-	db	4
-	uleb128	tmp22-func_begin0
-	uleb128	tmp23-func_begin0
-	db	1
-	db	82
-	db	0
-	private	debug_loc5
-debug_loc5:
-	db	4
-	uleb128	tmp1-func_begin0
-	uleb128	tmp4-func_begin0
-	db	2
-	db	116
-	db	10
-	db	4
-	uleb128	tmp4-func_begin0
-	uleb128	tmp5-func_begin0
-	db	1
-	db	80
-	db	4
-	uleb128	tmp5-func_begin0
-	uleb128	tmp6-func_begin0
-	db	1
-	db	81
-	db	4
-	uleb128	tmp6-func_begin0
-	uleb128	tmp16-func_begin0
-	db	2
-	db	116
-	db	10
-	db	4
-	uleb128	tmp16-func_begin0
-	uleb128	tmp17-func_begin0
-	db	1
-	db	82
-	db	4
-	uleb128	tmp17-func_begin0
-	uleb128	tmp25-func_begin0
-	db	2
-	db	116
-	db	10
-	db	4
-	uleb128	tmp25-func_begin0
-	uleb128	func_end0-func_begin0
-	db	4
-	db	116
-	db	25
-	db	35
-	db	10
-	db	0
-	private	debug_list_header_end0
-debug_list_header_end0:
-	section	.debug_abbrev,"",@progbits
-	private	abbrev_start22
-abbrev_start22:
-	db	1
-	db	17
-	db	1
-	db	37
-	db	37
-	db	19
-	db	5
-	db	3
-	db	37
-	db	114
-	db	23
-	db	16
-	db	23
-	db	27
-	db	37
-	db	17
-	db	27
-	db	18
-	db	6
-	db	115
-	db	23
-	db	"",214o,001o
-	db	23
-	db	0
-	db	0
-	db	2
-	db	46
-	db	1
-	db	17
-	db	27
-	db	18
-	db	6
-	db	64
-	db	24
-	db	122
-	db	25
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	11
-	db	39
-	db	25
-	db	63
-	db	25
-	db	0
-	db	0
-	db	3
-	db	5
-	db	0
-	db	2
-	db	34
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	11
-	db	73
-	db	19
-	db	0
-	db	0
-	db	4
-	db	72
-	db	0
-	db	127
-	db	19
-	db	125
-	db	27
-	db	0
-	db	0
-	db	5
-	db	46
-	db	1
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	5
-	db	39
-	db	25
-	db	73
-	db	19
-	db	60
-	db	25
-	db	63
-	db	25
-	db	0
-	db	0
-	db	6
-	db	5
-	db	0
-	db	73
-	db	19
-	db	0
-	db	0
-	db	7
-	db	36
-	db	0
-	db	3
-	db	37
-	db	62
-	db	11
-	db	11
-	db	11
-	db	0
-	db	0
-	db	8
-	db	46
-	db	1
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	5
-	db	39
-	db	25
-	db	60
-	db	25
-	db	63
-	db	25
-	db	0
-	db	0
-	db	9
-	db	22
-	db	0
-	db	73
-	db	19
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	11
-	db	0
-	db	0
-	db	0
-	section	.debug_info,"",@progbits
-	private	cu_begin0
-cu_begin0:
-	dd	debug_info_end0-debug_info_start0
-	private	debug_info_start0
-debug_info_start0:
-	dw	5
-	db	1
-	db	3
-	dd	abbrev_start22
-	db	1
-	db	0
-	dw	12
-	db	1
-	dd	str_offsets_base0
-	dd	line_table_start0
-	db	2
-	db	0
-	dd	func_end0-func_begin0
-	dd	addr_table_base0
-	dd	loclists_table_base0
-	db	2
-	db	0
-	dd	func_end0-func_begin0
-	db	1
-	db	84
+	section	.text,"ax",@progbits
+	public	_optix_X
+_optix_X:
+	ld	hl, -12
+	call	__frameset
+	ld	l, (ix + 6)
+	ld	h, (ix + 7)
+	ld	(ix + -9), l
+	ld	(ix + -8), h
+	ld	a, (ix + 9)
+	ld	(ix + -6), a
+	ld	a, (ix + 12)
+	ld	(ix + -3), a
+	ld	a, (ix + 15)
+	ld	l, a
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	iy, 0
+	lea	bc, iy + 0
+	ld	l, (ix + -9)
+	ld	h, (ix + -8)
+	ld	c, l
+	ld	b, h
+	ld	(ix + -12), bc
+	lea	de, iy + 0
+	ld	a, (ix + -6)
+	ld	e, a
+	ld	(ix + -9), de
+	ld	a, (ix + -3)
+	ld	iyl, a
+	lea	hl, iy + 0
+	add	hl, bc
+	ld	(ix + -3), hl
+	add	iy, de
+	ld	(ix + -6), iy
+	push	iy
+	ld	hl, (ix + -3)
+	push	hl
+	push	de
+	push	bc
+	call	_gfx_Line
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, (ix + -12)
+	ld	(ix + 6), hl
+	ld	hl, (ix + -6)
+	ld	(ix + 9), hl
+	ld	hl, (ix + -3)
+	ld	(ix + 12), hl
+	ld	hl, (ix + -9)
+	ld	(ix + 15), hl
+	ld	sp, ix
+	pop	ix
+	jp	_gfx_Line
+	section	.text,"ax",@progbits
 
-	db	7
-	db	1
-	db	3
-
-
-	db	3
-	db	5
-	db	16
-	db	1
-	db	3
-	dd	180
-	db	3
-	db	4
-	db	15
-	db	1
-	db	3
-	dd	172
-	db	3
-	db	3
-	db	12
-	db	1
-	db	3
-	dd	180
-	db	3
-	db	2
-	db	11
-	db	1
-	db	3
-	dd	172
-	db	3
-	db	1
-	db	10
-	db	1
-	db	3
-	dd	172
-	db	3
-	db	0
-	db	8
-	db	1
-	db	3
-	dd	172
-	db	4
-	dd	123
-	db	1
-	db	4
-	dd	142
-	db	2
-	db	4
-	dd	123
-	db	3
-	db	0
-	db	5
-	db	3
-	db	2
-	dw	503
-
-	dd	138
-
-
-	db	6
-	dd	138
-	db	0
-	db	7
-	db	4
-	db	8
-	db	1
-	db	8
-	db	5
-	db	2
-	dw	684
-
-
-
-	db	6
-	dd	168
-	db	6
-	dd	168
-	db	6
-	dd	168
-	db	6
-	dd	168
-	db	0
-	db	7
-	db	6
-	db	5
-	db	3
-	db	9
-	dd	138
-	db	9
-	db	3
-	db	15
-	db	9
-	dd	188
-	db	14
-	db	3
-	db	39
-	db	7
-	db	13
-	db	7
-	db	2
-	db	0
-	private	debug_info_end0
-debug_info_end0:
-	section	.debug_str_offsets,"",@progbits
-	dd	72
-	dw	5
-	dw	0
-	private	str_offsets_base0
-str_offsets_base0:
-	section	.debug_str,"MS",@progbits,1
-	private	info_string0
-info_string0:
-	db	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)",000o
-	private	info_string1
-info_string1:
-	db	"D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\shapes.c",000o
-	private	info_string2
-info_string2:
-	db	"D:\Data\Programming\TI\Projects\Main\OPTIX",000o
-	private	info_string3
-info_string3:
-	db	"gfx_SetColor",000o
-	private	info_string4
-info_string4:
-	db	"unsigned char",000o
-	private	info_string5
-info_string5:
-	db	"gfx_FillRectangle",000o
-	private	info_string6
-info_string6:
-	db	"int",000o
-	private	info_string7
-info_string7:
-	db	"optix_OutlinedRectangle",000o
-	private	info_string8
-info_string8:
-	db	"outline_color",000o
-	private	info_string9
-info_string9:
-	db	"uint8_t",000o
-	private	info_string10
-info_string10:
-	db	"fill_color",000o
-	private	info_string11
-info_string11:
-	db	"height",000o
-	private	info_string12
-info_string12:
-	db	"width",000o
-	private	info_string13
-info_string13:
-	db	"unsigned short",000o
-	private	info_string14
-info_string14:
-	db	"uint16_t",000o
-	private	info_string15
-info_string15:
-	db	"y",000o
-	private	info_string16
-info_string16:
-	db	"x",000o
-	section	.debug_str_offsets,"",@progbits
-	dd	info_string0
-	dd	info_string1
-	dd	info_string2
-	dd	info_string3
-	dd	info_string4
-	dd	info_string5
-	dd	info_string6
-	dd	info_string7
-	dd	info_string8
-	dd	info_string9
-	dd	info_string10
-	dd	info_string11
-	dd	info_string12
-	dd	info_string13
-	dd	info_string14
-	dd	info_string15
-	dd	info_string16
-	section	.debug_addr,"",@progbits
-	dd	debug_addr_end0-debug_addr_start0
-	private	debug_addr_start0
-debug_addr_start0:
-	dw	5
-	db	3
-	db	0
-	private	addr_table_base0
-addr_table_base0:
-	dl	func_begin0
-	dl	tmp3
-	dl	tmp18
-	dl	tmp21
-	private	debug_addr_end0
-debug_addr_end0:
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
-	section	.debug_line,"",@progbits
-line_table_start0:
 	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister
 	extern	__frameset
 	extern	_gfx_FillRectangle
+	extern	_gfx_Line
 	extern	_gfx_SetColor
 	extern	_gfx_Rectangle
