@@ -37,12 +37,12 @@ void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
     widget->update = update[type];
     widget->render = render[type];
     //element-specific things
-    switch (type) {
+    /*switch (type) {
         case OPTIX_BUTTON_TYPE:
             ((struct optix_button *) widget)->click_action = NULL;
             ((struct optix_button *) widget)->click_args = NULL;
             break;
-    }
+    }*/
 }
 
 void optix_SetObjectTransform(struct optix_widget *widget, int x, int y, uint16_t width, uint8_t height) {

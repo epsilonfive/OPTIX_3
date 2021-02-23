@@ -8,6 +8,7 @@ void optix_UpdateButton_default(struct optix_widget *widget) {
     //check if the cursor overlaps with it
     if (!widget->state.visible) return;
     if (optix_CheckTransformOverlap(&optix_cursor.widget, widget)) {
+        dbg_sprintf(dbgout, "Button selected\n");
         widget->state.selected = true;
         optix_cursor.state = OPTIX_CURSOR_OVER_ITEM;
     } else widget->state.selected = false;
@@ -17,7 +18,8 @@ void optix_UpdateButton_default(struct optix_widget *widget) {
             if (button->click_action != NULL) button->click_action(button->click_args);
             //button->state.color = 224;
             button->pressed = true;
-        }
+        } else if (button->pressed) dbg_sprintf(dbgout, "Button already pressed.\n");
+        else if (!widget->state.selected) dbg_sprintf(dbgout, "Button not selected.\n");
     } else {
         button->pressed = false;
         //the color should change back

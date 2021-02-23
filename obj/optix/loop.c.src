@@ -34,48 +34,44 @@ _optix_UpdateStack_TopLevel:
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB1_17
+	jq	z, BB1_24
 	ld	(ix + -15), a
 	ld	hl, 0
 	ld	(ix + -18), hl
 	ld	(ix + -3), hl
-	ld	(ix + -12), hl
 	push	hl
 	pop	bc
+	ld	(ix + -9), hl
 BB1_2:
 	ld	hl, (iy + 15)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	nz, BB1_3
-	jq	BB1_4
-BB1_3:
+	jq	z, BB1_5
 	push	iy
-	ld	(ix + -9), bc
+	ld	(ix + -12), bc
 	call	__indcallhl
-	ld	bc, (ix + -9)
+	ld	bc, (ix + -12)
 	pop	hl
 	ld	de, (ix + -3)
 	ld	hl, (ix + 6)
 	add	hl, de
 	ld	iy, (hl)
-BB1_4:
+BB1_5:
 	ld	a, (iy + 10)
 	ld	l, 1
 	xor	a, l
 	bit	0, a
-	jq	z, BB1_5
-	jq	BB1_7
-BB1_5:
+	jq	nz, BB1_9
 	ld	a, (iy)
 	and	a, -2
 	cp	a, 4
-	jq	nz, BB1_7
+	jq	nz, BB1_9
 	ld	(ix + -18), iy
-	ld	(ix + -12), bc
+	ld	(ix + -9), bc
 	ld	a, 1
 	ld	(ix + -15), a
-BB1_7:
+BB1_9:
 	inc	bc
 	ld	hl, (ix + -3)
 	push	hl
@@ -98,48 +94,66 @@ BB1_7:
 	ld	l, 1
 	xor	a, l
 	bit	0, a
-	jq	nz, BB1_17
-	ld	(ix + -9), bc
+	jq	nz, BB1_24
+	ld	(ix + -12), bc
 	dec	bc
-	ld	(ix + -15), bc
+	ld	(ix + -21), bc
 	ld	iy, (ix + 6)
-BB1_11:
+BB1_12:
 	ld	hl, (iy)
 	push	hl
 	pop	de
 	ld	a, (hl)
-	and	a, -2
 	cp	a, 4
-	jq	nz, BB1_15
-	ld	(ix + -21), iy
-	ld	hl, (ix + -12)
+	jq	nz, BB1_16
+	ld	(ix + -15), iy
+	ld	hl, (ix + -9)
 	ld	bc, (ix + -6)
 	or	a, a
 	sbc	hl, bc
 	ld	a, 1
-	jq	z, BB1_14
+	jq	z, BB1_15
 	ld	a, 0
-BB1_14:
+BB1_15:
 	and	a, 1
+	jq	BB1_20
+BB1_16:
+	cp	a, 5
+	jq	nz, BB1_21
+	ld	(ix + -15), iy
+	ld	hl, (ix + -9)
+	ld	bc, (ix + -6)
+	or	a, a
+	sbc	hl, bc
+	ld	a, 1
+	jq	z, BB1_19
+	ld	a, 0
+BB1_19:
+	push	de
+	pop	iy
+	ld	iy, (iy + 21)
+	and	a, 1
+	ld	(iy + 10), a
+BB1_20:
 	push	de
 	pop	iy
 	ld	(iy + 10), a
-	ld	iy, (ix + -21)
-BB1_15:
+	ld	iy, (ix + -15)
+BB1_21:
 	ld	bc, (ix + -6)
 	inc	bc
 	lea	iy, iy + 3
-	ld	hl, (ix + -9)
+	ld	hl, (ix + -12)
 	ld	(ix + -6), bc
 	or	a, a
 	sbc	hl, bc
-	jq	nz, BB1_11
-	ld	hl, (ix + -15)
-	ld	de, (ix + -12)
+	jq	nz, BB1_12
+	ld	hl, (ix + -21)
+	ld	de, (ix + -9)
 	or	a, a
 	sbc	hl, de
-	jq	z, BB1_17
-	ld	hl, (ix + -12)
+	jq	z, BB1_24
+	ld	hl, (ix + -9)
 	push	hl
 	pop	de
 	inc	de
@@ -158,7 +172,7 @@ BB1_15:
 	pop	de
 	ld	iy, (ix + 6)
 	add	iy, de
-	ld	hl, (ix + -12)
+	ld	hl, (ix + -9)
 	ld	bc, -3
 	call	__imulu
 	ld	de, (ix + -3)
@@ -176,7 +190,7 @@ BB1_15:
 	add	iy, de
 	ld	hl, (ix + -18)
 	ld	(iy + -3), hl
-BB1_17:
+BB1_24:
 	ld	sp, ix
 	pop	ix
 	ret
@@ -362,7 +376,7 @@ BB4_5:
 	extern	__Unwind_SjLj_Unregister
 	extern	__frameset
 	extern	__indcallhl
-	extern	__imulu
 	extern	_kb_Scan
 	extern	_optix_cursor
 	extern	_memmove
+	extern	__imulu

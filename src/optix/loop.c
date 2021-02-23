@@ -26,6 +26,7 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
     struct optix_widget *curr_window = NULL;
     int curr_window_index = 0;
     bool found_window = false;
+    //the value of i at the end will also be the number of elements in the stack
     while ((*stack)[i]) {
         //if this has been selected, we want to loop through and make sure nothing else is selected
         //this is so that what's on top will be selected, or what is rendered last
@@ -40,8 +41,12 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
     }
     //if it's already the last entry don't bother
     if (!found_window) return;
-    for (int j = 0; j < i; j++) 
-        if ((*stack)[j]->type == OPTIX_WINDOW_TITLE_BAR_TYPE || (*stack)[j]->type == OPTIX_WINDOW_TYPE) (*stack)[j]->state.selected = (j == curr_window_index);
+    //set everything in the array to unselected, except for the current window
+    for (int j = 0; j < i; j++) {
+        struct optix_window_title_bar *window_title_bar = (struct optix_window_title_bar *) (*stack)[j];
+        if ((*stack)[j]->type == OPTIX_WINDOW_TITLE_BAR_TYPE) (*stack)[j]->state.selected = window_title_bar->window->widget.state.selected = (j == curr_window_index);
+        else if ((*stack)[j]->type == OPTIX_WINDOW_TYPE) (*stack)[j]->state.selected = (j == curr_window_index);
+    }
     if (i == curr_window_index + 1) return;
     dbg_sprintf(dbgout, "Moving (%d - %d) stack elements...\n", i, curr_window_index);
     memmove((void *) stack + (curr_window_index * sizeof(struct optix_widget ***)), (void *) stack + ((curr_window_index + 1) * sizeof(struct optix_widget ***)),

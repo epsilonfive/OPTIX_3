@@ -6,19 +6,19 @@ _optix_InitializeWidget:
 	call	__frameset0
 	ld	hl, (ix + 6)
 	ld	a, (ix + 9)
-	ld	bc, 0
-	ld	de, L___const.optix_InitializeWidget.render
+	push	hl
+	pop	bc
 	ld	(hl), a
 	or	a, a
 	sbc	hl, hl
 	ld	l, a
 	or	a, a
 	jq	nz, BB0_2
-	ld	iy, (ix + 6)
-	ld	(iy + 18), bc
-	ld	de, L___const.optix_InitializeWidget.render
+	ld	de, 0
+	push	bc
+	pop	iy
+	ld	(iy + 18), de
 BB0_2:
-	ld	bc, (ix + 6)
 	push	bc
 	pop	iy
 	ld	(iy + 10), 0
@@ -26,27 +26,15 @@ BB0_2:
 	ld	bc, 3
 	call	__imulu
 	push	hl
-	pop	bc
+	pop	de
 	ld	hl, L___const.optix_InitializeWidget.update
-	add	hl, bc
+	add	hl, de
 	ld	hl, (hl)
-	ld	iy, (ix + 6)
 	ld	(iy + 15), hl
-	ex	de, hl
-	add	hl, bc
+	ld	hl, L___const.optix_InitializeWidget.render
+	add	hl, de
 	ld	hl, (hl)
-	ld	iy, (ix + 6)
 	ld	(iy + 12), hl
-	ld	a, (ix + 9)
-	cp	a, 2
-	jq	nz, BB0_4
-	ld	hl, (ix + 6)
-	push	hl
-	pop	iy
-	ld	hl, 0
-	ld	(iy + 21), hl
-	ld	(iy + 24), hl
-BB0_4:
 	pop	ix
 	ret
 	section	.text,"ax",@progbits

@@ -39,7 +39,7 @@ IV: Windows
 void test_func(void *args) {
    //we don't need to do anything with args
    gfx_SetColor(7);
-   gfx_FillRectangle(0, 0, 2, 2);
+   gfx_FillRectangle(0, 0, 320, 2);
    gfx_Blit(1);
 }
 
@@ -51,7 +51,7 @@ void main(void) {
    struct optix_text test_text[] = {{.text = "1"}, {.text = "2"}, {.text = "3"}, {.text = "4"}};
    //test_button
    struct optix_button test_button[] = {
-      {.widget.child = (struct optix_widget *[]) {&test_text[0].widget, NULL}},
+      {.widget.child = (struct optix_widget *[]) {&test_text[0].widget, NULL}, .click_action = test_func, .click_args = NULL},
       {.widget.child = (struct optix_widget *[]) {&test_text[1].widget, NULL}},
       {.widget.child = (struct optix_widget *[]) {&test_text[2].widget, NULL}},
       {.widget.child = (struct optix_widget *[]) {&test_text[3].widget, NULL}},
@@ -130,6 +130,8 @@ void main(void) {
          },
          .child = (struct optix_widget *[]) {&test_text2.widget, NULL},
       },
+      .click_action = test_func, 
+      .click_args = NULL,
    };
    optix_InitializeWidget(&test_button2.widget, OPTIX_BUTTON_TYPE);
    optix_AlignTransformToTransform(&test_text2.widget, &test_button2.widget, OPTIX_CENTERING_CENTERED, OPTIX_CENTERING_CENTERED);

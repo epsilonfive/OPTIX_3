@@ -10,6 +10,7 @@ _test_func:
 	pop	hl
 	ld	hl, 2
 	push	hl
+	ld	hl, 320
 	push	hl
 	or	a, a
 	sbc	hl, hl
@@ -311,6 +312,8 @@ _main:
 	ld	hl, (ix + 0)
 	pop	ix
 	ld	(iy + 0), hl
+	ld	hl, _test_func
+	ld	(iy + 3), hl
 	lea	de, iy + 0
 	ld	(ix + -3), de
 	ld	de, -643
@@ -646,24 +649,23 @@ BB1_2:
 	ld.sis	hl, 0
 	ld	(iy + 94), l
 	ld	(iy + 95), h
-	ld	hl, 0
-	ld	(iy + 96), hl
-	ld	(iy + 99), hl
-	push	ix
+	ld	de, 0
+	ld	(iy + 96), de
+	ld	(iy + 99), de
 	ld	bc, -658
-	add	ix, bc
-	ld	de, (ix + 0)
-	pop	ix
-	ld	(iy + 78), de
-	ld	(iy + 81), hl
-	push	ix
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	ld	(iy + 78), hl
+	ld	(iy + 81), de
 	ld	bc, -709
-	add	ix, bc
-	ld	de, (ix + 0)
-	pop	ix
-	ld	(iy + 102), de
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	ld	(iy + 102), hl
+	ld	hl, _test_func
 	ld	(iy + 105), hl
-	ld	(iy + 108), hl
+	ld	(iy + 108), de
 	ld	(iy + 111), 0
 	ld	hl, 2
 	push	hl
