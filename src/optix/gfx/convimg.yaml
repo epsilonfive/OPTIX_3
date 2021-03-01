@@ -5,6 +5,8 @@ converts:
       - cursor_normal.png
       - cursor_pointer.png
       - cursor_move.png
+      - cursor_resize_horizontal.png
+      - cursor_resize_vertical.png
 
 outputs:
   - type: c

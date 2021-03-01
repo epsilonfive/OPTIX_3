@@ -6,21 +6,21 @@ _optix_RenderSprite_default:
 	ld	hl, -3
 	call	__frameset
 	ld	iy, (ix + 6)
-	ld	a, (iy + 11)
+	ld	a, (iy + 15)
 	ld	l, 1
 	xor	a, l
 	bit	0, a
 	jq	nz, BB0_5
-	ld	a, (iy + 26)
+	ld	a, (iy + 30)
 	xor	a, l
 	bit	0, a
 	jq	z, BB0_3
-	ld	hl, (iy + 21)
+	ld	hl, (iy + 25)
 	ld	(ix + -3), hl
 	ld	de, (iy + 1)
 	ld	a, (iy + 4)
-	ld	c, (iy + 24)
-	ld	b, (iy + 25)
+	ld	c, (iy + 28)
+	ld	b, (iy + 29)
 	ld	l, b
 	push	hl
 	ld	l, c
@@ -33,18 +33,18 @@ _optix_RenderSprite_default:
 	call	_gfx_ScaledSprite_NoClip
 	jq	BB0_4
 BB0_3:
-	ld	a, (iy + 27)
+	ld	a, (iy + 31)
 	ld	l, a
 	push	hl
 	call	_gfx_SetTransparentColor
 	pop	hl
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 21)
+	ld	hl, (iy + 25)
 	ld	(ix + -3), hl
 	ld	de, (iy + 1)
 	ld	a, (iy + 4)
-	ld	c, (iy + 24)
-	ld	b, (iy + 25)
+	ld	c, (iy + 28)
+	ld	b, (iy + 29)
 	ld	l, b
 	push	hl
 	ld	l, c

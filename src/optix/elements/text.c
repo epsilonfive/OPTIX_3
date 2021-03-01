@@ -6,8 +6,8 @@ void optix_InitializeTextTransform(struct optix_text *text) {
     text->widget.transform.y = 0;
     text->widget.transform.width = gfx_GetStringWidth(text->text);
     text->widget.transform.height = 8;
-    text->x_centering = OPTIX_CENTERING_CENTERED;
-    text->y_centering = OPTIX_CENTERING_CENTERED;
+    text->widget.centering.x_centering = OPTIX_CENTERING_CENTERED;
+    text->widget.centering.y_centering = OPTIX_CENTERING_CENTERED;
 }
 
 

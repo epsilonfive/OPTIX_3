@@ -3,28 +3,37 @@
 //quick function to align 
 void optix_AlignMenu(struct optix_menu *menu) {
     int i = 0;
-    while (menu->widget.child[i] != NULL) {
+    dbg_sprintf(dbgout, "(menu) width: %d, height: %d", menu->widget.transform.width, menu->widget.transform.height);
+    while (menu->widget.child[i]) {
         struct optix_widget *child = menu->widget.child[i];
         //just continue if this won't be visible, but set it to invisible as well
         if (i > menu->rows * menu->columns - 1) {
             child->state.visible = false;
             i++;
             continue;
-        }
+        } else child->state.visible = true;
+        dbg_sprintf(dbgout, "Entry %d\n", i);
         if (child->type == OPTIX_BUTTON_TYPE) {
-            child->transform.width = menu->widget.transform.width / menu->columns;
-            child->transform.height = menu->widget.transform.height / menu->rows;
-            child->transform.x = menu->widget.transform.x + i % menu->columns * child->transform.width;
-            child->transform.y = menu->widget.transform.y + i / menu->columns * child->transform.height;
+            int default_width = menu->widget.transform.width / menu->columns;
+            int default_height = menu->widget.transform.height / menu->rows;
+            //resize the last entry in the row if it isn't the right size, because it irritates me if it's not
+            child->transform.width = default_width + (i % (menu->columns - 1) == 0) * (menu->widget.transform.width % menu->columns);
+            //the last row, i / menu->rows will be equal to 1
+            child->transform.height = default_height + (i / (menu->rows - 1)) * (menu->widget.transform.height % menu->rows);
+            child->transform.x = menu->widget.transform.x + i % menu->columns * default_width;
+            child->transform.y = menu->widget.transform.y + i / menu->columns * default_height;
             //realign it if necessary
-            if (child->child != NULL) {
+            if (child->child) {
                 int j = 0;
-                while (child->child[j] != NULL) {
+                while (child->child[j]) {
+                    dbg_sprintf(dbgout, "%d\n", child->child[j]->type);
                     if (child->child[j]->type == OPTIX_TEXT_TYPE) {
                         struct optix_text *child_text = (struct optix_text *) child->child[j];
-                        optix_AlignTransformToTransform(child->child[j], child, child_text->x_centering, child_text->y_centering);
+                        optix_AlignTransformToTransform(child->child[j], child, child_text->widget.centering.x_centering, child_text->widget.centering.y_centering);
                     } else if (child->type == OPTIX_SPRITE_TYPE) {
                         //implement later
+                        struct optix_sprite *child_sprite = (struct optix_sprite *) child->child[j];
+                        //optix_AlignTransformToTransform(child->child[j], )
                     }
                     j++;
                 }

@@ -9,7 +9,7 @@ _optix_InitializeTextTransform:
 	sbc	hl, hl
 	ld	(iy + 1), hl
 	ld	(iy + 4), hl
-	ld	hl, (iy + 21)
+	ld	hl, (iy + 25)
 	push	hl
 	call	_gfx_GetStringWidth
 	pop	de
@@ -17,8 +17,8 @@ _optix_InitializeTextTransform:
 	ld	(iy + 7), l
 	ld	(iy + 8), h
 	ld	(iy + 9), 8
-	ld	(iy + 24), 1
-	ld	(iy + 25), 1
+	ld	(iy + 10), 1
+	ld	(iy + 11), 1
 	pop	ix
 	ret
 	section	.text,"ax",@progbits
@@ -28,12 +28,12 @@ _optix_InitializeTextTransform:
 _optix_RenderText_default:
 	call	__frameset0
 	ld	iy, (ix + 6)
-	ld	a, (iy + 11)
+	ld	a, (iy + 15)
 	ld	l, 1
 	xor	a, l
 	bit	0, a
 	jq	nz, BB1_2
-	ld	hl, (iy + 21)
+	ld	hl, (iy + 25)
 	ld	de, (iy + 1)
 	ld	bc, (iy + 4)
 	push	bc

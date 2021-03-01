@@ -25,6 +25,8 @@ optix_colors_t optix_colors = {
     //text colors
     TEXT_FG_COLOR_DEFAULT                         ,
     TEXT_BG_COLOR_DEFAULT                         ,
+    //other
+    HIGHLIGHT_COLOR_DEFAULT                       ,
 };
 
 

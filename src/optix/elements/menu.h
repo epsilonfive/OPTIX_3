@@ -14,6 +14,7 @@ which we don't want.
 
 struct optix_menu {
     struct optix_widget widget;
+    struct optix_resize_info resize_info;
     int selection;
     int rows;
     int columns;

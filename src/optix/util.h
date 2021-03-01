@@ -16,5 +16,6 @@ void optix_SetObjectChildren(struct optix_widget *widget, struct optix_widget **
 void optix_SetPosition(struct optix_widget *widget, int x, int y);
 void optix_AlignTransformToTransform(struct optix_widget *transform, struct optix_widget *reference, uint8_t x_centering, uint8_t y_centering);
 bool optix_CheckTransformOverlap(struct optix_widget *test, struct optix_widget *reference);
+void optix_RecursiveAlign(struct optix_widget *widget);
 
 #endif

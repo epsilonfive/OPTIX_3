@@ -8,7 +8,7 @@ _optix_UpdateGUI:
 	ld	hl, (ix + 6)
 	ld	(ix + -3), hl
 	call	_kb_Scan
-	ld	hl, (_optix_cursor+15)
+	ld	hl, (_optix_cursor+19)
 	ld	de, 0
 	push	de
 	call	__indcallhl
@@ -23,174 +23,237 @@ _optix_UpdateGUI:
 	section	.text,"ax",@progbits
 	public	_optix_UpdateStack_TopLevel
 _optix_UpdateStack_TopLevel:
-	ld	hl, -21
+	ld	hl, -28
 	call	__frameset
 	ld	hl, (ix + 6)
-	xor	a, a
+	ld	bc, 3
 	ld	de, 0
+	ld	(ix + -28), de
+	xor	a, a
+	ld	(ix + -3), hl
+	push	de
+	pop	iy
+	ld	(ix + -25), a
+	ld	(ix + -18), a
+	push	de
+	pop	hl
 	ld	(ix + -6), de
-	ld	iy, (hl)
+BB1_1:
+	ld	(ix + -17), a
+	and	a, 1
+	ld	(ix + -16), a
+	ld	(ix + -12), hl
+	call	__imulu
+	push	hl
+	pop	de
+	ld	(ix + -21), iy
+	lea	hl, iy + 0
+	or	a, a
+	sbc	hl, de
+	ld	(ix + -15), hl
+	ld	iy, (ix + -3)
+	ld	de, (ix + -6)
+BB1_2:
+	ld	(ix + -9), iy
+	ld	iy, (iy)
 	lea	hl, iy + 0
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB1_24
-	ld	(ix + -15), a
-	ld	hl, 0
-	ld	(ix + -18), hl
-	ld	(ix + -3), hl
-	push	hl
-	pop	bc
-	ld	(ix + -9), hl
-BB1_2:
-	ld	hl, (iy + 15)
+	jq	z, BB1_19
+	ld	hl, (iy + 19)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB1_5
 	push	iy
-	ld	(ix + -12), bc
+	ld	(ix + -24), de
 	call	__indcallhl
-	ld	bc, (ix + -12)
+	ld	de, (ix + -24)
 	pop	hl
-	ld	de, (ix + -3)
-	ld	hl, (ix + 6)
-	add	hl, de
-	ld	iy, (hl)
 BB1_5:
-	ld	a, (iy + 10)
+	ld	a, (ix + -16)
 	ld	l, 1
 	xor	a, l
 	bit	0, a
-	jq	nz, BB1_9
+	jq	nz, BB1_7
+	inc	de
+	push	de
+	pop	bc
+	ld	de, 3
+	ld	hl, (ix + -15)
+	add	hl, de
+	push	bc
+	pop	de
+	ld	(ix + -15), hl
+	ld	iy, (ix + -9)
+	lea	iy, iy + 3
+	jq	BB1_2
+BB1_7:
+	ld	hl, (ix + -9)
+	ld	iy, (hl)
+	ld	e, (iy)
+	ld	a, e
+	cp	a, 4
+	ld	hl, (ix + -12)
+	ld	(ix + -9), iy
+	jq	z, BB1_11
+	ld	a, e
+	cp	a, 5
+	ld	a, (ix + -25)
+	jq	nz, BB1_13
+	ld	iy, (ix + -9)
+	ld	iy, (iy + 25)
+BB1_11:
+	lea	iy, iy + 35
 	ld	a, (iy)
+	ld	(iy), 0
+BB1_13:
+	ld	(ix + -25), a
+	and	a, 1
+	ld	c, 1
+	xor	a, c
+	xor	a, c
+	bit	0, a
+	ld	a, c
+	ld	bc, 3
+	ld	iy, (ix + -6)
+	jq	nz, BB1_16
+	ld	a, e
 	and	a, -2
 	cp	a, 4
-	jq	nz, BB1_9
-	ld	(ix + -18), iy
-	ld	(ix + -9), bc
-	ld	a, 1
-	ld	(ix + -15), a
-BB1_9:
-	inc	bc
-	ld	hl, (ix + -3)
-	push	hl
-	pop	de
-	ld	iy, (ix + 6)
-	add	iy, de
-	ld	iy, (iy + 3)
-	ld	de, 3
-	add	hl, de
-	ex	de, hl
+	jq	nz, BB1_18
+	lea	de, iy + 0
+	ld	iy, (ix + -9)
+	ld	a, (iy + 14)
+	push	de
+	pop	iy
+	ld	e, 1
+	xor	a, e
+	bit	0, a
+	ld	a, (ix + -17)
+	jq	nz, BB1_18
+BB1_16:
+	ld	l, 1
+	ld	(ix + -18), l
+	ld	(ix + -17), a
 	lea	hl, iy + 0
+	ld	de, (ix + -9)
+	ld	(ix + -28), de
+BB1_18:
+	inc	iy
+	ld	(ix + -6), iy
+	ex	de, hl
+	ld	hl, (ix + -21)
 	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	ld	(ix + -3), de
-	jq	nz, BB1_2
-	ld	(ix + -3), de
-	ld	a, (ix + -15)
+	ld	iy, (ix + -3)
+	lea	iy, iy + 3
+	ld	(ix + -3), iy
+	push	hl
+	pop	iy
+	ex	de, hl
+	ld	a, (ix + -17)
+	jq	BB1_1
+BB1_19:
+	ld	a, (ix + -18)
 	and	a, 1
 	ld	l, 1
 	xor	a, l
 	bit	0, a
-	jq	nz, BB1_24
-	ld	(ix + -12), bc
-	dec	bc
-	ld	(ix + -21), bc
+	jq	nz, BB1_34
 	ld	iy, (ix + 6)
-BB1_12:
-	ld	hl, (iy)
-	push	hl
-	pop	de
-	ld	a, (hl)
-	cp	a, 4
-	jq	nz, BB1_16
-	ld	(ix + -15), iy
-	ld	hl, (ix + -9)
-	ld	bc, (ix + -6)
-	or	a, a
-	sbc	hl, bc
-	ld	a, 1
-	jq	z, BB1_15
-	ld	a, 0
-BB1_15:
-	and	a, 1
-	jq	BB1_20
-BB1_16:
-	cp	a, 5
-	jq	nz, BB1_21
-	ld	(ix + -15), iy
-	ld	hl, (ix + -9)
-	ld	bc, (ix + -6)
-	or	a, a
-	sbc	hl, bc
-	ld	a, 1
-	jq	z, BB1_19
-	ld	a, 0
-BB1_19:
-	push	de
-	pop	iy
-	ld	iy, (iy + 21)
-	and	a, 1
-	ld	(iy + 10), a
-BB1_20:
-	push	de
-	pop	iy
-	ld	(iy + 10), a
-	ld	iy, (ix + -15)
+	ld	(ix + -3), iy
+	ld	bc, 0
 BB1_21:
-	ld	bc, (ix + -6)
-	inc	bc
-	lea	iy, iy + 3
-	ld	hl, (ix + -12)
+	push	de
+	pop	hl
 	ld	(ix + -6), bc
 	or	a, a
 	sbc	hl, bc
-	jq	nz, BB1_12
-	ld	hl, (ix + -21)
-	ld	de, (ix + -9)
+	jq	z, BB1_32
+	ld	(ix + -24), de
+	ld	hl, (ix + -3)
+	ld	hl, (hl)
+	push	hl
+	pop	iy
+	ld	a, (hl)
+	cp	a, 4
+	jq	nz, BB1_26
+	ld	hl, (ix + -12)
+	ld	bc, (ix + -6)
+	or	a, a
+	sbc	hl, bc
+	ld	a, 1
+	jq	z, BB1_25
+	ld	a, 0
+BB1_25:
+	and	a, 1
+	jq	BB1_30
+BB1_26:
+	cp	a, 5
+	jq	nz, BB1_31
+	ld	hl, (ix + -12)
+	ld	bc, (ix + -6)
+	or	a, a
+	sbc	hl, bc
+	ld	a, 1
+	jq	z, BB1_29
+	ld	a, 0
+BB1_29:
+	ld	hl, (iy + 25)
+	lea	de, iy + 0
+	and	a, 1
+	push	hl
+	pop	iy
+	ld	(iy + 14), a
+	push	de
+	pop	iy
+BB1_30:
+	ld	(iy + 14), a
+BB1_31:
+	ld	bc, (ix + -6)
+	inc	bc
+	ld	iy, (ix + -3)
+	lea	iy, iy + 3
+	ld	(ix + -3), iy
+	ld	de, (ix + -24)
+	jq	BB1_21
+BB1_32:
+	ld	iy, (ix + -12)
+	inc	iy
+	lea	hl, iy + 0
 	or	a, a
 	sbc	hl, de
-	jq	z, BB1_24
-	ld	hl, (ix + -9)
-	push	hl
-	pop	de
-	inc	de
-	ld	iy, 3
-	lea	bc, iy + 0
+	jq	z, BB1_34
+	ld	bc, 3
+	ld	hl, (ix + -12)
+	lea	de, iy + 0
 	call	__imulu
 	push	hl
 	pop	bc
-	ld	hl, (ix + 6)
+	ld	iy, (ix + 6)
+	lea	hl, iy + 0
 	add	hl, bc
-	ld	(ix + -6), hl
+	ld	(ix + -3), hl
 	ex	de, hl
-	lea	bc, iy + 0
+	ld	bc, 3
 	call	__imulu
 	push	hl
 	pop	de
-	ld	iy, (ix + 6)
 	add	iy, de
-	ld	hl, (ix + -9)
-	ld	bc, -3
-	call	__imulu
-	ld	de, (ix + -3)
-	add	hl, de
+	ld	hl, (ix + -15)
 	push	hl
 	push	iy
-	ld	hl, (ix + -6)
+	ld	hl, (ix + -3)
 	push	hl
 	call	_memmove
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	iy, (ix + 6)
-	ld	de, (ix + -3)
-	add	iy, de
-	ld	hl, (ix + -18)
+	ld	hl, (ix + -28)
+	ld	iy, (ix + -9)
 	ld	(iy + -3), hl
-BB1_24:
+BB1_34:
 	ld	sp, ix
 	pop	ix
 	ret
@@ -202,19 +265,23 @@ _optix_UpdateStack:
 	ld	hl, -6
 	call	__frameset
 	ld	iy, (ix + 6)
-	or	a, a
-	sbc	hl, hl
-	ld	(ix + -3), hl
-	lea	de, iy + 0
+	ld	de, 0
+	ld	bc, 3
+BB2_1:
+	ld	(ix + -3), de
+	ex	de, hl
+	call	__imulu
+	push	hl
+	pop	de
+	add	iy, de
+	ld	(ix + -6), iy
 	ld	iy, (iy)
 	lea	hl, iy + 0
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB2_11
-	ld	(ix + -6), de
-BB2_2:
-	ld	hl, (iy + 15)
+	ld	hl, (iy + 19)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -226,51 +293,34 @@ BB2_2:
 	ld	iy, (hl)
 BB2_5:
 	ld	de, (ix + -3)
-	ld	a, (iy + 10)
+	ld	bc, 3
+	ld	a, (iy + 14)
 	ld	l, 1
 	xor	a, l
 	bit	0, a
-	jq	nz, BB2_10
-	push	de
-	pop	hl
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB2_10
-	ld	hl, (ix + 6)
-	push	hl
-	pop	iy
+	ld	iy, (ix + 6)
+	jq	z, BB2_8
+BB2_7:
+	inc	de
+	jq	BB2_1
+BB2_8:
+	ld	(ix + -3), iy
 	push	de
 	pop	hl
 BB2_9:
-	ld	(ix + -3), iy
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB2_7
 	ld	iy, (ix + -3)
 	ld	iy, (iy)
-	ld	(iy + 10), 0
-	ld	iy, (ix + -3)
+	ld	(iy + 14), 0
 	dec	hl
+	ld	iy, (ix + -3)
 	lea	iy, iy + 3
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	nz, BB2_9
-BB2_10:
-	inc	de
-	ld	(ix + -3), de
-	ex	de, hl
-	ld	bc, 3
-	call	__imulu
-	push	hl
-	pop	de
-	ld	hl, (ix + 6)
-	add	hl, de
-	ld	(ix + -6), hl
-	ld	iy, (hl)
-	lea	hl, iy + 0
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	nz, BB2_2
+	ld	(ix + -3), iy
+	ld	iy, (ix + 6)
+	jq	BB2_9
 BB2_11:
 	ld	sp, ix
 	pop	ix
@@ -280,48 +330,14 @@ BB2_11:
 	section	.text,"ax",@progbits
 	public	_optix_RenderGUI
 _optix_RenderGUI:
-	ld	hl, -3
-	call	__frameset
+	call	__frameset0
 	ld	hl, (ix + 6)
-	ld	de, 0
 	push	hl
-	pop	iy
-	ld	hl, (hl)
-	push	hl
-	pop	bc
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB3_5
-	lea	hl, iy + 3
-	ld	(ix + -3), hl
-BB3_2:
-	push	bc
-	pop	iy
-	ld	hl, (iy + 12)
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB3_4
-	push	bc
-	call	__indcallhl
-	ld	de, 0
+	call	_optix_RenderStack
 	pop	hl
-BB3_4:
-	ld	iy, (ix + -3)
-	ld	hl, (iy)
-	lea	iy, iy + 3
-	ld	(ix + -3), iy
-	push	hl
-	pop	bc
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	nz, BB3_2
-BB3_5:
-	ld	hl, (_optix_cursor+12)
+	ld	hl, (_optix_cursor+16)
+	ld	de, 0
 	ld	(ix + 6), de
-	ld	sp, ix
 	pop	ix
 	jp	(hl)
 	section	.text,"ax",@progbits
@@ -331,40 +347,27 @@ BB3_5:
 _optix_RenderStack:
 	ld	hl, -3
 	call	__frameset
-	ld	hl, (ix + 6)
-	push	hl
-	pop	iy
-	ld	hl, (hl)
-	push	hl
-	pop	bc
+	ld	iy, (ix + 6)
+BB4_1:
+	ld	(ix + -3), iy
+	ld	iy, (iy)
+	lea	hl, iy + 0
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB4_5
-	lea	hl, iy + 3
-	ld	(ix + -3), hl
-BB4_2:
-	push	bc
-	pop	iy
-	ld	hl, (iy + 12)
+	ld	hl, (iy + 16)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB4_4
-	push	bc
+	push	iy
 	call	__indcallhl
 	pop	hl
 BB4_4:
 	ld	iy, (ix + -3)
-	ld	hl, (iy)
 	lea	iy, iy + 3
-	ld	(ix + -3), iy
-	push	hl
-	pop	bc
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	nz, BB4_2
+	jq	BB4_1
 BB4_5:
 	pop	hl
 	pop	ix
@@ -373,10 +376,11 @@ BB4_5:
 
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
 	extern	__Unwind_SjLj_Register
-	extern	__Unwind_SjLj_Unregister
 	extern	__frameset
 	extern	__indcallhl
 	extern	_kb_Scan
 	extern	_optix_cursor
 	extern	_memmove
+	extern	__Unwind_SjLj_Unregister
 	extern	__imulu
+	extern	__frameset0

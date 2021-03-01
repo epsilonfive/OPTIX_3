@@ -7,7 +7,7 @@ _optix_RenderCursor_default:
 	push	hl
 	call	_gfx_SetTransparentColor
 	pop	hl
-	ld	hl, (_optix_cursor+27)
+	ld	hl, (_optix_cursor+31)
 	ld	bc, 3
 	call	__imulu
 	push	hl
@@ -31,16 +31,16 @@ _optix_RenderCursor_default:
 	section	.text,"ax",@progbits
 	public	_optix_UpdateCursor_default
 _optix_UpdateCursor_default:
-	ld	hl, -3
+	ld	hl, -6
 	call	__frameset
 	ld	bc, 0
 	ld	hl, -720866
 	ld	de, (_optix_cursor+1)
-	ld	(_optix_cursor+21), de
+	ld	(_optix_cursor+25), de
 	ld	iy, (_optix_cursor+4)
-	ld	(_optix_cursor+24), iy
-	ld	(_optix_cursor+27), bc
-	ld	a, (_optix_cursor+11)
+	ld	(_optix_cursor+28), iy
+	ld	(_optix_cursor+31), bc
+	ld	a, (_optix_cursor+15)
 	inc	c
 	xor	a, c
 	push	de
@@ -56,10 +56,15 @@ _optix_UpdateCursor_default:
 	jq	z, BB1_5
 	ld	a, l
 	or	a, a
-	ld	iy, -720866
-	jq	nz, BB1_16
-	ld	l, (iy)
-	ld	h, (iy + 1)
+	jq	nz, BB1_28
+	ld	hl, -720866
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
 	ld.sis	bc, 1
 	call	__sand
 	ld	a, l
@@ -67,18 +72,30 @@ _optix_UpdateCursor_default:
 	xor	a, l
 	xor	a, l
 	bit	0, a
-	jq	nz, BB1_16
-	ld	l, (iy)
-	ld	h, (iy + 1)
+	jq	nz, BB1_28
+	ld	hl, -720866
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
 	ld	a, l
 	bit	1, a
-	jq	nz, BB1_16
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	jq	BB1_16
+	jq	nz, BB1_28
+	ld	hl, -720866
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	jq	BB1_28
 BB1_5:
 	ld	(ix + -3), de
-	ld	de, -2
+	ld	de, -3
 	ld	a, l
 	or	a, a
 	jq	z, BB1_8
@@ -99,26 +116,14 @@ BB1_8:
 	ld	a, l
 	xor	a, e
 	bit	0, a
-	jq	nz, BB1_11
-	ld	de, 2
+	jq	nz, BB1_12
+	ld	de, 3
 	add	iy, de
 	ld	(_optix_cursor+4), iy
-BB1_11:
-	ld	iy, -720866
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	ld	a, l
-	bit	1, a
-	lea	hl, iy + 0
-	ld	de, -2
-	jq	nz, BB1_13
+BB1_12:
+	lea	bc, iy + 0
 	ld	iy, (ix + -3)
-	jq	BB1_14
-BB1_13:
-	ld	iy, (ix + -3)
-	add	iy, de
-	ld	(_optix_cursor+1), iy
-BB1_14:
+	ld	hl, -720866
 	push	de
 	ld	e, (hl)
 	inc	hl
@@ -127,13 +132,91 @@ BB1_14:
 	ld	h, d
 	pop	de
 	ld	a, l
-	bit	2, a
+	bit	1, a
 	jq	z, BB1_16
-	ld	de, 2
+	ld	de, -3
 	add	iy, de
+	ld	(ix + -3), iy
 	ld	(_optix_cursor+1), iy
 BB1_16:
+	ld	hl, 320
+	ld	iy, -720866
+	ld	e, (iy)
+	ld	d, (iy + 1)
+	ld	a, e
+	bit	2, a
+	ld	(ix + -6), bc
+	jq	nz, BB1_18
+	push	hl
+	pop	de
+	jq	BB1_19
+BB1_18:
+	push	hl
+	pop	bc
+	ld	hl, (ix + -3)
+	ld	de, 3
+	add	hl, de
+	ld	(_optix_cursor+1), hl
+	ld	(ix + -3), hl
+	push	bc
 	pop	hl
+BB1_19:
+	ld	iy, _optix_cursor+7
+	ld	c, (iy)
+	ld	b, (iy + 1)
+	ld	de, 0
+	ld	e, c
+	ld	d, b
+	or	a, a
+	sbc	hl, de
+	push	hl
+	pop	bc
+	ld	de, (ix + -3)
+	or	a, a
+	sbc	hl, de
+	call	__setflag
+	push	de
+	pop	iy
+	jq	p, BB1_22
+	ld	(_optix_cursor+1), bc
+	push	bc
+	pop	iy
+BB1_22:
+	ld	a, (_optix_cursor+9)
+	ld	de, 0
+	ld	e, a
+	ld	hl, 240
+	or	a, a
+	sbc	hl, de
+	push	hl
+	pop	de
+	ld	bc, (ix + -6)
+	or	a, a
+	sbc	hl, bc
+	call	__setflag
+	jq	p, BB1_24
+	ld	(_optix_cursor+4), de
+	push	de
+	pop	bc
+BB1_24:
+	ld	de, 0
+	lea	hl, iy + 0
+	or	a, a
+	sbc	hl, de
+	call	__setflag
+	ld	iy, 0
+	jq	p, BB1_26
+	ld	(_optix_cursor+1), iy
+BB1_26:
+	push	bc
+	pop	hl
+	or	a, a
+	sbc	hl, de
+	call	__setflag
+	jq	p, BB1_28
+	ld	(_optix_cursor+4), iy
+BB1_28:
+	ld	sp, ix
 	pop	ix
 	ret
 	section	.text,"ax",@progbits
@@ -154,11 +237,11 @@ _optix_InitializeCursor:
 	ld	(hl), b
 	ld	(_optix_cursor+9), a
 	ld	hl, _optix_UpdateCursor_default
-	ld	(_optix_cursor+15), hl
+	ld	(_optix_cursor+19), hl
 	ld	hl, _optix_RenderCursor_default
-	ld	(_optix_cursor+12), hl
+	ld	(_optix_cursor+16), hl
 	ld	a, e
-	ld	(_optix_cursor+11), a
+	ld	(_optix_cursor+15), a
 	ret
 	section	.text,"ax",@progbits
 
@@ -166,10 +249,11 @@ _optix_InitializeCursor:
 	public	_optix_cursor
 _optix_cursor:
 	db	0
-	dl	160
-	dl	120
+	dl	152
+	dl	112
 	dw	16
 	db	16
+	db	4 dup 0
 	db	0
 	db	1
 	dl	_optix_RenderCursor_default
@@ -185,8 +269,12 @@ L___const.optix_RenderCursor_default.spr:
 	dl	_cursor_normal_data
 	dl	_cursor_pointer_data
 	dl	_cursor_move_data
+	dl	_cursor_resize_horizontal_data
+	dl	_cursor_resize_vertical_data
 
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
+	extern	_cursor_resize_vertical_data
+	extern	__setflag
 	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister
 	extern	__frameset
@@ -196,4 +284,5 @@ L___const.optix_RenderCursor_default.spr:
 	extern	_cursor_move_data
 	extern	_cursor_normal_data
 	extern	_gfx_TransparentSprite_NoClip
+	extern	_cursor_resize_horizontal_data
 	extern	__sand

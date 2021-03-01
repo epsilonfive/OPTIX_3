@@ -3,138 +3,176 @@
 	section	.text,"ax",@progbits
 	public	_optix_AlignMenu
 _optix_AlignMenu:
-	ld	hl, -21
+	ld	hl, -27
 	call	__frameset
 	ld	iy, (ix + 6)
 	ld	de, 0
-	ld	hl, (iy + 18)
-	ld	(ix + -9), hl
-	ld	hl, (hl)
+	ld	bc, 3
+BB0_1:
+	ld	hl, (iy + 22)
 	ld	(ix + -3), hl
+	push	de
+	pop	hl
+	call	__imulu
+	push	hl
+	pop	bc
+	ld	hl, (ix + -3)
+	add	hl, bc
+	ld	hl, (hl)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB0_13
-BB0_2:
-	ld	iy, (ix + 6)
-	ld	bc, (iy + 24)
-	ld	iy, (iy + 27)
+	jq	z, BB0_14
+	ld	(ix + -3), hl
+	ld	bc, (iy + 38)
+	ld	iy, (iy + 41)
 	lea	hl, iy + 0
-	ld	(ix + -12), bc
+	ld	(ix + -9), bc
 	call	__imulu
 	push	hl
 	pop	bc
-	push	de
-	pop	hl
+	ld	(ix + -6), de
+	ex	de, hl
 	or	a, a
 	sbc	hl, bc
 	call	__setflag
-	push	de
-	pop	bc
-	ld	(ix + -6), bc
 	jq	p, BB0_3
-	lea	de, iy + 0
-	ld	hl, (ix + -3)
-	ld	a, (hl)
+	ld	(ix + -12), iy
+	ld	iy, (ix + -3)
+	ld	(iy + 15), 1
+	ld	a, (iy)
 	cp	a, 2
-	jq	nz, BB0_14
+	jq	nz, BB0_13
 	ld	iy, (ix + 6)
 	ld	c, (iy + 7)
 	ld	b, (iy + 8)
-	or	a, a
-	sbc	hl, hl
+	ld	de, 0
+	push	de
+	pop	hl
 	ld	l, c
 	ld	h, b
+	ld	(ix + -24), hl
+	ld	bc, (ix + -12)
+	call	__idivs
+	ld	(ix + -15), hl
+	ld	iy, (ix + 6)
+	ld	a, (iy + 9)
+	ld	e, a
+	ld	(ix + -21), de
+	ex	de, hl
+	ld	bc, (ix + -9)
+	call	__idivs
+	ld	(ix + -18), hl
+	ld	de, (ix + -12)
 	push	de
 	pop	bc
-	call	__idivs
-	ld	(ix + -21), hl
+	dec	bc
+	ld	hl, (ix + -6)
+	call	__irems
+	ld	(ix + -27), hl
+	ld	hl, (ix + -15)
+	push	de
+	pop	bc
+	call	__imulu
+	push	hl
+	pop	bc
+	ld	hl, (ix + -24)
+	or	a, a
+	sbc	hl, bc
+	push	hl
+	pop	iy
+	ld	hl, (ix + -27)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB0_7
+	ld	iy, 0
+BB0_7:
+	ld	de, (ix + -15)
+	add	iy, de
+	ex	de, hl
+	ld	e, iyl
+	ld	d, iyh
+	ex	de, hl
 	ld	iy, (ix + -3)
 	ld	(iy + 7), l
 	ld	(iy + 8), h
-	ld	iy, (ix + 6)
-	ld	a, (iy + 9)
-	or	a, a
-	sbc	hl, hl
-	ld	l, a
-	ld	bc, (ix + -12)
-	call	__idivs
-	ld	(ix + -12), hl
-	ld	a, l
-	ld	iy, (ix + -3)
-	ld	(iy + 9), a
-	ld	iy, (ix + 6)
-	ld	hl, (iy + 1)
-	ld	(ix + -18), hl
-	ld	iy, (ix + -6)
-	lea	hl, iy + 0
+	ld	de, (ix + -9)
 	push	de
 	pop	bc
+	dec	bc
+	ld	hl, (ix + -6)
 	call	__idivs
-	ld	(ix + -15), hl
+	ld	(ix + -24), hl
+	ld	hl, (ix + -18)
+	ld	b, l
+	ld	c, e
+	mlt	bc
+	ld	de, (ix + -21)
+	ld	a, e
+	sub	a, c
+	ld	d, a
+	ld	bc, (ix + -24)
+	ld	e, c
+	mlt	de
+	ld	a, e
+	add	a, l
+	ld	(iy + 9), a
+	ld	iy, (ix + 6)
+	ld	iy, (iy + 1)
+	ld	de, (ix + -6)
+	push	de
+	pop	hl
+	ld	bc, (ix + -12)
+	call	__idivs
+	ld	(ix + -9), hl
 	call	__imulu
-	push	hl
-	pop	de
-	lea	hl, iy + 0
-	or	a, a
-	sbc	hl, de
-	push	hl
-	pop	de
-	ld	hl, (ix + -21)
-	ld	bc, 65535
-	call	__iand
 	push	hl
 	pop	bc
 	ex	de, hl
+	or	a, a
+	sbc	hl, bc
+	ld	bc, (ix + -15)
 	call	__imulu
-	ld	de, (ix + -18)
+	lea	de, iy + 0
 	add	hl, de
 	ld	iy, (ix + -3)
 	ld	(iy + 1), hl
 	ld	iy, (ix + 6)
 	ld	de, (iy + 4)
-	ld	hl, (ix + -12)
-	ld	bc, 255
-	call	__iand
-	push	hl
-	pop	bc
-	ld	hl, (ix + -15)
+	ld	hl, (ix + -9)
+	ld	bc, (ix + -18)
 	call	__imulu
 	add	hl, de
 	ld	iy, (ix + -3)
 	ld	(iy + 4), hl
-	ld	iy, (iy + 18)
+	ld	de, (iy + 22)
+	push	de
+	pop	hl
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB0_13
+	or	a, a
+	sbc	hl, hl
+BB0_9:
+	ld	(ix + -9), hl
+	push	hl
+	pop	bc
+	push	de
+	pop	hl
+	add	hl, bc
+	ld	iy, (hl)
 	lea	hl, iy + 0
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	nz, BB0_6
-	jq	BB0_12
-BB0_3:
-	ld	iy, (ix + -3)
-	ld	(iy + 11), 0
-	jq	BB0_12
-BB0_14:
-	jq	BB0_12
-BB0_6:
-	ld	hl, (iy)
-	push	hl
-	pop	de
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB0_12
-	lea	bc, iy + 0
-	ld	hl, 3
-	ld	(ix + -9), hl
-	push	de
-	pop	iy
-BB0_8:
+	jq	z, BB0_13
 	ld	a, (iy)
 	or	a, a
-	jq	nz, BB0_10
-	ld	a, (iy + 24)
-	ld	l, (iy + 25)
+	jq	nz, BB0_12
+	ld	a, (iy + 10)
+	ld	l, (iy + 11)
 	push	hl
 	ld	l, a
 	push	hl
@@ -147,44 +185,22 @@ BB0_8:
 	pop	hl
 	pop	hl
 	ld	iy, (ix + -3)
-	ld	bc, (iy + 18)
-BB0_10:
-	ld	iy, (ix + -9)
-	lea	de, iy + 0
-	push	bc
-	pop	hl
-	add	hl, de
-	ld	hl, (hl)
-	ld	de, 3
-	add	iy, de
-	ld	(ix + -9), iy
-	push	hl
-	pop	iy
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	nz, BB0_8
-	ld	iy, (ix + 6)
-	ld	hl, (iy + 18)
-	ld	(ix + -9), hl
+	ld	de, (iy + 22)
 BB0_12:
-	ld	de, (ix + -6)
-	inc	de
-	push	de
-	pop	hl
 	ld	bc, 3
-	call	__imulu
-	push	hl
-	pop	bc
 	ld	hl, (ix + -9)
 	add	hl, bc
-	ld	hl, (hl)
-	ld	(ix + -3), hl
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	nz, BB0_2
+	jq	BB0_9
+BB0_3:
+	ld	iy, (ix + -3)
+	ld	(iy + 15), 0
 BB0_13:
+	ld	de, (ix + -6)
+	inc	de
+	ld	iy, (ix + 6)
+	ld	bc, 3
+	jq	BB0_1
+BB0_14:
 	ld	sp, ix
 	pop	ix
 	ret
@@ -193,12 +209,12 @@ BB0_13:
 	section	.text,"ax",@progbits
 	public	_optix_UpdateMenu_default
 _optix_UpdateMenu_default:
-	ld	hl, -10
+	ld	hl, -7
 	call	__frameset
 	ld	de, (ix + 6)
 	ld	hl, _optix_cursor
 	xor	a, a
-	ld	(ix + -4), a
+	ld	(ix + -7), a
 	push	de
 	push	hl
 	call	_optix_CheckTransformOverlap
@@ -206,97 +222,80 @@ _optix_UpdateMenu_default:
 	pop	hl
 	and	a, 1
 	ld	iy, (ix + 6)
-	ld	(iy + 10), a
-	ld	iy, (iy + 18)
-	ld	hl, (iy)
+	ld	(iy + 14), a
+	ld	iy, (ix + 6)
+	ld	de, (iy + 22)
+	ld	iy, 0
+	ld	(ix + -3), iy
+BB1_1:
+	lea	bc, iy + 0
+	push	de
+	pop	hl
+	add	hl, bc
+	ld	hl, (hl)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	nz, BB1_2
-BB1_1:
-	ld	sp, ix
-	pop	ix
-	ret
-BB1_2:
-	ld	e, 1
-	ld	bc, 0
-	ld	(ix + -7), bc
-	ld	(ix + -3), iy
+	jq	z, BB1_13
 	push	hl
-	pop	iy
-	push	bc
-	pop	hl
-BB1_3:
-	xor	a, e
+	pop	bc
+	ld	(ix + -6), iy
+	ld	iy, (ix + 6)
+	ld	a, (iy + 14)
+	ld	l, 1
+	xor	a, l
 	bit	0, a
-	jq	nz, BB1_9
-	ld	a, (ix + -4)
+	jq	nz, BB1_8
+	ld	a, (ix + -7)
 	and	a, 1
-	xor	a, e
+	xor	a, l
 	bit	0, a
-	jq	z, BB1_9
-	ld	(ix + -10), hl
-	ld	hl, (iy + 15)
+	jq	z, BB1_8
+	push	bc
+	pop	iy
+	ld	hl, (iy + 19)
 	push	iy
 	call	__indcallhl
 	pop	hl
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 18)
-	ld	de, (ix + -10)
+	ld	de, (iy + 22)
+	ld	bc, (ix + -6)
 	push	de
-	pop	bc
-	ld	(ix + -3), hl
-	add	hl, de
+	pop	hl
+	add	hl, bc
 	ld	iy, (hl)
 	ld	a, (iy)
 	cp	a, 2
-	jq	nz, BB1_10
-	ld	a, (iy + 10)
+	jq	nz, BB1_9
+	ld	a, (iy + 14)
 	ld	l, 1
 	xor	a, l
 	bit	0, a
-	push	bc
-	pop	hl
-	jq	nz, BB1_12
-	ld	iy, (ix + 6)
-	ld	de, (ix + -7)
-	ld	(iy + 21), de
-	ld	a, 1
-	ld	(ix + -4), a
-	jq	BB1_12
-BB1_9:
-	ld	(iy + 10), 0
-BB1_12:
 	ld	bc, (ix + -3)
-	push	hl
-	pop	de
-	push	bc
-	pop	iy
-	ld	(ix + -3), iy
-	add	iy, de
-	ld	bc, (iy + 3)
-	push	bc
-	pop	hl
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB1_1
-	ld	hl, (ix + -7)
-	inc	hl
-	ld	(ix + -7), hl
-	ex	de, hl
+	jq	nz, BB1_11
 	ld	iy, (ix + 6)
-	ld	a, (iy + 10)
-	ld	de, 3
-	add	hl, de
-	ld	e, 1
+	ld	(iy + 35), bc
+	ld	(ix + -7), l
+BB1_11:
+	ld	iy, (ix + -6)
+	jq	BB1_12
+BB1_8:
 	push	bc
 	pop	iy
-	jq	BB1_3
-BB1_10:
-	push	bc
-	pop	hl
-	jq	BB1_12
+	ld	(iy + 14), 0
+BB1_9:
+	ld	iy, (ix + -6)
+	ld	bc, (ix + -3)
+BB1_12:
+	inc	bc
+	ld	(ix + -3), bc
+	ld	bc, 3
+	add	iy, bc
+	jq	BB1_1
+BB1_13:
+	ld	sp, ix
+	pop	ix
+	ret
 	section	.text,"ax",@progbits
 
 	section	.text,"ax",@progbits
@@ -304,7 +303,7 @@ BB1_10:
 _optix_RenderMenu_default:
 	call	__frameset0
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 18)
+	ld	hl, (iy + 22)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -319,13 +318,13 @@ _optix_RenderMenu_default:
 	extern	__setflag
 	extern	_optix_CheckTransformOverlap
 	extern	__Unwind_SjLj_Register
-	extern	__frameset
-	extern	__iand
 	extern	__Unwind_SjLj_Unregister
-	extern	__indcallhl
+	extern	__frameset
+	extern	__irems
+	extern	_optix_RenderStack
 	extern	__imulu
 	extern	_optix_cursor
 	extern	_optix_AlignTransformToTransform
-	extern	_optix_RenderStack
+	extern	__indcallhl
 	extern	__frameset0
 	extern	__idivs

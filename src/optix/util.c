@@ -6,6 +6,8 @@
 //initializes a widget, and also sets its state to non-selected and visible (which will be updated elsewhere in the GUI)
 //initializes the callbacks and things too
 void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
+    struct optix_window_title_bar *window_title_bar = (struct optix_window_title_bar *) widget;
+    struct optix_window *window = (struct optix_window *) window_title_bar->window;
     void (*update[OPTIX_NUM_TYPES])(struct optix_widget *) = {
         //text
         NULL,
@@ -17,6 +19,8 @@ void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
         optix_UpdateMenu_default,
         //window
         optix_UpdateWindow_default,
+        //window title bar
+        optix_UpdateWindowTitleBar_default,
     };
     void (*render[OPTIX_NUM_TYPES])(struct optix_widget *) = {
         //text
@@ -29,20 +33,33 @@ void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
         optix_RenderMenu_default,
         //window
         optix_RenderWindow_default,
+        //window title bar
+        optix_RenderWindowTitleBar_default,
     };
     widget->type = type;
-    if (type == OPTIX_TEXT_TYPE) widget->child = NULL;
     widget->state.selected = false;
     widget->state.visible = true;
     widget->update = update[type];
     widget->render = render[type];
     //element-specific things
-    /*switch (type) {
+    switch (type) {
+        case OPTIX_TEXT_TYPE:
+            widget->child = NULL;
+            optix_InitializeTextTransform((struct optix_text *) widget);
+            //no break here, we want it to fall through
         case OPTIX_BUTTON_TYPE:
-            ((struct optix_button *) widget)->click_action = NULL;
-            ((struct optix_button *) widget)->click_args = NULL;
+        case OPTIX_SPRITE_TYPE:
+            widget->centering.x_centering = OPTIX_CENTERING_CENTERED;
+            widget->centering.y_centering = OPTIX_CENTERING_CENTERED;
             break;
-    }*/
+        case OPTIX_WINDOW_TITLE_BAR_TYPE:
+            //initialize the transform for this as well
+            widget->transform.x = window->widget.transform.x;
+            widget->transform.y = window->widget.transform.y - TITLE_BAR_HEIGHT;
+            widget->transform.width = window->widget.transform.width;
+            widget->transform.height = TITLE_BAR_HEIGHT;
+            break;
+    }
 }
 
 void optix_SetObjectTransform(struct optix_widget *widget, int x, int y, uint16_t width, uint8_t height) {
@@ -86,13 +103,42 @@ void optix_SetPosition(struct optix_widget *widget, int x, int y) {
 void optix_AlignTransformToTransform(struct optix_widget *transform, struct optix_widget *reference, uint8_t x_centering, uint8_t y_centering) {
     optix_SetPosition(transform, reference->transform.x + ((reference->transform.width - transform->transform.width) / 2) * x_centering, 
     reference->transform.y + ((reference->transform.height - transform->transform.height) / 2) * y_centering);
-    if (transform->type == OPTIX_TEXT_TYPE) {
-        ((struct optix_text *) transform)->x_centering = x_centering;
-        ((struct optix_text *) transform)->y_centering = y_centering;
-    }
 }
 
 bool optix_CheckTransformOverlap(struct optix_widget *test, struct optix_widget *reference) {
     return gfx_CheckRectangleHotspot(test->transform.x, test->transform.y, test->transform.width, test->transform.height,
         reference->transform.x, reference->transform.y, reference->transform.width, reference->transform.height);
+}
+
+//pass it in a widget, and it will recursively align all of its children
+void optix_RecursiveAlign(struct optix_widget *widget) {
+    int i = 0;
+    //we need to align this as well
+    if (widget->type == OPTIX_WINDOW_TITLE_BAR_TYPE) {
+        //we're also going to refresh the title bar
+        struct optix_window_title_bar *window_title_bar = (struct optix_window_title_bar *) widget;
+        dbg_sprintf(dbgout, "Aligning title bar...\n");
+        if (widget->child != NULL) {
+            int i = 0;
+            while (widget->child[i]) {
+                struct optix_widget *child = widget->child[i];
+                child->transform.x = widget->transform.x + ((widget->transform.width - child->transform.width) / 2) * child->centering.x_centering;
+                child->transform.y = widget->transform.y + ((widget->transform.height - child->transform.height) / 2) * child->centering.y_centering;
+                optix_RecursiveAlign(widget->child[i]);
+                i++;
+            }
+        }
+        //make us align the window instead
+        widget = (struct optix_widget *) window_title_bar->window;
+    }
+    while (widget->child[i] != NULL) {
+        struct optix_widget *child = widget->child[i];
+        child->transform.x = widget->transform.x + ((widget->transform.width - child->transform.width) / 2) * child->centering.x_centering;
+        child->transform.y = widget->transform.y + ((widget->transform.height - child->transform.height) / 2) * child->centering.y_centering;
+        if (child->child != NULL) {
+            if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child);
+            else optix_RecursiveAlign(child);
+        }
+        i++;
+    }
 }

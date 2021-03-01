@@ -43,33 +43,38 @@ void test_func(void *args) {
    gfx_Blit(1);
 }
 
+void focus_window(void *args) {
+   struct optix_window *window = (struct optix_widget *) args;
+   window->needs_focus = true;
+}
+
+void minimize_window(void *args) {
+   struct optix_window *window = (struct optix_widget *) args;
+   window->widget.state.visible = false;
+}
+
 void main(void) {
-   //first window, with a little bar on the bottom and some text
-   struct optix_text test_message = {.text = "Hello, world!"};
-   optix_InitializeWidget(&test_message.widget, OPTIX_TEXT_TYPE);
-   optix_InitializeTextTransform(&test_message);
-   struct optix_text test_text[] = {{.text = "1"}, {.text = "2"}, {.text = "3"}, {.text = "4"}};
-   //test_button
-   struct optix_button test_button[] = {
-      {.widget.child = (struct optix_widget *[]) {&test_text[0].widget, NULL}, .click_action = test_func, .click_args = NULL},
-      {.widget.child = (struct optix_widget *[]) {&test_text[1].widget, NULL}},
+   struct optix_text test_text[] = {
+      {.text = "1"},
+      {.text = "2"},
+      {.text = "3"},
+      {.text = "4"},
+   };
+   struct optix_button test_button[4] = {
+      {.widget.child = (struct optix_widget *[]) {&test_text[0].widget, NULL}},
+      {.widget.child = (struct optix_widget *[]) {&test_text[1].widget, NULL}},     
       {.widget.child = (struct optix_widget *[]) {&test_text[2].widget, NULL}},
       {.widget.child = (struct optix_widget *[]) {&test_text[3].widget, NULL}},
    };
-   //initialize the buttons and their text
    for (int i = 0; i < 4; i++) {
       optix_InitializeWidget(&test_text[i].widget, OPTIX_TEXT_TYPE);
-      optix_InitializeTextTransform(&test_text[i]);
-      //initialize those buttons
-      //transform doesn't matter because the menu will set it
       optix_InitializeWidget(&test_button[i].widget, OPTIX_BUTTON_TYPE);
    }
    struct optix_menu test_menu = {
       .widget = {
-         .type = OPTIX_MENU_TYPE,
          .transform = {
             .width = 100,
-            .height = 20,
+            .height = 100,
          },
          .child = (struct optix_widget *[]) {
             &test_button[0].widget,
@@ -78,157 +83,65 @@ void main(void) {
             &test_button[3].widget,
             NULL,
          },
-         .update = optix_UpdateMenu_default,
-         .render = optix_RenderMenu_default,
       },
-      .rows = 1,
-      .columns = 4,
+      .resize_info = {
+         .resizable = true,
+         .min_width = 50,
+         .min_height = 50,
+      },
+      .rows = 2,
+      .columns = 2,
    };
-   optix_AlignMenu(&test_menu);
+   optix_InitializeWidget(&test_menu.widget, OPTIX_MENU_TYPE);
    struct optix_window test_window = {
       .widget = {
-         .type = OPTIX_WINDOW_TYPE,
          .transform = {
             .x = 100,
             .y = 100,
             .width = 100,
             .height = 100,
          },
-         .child = (struct optix_widget *[]) {&test_menu.widget, &test_message.widget, NULL},
-         .update = optix_UpdateWindow_default,
-         .render = optix_RenderWindow_default,
+         .child = (struct optix_widget *[]) {&test_menu.widget, NULL},
+      },
+      .resize_info = {
+         .resizable = true,
+         .min_width = 50,
+         .min_height = 50,
       },
    };
-   struct optix_window_title_bar test_title_bar = {
-      .widget = {
-         .type = OPTIX_WINDOW_TITLE_BAR_TYPE,
-         .transform = {
-            .x = test_window.widget.transform.x,
-            .y = test_window.widget.transform.y - TITLE_BAR_HEIGHT,
-            .width = test_window.widget.transform.width,
-            .height = TITLE_BAR_HEIGHT,
-         },
-         .child = NULL,
-         .update = optix_UpdateWindowTitleBar_default,
-         .render = optix_RenderWindowTitleBar_default,
-      },
-      .window = &test_window.widget,
-   };
-   optix_AlignTransformToTransform(&test_menu.widget, &test_window.widget, OPTIX_CENTERING_CENTERED, OPTIX_CENTERING_BOTTOM);
-   optix_AlignTransformToTransform(&test_message.widget, &test_window.widget, OPTIX_CENTERING_CENTERED, OPTIX_CENTERING_CENTERED);
-   //the start button
-   struct optix_text test_text2 = {.text = "START"};
-   optix_InitializeWidget(&test_text2.widget, OPTIX_TEXT_TYPE);
-   optix_InitializeTextTransform(&test_text2);
-   struct optix_button test_button2 = {
+   optix_InitializeWidget(&test_window.widget, OPTIX_WINDOW_TYPE);
+   //a button that will minimize the window when pressed
+   struct optix_text button_text = {.text = "_"};
+   struct optix_button minimize_button = {
       .widget = {
          .transform = {
-            .x = 0,
-            .y = 228,
-            .width = 70,
+            .width = 12,
             .height = 12,
          },
-         .child = (struct optix_widget *[]) {&test_text2.widget, NULL},
+         .child = (struct optix_widget *[]) {&button_text.widget, NULL}
       },
-      .click_action = test_func, 
-      .click_args = NULL,
+      .click_action = minimize_window,
+      .click_args = &test_window,
    };
-   optix_InitializeWidget(&test_button2.widget, OPTIX_BUTTON_TYPE);
-   optix_AlignTransformToTransform(&test_text2.widget, &test_button2.widget, OPTIX_CENTERING_CENTERED, OPTIX_CENTERING_CENTERED);
-   //a sprite for testing
-   struct optix_sprite test_sprite = {
-      .widget = {
-         .transform = {
-            .x = 0,
-            .y = 0,
-         },
-      },
-      .spr = cursor_normal,
-      .x_scale = 2,
-      .y_scale = 2,
-      .transparent = false,
+   optix_InitializeWidget(&button_text.widget, OPTIX_TEXT_TYPE);
+   optix_InitializeWidget(&minimize_button.widget, OPTIX_BUTTON_TYPE);
+   minimize_button.widget.centering.x_centering = OPTIX_CENTERING_RIGHT;
+   struct optix_window_title_bar test_title_bar = {
+      .widget = {.child = (struct optix_widget *[]) {&minimize_button.widget, NULL}},
+      .window = &test_window,
+      .title = "Test",
    };
-   optix_InitializeWidget(&test_sprite.widget, OPTIX_SPRITE_TYPE);
-   //another window, but only text in it
-   struct optix_text test_message2 = {.text = "Test text"};
-   optix_InitializeWidget(&test_message2.widget, OPTIX_TEXT_TYPE);
-   optix_InitializeTextTransform(&test_message2);
-   struct optix_window test_window2 = {
-      .widget = {
-         .type = OPTIX_WINDOW_TYPE,
-         .transform = {
-            .x = 10,
-            .y = 150,
-            .width = 200,
-            .height = 50,
-         },
-         .child = (struct optix_widget *[]) {&test_message2.widget, NULL},
-         .update = optix_UpdateWindow_default,
-         .render = optix_RenderWindow_default,
-      },
-   };
-   optix_AlignTransformToTransform(&test_message2.widget, &test_window2.widget, OPTIX_CENTERING_CENTERED, OPTIX_CENTERING_CENTERED);
-   struct optix_window_title_bar test_title_bar2 = {
-      .widget = {
-         .type = OPTIX_WINDOW_TITLE_BAR_TYPE,
-         .transform = {
-            .x = test_window2.widget.transform.x,
-            .y = test_window2.widget.transform.y - TITLE_BAR_HEIGHT,
-            .width = test_window2.widget.transform.width,
-            .height = TITLE_BAR_HEIGHT,
-         },
-         .child = NULL,
-         .update = optix_UpdateWindowTitleBar_default,
-         .render = optix_RenderWindowTitleBar_default,
-      },
-      .window = &test_window2.widget,
-   };
-   //another window, but only text in it
-   struct optix_text test_message3 = {.text = "Test 2"};
-   optix_InitializeWidget(&test_message3.widget, OPTIX_TEXT_TYPE);
-   optix_InitializeTextTransform(&test_message3);
-   struct optix_window test_window3 = {
-      .widget = {
-         .type = OPTIX_WINDOW_TYPE,
-         .transform = {
-            .x = 10,
-            .y = 190,
-            .width = 50,
-            .height = 50,
-         },
-         .child = (struct optix_widget *[]) {&test_message3.widget, NULL},
-         .update = optix_UpdateWindow_default,
-         .render = optix_RenderWindow_default,
-      },
-   };
-   optix_AlignTransformToTransform(&test_message3.widget, &test_window3.widget, OPTIX_CENTERING_CENTERED, OPTIX_CENTERING_CENTERED);
-   struct optix_window_title_bar test_title_bar3 = {
-      .widget = {
-         .type = OPTIX_WINDOW_TITLE_BAR_TYPE,
-         .transform = {
-            .x = test_window3.widget.transform.x,
-            .y = test_window3.widget.transform.y - TITLE_BAR_HEIGHT,
-            .width = test_window3.widget.transform.width,
-            .height = TITLE_BAR_HEIGHT,
-         },
-         .child = NULL,
-         .update = optix_UpdateWindowTitleBar_default,
-         .render = optix_RenderWindowTitleBar_default,
-      },
-      .window = &test_window3.widget,
-   };
-   //we need a null at the end
-   struct optix_widget *test_stack[] = {&test_sprite.widget, &test_button2.widget, &test_title_bar.widget, &test_title_bar2.widget, &test_title_bar3.widget, NULL};
+   optix_InitializeWidget(&test_title_bar.widget, OPTIX_WINDOW_TITLE_BAR_TYPE);
+   //finally, align everything
+   optix_RecursiveAlign(&test_title_bar.widget);
+   struct optix_widget *test_stack[] = {&test_title_bar.widget, NULL};   
    optix_InitializeColors();
    //graphics
    gfx_Begin();
    gfx_SetDraw(1);
    do {
       optix_UpdateGUI(&test_stack);
-      gfx_FillScreen(0);
-      gfx_SetColor(255);
-      gfx_HorizLine(0, 227, 320);
-      gfx_VertLine(70, 228, 20);
+      gfx_ZeroScreen();
       optix_RenderGUI(test_stack);
       gfx_Blit(1);
    } while (!(kb_Data[6] & kb_Clear));
