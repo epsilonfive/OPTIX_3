@@ -13,7 +13,7 @@
 #define WINDOW_BG_COLOR_DEFAULT                       0
 #define WINDOW_TITLE_BAR_COLOR_UNSELECTED_DEFAULT     255
 #define WINDOW_TITLE_BAR_COLOR_SELECTED_DEFAULT       18
-#define WINDOW_BORDER_COLOR_DEFAULT                   18
+#define WINDOW_BORDER_COLOR_DEFAULT                   255
 #define WINDOW_TITLE_TEXT_FG_COLOR_UNSELECTED_DEFAULT 0
 #define WINDOW_TITLE_TEXT_BG_COLOR_UNSELECTED_DEFAULT 255   
 #define WINDOW_TITLE_TEXT_FG_COLOR_SELECTED_DEFAULT   255
@@ -33,7 +33,8 @@
 #define TEXT_FG_COLOR_DEFAULT                         255
 #define TEXT_BG_COLOR_DEFAULT                         0
 //random other stuff
-#define HIGHLIGHT_COLOR_DEFAULT                       255
+#define HIGHLIGHT_COLOR_DEFAULT                       158
+#define DIVIDER_COLOR_DEFAULT                         255
 /*
 4.24
 order 4
@@ -69,6 +70,7 @@ typedef struct {
     uint8_t text_bg;
     //other
     uint8_t highlight;
+    uint8_t divider;
 } optix_colors_t;
 extern optix_colors_t optix_colors; 
 

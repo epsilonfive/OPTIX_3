@@ -36,6 +36,9 @@ struct optix_centering {
 //I'll just keep this in the window and menu objects for now
 struct optix_resize_info {
     bool resizable;
+    //set to true to lock x or y to the original x/y
+    bool x_lock;
+    bool y_lock;
     //a reference transform, width will be subtracted to determine new scale (maybe if you wanted to have a fixed-size sidebar or something)
     struct optix_transform *x_reference_transform;
     struct optix_transform *y_reference_transform;

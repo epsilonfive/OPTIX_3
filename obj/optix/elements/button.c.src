@@ -62,25 +62,25 @@ BB0_5:
 	ld	a, l
 	bit	5, a
 	jq	nz, BB0_7
-	ld	(iy + 35), 0
+	ld	(iy + 31), 0
 	jq	BB0_13
 BB0_7:
-	bit	0, (iy + 35)
+	bit	0, (iy + 31)
 	jq	nz, BB0_13
 	bit	0, e
 	jq	nz, BB0_13
-	ld	hl, (iy + 29)
+	ld	hl, (iy + 25)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB0_11
-	ld	de, (iy + 32)
+	ld	de, (iy + 28)
 	push	de
 	call	__indcallhl
 	ld	iy, (ix + 6)
 	pop	hl
 BB0_11:
-	ld	(iy + 35), 1
+	ld	(iy + 31), 1
 BB0_13:
 	pop	ix
 	ret
@@ -105,7 +105,7 @@ _optix_RenderButton_default:
 	ld	hl, _optix_colors+14
 	jq	BB1_14
 BB1_3:
-	ld	a, (iy + 35)
+	ld	a, (iy + 31)
 	xor	a, l
 	ld	l, a
 	bit	0, l

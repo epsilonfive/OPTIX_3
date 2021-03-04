@@ -4,7 +4,6 @@
 void optix_UpdateWindow_default(struct optix_widget *widget) {
     struct optix_window *window = (struct optix_window *) widget;
     if (widget->state.visible) {
-        dbg_sprintf(dbgout, "x: %d y: %d width: %d height: %d\n", widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height);
         if (kb_Data[6] & kb_Enter || kb_Data[1] & kb_2nd) {
             //rescale it if necessary
             //if the cursor didn't move just continue
@@ -92,14 +91,15 @@ void optix_UpdateWindowTitleBar_default(struct optix_widget *widget) {
                     if (y_pos + window_title_bar->window->widget.transform.height > 239) y_pos = 239 - window_title_bar->window->widget.transform.height;
                     //if the size is new resize it
                     if (new_width != widget->transform.width || new_height != widget->transform.height) {
-                        optix_ResizeWindow(window_title_bar->window, new_width, new_height);
                         //this could cause some issues apparently
                         //make a preview rectangle thing, like in Windows
                         gfx_SetDraw(0);
                         gfx_SetColor(optix_colors.highlight);
                         gfx_Rectangle(x_pos - 1, y_pos, new_width + 2, new_height + widget->transform.height + 1);
+                        gfx_Rectangle(x_pos, y_pos + 1, new_width, new_height + widget->transform.height - 1);
                         gfx_SetDraw(1);
                         while (kb_AnyKey()) kb_Scan();
+                        optix_ResizeWindow(window_title_bar->window, new_width, new_height);
                     }
                     optix_SetPosition(widget, x_pos, y_pos);
                     optix_SetPosition(window_title_bar->window, x_pos, y_pos + widget->transform.height);
@@ -156,15 +156,19 @@ void optix_ResizeWindow(struct optix_widget *widget, uint16_t width, uint8_t hei
         while (widget->child[i]) {
             struct optix_widget *child = widget->child[i];
             //resize it to a new size
-            child->transform.width = width;
-            child->transform.height = height;
             if (child->type == OPTIX_MENU_TYPE) {
                 struct optix_menu *menu = (struct optix_menu *) child;
-                menu->columns = width / menu->resize_info.min_width;
-                menu->rows = height / menu->resize_info.min_height;
-                dbg_sprintf(dbgout, "%d %d\n", menu->columns, menu->rows);
-                menu->widget.transform.width = width;
-                menu->widget.transform.height = height;
+                if (!menu->resize_info.x_lock) {
+                    menu->columns = width / menu->resize_info.min_width;
+                    menu->widget.transform.width = width;
+                }
+                if (!menu->resize_info.y_lock) {
+                    menu->rows = height / menu->resize_info.min_height;
+                    menu->widget.transform.height = height;
+                }
+            } else {
+                child->transform.width = width;
+                child->transform.height = height;
             }
             i++;
         }

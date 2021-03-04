@@ -2,16 +2,18 @@
 #define GUI_CONTROL_H
 
 //includes
-//#include "globals.h"
+#include "globals.h"
 
 //definitions
-#define OPTIX_NUM_TYPES             6
+#define OPTIX_NUM_TYPES             8
 #define OPTIX_TEXT_TYPE             0
 #define OPTIX_SPRITE_TYPE           1
 #define OPTIX_BUTTON_TYPE           2
 #define OPTIX_MENU_TYPE             3
 #define OPTIX_WINDOW_TYPE           4
 #define OPTIX_WINDOW_TITLE_BAR_TYPE 5
+#define OPTIX_DIVIDER_TYPE          6
+#define OPTIX_RECTANGLE_TYPE        7
 //centering types
 //always the same
 #define OPTIX_CENTERING_CENTERED 1
@@ -22,5 +24,18 @@
 
 //functions
 void optix_InitializeGUIState(void);
+
+//structs
+//and yes, these do really need to be global Mateo
+typedef struct {
+    
+
+} optix_settings_t;
+extern optix_settings_t optix_settings;
+
+typedef struct {
+    bool gui_needs_full_redraw;
+} optix_gui_data_t;
+extern optix_gui_data_t optix_gui_data;
 
 #endif

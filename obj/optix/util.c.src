@@ -7,8 +7,10 @@ _optix_InitializeWidget:
 	call	__frameset
 	ld	iy, (ix + 6)
 	ld	e, (ix + 9)
+	ld	a, 1
 	ld	hl, (iy + 25)
 	ld	(ix + -3), hl
+	ld	(_optix_gui_data), a
 	ld	(iy), e
 	ld	(iy + 14), 0
 	ld	(iy + 15), 1
@@ -194,77 +196,127 @@ BB4_2:
 	section	.text,"ax",@progbits
 	public	_optix_AlignTransformToTransform
 _optix_AlignTransformToTransform:
-	ld	hl, -19
+	ld	hl, -8
 	call	__frameset
-	ld	de, (ix + 6)
-	ld	(ix + -6), de
 	ld	iy, (ix + 9)
-	ld	(ix + -19), iy
 	ld	a, (ix + 12)
-	ld	l, (ix + 15)
-	ld	(ix + -7), l
 	ld	hl, (iy + 1)
-	ld	(ix + -10), hl
-	ld	c, (iy + 7)
-	ld	b, (iy + 8)
-	or	a, a
-	sbc	hl, hl
-	ld	l, c
-	ld	h, b
-	ld	(ix + -3), de
-	ld	iy, (ix + -3)
-	ld	c, (iy + 7)
-	ld	b, (iy + 8)
-	ld	iy, 0
-	lea	de, iy + 0
-	ld	e, c
-	ld	d, b
+	ld	(ix + -3), hl
+	push	hl
+	ld	l, (iy + 7)
+	ld	h, (iy + 8)
+	ex	(sp), hl
+	pop	iy
+	ld	de, 0
+	push	de
+	pop	hl
+	ex	de, hl
+	ld	e, iyl
+	ld	d, iyh
+	ex	de, hl
+	ld	iy, (ix + 6)
+	push	hl
+	ld	l, (iy + 7)
+	ld	h, (iy + 8)
+	ex	(sp), hl
+	pop	iy
+	ld	e, iyl
+	ld	d, iyh
 	or	a, a
 	sbc	hl, de
+	ld	(ix + -6), hl
 	ld	bc, 2
 	call	__idivs
-	lea	bc, iy + 0
+	push	hl
+	pop	iy
+	ld	bc, 0
 	ld	c, a
-	ld	(ix + -16), bc
 	call	__imulu
-	ld	de, (ix + -10)
+	ld	de, (ix + -3)
 	add	hl, de
-	ld	(ix + -10), hl
-	ld	iy, (ix + -19)
+	add	iy, iy
+	lea	de, iy + 0
+	push	hl
+	pop	bc
+	ld	hl, (ix + -6)
+	or	a, a
+	sbc	hl, de
+	push	hl
+	pop	de
+	push	bc
+	pop	hl
+	add	hl, de
+	cp	a, 2
+	jq	z, BB5_2
+	push	bc
+	pop	hl
+BB5_2:
+	ld	iy, (ix + 6)
+	ld	(iy + 1), hl
+	lea	de, iy + 0
+	ld	iy, (ix + 9)
 	ld	hl, (iy + 4)
-	ld	(ix + -13), hl
+	ld	(ix + -3), hl
 	ld	a, (iy + 9)
 	ld	h, 0
 	ld	l, a
-	ld	iy, (ix + -3)
+	push	de
+	pop	iy
 	ld	e, (iy + 9)
 	ld	d, h
 	or	a, a
 	sbc.sis	hl, de
+	ld	(ix + -6), l
+	ld	(ix + -5), h
 	ld.sis	bc, 2
 	call	__sdivs
-	ld	c, l
-	ld	b, h
-	ld	a, b
+	ld	e, l
+	ld	d, h
+	ld	a, d
 	ld	l, a
 	rlc	l
 	sbc	hl, hl
 	ld	h, a
-	ld	l, c
-	ld	a, (ix + -7)
-	ld	bc, (ix + -16)
+	ld	(ix + -8), e
+	ld	(ix + -7), d
+	ld	l, e
+	ld	a, (ix + 15)
+	ld	bc, 0
 	ld	c, a
 	call	__imulu
-	ld	de, (ix + -13)
-	add	hl, de
-	ld	de, (ix + -6)
-	ld	(ix + 6), de
-	ld	de, (ix + -10)
-	ld	(ix + 9), de
-	ld	(ix + 12), hl
+	push	hl
+	pop	iy
+	ld	de, (ix + -3)
+	add	iy, de
+	cp	a, 2
+	jq	nz, BB5_4
+	ld	l, (ix + -8)
+	ld	h, (ix + -7)
+	add.sis	hl, hl
+	ld	e, l
+	ld	d, h
+	ld	l, (ix + -6)
+	ld	h, (ix + -5)
+	or	a, a
+	sbc.sis	hl, de
+	ld	e, l
+	ld	d, h
+	ld	a, d
+	ld	l, a
+	rlc	l
+	sbc	hl, hl
+	push	hl
+	pop	bc
+	ld	b, a
+	ld	c, e
+	add	iy, bc
+BB5_4:
+	lea	hl, iy + 0
+	ld	iy, (ix + 6)
+	ld	(iy + 4), hl
 	ld	sp, ix
 	pop	ix
-	jp	_optix_SetPosition
+	ret
 	section	.text,"ax",@progbits
 
 	section	.text,"ax",@progbits
@@ -367,7 +419,7 @@ BB6_7:
 	section	.text,"ax",@progbits
 	public	_optix_RecursiveAlign
 _optix_RecursiveAlign:
-	ld	hl, -15
+	ld	hl, -9
 	call	__frameset
 	ld	iy, (ix + 6)
 	ld	a, (iy)
@@ -385,102 +437,57 @@ BB7_3:
 	lea	hl, iy + 0
 	ld	iy, 0
 	lea	de, iy + 0
-BB7_5:
 	push	hl
 	pop	bc
+BB7_5:
 	push	bc
 	pop	iy
 	ld	hl, (iy + 22)
-	ld	(ix + -9), de
+	ld	(ix + -3), de
 	add	hl, de
-	ld	hl, (hl)
-	ld	(ix + -3), hl
+	ld	iy, (hl)
+	lea	hl, iy + 0
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB7_12
-	ld	hl, (iy + 1)
-	ld	(ix + -12), hl
-	ld	c, (iy + 7)
-	ld	b, (iy + 8)
-	or	a, a
-	sbc	hl, hl
-	ld	l, c
-	ld	h, b
-	ld	(ix + -6), iy
-	ld	iy, (ix + -3)
-	ld	c, (iy + 7)
-	ld	b, (iy + 8)
-	ld	de, 0
-	ld	e, c
-	ld	d, b
-	or	a, a
-	sbc	hl, de
-	ld	bc, 2
-	call	__idivs
-	ld	iy, (ix + -3)
 	ld	a, (iy + 10)
-	ld	bc, 0
-	ld	c, a
-	ld	(ix + -15), bc
-	call	__imulu
-	ld	de, (ix + -12)
-	add	hl, de
-	ld	iy, (ix + -3)
-	ld	(iy + 1), hl
-	ld	iy, (ix + -6)
-	ld	hl, (iy + 4)
-	ld	(ix + -12), hl
-	ld	a, (iy + 9)
-	ld	h, 0
+	ld	l, (iy + 11)
+	push	hl
 	ld	l, a
-	ld	iy, (ix + -3)
-	ld	e, (iy + 9)
-	ld	d, h
-	or	a, a
-	sbc.sis	hl, de
-	ld.sis	bc, 2
-	call	__sdivs
-	ld	c, l
-	ld	b, h
-	ld	a, b
-	ld	l, a
-	rlc	l
-	sbc	hl, hl
-	ld	h, a
-	ld	l, c
-	ld	a, (iy + 11)
-	ld	bc, (ix + -15)
-	ld	c, a
-	call	__imulu
-	ld	de, (ix + -12)
-	add	hl, de
-	ld	(iy + 4), hl
+	push	hl
+	ld	(ix + -6), bc
+	push	bc
+	push	iy
+	ld	(ix + -9), iy
+	call	_optix_AlignTransformToTransform
+	ld	iy, (ix + -9)
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
 	ld	hl, (iy + 22)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB7_11
-	ld	hl, (ix + -3)
-	ld	a, (hl)
+	ld	a, (iy)
 	cp	a, 3
 	jq	nz, BB7_9
-	ld	hl, (ix + -3)
-	push	hl
+	push	iy
 	call	_optix_AlignMenu
 	jq	BB7_10
 BB7_9:
-	ld	hl, (ix + -3)
-	push	hl
+	push	iy
 	call	_optix_RecursiveAlign
 BB7_10:
 	pop	hl
 BB7_11:
 	ld	de, 3
-	ld	hl, (ix + -9)
+	ld	hl, (ix + -3)
 	add	hl, de
 	ex	de, hl
-	ld	hl, (ix + -6)
+	ld	bc, (ix + -6)
 	jq	BB7_5
 BB7_12:
 	ld	sp, ix
@@ -488,86 +495,44 @@ BB7_12:
 	ret
 BB7_13:
 	ld	de, 0
-	push	de
-	pop	iy
 BB7_14:
-	ld	(ix + -3), iy
-	lea	de, iy + 0
+	ld	(ix + -3), de
 	add	hl, de
-	ld	hl, (hl)
+	ld	iy, (hl)
+	lea	hl, iy + 0
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB7_2
-	ex	de, hl
-	ld	iy, (ix + 6)
-	ld	hl, (iy + 1)
-	ld	(ix + -6), hl
-	ld	iy, (ix + 6)
-	ld	c, (iy + 7)
-	ld	b, (iy + 8)
-	or	a, a
-	sbc	hl, hl
-	ld	l, c
-	ld	h, b
-	push	de
-	pop	iy
-	ld	c, (iy + 7)
-	ld	b, (iy + 8)
-	ld	de, 0
-	ld	e, c
-	ld	d, b
-	or	a, a
-	sbc	hl, de
-	ld	bc, 2
-	call	__idivs
 	ld	a, (iy + 10)
-	ld	bc, 0
-	ld	c, a
-	ld	(ix + -9), bc
-	call	__imulu
-	ld	de, (ix + -6)
-	add	hl, de
-	ld	(iy + 1), hl
-	lea	de, iy + 0
-	ld	iy, (ix + 6)
-	ld	hl, (iy + 4)
-	ld	(ix + -6), hl
-	ld	iy, (ix + 6)
-	ld	a, (iy + 9)
-	ld	h, 0
+	ld	l, (iy + 11)
+	push	hl
 	ld	l, a
-	push	de
-	pop	iy
-	ld	e, (iy + 9)
-	ld	d, h
-	or	a, a
-	sbc.sis	hl, de
-	ld.sis	bc, 2
-	call	__sdivs
-	ld	c, l
-	ld	b, h
-	ld	a, b
-	ld	l, a
-	rlc	l
-	sbc	hl, hl
-	ld	h, a
-	ld	l, c
-	ld	a, (iy + 11)
-	ld	bc, (ix + -9)
-	ld	c, a
-	call	__imulu
-	ld	de, (ix + -6)
-	add	hl, de
-	ld	(iy + 4), hl
+	push	hl
+	ld	hl, (ix + 6)
+	push	hl
 	push	iy
+	call	_optix_AlignTransformToTransform
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	iy, (ix + 6)
+	ld	hl, (iy + 22)
+	ld	de, (ix + -3)
+	add	hl, de
+	ld	hl, (hl)
+	push	hl
 	call	_optix_RecursiveAlign
+	ld	bc, (ix + -3)
 	pop	hl
 	ld	iy, (ix + 6)
 	ld	hl, (iy + 22)
 	ld	de, 3
-	ld	iy, (ix + -3)
+	push	bc
+	pop	iy
 	add	iy, de
+	lea	de, iy + 0
 	jq	BB7_14
 	section	.text,"ax",@progbits
 
@@ -580,6 +545,8 @@ L___const.optix_InitializeWidget.update:
 	dl	_optix_UpdateMenu_default
 	dl	_optix_UpdateWindow_default
 	dl	_optix_UpdateWindowTitleBar_default
+	dl	0
+	dl	0
 
 	section	.rodata,"a",@progbits
 	private	L___const.optix_InitializeWidget.render
@@ -590,12 +557,15 @@ L___const.optix_InitializeWidget.render:
 	dl	_optix_RenderMenu_default
 	dl	_optix_RenderWindow_default
 	dl	_optix_RenderWindowTitleBar_default
+	dl	_optix_RenderDivider_default
+	dl	_optix_RenderRectangle_default
 
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
 	extern	__Unwind_SjLj_Register
 	extern	__frameset
 	extern	_optix_UpdateMenu_default
 	extern	_optix_InitializeTextTransform
+	extern	_optix_RenderRectangle_default
 	extern	_optix_RenderWindow_default
 	extern	_optix_UpdateWindow_default
 	extern	__idivs
@@ -605,10 +575,12 @@ L___const.optix_InitializeWidget.render:
 	extern	_optix_AlignMenu
 	extern	_optix_UpdateButton_default
 	extern	_optix_RenderButton_default
+	extern	_optix_RenderDivider_default
 	extern	__imulu
 	extern	_optix_RenderWindowTitleBar_default
 	extern	_optix_UpdateWindowTitleBar_default
 	extern	_optix_RenderSprite_default
+	extern	_optix_gui_data
 	extern	_optix_RenderText_default
 	extern	__frameset0
 	extern	_optix_RenderMenu_default

@@ -24,8 +24,8 @@ BB0_1:
 	sbc	hl, bc
 	jq	z, BB0_14
 	ld	(ix + -3), hl
-	ld	bc, (iy + 38)
-	ld	iy, (iy + 41)
+	ld	bc, (iy + 40)
+	ld	iy, (iy + 43)
 	lea	hl, iy + 0
 	ld	(ix + -9), bc
 	call	__imulu
@@ -274,7 +274,7 @@ BB1_1:
 	ld	bc, (ix + -3)
 	jq	nz, BB1_11
 	ld	iy, (ix + 6)
-	ld	(iy + 35), bc
+	ld	(iy + 37), bc
 	ld	(ix + -7), l
 BB1_11:
 	ld	iy, (ix + -6)

@@ -279,88 +279,108 @@ BB0_26:
 	section	.text,"ax",@progbits
 	public	_optix_ResizeWindow
 _optix_ResizeWindow:
-	ld	hl, -3
+	ld	hl, -5
 	call	__frameset
 	ld	iy, (ix + 6)
 	ld	a, (iy + 25)
-	ld	l, 1
-	xor	a, l
+	ld	c, 1
+	xor	a, c
 	bit	0, a
-	jq	nz, BB1_11
-	ld	e, (ix + 9)
-	ld	d, (ix + 10)
+	jq	nz, BB1_16
+	ld	l, (ix + 9)
+	ld	h, (ix + 10)
 	ld	a, (ix + 12)
-	ld	c, (iy + 32)
-	ld	b, (iy + 33)
-	ld	l, e
-	ld	h, d
+	ld	e, (iy + 34)
+	ld	d, (iy + 35)
+	ld	(ix + -2), e
+	ld	(ix + -1), d
 	or	a, a
-	sbc.sis	hl, bc
+	sbc.sis	hl, de
 	jq	c, BB1_3
-	ld	c, e
-	ld	b, d
+	ld	l, (ix + 9)
+	ld	h, (ix + 10)
+	ld	(ix + -2), l
+	ld	(ix + -1), h
 BB1_3:
-	ld	l, (iy + 34)
-	cp	a, l
+	ld	b, (iy + 36)
+	cp	a, b
 	jq	c, BB1_5
-	ld	l, a
+	ld	b, a
 BB1_5:
-	ld	(iy + 7), c
-	ld	(iy + 8), b
-	ld	(ix + -1), l
-	ld	(iy + 9), l
+	ld	l, (ix + -2)
+	ld	h, (ix + -1)
+	ld	(iy + 7), l
+	ld	(iy + 8), h
+	ld	(iy + 9), b
 	ld	iy, (iy + 22)
 BB1_6:
-	lea	de, iy + 0
-	ld	iy, (iy)
-	lea	hl, iy + 0
+	ld	hl, (iy)
+	push	hl
+	pop	de
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB1_10
-	ld	(iy + 7), c
-	ld	(iy + 8), b
-	ld	a, (ix + -1)
-	ld	(iy + 9), a
+	jq	z, BB1_15
+	ld	(ix + -5), iy
+	push	de
+	pop	iy
 	ld	a, (iy)
 	cp	a, 3
-	jq	nz, BB1_9
-	ld	(ix + -3), c
-	ld	(ix + -2), b
-	ld	c, (iy + 32)
-	ld	b, (iy + 33)
-	ld	l, (ix + -3)
-	ld	h, (ix + -2)
+	jq	nz, BB1_12
+	ld	a, (iy + 26)
+	xor	a, c
+	xor	a, c
+	bit	0, a
+	jq	nz, BB1_10
+	ld	a, b
+	ld	c, (iy + 34)
+	ld	b, (iy + 35)
+	ld	e, (ix + -2)
+	ld	d, (ix + -1)
+	ld	l, e
+	ld	h, d
 	call	__sdivu
 	ld	bc, 0
 	ld	c, l
 	ld	b, h
-	ld	(iy + 41), bc
-	ld	c, (iy + 34)
-	ld	b, (ix + -1)
+	ld	(iy + 43), bc
+	ld	b, a
+	ld	c, 1
+	ld	(iy + 7), e
+	ld	(iy + 8), d
+BB1_10:
+	ld	a, (iy + 27)
+	xor	a, c
+	xor	a, c
+	bit	0, a
+	jq	nz, BB1_14
+	ld	l, c
+	ld	c, (iy + 36)
 	call	__bdivu
-	ld	c, (ix + -3)
-	ld	b, (ix + -2)
+	ld	c, l
 	or	a, a
 	sbc	hl, hl
 	ld	l, a
-	ld	(iy + 38), hl
-	ld	(iy + 7), c
-	ld	(iy + 8), b
-	ld	a, (ix + -1)
-	ld	(iy + 9), a
-BB1_9:
-	push	de
-	pop	iy
+	ld	(iy + 40), hl
+	jq	BB1_13
+BB1_12:
+	ld	l, (ix + -2)
+	ld	h, (ix + -1)
+	ld	(iy + 7), l
+	ld	(iy + 8), h
+BB1_13:
+	ld	(iy + 9), b
+BB1_14:
+	ld	iy, (ix + -5)
 	lea	iy, iy + 3
 	jq	BB1_6
-BB1_10:
+BB1_15:
 	ld	hl, (ix + 6)
 	push	hl
 	call	_optix_RecursiveAlign
 	pop	hl
-BB1_11:
-	pop	hl
+BB1_16:
+	ld	sp, ix
 	pop	ix
 	ret
 	section	.text,"ax",@progbits
@@ -442,7 +462,7 @@ _optix_UpdateWindowTitleBar_default:
 	xor	a, c
 	ld	(iy + 15), l
 	bit	0, a
-	jq	nz, BB3_37
+	jq	nz, BB3_41
 	ld	(ix + -1), e
 	ld.sis	hl, 318
 	ld	(ix + -4), hl
@@ -464,7 +484,7 @@ _optix_UpdateWindowTitleBar_default:
 	ld	e, 1
 	xor	a, e
 	bit	0, a
-	jq	nz, BB3_33
+	jq	nz, BB3_37
 	ld	hl, -720868
 	push	de
 	ld	e, (hl)
@@ -490,7 +510,7 @@ _optix_UpdateWindowTitleBar_default:
 	pop	de
 	ld	a, l
 	bit	5, a
-	jq	z, BB3_28
+	jq	z, BB3_32
 BB3_6:
 	ld	a, (ix + -1)
 	xor	a, e
@@ -501,7 +521,7 @@ BB3_7:
 	ld	iy, (iy + 25)
 	ld	(iy + 14), 1
 	ld	iy, (ix + 6)
-	jq	BB3_27
+	jq	BB3_31
 BB3_8:
 	ld	bc, (_optix_cursor+25)
 	ld	de, (_optix_cursor+1)
@@ -511,20 +531,20 @@ BB3_8:
 	sbc	hl, bc
 	jq	nz, BB3_10
 	ld	hl, (_optix_cursor+28)
-	ld	(ix + -7), bc
+	ld	(ix + -10), bc
 	ld	bc, (_optix_cursor+4)
-	ld	(ix + -10), hl
+	ld	(ix + -7), hl
 	ld	(ix + -13), bc
 	or	a, a
 	sbc	hl, bc
-	ld	bc, (ix + -7)
+	ld	bc, (ix + -10)
 	jq	z, BB3_7
 	jq	BB3_11
 BB3_10:
 	ld	hl, (_optix_cursor+4)
 	ld	(ix + -13), hl
 	ld	hl, (_optix_cursor+28)
-	ld	(ix + -10), hl
+	ld	(ix + -7), hl
 BB3_11:
 	ld	iy, (iy + 1)
 	ex	de, hl
@@ -533,11 +553,11 @@ BB3_11:
 	push	hl
 	pop	de
 	add	iy, de
-	ld	(ix + -7), iy
+	ld	(ix + -10), iy
 	ld	iy, (ix + 6)
 	ld	de, (iy + 4)
 	ld	hl, (ix + -13)
-	ld	bc, (ix + -10)
+	ld	bc, (ix + -7)
 	or	a, a
 	sbc	hl, bc
 	add	hl, de
@@ -552,17 +572,17 @@ BB3_11:
 	ld	e, (iy + 9)
 	or	a, a
 	sbc	hl, hl
-	ld	(ix + -10), e
-	ld	(ix + -9), d
+	ld	(ix + -7), e
+	ld	(ix + -6), d
 	ld	l, e
-	ld	(ix + -24), hl
+	ld	(ix + -16), hl
 	ld	de, 1
-	ld	hl, (ix + -7)
+	ld	hl, (ix + -10)
 	or	a, a
 	sbc	hl, de
 	call	__setflag
 	jq	p, BB3_14
-	ld	(ix + -16), bc
+	ld	(ix + -19), bc
 	ld	iy, (ix + 6)
 	ld	iy, (iy + 25)
 	ld	a, (iy + 25)
@@ -571,16 +591,16 @@ BB3_11:
 	bit	0, a
 	jq	z, BB3_17
 	ld	de, 0
-	ld	hl, (ix + -16)
+	ld	hl, (ix + -19)
 	or	a, a
 	sbc	hl, de
 	call	__setflag
 	ld	hl, 1
-	ld	(ix + -7), hl
+	ld	(ix + -10), hl
 	ld	l, (ix + -21)
 	ld	h, (ix + -20)
 	ld	(ix + -4), hl
-	ld	hl, (ix + -24)
+	ld	hl, (ix + -16)
 	ld	(ix + -13), hl
 	ld	iy, (ix + 6)
 	jq	m, BB3_16
@@ -594,14 +614,14 @@ BB3_14:
 	sbc	hl, de
 	call	__setflag
 	jq	p, BB3_18
-	ld	hl, (ix + -7)
+	ld	hl, (ix + -10)
 	ld	de, 1
 	or	a, a
 	sbc	hl, de
 	jq	nz, BB3_19
 BB3_16:
-	ld	e, (ix + -10)
-	ld	d, (ix + -9)
+	ld	e, (ix + -7)
+	ld	d, (ix + -6)
 	ld	d, 0
 	ld.sis	hl, 238
 	or	a, a
@@ -618,47 +638,47 @@ BB3_16:
 	ld	l, c
 	ld	(ix + -13), hl
 	ld	hl, 1
-	ld	(ix + -7), hl
+	ld	(ix + -10), hl
 	dec	hl
-	ld	(ix + -16), hl
+	ld	(ix + -19), hl
 	ld.sis	hl, 158
 	ld	(ix + -4), hl
 	jq	BB3_20
 BB3_17:
 	ld	hl, 238
-	ld	de, (ix + -24)
+	ld	de, (ix + -16)
 	or	a, a
 	sbc	hl, de
 	ld	(ix + -13), hl
 	ld	hl, 1
-	ld	(ix + -7), hl
+	ld	(ix + -10), hl
 	dec	hl
-	ld	(ix + -16), hl
+	ld	(ix + -19), hl
 	ld.sis	hl, 158
 	ld	(ix + -4), hl
 	ld	iy, (ix + 6)
 	jq	BB3_20
 BB3_18:
-	ld	(ix + -16), bc
+	ld	(ix + -19), bc
 	ld	l, (ix + -21)
 	ld	h, (ix + -20)
 	ld	(ix + -4), hl
-	ld	hl, (ix + -24)
+	ld	hl, (ix + -16)
 	ld	(ix + -13), hl
 	jq	BB3_20
 BB3_19:
 	ld	hl, 238
-	ld	de, (ix + -24)
+	ld	de, (ix + -16)
 	or	a, a
 	sbc	hl, de
 	ld	(ix + -13), hl
 	ld	hl, 1
-	ld	(ix + -7), hl
+	ld	(ix + -10), hl
 	dec	hl
-	ld	(ix + -16), hl
+	ld	(ix + -19), hl
 BB3_20:
 	ld	iy, (iy + 25)
-	ld	(ix + -19), iy
+	ld	(ix + -24), iy
 	ld	l, (iy + 7)
 	ld	h, (iy + 8)
 	ld	de, 0
@@ -666,59 +686,144 @@ BB3_20:
 	pop	bc
 	ld	c, l
 	ld	b, h
-	ld	iy, (ix + -7)
+	ld	iy, (ix + -10)
 	add	iy, bc
 	ld	hl, 319
 	or	a, a
 	sbc	hl, bc
-	ld	(ix + -10), hl
+	ld	(ix + -7), hl
 	ld	bc, 320
 	lea	hl, iy + 0
 	or	a, a
 	sbc	hl, bc
 	call	__setflag
 	jq	p, BB3_22
-	ld	hl, (ix + -7)
-	ld	(ix + -10), hl
+	ld	hl, (ix + -10)
+	ld	(ix + -7), hl
 BB3_22:
-	ld	iy, (ix + -19)
+	ld	iy, (ix + -24)
 	ld	a, (iy + 9)
 	push	de
 	pop	bc
 	ld	c, a
-	ld	de, (ix + -16)
+	ld	de, (ix + -19)
 	push	de
 	pop	iy
 	add	iy, bc
 	ld	hl, 239
 	or	a, a
 	sbc	hl, bc
-	ld	(ix + -7), hl
+	ld	(ix + -10), hl
 	ld	bc, 240
 	lea	hl, iy + 0
 	or	a, a
 	sbc	hl, bc
 	call	__setflag
 	jq	p, BB3_24
-	ld	(ix + -7), de
+	ld	(ix + -10), de
 BB3_24:
-	ld	de, (ix + -4)
-	ld	l, e
-	ld	h, d
-	ld	c, (ix + -21)
-	ld	b, (ix + -20)
+	ld	hl, (ix + -4)
+	ld	e, (ix + -21)
+	ld	d, (ix + -20)
 	or	a, a
-	sbc.sis	hl, bc
-	jq	nz, BB3_38
+	sbc.sis	hl, de
+	ld	de, (ix + -16)
+	jq	nz, BB3_26
 	ld	hl, (ix + -13)
-	ld	bc, (ix + -24)
 	or	a, a
-	sbc	hl, bc
-	jq	nz, BB3_38
+	sbc	hl, de
+	jq	z, BB3_30
 BB3_26:
-	ld	hl, (ix + -7)
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	pop	bc
+	push	bc
+	pop	de
+	ld	hl, (ix + -4)
+	ld	e, l
+	ld	d, h
+	ld	(ix + -16), de
+	push	bc
+	call	_gfx_SetDraw
+	pop	hl
+	ld	a, (_optix_colors+21)
+	ld	l, a
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	de, (ix + -7)
+	dec	de
+	ld	hl, (ix + -16)
+	ld	bc, 2
+	add	hl, bc
+	ld	(ix + -19), hl
+	ld	iy, (ix + 6)
+	ld	a, (iy + 9)
+	ld	bc, 0
+	ld	c, a
+	ld	hl, (ix + -13)
+	inc	hl
+	add	hl, bc
+	push	hl
+	ld	hl, (ix + -19)
 	push	hl
 	ld	hl, (ix + -10)
+	push	hl
+	push	de
+	call	_gfx_Rectangle
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, (ix + -10)
+	inc	hl
+	push	hl
+	pop	bc
+	ld	iy, (ix + 6)
+	ld	a, (iy + 9)
+	ld	de, 0
+	ld	e, a
+	ld	hl, (ix + -13)
+	dec	hl
+	add	hl, de
+	push	hl
+	ld	hl, (ix + -16)
+	push	hl
+	push	bc
+	ld	hl, (ix + -7)
+	push	hl
+	call	_gfx_Rectangle
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 1
+	push	hl
+	call	_gfx_SetDraw
+	pop	hl
+BB3_27:
+	call	_kb_AnyKey
+	or	a, a
+	jq	z, BB3_29
+	call	_kb_Scan
+	jq	BB3_27
+BB3_29:
+	ld	iy, (ix + 6)
+	ld	hl, (iy + 25)
+	ld	de, (ix + -13)
+	push	de
+	ld	de, (ix + -4)
+	push	de
+	push	hl
+	call	_optix_ResizeWindow
+	pop	hl
+	pop	hl
+	pop	hl
+BB3_30:
+	ld	hl, (ix + -10)
+	push	hl
+	ld	hl, (ix + -7)
 	push	hl
 	ld	hl, (ix + 6)
 	push	hl
@@ -730,10 +835,10 @@ BB3_26:
 	ld	bc, (iy + 25)
 	ld	de, 0
 	ld	e, (iy + 9)
-	ld	hl, (ix + -7)
+	ld	hl, (ix + -10)
 	add	hl, de
 	push	hl
-	ld	hl, (ix + -10)
+	ld	hl, (ix + -7)
 	push	hl
 	push	bc
 	call	_optix_SetPosition
@@ -741,25 +846,25 @@ BB3_26:
 	pop	hl
 	pop	hl
 	pop	hl
-BB3_27:
+BB3_31:
 	ld	e, 1
-BB3_28:
+BB3_32:
 	ld	hl, (_optix_cursor+31)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	nz, BB3_33
+	jq	nz, BB3_37
 	ld	a, (ix + -1)
 	xor	a, e
 	bit	0, a
-	jq	z, BB3_31
+	jq	z, BB3_35
 	ld	hl, 1
-	jq	BB3_32
-BB3_31:
+	jq	BB3_36
+BB3_35:
 	ld	hl, 2
-BB3_32:
+BB3_36:
 	ld	(_optix_cursor+31), hl
-BB3_33:
+BB3_37:
 	ld	iy, (iy + 25)
 	ld	hl, (iy + 19)
 	push	iy
@@ -777,7 +882,7 @@ BB3_33:
 	ld	de, (iy + 1)
 	or	a, a
 	sbc	hl, de
-	jq	nz, BB3_35
+	jq	nz, BB3_39
 	push	bc
 	pop	iy
 	ld	l, (iy + 7)
@@ -789,80 +894,22 @@ BB3_33:
 	pop	iy
 	or	a, a
 	sbc.sis	hl, de
-	jq	z, BB3_36
-BB3_35:
+	jq	z, BB3_40
+BB3_39:
 	ld	hl, (ix + 6)
 	push	hl
 	call	_optix_RefreshWindowTitleBarTransform
 	pop	hl
 	ld	iy, (ix + 6)
 	ld	iy, (iy + 25)
-BB3_36:
+BB3_40:
 	ld	a, (iy + 14)
 	ld	iy, (ix + 6)
 	ld	(iy + 14), a
-BB3_37:
+BB3_41:
 	ld	sp, ix
 	pop	ix
 	ret
-BB3_38:
-	or	a, a
-	sbc	hl, hl
-	ld	l, e
-	ld	h, d
-	ld	(ix + -16), hl
-	ld	hl, (ix + -13)
-	push	hl
-	push	de
-	ld	hl, (ix + -19)
-	push	hl
-	call	_optix_ResizeWindow
-	pop	hl
-	pop	hl
-	pop	hl
-	or	a, a
-	sbc	hl, hl
-	push	hl
-	call	_gfx_SetDraw
-	pop	hl
-	ld	a, (_optix_colors+21)
-	ld	l, a
-	push	hl
-	call	_gfx_SetColor
-	pop	hl
-	ld	bc, (ix + -10)
-	dec	bc
-	ld	de, 2
-	ld	hl, (ix + -16)
-	add	hl, de
-	ld	(ix + -16), hl
-	ld	iy, (ix + 6)
-	ld	de, 0
-	ld	e, (iy + 9)
-	ld	hl, (ix + -13)
-	inc	hl
-	add	hl, de
-	push	hl
-	ld	hl, (ix + -16)
-	push	hl
-	ld	de, (ix + -7)
-	push	de
-	push	bc
-	call	_gfx_Rectangle
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-	ld	hl, 1
-	push	hl
-	call	_gfx_SetDraw
-	pop	hl
-BB3_39:
-	call	_kb_AnyKey
-	or	a, a
-	jq	z, BB3_26
-	call	_kb_Scan
-	jq	BB3_39
 	section	.text,"ax",@progbits
 
 	section	.text,"ax",@progbits

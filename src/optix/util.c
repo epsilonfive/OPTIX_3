@@ -21,6 +21,10 @@ void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
         optix_UpdateWindow_default,
         //window title bar
         optix_UpdateWindowTitleBar_default,
+        //divider
+        NULL,
+        //rectangle
+        NULL,
     };
     void (*render[OPTIX_NUM_TYPES])(struct optix_widget *) = {
         //text
@@ -35,7 +39,13 @@ void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
         optix_RenderWindow_default,
         //window title bar
         optix_RenderWindowTitleBar_default,
+        //divider
+        optix_RenderDivider_default,
+        //rectangle
+        optix_RenderRectangle_default,
     };
+    //if we're adding stuff we probably want this
+    optix_gui_data.gui_needs_full_redraw = true;
     widget->type = type;
     widget->state.selected = false;
     widget->state.visible = true;
@@ -101,8 +111,10 @@ void optix_SetPosition(struct optix_widget *widget, int x, int y) {
 //Aligns a transform to another transform. Use OPTIX_CENTERING_LEFT, RIGHT, etc.
 //transform is aligned to reference based on its width and height
 void optix_AlignTransformToTransform(struct optix_widget *transform, struct optix_widget *reference, uint8_t x_centering, uint8_t y_centering) {
-    optix_SetPosition(transform, reference->transform.x + ((reference->transform.width - transform->transform.width) / 2) * x_centering, 
-    reference->transform.y + ((reference->transform.height - transform->transform.height) / 2) * y_centering);
+    transform->transform.x = reference->transform.x + ((reference->transform.width - transform->transform.width) / 2) * x_centering;
+    if (x_centering == OPTIX_CENTERING_RIGHT) transform->transform.x += ((reference->transform.width - transform->transform.width) % 2);
+    transform->transform.y = reference->transform.y + ((reference->transform.height - transform->transform.height) / 2) * y_centering;
+    if (y_centering == OPTIX_CENTERING_BOTTOM) transform->transform.y += ((reference->transform.height - transform->transform.height) % 2);
 }
 
 bool optix_CheckTransformOverlap(struct optix_widget *test, struct optix_widget *reference) {
@@ -122,8 +134,7 @@ void optix_RecursiveAlign(struct optix_widget *widget) {
             int i = 0;
             while (widget->child[i]) {
                 struct optix_widget *child = widget->child[i];
-                child->transform.x = widget->transform.x + ((widget->transform.width - child->transform.width) / 2) * child->centering.x_centering;
-                child->transform.y = widget->transform.y + ((widget->transform.height - child->transform.height) / 2) * child->centering.y_centering;
+                optix_AlignTransformToTransform(child, widget, child->centering.x_centering, child->centering.y_centering);
                 optix_RecursiveAlign(widget->child[i]);
                 i++;
             }
@@ -133,8 +144,7 @@ void optix_RecursiveAlign(struct optix_widget *widget) {
     }
     while (widget->child[i] != NULL) {
         struct optix_widget *child = widget->child[i];
-        child->transform.x = widget->transform.x + ((widget->transform.width - child->transform.width) / 2) * child->centering.x_centering;
-        child->transform.y = widget->transform.y + ((widget->transform.height - child->transform.height) / 2) * child->centering.y_centering;
+        optix_AlignTransformToTransform(child, widget, child->centering.x_centering, child->centering.y_centering);
         if (child->child != NULL) {
             if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child);
             else optix_RecursiveAlign(child);

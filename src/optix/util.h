@@ -7,6 +7,8 @@
 #include "elements/menu.h"
 #include "elements/window.h"
 #include "elements/sprite.h"
+#include "elements/divider.h"
+#include "elements/rectangle.h"
 
 
 void optix_InitializeWidget(struct optix_widget *widget, uint8_t type);

@@ -13,5 +13,7 @@
 #include "elements/menu.h"
 #include "elements/window.h"
 #include "elements/sprite.h"
+#include "elements/divider.h"
+#include "elements/rectangle.h"
 
 #endif

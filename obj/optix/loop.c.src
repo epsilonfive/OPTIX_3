@@ -105,7 +105,7 @@ BB1_7:
 	ld	iy, (ix + -9)
 	ld	iy, (iy + 25)
 BB1_11:
-	lea	iy, iy + 35
+	lea	iy, iy + 37
 	ld	a, (iy)
 	ld	(iy), 0
 BB1_13:
@@ -370,6 +370,33 @@ BB4_4:
 	jq	BB4_1
 BB4_5:
 	pop	hl
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_optix_MarkWholeGUIVisible
+_optix_MarkWholeGUIVisible:
+	call	__frameset0
+	ld	hl, (ix + 6)
+BB5_1:
+	ld	iy, (hl)
+	lea	hl, iy + 0
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB5_4
+	ld	(iy + 15), 1
+	ld	hl, (iy + 22)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	push	hl
+	call	nz, _optix_MarkWholeGUIVisible
+	pop	hl
+	ld	hl, (ix + 6)
+	jq	BB5_1
+BB5_4:
 	pop	ix
 	ret
 	section	.text,"ax",@progbits

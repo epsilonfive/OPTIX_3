@@ -83,9 +83,17 @@ void optix_RenderGUI(struct optix_widget *stack[]) {
 
 void optix_RenderStack(struct optix_widget *stack[]) {
     int i = 0;
-    while (stack[i] != NULL) {
-        if (stack[i]->render != NULL) stack[i]->render(stack[i]);
+    while (stack[i]) {
+        if (stack[i]->render) stack[i]->render(stack[i]);
         i++;
     }
 }
 
+//mark the entire GUI as needing a redraw
+void optix_MarkWholeGUIVisible(struct optix_widget *stack[]) {
+    int i = 0;
+    while (stack[i]) {
+        stack[i]->state.visible = true;
+        if (stack[i]->child) optix_MarkWholeGUIVisible(stack[i]->child);
+    }
+}

@@ -54,6 +54,20 @@ void minimize_window(void *args) {
 }
 
 void main(void) {
+   struct optix_rectangle test_rectangle = {
+      .widget = {
+         .transform = {
+            .x = 0,
+            .y = 0,
+            .width = 100,
+            .height = 100,
+         },
+      },
+      .filled = true,
+      .border_color = 224,
+      .fill_color = 255,
+   };
+   optix_InitializeWidget(&test_rectangle.widget, OPTIX_RECTANGLE_TYPE);
    struct optix_text test_text[] = {
       {.text = "1"},
       {.text = "2"},
@@ -73,7 +87,7 @@ void main(void) {
    struct optix_menu test_menu = {
       .widget = {
          .transform = {
-            .width = 100,
+            .width = 50,
             .height = 100,
          },
          .child = (struct optix_widget *[]) {
@@ -86,13 +100,28 @@ void main(void) {
       },
       .resize_info = {
          .resizable = true,
+         .x_lock = true,
+         .y_lock = true,
          .min_width = 50,
-         .min_height = 50,
+         .min_height = 20,
       },
-      .rows = 2,
-      .columns = 2,
+      .rows = 4,
+      .columns = 1,
    };
    optix_InitializeWidget(&test_menu.widget, OPTIX_MENU_TYPE);
+   test_menu.widget.centering.x_centering = OPTIX_CENTERING_LEFT;
+   struct optix_divider test_divider = {
+      .alignment = DIVIDER_ALIGNMENT_RIGHT,
+      .reference = &test_menu.widget,
+      //let's not talk about this alright
+      .height_increase = 1,
+   };
+   optix_InitializeWidget(&test_divider.widget, OPTIX_DIVIDER_TYPE);
+   struct optix_divider test_divider2 = {
+      .alignment = DIVIDER_ALIGNMENT_BOTTOM,
+      .reference = &test_menu.widget,
+   };
+   optix_InitializeWidget(&test_divider2.widget, OPTIX_DIVIDER_TYPE);
    struct optix_window test_window = {
       .widget = {
          .transform = {
@@ -101,7 +130,7 @@ void main(void) {
             .width = 100,
             .height = 100,
          },
-         .child = (struct optix_widget *[]) {&test_menu.widget, NULL},
+         .child = (struct optix_widget *[]) {&test_menu.widget, &test_divider.widget, &test_divider2.widget, NULL},
       },
       .resize_info = {
          .resizable = true,
@@ -134,7 +163,7 @@ void main(void) {
    optix_InitializeWidget(&test_title_bar.widget, OPTIX_WINDOW_TITLE_BAR_TYPE);
    //finally, align everything
    optix_RecursiveAlign(&test_title_bar.widget);
-   struct optix_widget *test_stack[] = {&test_title_bar.widget, NULL};   
+   struct optix_widget *test_stack[] = {&test_rectangle.widget, &test_title_bar.widget, NULL};   
    optix_InitializeColors();
    //graphics
    gfx_Begin();

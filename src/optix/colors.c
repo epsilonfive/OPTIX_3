@@ -27,6 +27,7 @@ optix_colors_t optix_colors = {
     TEXT_BG_COLOR_DEFAULT                         ,
     //other
     HIGHLIGHT_COLOR_DEFAULT                       ,
+    DIVIDER_COLOR_DEFAULT                         ,
 };
 
 
