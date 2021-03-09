@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "cursor.h": "c",
-        "main.h": "c"
+        "main.h": "c",
+        "vargfx.h": "c"
     }
 }

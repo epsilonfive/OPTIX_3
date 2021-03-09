@@ -8,7 +8,6 @@ void optix_RenderDivider_default(struct optix_widget *widget) {
     struct optix_transform *reference = (struct optix_transform *) &divider->reference->transform;
     //gfx_SetColor(optix_colors.divider);
     gfx_SetColor(255);
-    dbg_sprintf(dbgout, "Rendering...%d %d %d %d\n", reference->x, reference->y, reference->width, reference->height);
     switch (divider->alignment) {
         case DIVIDER_ALIGNMENT_BOTTOM:
         case DIVIDER_ALIGNMENT_TOP:

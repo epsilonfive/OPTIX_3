@@ -207,6 +207,328 @@ BB0_14:
 	section	.text,"ax",@progbits
 
 	section	.text,"ax",@progbits
+	public	_optix_InitializeMenu
+_optix_InitializeMenu:
+	ld	hl, -18
+	call	__frameset
+	ld	hl, (ix + 6)
+	ld	(ix + -12), hl
+	ld	de, (ix + 9)
+	ld	(ix + -15), de
+	ld	hl, (ix + 12)
+	ld	(ix + -6), hl
+	ld	hl, (ix + 15)
+	ld	(ix + -9), hl
+	ld	bc, 3
+	or	a, a
+	sbc	hl, hl
+	ld	(ix + -3), hl
+	ex	de, hl
+	call	__imulu
+	add	hl, bc
+	push	hl
+	call	_malloc
+	pop	de
+	ld	iy, (ix + -12)
+	ld	(iy + 22), hl
+	push	hl
+	pop	iy
+	ld	de, (ix + -15)
+	ld	bc, 3
+	push	de
+	pop	hl
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	hl, 0
+	ld	(iy), hl
+	ld	bc, 1
+	push	de
+	pop	hl
+	or	a, a
+	sbc	hl, bc
+	call	__setflag
+	jq	p, BB1_2
+	ld	de, 0
+BB1_2:
+	ld	iy, (ix + -6)
+BB1_3:
+	push	de
+	pop	hl
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB1_29
+	ld	(ix + -15), de
+	ld	hl, 32
+	push	hl
+	call	_malloc
+	push	hl
+	pop	bc
+	pop	de
+	ld	iy, (ix + -12)
+	ld	hl, (iy + 22)
+	ld	de, (ix + -3)
+	add	hl, de
+	ld	(hl), bc
+	ld	hl, (iy + 22)
+	add	hl, de
+	ld	hl, (hl)
+	ld	de, 2
+	push	de
+	push	hl
+	call	_optix_InitializeWidget
+	pop	hl
+	pop	hl
+	ld	hl, (ix + -6)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	iy, 1
+	jq	z, BB1_8
+	ld	de, (ix + -3)
+	ld	hl, (ix + -6)
+	add	hl, de
+	ld	hl, (hl)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	iy, 1
+	jq	z, BB1_7
+	ld	iy, 2
+BB1_7:
+BB1_8:
+	ld	hl, (ix + -9)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	a, 0
+	ld	l, a
+	jq	z, BB1_12
+	ld	de, (ix + -3)
+	ld	hl, (ix + -9)
+	add	hl, de
+	ld	hl, (hl)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	a, 1
+	ld	l, a
+	jq	nz, BB1_11
+	ld	a, 0
+	ld	l, a
+BB1_11:
+BB1_12:
+	ld	bc, 1
+	call	__iand
+	push	hl
+	pop	de
+	add	iy, de
+	lea	hl, iy + 0
+	ld	bc, 3
+	call	__imulu
+	push	hl
+	call	_malloc
+	ld	(ix + -18), hl
+	pop	de
+	ld	iy, (ix + -12)
+	ld	hl, (iy + 22)
+	lea	bc, iy + 0
+	ld	de, (ix + -3)
+	add	hl, de
+	ld	iy, (hl)
+	ld	hl, (ix + -18)
+	ld	(iy + 22), hl
+	push	bc
+	pop	iy
+	ld	hl, (iy + 22)
+	add	hl, de
+	ld	iy, (hl)
+	ld	iy, (iy + 22)
+	ld	hl, (ix + -6)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	a, 0
+	ld	l, a
+	jq	z, BB1_16
+	ld	de, (ix + -3)
+	ld	hl, (ix + -6)
+	add	hl, de
+	ld	hl, (hl)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	a, 1
+	ld	l, a
+	jq	nz, BB1_15
+	ld	a, 0
+	ld	l, a
+BB1_15:
+BB1_16:
+	ld	bc, 1
+	call	__iand
+	push	hl
+	pop	de
+	ld	hl, (ix + -9)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	a, 0
+	ld	l, a
+	jq	z, BB1_20
+	ld	bc, (ix + -3)
+	ld	hl, (ix + -9)
+	add	hl, bc
+	ld	hl, (hl)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	a, 1
+	ld	l, a
+	jq	nz, BB1_19
+	ld	a, 0
+	ld	l, a
+BB1_19:
+BB1_20:
+	ld	bc, 1
+	call	__iand
+	add	hl, de
+	ld	bc, 3
+	call	__imulu
+	push	hl
+	pop	de
+	add	iy, de
+	ld	hl, 0
+	ld	(iy), hl
+	ld	iy, (ix + -6)
+	lea	hl, iy + 0
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB1_23
+	ld	de, (ix + -3)
+	lea	hl, iy + 0
+	add	hl, de
+	ld	hl, (hl)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB1_23
+	ld	hl, 28
+	push	hl
+	call	_malloc
+	pop	de
+	ld	iy, (ix + -12)
+	ld	iy, (iy + 22)
+	ld	de, (ix + -3)
+	add	iy, de
+	ld	iy, (iy)
+	ld	iy, (iy + 22)
+	push	hl
+	pop	bc
+	ld	(iy), bc
+	ld	hl, (ix + -6)
+	add	hl, de
+	ld	hl, (hl)
+	push	bc
+	pop	iy
+	ld	(iy + 25), hl
+	lea	de, iy + 0
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	push	de
+	call	_optix_InitializeWidget
+	ld	iy, (ix + -6)
+	pop	hl
+	pop	hl
+BB1_23:
+	ld	hl, (ix + -9)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	hl, (ix + -3)
+	jq	z, BB1_28
+	push	hl
+	pop	de
+	push	hl
+	pop	bc
+	ld	hl, (ix + -9)
+	add	hl, de
+	ld	hl, (hl)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	push	bc
+	pop	hl
+	jq	z, BB1_28
+	ld	(ix + -3), hl
+	ld	hl, 32
+	push	hl
+	call	_malloc
+	ld	(ix + -18), hl
+	pop	hl
+	ld	iy, (ix + -12)
+	ld	hl, (iy + 22)
+	ld	de, (ix + -3)
+	add	hl, de
+	ld	iy, (hl)
+	ld	iy, (iy + 22)
+	ld	hl, (ix + -6)
+	add	hl, de
+	ld	hl, (hl)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	a, 1
+	jq	nz, BB1_27
+	ld	a, 0
+BB1_27:
+	and	a, 1
+	or	a, a
+	sbc	hl, hl
+	ld	l, a
+	ld	bc, 3
+	call	__imulu
+	push	hl
+	pop	de
+	add	iy, de
+	lea	hl, iy + 0
+	ld	iy, (ix + -18)
+	ld	(hl), iy
+	ld	de, (ix + -3)
+	ld	hl, (ix + -9)
+	add	hl, de
+	ld	hl, (hl)
+	ld	(iy + 25), hl
+	ld	hl, 1
+	push	hl
+	push	iy
+	call	_optix_InitializeWidget
+	pop	hl
+	pop	hl
+	ld	hl, (ix + -3)
+	ld	iy, (ix + -6)
+BB1_28:
+	ld	de, (ix + -15)
+	dec	de
+	ld	bc, 3
+	add	hl, bc
+	ld	(ix + -3), hl
+	jq	BB1_3
+BB1_29:
+	ld	hl, (ix + -12)
+	ld	(ix + 6), hl
+	ld	hl, 3
+	ld	(ix + 9), hl
+	ld	sp, ix
+	pop	ix
+	jp	_optix_InitializeWidget
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
 	public	_optix_UpdateMenu_default
 _optix_UpdateMenu_default:
 	ld	hl, -7
@@ -227,7 +549,7 @@ _optix_UpdateMenu_default:
 	ld	de, (iy + 22)
 	ld	iy, 0
 	ld	(ix + -3), iy
-BB1_1:
+BB2_1:
 	lea	bc, iy + 0
 	push	de
 	pop	hl
@@ -236,7 +558,7 @@ BB1_1:
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB1_13
+	jq	z, BB2_13
 	push	hl
 	pop	bc
 	ld	(ix + -6), iy
@@ -245,12 +567,12 @@ BB1_1:
 	ld	l, 1
 	xor	a, l
 	bit	0, a
-	jq	nz, BB1_8
+	jq	nz, BB2_8
 	ld	a, (ix + -7)
 	and	a, 1
 	xor	a, l
 	bit	0, a
-	jq	z, BB1_8
+	jq	z, BB2_8
 	push	bc
 	pop	iy
 	ld	hl, (iy + 19)
@@ -266,33 +588,33 @@ BB1_1:
 	ld	iy, (hl)
 	ld	a, (iy)
 	cp	a, 2
-	jq	nz, BB1_9
+	jq	nz, BB2_9
 	ld	a, (iy + 14)
 	ld	l, 1
 	xor	a, l
 	bit	0, a
 	ld	bc, (ix + -3)
-	jq	nz, BB1_11
+	jq	nz, BB2_11
 	ld	iy, (ix + 6)
 	ld	(iy + 37), bc
 	ld	(ix + -7), l
-BB1_11:
+BB2_11:
 	ld	iy, (ix + -6)
-	jq	BB1_12
-BB1_8:
+	jq	BB2_12
+BB2_8:
 	push	bc
 	pop	iy
 	ld	(iy + 14), 0
-BB1_9:
+BB2_9:
 	ld	iy, (ix + -6)
 	ld	bc, (ix + -3)
-BB1_12:
+BB2_12:
 	inc	bc
 	ld	(ix + -3), bc
 	ld	bc, 3
 	add	iy, bc
-	jq	BB1_1
-BB1_13:
+	jq	BB2_1
+BB2_13:
 	ld	sp, ix
 	pop	ix
 	ret
@@ -315,16 +637,19 @@ _optix_RenderMenu_default:
 	section	.text,"ax",@progbits
 
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
-	extern	__setflag
 	extern	_optix_CheckTransformOverlap
 	extern	__Unwind_SjLj_Register
-	extern	__Unwind_SjLj_Unregister
 	extern	__frameset
+	extern	_malloc
+	extern	_optix_InitializeWidget
+	extern	_optix_cursor
+	extern	__indcallhl
+	extern	__idivs
+	extern	__setflag
+	extern	__Unwind_SjLj_Unregister
+	extern	__iand
 	extern	__irems
 	extern	_optix_RenderStack
 	extern	__imulu
-	extern	_optix_cursor
 	extern	_optix_AlignTransformToTransform
-	extern	__indcallhl
 	extern	__frameset0
-	extern	__idivs

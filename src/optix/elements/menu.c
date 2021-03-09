@@ -3,7 +3,6 @@
 //quick function to align 
 void optix_AlignMenu(struct optix_menu *menu) {
     int i = 0;
-    dbg_sprintf(dbgout, "(menu) width: %d, height: %d", menu->widget.transform.width, menu->widget.transform.height);
     while (menu->widget.child[i]) {
         struct optix_widget *child = menu->widget.child[i];
         //just continue if this won't be visible, but set it to invisible as well
@@ -12,7 +11,6 @@ void optix_AlignMenu(struct optix_menu *menu) {
             i++;
             continue;
         } else child->state.visible = true;
-        dbg_sprintf(dbgout, "Entry %d\n", i);
         if (child->type == OPTIX_BUTTON_TYPE) {
             int default_width = menu->widget.transform.width / menu->columns;
             int default_height = menu->widget.transform.height / menu->rows;
@@ -26,7 +24,6 @@ void optix_AlignMenu(struct optix_menu *menu) {
             if (child->child) {
                 int j = 0;
                 while (child->child[j]) {
-                    dbg_sprintf(dbgout, "%d\n", child->child[j]->type);
                     if (child->child[j]->type == OPTIX_TEXT_TYPE) {
                         struct optix_text *child_text = (struct optix_text *) child->child[j];
                         optix_AlignTransformToTransform(child->child[j], child, child_text->widget.centering.x_centering, child_text->widget.centering.y_centering);
@@ -43,6 +40,42 @@ void optix_AlignMenu(struct optix_menu *menu) {
     }
 }
 
+//function to quickly initialize menu, because I was noticing I had to write this out a lot
+//it does allocate things itself so the freeing function will have to be called at some point to get rid of those
+//just pass it an array of text and an array of sprites and it will make a basic menu for you
+//I'm making an executive decision that text comes before sprites when applicable
+void optix_InitializeMenu(struct optix_menu *menu, int num_options, const char *(*text)[], gfx_sprite_t *(*spr)[]) {
+    int i = 0;
+    //start by allocating out the menu's children
+    menu->widget.child = malloc((num_options + 1) * sizeof(struct optix_widget *));
+    menu->widget.child[num_options] = NULL;
+    //next go through and initialize each of those
+    for (i = 0; i < num_options; i++) {
+        //make a button and initialize it
+        menu->widget.child[i] = malloc(sizeof(struct optix_button));
+        optix_InitializeWidget(menu->widget.child[i], OPTIX_BUTTON_TYPE);
+        //next put the text and sprites into that button
+        //allocate it out
+        //it always has to be at least 3 bytes, because it always has to contain a NULL at the end, or if there is nothing in the array
+        menu->widget.child[i]->child = malloc((1 + (text && (*text)[i]) + (spr && (*spr)[i])) * sizeof(struct optix_widget *));
+        //so put that null at the end
+        menu->widget.child[i]->child[(text && (*text)[i]) + (spr && (*spr)[i])] = NULL;
+        //if the text is not null add a new child to the button for it
+        if (text && (*text)[i]) {
+            struct optix_widget *new_text = menu->widget.child[i]->child[0] = malloc(sizeof(struct optix_text));
+            ((struct optix_text *) new_text)->text = (*text)[i];
+            optix_InitializeWidget(new_text, OPTIX_TEXT_TYPE);
+        }
+        //same for sprite 
+        if (spr && (*spr)[i]) {
+            struct optix_widget *new_spr = menu->widget.child[i]->child[(*text)[i] != NULL] = malloc(sizeof(struct optix_sprite));
+            ((struct optix_sprite *) new_spr)->spr = (*spr)[i];
+            optix_InitializeWidget(new_spr, OPTIX_SPRITE_TYPE);
+        }
+    }
+    //general stuff
+    optix_InitializeWidget(&menu->widget, OPTIX_MENU_TYPE);
+}
 
 
 void optix_UpdateMenu_default(struct optix_widget *widget) {

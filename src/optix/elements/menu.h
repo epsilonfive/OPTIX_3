@@ -22,6 +22,7 @@ struct optix_menu {
 
 //functions
 void optix_AlignMenu(struct optix_menu *menu);
+void optix_InitializeMenu(struct optix_menu *menu, int num_options, const char *(*text)[], gfx_sprite_t *(*spr)[]);
 void optix_UpdateMenu_default(struct optix_widget *widget);
 void optix_RenderMenu_default(struct optix_widget *widget);
 

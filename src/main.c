@@ -68,34 +68,12 @@ void main(void) {
       .fill_color = 255,
    };
    optix_InitializeWidget(&test_rectangle.widget, OPTIX_RECTANGLE_TYPE);
-   struct optix_text test_text[] = {
-      {.text = "1"},
-      {.text = "2"},
-      {.text = "3"},
-      {.text = "4"},
-   };
-   struct optix_button test_button[4] = {
-      {.widget.child = (struct optix_widget *[]) {&test_text[0].widget, NULL}},
-      {.widget.child = (struct optix_widget *[]) {&test_text[1].widget, NULL}},     
-      {.widget.child = (struct optix_widget *[]) {&test_text[2].widget, NULL}},
-      {.widget.child = (struct optix_widget *[]) {&test_text[3].widget, NULL}},
-   };
-   for (int i = 0; i < 4; i++) {
-      optix_InitializeWidget(&test_text[i].widget, OPTIX_TEXT_TYPE);
-      optix_InitializeWidget(&test_button[i].widget, OPTIX_BUTTON_TYPE);
-   }
+   char *test_text[] = {"1", "2", "3", "4"};
    struct optix_menu test_menu = {
       .widget = {
          .transform = {
             .width = 50,
             .height = 100,
-         },
-         .child = (struct optix_widget *[]) {
-            &test_button[0].widget,
-            &test_button[1].widget,
-            &test_button[2].widget,
-            &test_button[3].widget,
-            NULL,
          },
       },
       .resize_info = {
@@ -108,7 +86,7 @@ void main(void) {
       .rows = 4,
       .columns = 1,
    };
-   optix_InitializeWidget(&test_menu.widget, OPTIX_MENU_TYPE);
+   optix_InitializeMenu(&test_menu, 4, &test_text, NULL);
    test_menu.widget.centering.x_centering = OPTIX_CENTERING_LEFT;
    struct optix_divider test_divider = {
       .alignment = DIVIDER_ALIGNMENT_RIGHT,

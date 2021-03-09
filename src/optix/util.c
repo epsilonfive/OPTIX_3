@@ -129,7 +129,6 @@ void optix_RecursiveAlign(struct optix_widget *widget) {
     if (widget->type == OPTIX_WINDOW_TITLE_BAR_TYPE) {
         //we're also going to refresh the title bar
         struct optix_window_title_bar *window_title_bar = (struct optix_window_title_bar *) widget;
-        dbg_sprintf(dbgout, "Aligning title bar...\n");
         if (widget->child != NULL) {
             int i = 0;
             while (widget->child[i]) {
