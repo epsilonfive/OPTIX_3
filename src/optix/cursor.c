@@ -43,13 +43,12 @@ void optix_UpdateCursor_default(void) {
         if (transform->x < 0) transform->x = 0;
         if (transform->y < 0) transform->y = 0;
     } else {
-        int cursor_direction;
         //kb_Scan will be called elsewhere
-        if (kb_Data[7] & kb_Up)         cursor_direction = OPTIX_CURSOR_UP;
-        else if (kb_Data[7] & kb_Down)  cursor_direction = OPTIX_CURSOR_DOWN;
-        else if (kb_Data[7] & kb_Left)  cursor_direction = OPTIX_CURSOR_LEFT;
-        else if (kb_Data[7] & kb_Right) cursor_direction = OPTIX_CURSOR_RIGHT;
-        else cursor_direction = OPTIX_CURSOR_NO_DIR;
+        if (kb_Data[7] & kb_Up)         optix_cursor.direction = OPTIX_CURSOR_UP;
+        else if (kb_Data[7] & kb_Down)  optix_cursor.direction = OPTIX_CURSOR_DOWN;
+        else if (kb_Data[7] & kb_Left)  optix_cursor.direction = OPTIX_CURSOR_LEFT;
+        else if (kb_Data[7] & kb_Right) optix_cursor.direction = OPTIX_CURSOR_RIGHT;
+        else optix_cursor.direction = OPTIX_CURSOR_NO_DIR;
         //the box-based GUI mode (implement later)
     }
 }  
@@ -64,4 +63,38 @@ void optix_RenderCursor_default(void) {
     };
     gfx_SetTransparentColor(255);
     gfx_TransparentSprite_NoClip(spr[optix_cursor.state], optix_cursor.widget.transform.x, optix_cursor.widget.transform.y);
+}
+
+//returns a pointer to the closest element found within the array
+//use the ternary operator excessively
+struct optix_widget *optix_FindNearestElement(uint8_t direction, struct optix_widget *reference, struct optix_widget *stack[]) {
+    int i = 0;
+    int closest_score;
+    struct optix_widget *closest;
+    //this is going to have to be recursive
+    //return the element that is the closest
+    //ideally, you'd use this by passing in the children of a window but it would also work in other cases as well
+    while (stack[i]) {
+        int score = 0;
+        //this will make sure that every element is tested, which we may (?) not want
+        struct optix_widget *current = (stack[i]->child) ? optix_FindNearestElement(direction, reference, stack[i]->child) : stack[i];
+        switch (direction) {
+            case OPTIX_CURSOR_LEFT:
+                score = (current->transform.x < reference->transform.x) * abs(current->transform.x - reference->transform.x);
+                break;
+            case OPTIX_CURSOR_RIGHT:
+                score = (current->transform.x > reference->transform.x) * abs(current->transform.x - reference->transform.x);
+                break;
+            case OPTIX_CURSOR_UP:
+                score = (current->transform.y < reference->transform.y) * abs(current->transform.y - reference->transform.y);
+                break;
+            case OPTIX_CURSOR_DOWN:
+                score = (current->transform.y > reference->transform.y) * abs(current->transform.y - reference->transform.y);
+                break;
+        }
+        //I finally get to use this
+        closest_score = (score < closest_score && score) ? score : closest_score;
+        closest = current;
+    }
+    return closest;
 }

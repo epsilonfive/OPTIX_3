@@ -91,29 +91,32 @@ void optix_SetObjectChildren(struct optix_widget *widget, struct optix_widget **
 
 //sets the position of an object, and also moves its children accordingly
 void optix_SetPosition(struct optix_widget *widget, int x, int y) {
+    if (!widget) return;
     //start by figuring out what the difference is between the new and old positions
+    dbg_sprintf(dbgout, "Setting position...\n");
     int x_shift = x - widget->transform.x;
     int y_shift = y - widget->transform.y;
     //shift the widget itself
     widget->transform.x = x;
     widget->transform.y = y;
     //move its children as well
-    if (widget->child != NULL) {
+    if (widget->child) {
         int i = 0;
-        while (widget->child[i] != NULL) {
+        while (widget->child[i]) {
             struct optix_widget *child = widget->child[i];
             optix_SetPosition(child, child->transform.x + x_shift, child->transform.y + y_shift);
             i++;
         }
     }
+    dbg_sprintf(dbgout, "Success.\n");
 }
 
 //Aligns a transform to another transform. Use OPTIX_CENTERING_LEFT, RIGHT, etc.
 //transform is aligned to reference based on its width and height
 void optix_AlignTransformToTransform(struct optix_widget *transform, struct optix_widget *reference, uint8_t x_centering, uint8_t y_centering) {
-    transform->transform.x = reference->transform.x + ((reference->transform.width - transform->transform.width) / 2) * x_centering;
+    transform->transform.x = reference->transform.x + ((reference->transform.width - transform->transform.width) / 2) * x_centering + transform->centering.x_offset;
     if (x_centering == OPTIX_CENTERING_RIGHT) transform->transform.x += ((reference->transform.width - transform->transform.width) % 2);
-    transform->transform.y = reference->transform.y + ((reference->transform.height - transform->transform.height) / 2) * y_centering;
+    transform->transform.y = reference->transform.y + ((reference->transform.height - transform->transform.height) / 2) * y_centering + transform->centering.y_offset;
     if (y_centering == OPTIX_CENTERING_BOTTOM) transform->transform.y += ((reference->transform.height - transform->transform.height) % 2);
 }
 
@@ -129,25 +132,31 @@ void optix_RecursiveAlign(struct optix_widget *widget) {
     if (widget->type == OPTIX_WINDOW_TITLE_BAR_TYPE) {
         //we're also going to refresh the title bar
         struct optix_window_title_bar *window_title_bar = (struct optix_window_title_bar *) widget;
-        if (widget->child != NULL) {
-            int i = 0;
+        if (widget->child) {
+            i = 0;
             while (widget->child[i]) {
                 struct optix_widget *child = widget->child[i];
                 optix_AlignTransformToTransform(child, widget, child->centering.x_centering, child->centering.y_centering);
-                optix_RecursiveAlign(widget->child[i]);
+                if (child->child) {
+                    if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child);
+                    else optix_RecursiveAlign(child);
+                }
                 i++;
             }
         }
         //make us align the window instead
         widget = (struct optix_widget *) window_title_bar->window;
     }
-    while (widget->child[i] != NULL) {
-        struct optix_widget *child = widget->child[i];
-        optix_AlignTransformToTransform(child, widget, child->centering.x_centering, child->centering.y_centering);
-        if (child->child != NULL) {
-            if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child);
-            else optix_RecursiveAlign(child);
+    if (widget->child) {
+        i = 0;
+        while (widget->child[i]) {
+            struct optix_widget *child = widget->child[i];
+            optix_AlignTransformToTransform(child, widget, child->centering.x_centering, child->centering.y_centering);
+            if (child->child) {
+                if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child);
+                else optix_RecursiveAlign(child);
+            }
+            i++;
         }
-        i++;
     }
 }

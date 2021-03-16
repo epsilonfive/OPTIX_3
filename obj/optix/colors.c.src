@@ -51,22 +51,41 @@ _optix_BlackText:
 _optix_SetTextColor:
 	ld	hl, -3
 	call	__frameset
-	ld	a, (ix + 6)
-	ld	l, (ix + 9)
-	ld	(ix + -3), hl
-	ld	l, a
+	ld	l, (ix + 6)
+	ld	h, (ix + 9)
+	ld	a, (_optix_gui_data+1)
+	ld	e, 1
+	xor	a, e
+	bit	0, a
+	jq	z, BB3_2
 	push	hl
 	call	_gfx_SetTextFGColor
 	pop	hl
-	ld	hl, (ix + -3)
+	ld	a, (ix + 9)
+	ld	l, a
+	ld	(ix + -3), hl
 	push	hl
 	call	_gfx_SetTextBGColor
 	pop	hl
 	ld	hl, (ix + -3)
-	ld	(ix + 6), hl
+	push	hl
+	call	_gfx_SetTextTransparentColor
+	jq	BB3_3
+BB3_2:
+	ld	de, 0
+	push	de
+	pop	bc
+	ld	c, l
+	ld	e, h
+	push	de
+	push	bc
+	call	_fontlib_SetColors
+	pop	hl
+BB3_3:
+	pop	hl
 	pop	hl
 	pop	ix
-	jp	_gfx_SetTextTransparentColor
+	ret
 	section	.text,"ax",@progbits
 
 	section	.data,"aw",@progbits
@@ -103,3 +122,5 @@ _optix_colors:
 	extern	__frameset
 	extern	_gfx_SetTextBGColor
 	extern	_gfx_SetTextFGColor
+	extern	_fontlib_SetColors
+	extern	_optix_gui_data

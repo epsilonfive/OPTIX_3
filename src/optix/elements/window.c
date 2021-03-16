@@ -4,10 +4,11 @@
 void optix_UpdateWindow_default(struct optix_widget *widget) {
     struct optix_window *window = (struct optix_window *) widget;
     if (widget->state.visible) {
+        if (widget->state.selected && widget->child) optix_UpdateStack(widget->child);
         if (kb_Data[6] & kb_Enter || kb_Data[1] & kb_2nd) {
             //rescale it if necessary
             //if the cursor didn't move just continue
-            if (optix_CheckTransformOverlap(&optix_cursor.widget, widget) && 
+            if (widget->state.selected && optix_CheckTransformOverlap(&optix_cursor.widget, widget) && 
             (optix_cursor.last_x != optix_cursor.widget.transform.x || optix_cursor.last_y != optix_cursor.widget.transform.y)) {
                 int center_x = widget->transform.x + widget->transform.width / 2;
                 int center_y = widget->transform.y + widget->transform.height / 2;
@@ -28,14 +29,19 @@ void optix_UpdateWindow_default(struct optix_widget *widget) {
                     y_size_change = optix_cursor.widget.transform.y - optix_cursor.last_y;
                     optix_cursor.state = OPTIX_CURSOR_RESIZE_VERT;
                 }
-                optix_SetPosition(widget, widget->transform.x += x_shift, widget->transform.y += y_shift);
-                optix_ResizeWindow(window, widget->transform.width += x_size_change, widget->transform.height += y_size_change);
+                //only if something actually happened
+                if (x_size_change || y_size_change || x_shift || y_shift) {
+                    optix_SetPosition(widget, widget->transform.x += x_shift, widget->transform.y += y_shift);
+                    optix_ResizeWindow(window, widget->transform.width += x_size_change, widget->transform.height += y_size_change);
+                }
             }
-            if (optix_cursor.state == OPTIX_CURSOR_NORMAL && optix_CheckTransformOverlap(&optix_cursor.widget, widget)) widget->state.selected = true;
-            else if (optix_cursor.state == OPTIX_CURSOR_NORMAL) widget->state.selected = false;
+            if (optix_CheckTransformOverlap(&optix_cursor.widget, widget)) {
+                widget->state.selected = true;
+                return;
+                dbg_sprintf(dbgout, "This shouldn't get run.\n");
+            } else widget->state.selected = false;
         }
-        if (widget->state.selected && widget->child != NULL) optix_UpdateStack(widget->child);
-    }
+    } else widget->state.selected = false;
 }
 
 void optix_RenderWindow_default(struct optix_widget *widget) {
@@ -54,7 +60,7 @@ void optix_UpdateWindowTitleBar_default(struct optix_widget *widget) {
     bool window_selected = window_title_bar->window->widget.state.selected;
     widget->state.visible = window_title_bar->window->widget.state.visible;
     if (widget->state.visible) {
-        if (widget->child != NULL) optix_UpdateStack(widget->child);
+        if (widget->state.selected && widget->child) optix_UpdateStack(widget->child);
         //windows are children of the title bar
         //make it so you can move the windows around while holding the selection key and moving the mouse
         //this is for the moving
@@ -65,9 +71,19 @@ void optix_UpdateWindowTitleBar_default(struct optix_widget *widget) {
                     int y_pos = widget->transform.y + (optix_cursor.widget.transform.y - optix_cursor.last_y);
                     int new_width = widget->transform.width;
                     int new_height = widget->transform.height;
+                    //snap left
                     if (x_pos < 1) {
                         x_pos = 1;
                         //resize the window to cover the left half of the screen if possible
+                        if (window_title_bar->window->resize_info.resizable) {
+                            y_pos = WINDOW_SNAP_MIN_Y;
+                            new_width = LCD_WIDTH / 2 - 2;
+                            new_height = WINDOW_SNAP_HEIGHT - widget->transform.height - 2;
+                        }
+                    }
+                    //snap right
+                    if (x_pos + window_title_bar->window->widget.transform.width >  319) {
+                        x_pos = 320 - LCD_WIDTH / 2;
                         if (window_title_bar->window->resize_info.resizable) {
                             y_pos = WINDOW_SNAP_MIN_Y;
                             new_width = LCD_WIDTH / 2 - 2;
@@ -111,16 +127,17 @@ void optix_UpdateWindowTitleBar_default(struct optix_widget *widget) {
                 else optix_cursor.state = OPTIX_CURSOR_OVER_ITEM;
             }
         }
-        window_title_bar->window->widget.update((struct optix_widget *) window_title_bar->window);
         //only update it if we need to
+        window_title_bar->window->widget.update((struct optix_widget *) window_title_bar->window);
         if (window_title_bar->window->widget.transform.x != widget->transform.x || window_title_bar->window->widget.transform.width != widget->transform.width)
             optix_RefreshWindowTitleBarTransform(window_title_bar);
         widget->state.selected = window_title_bar->window->widget.state.selected;
-    }
+    } else widget->state.visible = false;
 }
 
 void optix_RenderWindowTitleBar_default(struct optix_widget *widget) {
     struct optix_window_title_bar *window_title_bar = (struct optix_window_title_bar *) widget;
+    //those settextcolors are in there in case there's a title, which should change color on select
     if (widget->state.visible) {
         if (window_title_bar->window->widget.state.selected) {
             optix_OutlinedRectangle(widget->transform.x - 1, widget->transform.y, widget->transform.width + 2, widget->transform.height, //transform
@@ -131,9 +148,8 @@ void optix_RenderWindowTitleBar_default(struct optix_widget *widget) {
             optix_colors.window_title_bar_unselected, optix_colors.window_border);                                                       //color
             optix_SetTextColor(optix_colors.window_title_text_fg_unselected, optix_colors.window_title_text_bg_unselected);
         }
-        gfx_PrintStringXY(window_title_bar->title, widget->transform.x + 3, widget->transform.y + 3);
-        optix_SetTextColor(optix_colors.text_fg, optix_colors.text_bg);
         if (widget->child != NULL) optix_RenderStack(widget->child);
+        optix_SetTextColor(optix_colors.text_fg, optix_colors.text_bg);
         if (window_title_bar->window != NULL) window_title_bar->window->widget.render(window_title_bar->window);
     }
 }
@@ -149,30 +165,34 @@ void optix_ResizeWindow(struct optix_widget *widget, uint16_t width, uint8_t hei
     struct optix_window *window = (struct optix_window *) widget;
     int i = 0;
     if (window->resize_info.resizable) {
+        dbg_sprintf(dbgout, "Resizing...\n");
         if (width < window->resize_info.min_width) width = window->resize_info.min_width;
         if (height < window->resize_info.min_height) height = window->resize_info.min_height;
         widget->transform.width = width;
         widget->transform.height = height;
-        while (widget->child[i]) {
-            struct optix_widget *child = widget->child[i];
-            //resize it to a new size
-            if (child->type == OPTIX_MENU_TYPE) {
-                struct optix_menu *menu = (struct optix_menu *) child;
-                if (!menu->resize_info.x_lock) {
-                    menu->columns = width / menu->resize_info.min_width;
-                    menu->widget.transform.width = width;
+        if (widget->child) {
+            while (widget->child[i]) {
+                struct optix_widget *child = widget->child[i];
+                //resize it to a new sizef
+                if (child->type == OPTIX_MENU_TYPE) {
+                    struct optix_menu *menu = (struct optix_menu *) child;
+                    if (!menu->resize_info.x_lock) {
+                        menu->columns = width / menu->resize_info.min_width;
+                        menu->widget.transform.width = width;
+                    }
+                    if (!menu->resize_info.y_lock) {
+                        menu->rows = height / menu->resize_info.min_height;
+                        menu->widget.transform.height = height;
+                    }
+                } else {
+                    child->transform.width = width;
+                    child->transform.height = height;
                 }
-                if (!menu->resize_info.y_lock) {
-                    menu->rows = height / menu->resize_info.min_height;
-                    menu->widget.transform.height = height;
-                }
-            } else {
-                child->transform.width = width;
-                child->transform.height = height;
+                i++;
             }
-            i++;
         }
         optix_RecursiveAlign(widget);
+        dbg_sprintf(dbgout, "Resize success.\n");
     }
 }
 

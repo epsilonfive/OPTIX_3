@@ -7,13 +7,10 @@ void optix_UpdateButton_default(struct optix_widget *widget) {
     struct optix_button *button = (struct optix_button *) widget;
     //check if the cursor overlaps with it
     if (!widget->state.visible) return;
-    if (optix_cursor.state == OPTIX_CURSOR_NORMAL && optix_CheckTransformOverlap(&optix_cursor.widget, widget)) {
-        widget->state.selected = true;
-        optix_cursor.state = OPTIX_CURSOR_OVER_ITEM;
-    } else widget->state.selected = false;
     //kb_Scan will be called elsewhere
     if (kb_Data[6] & kb_Enter || kb_Data[1] & kb_2nd) {
         if (!button->pressed && widget->state.selected) {
+            dbg_sprintf(dbgout, "Running function...\n");
             if (button->click_action != NULL) button->click_action(button->click_args);
             //button->state.color = 224;
             button->pressed = true;
@@ -23,6 +20,10 @@ void optix_UpdateButton_default(struct optix_widget *widget) {
         //the color should change back
         //button->state.color = 255;
     }
+    if (optix_cursor.state == OPTIX_CURSOR_NORMAL && optix_CheckTransformOverlap(&optix_cursor.widget, widget)) {
+        widget->state.selected = true;
+        optix_cursor.state = OPTIX_CURSOR_OVER_ITEM;
+    } else widget->state.selected = button->pressed = false;
 }
 
 //render button
@@ -30,7 +31,7 @@ void optix_RenderButton_default(struct optix_widget *widget) {
     struct optix_button *button = (struct optix_button *) widget;
     if (widget->state.visible) {
         if (widget->state.selected) {
-            if (button->pressed) { 
+            if (button->pressed) {
                 optix_OutlinedRectangle(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height, //transform
                 optix_colors.button_bg_pressed, optix_colors.button_border);                                                         //color
                 optix_SetTextColor(optix_colors.button_text_fg_pressed, optix_colors.button_text_bg_pressed);

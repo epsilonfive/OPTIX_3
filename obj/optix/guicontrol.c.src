@@ -9,11 +9,12 @@ _optix_InitializeGUIState:
 	section	.bss,"aw",@nobits
 	public	_optix_settings
 _optix_settings:
+	rb	1
 
 	section	.bss,"aw",@nobits
 	public	_optix_gui_data
 _optix_gui_data:
-	rb	1
+	rb	2
 
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
 	extern	__Unwind_SjLj_Register

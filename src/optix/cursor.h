@@ -30,6 +30,9 @@ struct optix_cursor_t {
     int last_x;
     int last_y;
     int state;
+    //to be used when in box-based mode
+    int direction;
+    struct optix_widget *current_selection;
 };
 extern struct optix_cursor_t optix_cursor;
 
@@ -37,5 +40,6 @@ extern struct optix_cursor_t optix_cursor;
 void optix_InitializeCursor(void);
 void optix_UpdateCursor_default(void);
 void optix_RenderCursor_default(void);
+struct optix_widget *optix_FindNearestElement(uint8_t direction, struct optix_widget *reference, struct optix_widget *stack[]);
 
 #endif

@@ -9,16 +9,37 @@ _optix_InitializeTextTransform:
 	sbc	hl, hl
 	ld	(iy + 1), hl
 	ld	(iy + 4), hl
+	ld	a, (_optix_gui_data+1)
+	inc	l
+	xor	a, l
 	ld	hl, (iy + 25)
+	bit	0, a
+	jq	z, BB0_1
 	push	hl
 	call	_gfx_GetStringWidth
+	ld	a, 8
 	pop	de
 	ld	iy, (ix + 6)
 	ld	(iy + 7), l
 	ld	(iy + 8), h
-	ld	(iy + 9), 8
+	jq	BB0_3
+BB0_1:
+	push	hl
+	call	_fontlib_GetStringWidth
+	pop	de
+	ld	iy, (ix + 6)
+	ld	(iy + 7), l
+	ld	(iy + 8), h
+	call	_fontlib_GetCurrentFontHeight
+BB0_3:
+	ld	hl, (ix + 6)
+	push	hl
+	pop	iy
+	ld	(iy + 9), a
 	ld	(iy + 10), 1
 	ld	(iy + 11), 1
+	ld	(iy + 13), 0
+	ld	(iy + 12), 0
 	pop	ix
 	ret
 	section	.text,"ax",@progbits
@@ -32,7 +53,11 @@ _optix_RenderText_default:
 	ld	l, 1
 	xor	a, l
 	bit	0, a
-	jq	nz, BB1_2
+	jq	nz, BB1_5
+	ld	a, (_optix_gui_data+1)
+	xor	a, l
+	bit	0, a
+	jq	z, BB1_3
 	ld	hl, (iy + 25)
 	ld	de, (iy + 1)
 	ld	bc, (iy + 4)
@@ -42,15 +67,120 @@ _optix_RenderText_default:
 	call	_gfx_PrintStringXY
 	pop	hl
 	pop	hl
+	jq	BB1_4
+BB1_3:
+	ld	hl, (iy + 1)
+	ld	a, (iy + 4)
+	ld	e, (iy + 7)
+	ld	d, (iy + 8)
+	ld	bc, 0
+	ld	c, e
+	ld	b, d
+	ld	e, (iy + 9)
+	push	de
+	push	bc
+	ld	e, a
+	push	de
+	push	hl
+	call	_fontlib_SetWindow
 	pop	hl
-BB1_2:
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	iy, (ix + 6)
+	ld	hl, (iy + 1)
+	ld	a, (iy + 4)
+	ld	e, a
+	push	de
+	push	hl
+	call	_fontlib_SetCursorPosition
+	pop	hl
+	pop	hl
+	ld	iy, (ix + 6)
+	ld	hl, (iy + 25)
+	push	hl
+	call	_fontlib_DrawString
+BB1_4:
+	pop	hl
+BB1_5:
 	pop	ix
 	ret
 	section	.text,"ax",@progbits
 
+	section	.text,"ax",@progbits
+	public	_optix_InitializeFont
+_optix_InitializeFont:
+	ld	hl, -3
+	call	__frameset
+	ld	hl, L_.str
+	ld	de, 0
+	push	de
+	push	hl
+	call	_fontlib_GetFontByIndex
+	pop	de
+	pop	de
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB2_2
+	ld	de, 0
+	push	de
+	push	hl
+	ld	(ix + -3), hl
+	call	_fontlib_SetFont
+	pop	hl
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	dec	hl
+	push	hl
+	call	_fontlib_SetColors
+	pop	hl
+	pop	hl
+	ld	hl, 1
+	push	hl
+	call	_fontlib_SetTransparency
+	ld	hl, (ix + -3)
+	pop	de
+BB2_2:
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	nz, BB2_3
+	ld	l, 0
+	jq	BB2_5
+BB2_3:
+	ld	l, 1
+BB2_5:
+	ld	a, l
+	and	a, 1
+	ld	(_optix_gui_data+1), a
+	ld	a, l
+	pop	hl
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.rodata,"a",@progbits
+	private	L_.str
+L_.str:
+	db	"DRSANS",000o
+
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
 	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister
+	extern	__frameset
+	extern	_fontlib_GetFontByIndex
+	extern	_fontlib_SetTransparency
+	extern	_fontlib_DrawString
 	extern	_gfx_GetStringWidth
+	extern	_fontlib_GetStringWidth
+	extern	_fontlib_SetCursorPosition
+	extern	_fontlib_SetColors
+	extern	_fontlib_GetCurrentFontHeight
+	extern	_fontlib_SetFont
+	extern	_optix_gui_data
 	extern	_gfx_PrintStringXY
 	extern	__frameset0
+	extern	_fontlib_SetWindow

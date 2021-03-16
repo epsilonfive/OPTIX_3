@@ -26,19 +26,43 @@ _optix_UpdateStack_TopLevel:
 	ld	hl, -28
 	call	__frameset
 	ld	hl, (ix + 6)
-	ld	bc, 3
-	ld	de, 0
-	ld	(ix + -28), de
 	xor	a, a
+	ld	(ix + -18), a
+	ld	de, 0
+	ld	a, (_optix_settings)
+	ld	c, 1
+	xor	a, c
+	xor	a, c
+	bit	0, a
+	jq	nz, BB1_2
+	ld	a, (_optix_cursor+34)
+	ld	l, a
+	ld	de, (_optix_cursor+37)
+	ld	bc, (ix + 6)
+	push	bc
+	push	de
+	push	hl
+	call	_optix_FindNearestElement
+	pop	de
+	pop	de
+	pop	de
+	ld	de, 0
+	ld	(_optix_cursor+37), hl
+	ld	hl, (ix + 6)
+BB1_2:
+	ld	iy, 3
+	ld	bc, 0
+	ld	(ix + -28), bc
+	lea	bc, iy + 0
 	ld	(ix + -3), hl
 	push	de
 	pop	iy
+	xor	a, a
 	ld	(ix + -25), a
-	ld	(ix + -18), a
 	push	de
 	pop	hl
 	ld	(ix + -6), de
-BB1_1:
+BB1_3:
 	ld	(ix + -17), a
 	and	a, 1
 	ld	(ix + -16), a
@@ -53,30 +77,30 @@ BB1_1:
 	ld	(ix + -15), hl
 	ld	iy, (ix + -3)
 	ld	de, (ix + -6)
-BB1_2:
+BB1_4:
 	ld	(ix + -9), iy
 	ld	iy, (iy)
 	lea	hl, iy + 0
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB1_19
+	jq	z, BB1_21
 	ld	hl, (iy + 19)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB1_5
+	jq	z, BB1_7
 	push	iy
 	ld	(ix + -24), de
 	call	__indcallhl
 	ld	de, (ix + -24)
 	pop	hl
-BB1_5:
+BB1_7:
 	ld	a, (ix + -16)
 	ld	l, 1
 	xor	a, l
 	bit	0, a
-	jq	nz, BB1_7
+	jq	nz, BB1_9
 	inc	de
 	push	de
 	pop	bc
@@ -88,63 +112,65 @@ BB1_5:
 	ld	(ix + -15), hl
 	ld	iy, (ix + -9)
 	lea	iy, iy + 3
-	jq	BB1_2
-BB1_7:
+	jq	BB1_4
+BB1_9:
 	ld	hl, (ix + -9)
-	ld	iy, (hl)
-	ld	e, (iy)
+	ld	hl, (hl)
+	ld	e, (hl)
 	ld	a, e
 	cp	a, 4
-	ld	hl, (ix + -12)
-	ld	(ix + -9), iy
-	jq	z, BB1_11
+	ld	(ix + -9), hl
+	jq	nz, BB1_11
+	push	hl
+	pop	iy
+	jq	BB1_13
+BB1_11:
 	ld	a, e
 	cp	a, 5
 	ld	a, (ix + -25)
-	jq	nz, BB1_13
+	jq	nz, BB1_15
 	ld	iy, (ix + -9)
 	ld	iy, (iy + 25)
-BB1_11:
+BB1_13:
 	lea	iy, iy + 37
 	ld	a, (iy)
 	ld	(iy), 0
-BB1_13:
+BB1_15:
 	ld	(ix + -25), a
 	and	a, 1
-	ld	c, 1
-	xor	a, c
-	xor	a, c
+	ld	l, 1
+	xor	a, l
+	xor	a, l
 	bit	0, a
-	ld	a, c
-	ld	bc, 3
-	ld	iy, (ix + -6)
-	jq	nz, BB1_16
+	ld	a, 1
+	ld	hl, (ix + -12)
+	ld	bc, (ix + -6)
+	jq	nz, BB1_18
 	ld	a, e
 	and	a, -2
 	cp	a, 4
-	jq	nz, BB1_18
-	lea	de, iy + 0
+	jq	nz, BB1_20
 	ld	iy, (ix + -9)
 	ld	a, (iy + 14)
-	push	de
-	pop	iy
 	ld	e, 1
 	xor	a, e
 	bit	0, a
 	ld	a, (ix + -17)
-	jq	nz, BB1_18
-BB1_16:
+	jq	nz, BB1_20
+BB1_18:
 	ld	l, 1
 	ld	(ix + -18), l
 	ld	(ix + -17), a
-	lea	hl, iy + 0
+	push	bc
+	pop	hl
 	ld	de, (ix + -9)
 	ld	(ix + -28), de
-BB1_18:
-	inc	iy
-	ld	(ix + -6), iy
+BB1_20:
+	inc	bc
+	ld	(ix + -6), bc
 	ex	de, hl
 	ld	hl, (ix + -21)
+	ld	bc, 3
 	add	hl, bc
 	ld	iy, (ix + -3)
 	lea	iy, iy + 3
@@ -153,24 +179,24 @@ BB1_18:
 	pop	iy
 	ex	de, hl
 	ld	a, (ix + -17)
-	jq	BB1_1
-BB1_19:
+	jq	BB1_3
+BB1_21:
 	ld	a, (ix + -18)
 	and	a, 1
 	ld	l, 1
 	xor	a, l
 	bit	0, a
-	jq	nz, BB1_34
+	jq	nz, BB1_36
 	ld	iy, (ix + 6)
 	ld	(ix + -3), iy
 	ld	bc, 0
-BB1_21:
+BB1_23:
 	push	de
 	pop	hl
 	ld	(ix + -6), bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB1_32
+	jq	z, BB1_34
 	ld	(ix + -24), de
 	ld	hl, (ix + -3)
 	ld	hl, (hl)
@@ -178,28 +204,28 @@ BB1_21:
 	pop	iy
 	ld	a, (hl)
 	cp	a, 4
-	jq	nz, BB1_26
+	jq	nz, BB1_28
 	ld	hl, (ix + -12)
 	ld	bc, (ix + -6)
 	or	a, a
 	sbc	hl, bc
 	ld	a, 1
-	jq	z, BB1_25
+	jq	z, BB1_27
 	ld	a, 0
-BB1_25:
+BB1_27:
 	and	a, 1
-	jq	BB1_30
-BB1_26:
+	jq	BB1_32
+BB1_28:
 	cp	a, 5
-	jq	nz, BB1_31
+	jq	nz, BB1_33
 	ld	hl, (ix + -12)
 	ld	bc, (ix + -6)
 	or	a, a
 	sbc	hl, bc
 	ld	a, 1
-	jq	z, BB1_29
+	jq	z, BB1_31
 	ld	a, 0
-BB1_29:
+BB1_31:
 	ld	hl, (iy + 25)
 	lea	de, iy + 0
 	and	a, 1
@@ -208,23 +234,23 @@ BB1_29:
 	ld	(iy + 14), a
 	push	de
 	pop	iy
-BB1_30:
+BB1_32:
 	ld	(iy + 14), a
-BB1_31:
+BB1_33:
 	ld	bc, (ix + -6)
 	inc	bc
 	ld	iy, (ix + -3)
 	lea	iy, iy + 3
 	ld	(ix + -3), iy
 	ld	de, (ix + -24)
-	jq	BB1_21
-BB1_32:
+	jq	BB1_23
+BB1_34:
 	ld	iy, (ix + -12)
 	inc	iy
 	lea	hl, iy + 0
 	or	a, a
 	sbc	hl, de
-	jq	z, BB1_34
+	jq	z, BB1_36
 	ld	bc, 3
 	ld	hl, (ix + -12)
 	lea	de, iy + 0
@@ -253,7 +279,7 @@ BB1_32:
 	ld	hl, (ix + -28)
 	ld	iy, (ix + -9)
 	ld	(iy + -3), hl
-BB1_34:
+BB1_36:
 	ld	sp, ix
 	pop	ix
 	ret
@@ -408,6 +434,8 @@ BB5_4:
 	extern	_kb_Scan
 	extern	_optix_cursor
 	extern	_memmove
+	extern	_optix_settings
 	extern	__Unwind_SjLj_Unregister
 	extern	__imulu
+	extern	_optix_FindNearestElement
 	extern	__frameset0

@@ -134,18 +134,23 @@ _optix_SetPosition:
 	ld	hl, -9
 	call	__frameset
 	ld	iy, (ix + 6)
+	lea	hl, iy + 0
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB4_5
 	ld	hl, (ix + 9)
 	ld	bc, (ix + 12)
 	ld	de, (iy + 1)
 	or	a, a
 	sbc	hl, de
-	ld	(ix + -3), hl
+	ld	(ix + -6), hl
 	ld	de, (iy + 4)
 	push	bc
 	pop	hl
 	or	a, a
 	sbc	hl, de
-	ld	(ix + -6), hl
+	ld	(ix + -9), hl
 	ld	hl, (ix + 9)
 	ld	(iy + 1), hl
 	ld	(iy + 4), bc
@@ -153,29 +158,30 @@ _optix_SetPosition:
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	nz, BB4_1
-BB4_4:
+	jq	nz, BB4_2
+BB4_5:
 	ld	sp, ix
 	pop	ix
 	ret
-BB4_1:
-	ld	de, 0
 BB4_2:
-	ld	(ix + -9), de
+	ld	iy, 0
+BB4_3:
+	ld	(ix + -3), iy
+	lea	de, iy + 0
 	add	hl, de
 	ld	iy, (hl)
 	lea	hl, iy + 0
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB4_4
+	jq	z, BB4_5
 	ld	de, (iy + 1)
-	ld	hl, (ix + -3)
+	ld	hl, (ix + -6)
 	add	hl, de
 	push	hl
 	pop	bc
 	ld	de, (iy + 4)
-	ld	hl, (ix + -6)
+	ld	hl, (ix + -9)
 	add	hl, de
 	push	hl
 	push	bc
@@ -186,58 +192,63 @@ BB4_2:
 	pop	hl
 	ld	iy, (ix + 6)
 	ld	hl, (iy + 22)
+	ld	iy, (ix + -3)
 	ld	de, 3
-	ld	iy, (ix + -9)
 	add	iy, de
-	lea	de, iy + 0
-	jq	BB4_2
+	jq	BB4_3
 	section	.text,"ax",@progbits
 
 	section	.text,"ax",@progbits
 	public	_optix_AlignTransformToTransform
 _optix_AlignTransformToTransform:
-	ld	hl, -8
+	ld	hl, -12
 	call	__frameset
 	ld	iy, (ix + 9)
 	ld	a, (ix + 12)
 	ld	hl, (iy + 1)
 	ld	(ix + -3), hl
-	push	hl
-	ld	l, (iy + 7)
-	ld	h, (iy + 8)
-	ex	(sp), hl
-	pop	iy
-	ld	de, 0
-	push	de
+	ld	e, (iy + 7)
+	ld	d, (iy + 8)
+	ld	bc, 0
+	push	bc
 	pop	hl
-	ex	de, hl
-	ld	e, iyl
-	ld	d, iyh
-	ex	de, hl
+	ld	l, e
+	ld	h, d
 	ld	iy, (ix + 6)
 	push	hl
 	ld	l, (iy + 7)
 	ld	h, (iy + 8)
 	ex	(sp), hl
 	pop	iy
-	ld	e, iyl
-	ld	d, iyh
+	ld	c, iyl
+	ld	b, iyh
 	or	a, a
-	sbc	hl, de
+	sbc	hl, bc
 	ld	(ix + -6), hl
 	ld	bc, 2
 	call	__idivs
-	push	hl
-	pop	iy
+	ld	(ix + -9), hl
 	ld	bc, 0
 	ld	c, a
 	call	__imulu
-	ld	de, (ix + -3)
-	add	hl, de
-	add	iy, iy
-	lea	de, iy + 0
+	ld	(ix + -12), hl
+	ld	iy, (ix + 6)
+	ld	e, (iy + 12)
+	ld	l, e
+	rlc	l
+	sbc	hl, hl
 	push	hl
 	pop	bc
+	ld	c, e
+	ld	hl, (ix + -3)
+	add	hl, bc
+	ld	de, (ix + -12)
+	add	hl, de
+	push	hl
+	pop	bc
+	ld	hl, (ix + -9)
+	add	hl, hl
+	ex	de, hl
 	ld	hl, (ix + -6)
 	or	a, a
 	sbc	hl, de
@@ -251,17 +262,19 @@ _optix_AlignTransformToTransform:
 	push	bc
 	pop	hl
 BB5_2:
-	ld	iy, (ix + 6)
+	ld	de, (ix + 6)
+	push	de
+	pop	iy
 	ld	(iy + 1), hl
-	lea	de, iy + 0
-	ld	iy, (ix + 9)
+	ld	hl, (ix + 9)
+	push	hl
+	pop	iy
 	ld	hl, (iy + 4)
 	ld	(ix + -3), hl
 	ld	a, (iy + 9)
 	ld	h, 0
 	ld	l, a
-	push	de
-	pop	iy
+	ld	iy, (ix + 6)
 	ld	e, (iy + 9)
 	ld	d, h
 	or	a, a
@@ -277,21 +290,31 @@ BB5_2:
 	rlc	l
 	sbc	hl, hl
 	ld	h, a
-	ld	(ix + -8), e
-	ld	(ix + -7), d
+	ld	(ix + -9), e
+	ld	(ix + -8), d
 	ld	l, e
 	ld	a, (ix + 15)
 	ld	bc, 0
 	ld	c, a
 	call	__imulu
 	push	hl
-	pop	iy
-	ld	de, (ix + -3)
+	pop	de
+	ld	iy, (ix + 6)
+	ld	a, (iy + 13)
+	ld	l, a
+	rlc	l
+	sbc	hl, hl
+	push	hl
+	pop	bc
+	ld	c, a
+	ld	iy, (ix + -3)
+	add	iy, bc
 	add	iy, de
+	ld	a, (ix + 15)
 	cp	a, 2
-	jq	nz, BB5_4
-	ld	l, (ix + -8)
-	ld	h, (ix + -7)
+	jq	nz, BB5_5
+	ld	l, (ix + -9)
+	ld	h, (ix + -8)
 	add.sis	hl, hl
 	ld	e, l
 	ld	d, h
@@ -309,9 +332,12 @@ BB5_2:
 	pop	bc
 	ld	b, a
 	ld	c, e
-	add	iy, bc
-BB5_4:
 	lea	hl, iy + 0
+	add	hl, bc
+	jq	BB5_4
+BB5_5:
+	lea	hl, iy + 0
+BB5_4:
 	ld	iy, (ix + 6)
 	ld	(iy + 4), hl
 	ld	sp, ix
@@ -421,36 +447,48 @@ BB6_7:
 _optix_RecursiveAlign:
 	ld	hl, -9
 	call	__frameset
-	ld	iy, (ix + 6)
-	ld	a, (iy)
+	ld	hl, (ix + 6)
+	push	hl
+	pop	bc
+	ld	a, (hl)
 	cp	a, 5
-	jq	nz, BB7_3
+	jq	nz, BB7_4
+	push	bc
+	pop	iy
 	ld	hl, (iy + 22)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	nz, BB7_13
+	jq	nz, BB7_14
 BB7_2:
-	ld	iy, (ix + 6)
+	push	bc
+	pop	iy
 	ld	iy, (iy + 25)
-BB7_3:
-	lea	hl, iy + 0
-	ld	iy, 0
-	lea	de, iy + 0
-	push	hl
-	pop	bc
-BB7_5:
+	lea	bc, iy + 0
+BB7_4:
 	push	bc
 	pop	iy
 	ld	hl, (iy + 22)
-	ld	(ix + -3), de
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	nz, BB7_6
+BB7_5:
+	ld	sp, ix
+	pop	ix
+	ret
+BB7_6:
+	ld	iy, 0
+BB7_7:
+	ld	(ix + -3), iy
+	lea	de, iy + 0
 	add	hl, de
 	ld	iy, (hl)
 	lea	hl, iy + 0
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB7_12
+	jq	z, BB7_5
 	ld	a, (iy + 10)
 	ld	l, (iy + 11)
 	push	hl
@@ -470,70 +508,83 @@ BB7_5:
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB7_11
+	jq	z, BB7_13
 	ld	a, (iy)
 	cp	a, 3
-	jq	nz, BB7_9
+	jq	nz, BB7_11
 	push	iy
 	call	_optix_AlignMenu
-	jq	BB7_10
-BB7_9:
+	jq	BB7_12
+BB7_11:
 	push	iy
 	call	_optix_RecursiveAlign
-BB7_10:
-	pop	hl
-BB7_11:
-	ld	de, 3
-	ld	hl, (ix + -3)
-	add	hl, de
-	ex	de, hl
-	ld	bc, (ix + -6)
-	jq	BB7_5
 BB7_12:
-	ld	sp, ix
-	pop	ix
-	ret
+	pop	hl
 BB7_13:
-	ld	de, 0
+	ld	iy, (ix + -6)
+	ld	hl, (iy + 22)
+	lea	bc, iy + 0
+	ld	de, 3
+	ld	iy, (ix + -3)
+	add	iy, de
+	jq	BB7_7
 BB7_14:
-	ld	(ix + -3), de
+	ld	de, 0
+BB7_15:
+	ld	(ix + -6), de
 	add	hl, de
-	ld	iy, (hl)
-	lea	hl, iy + 0
+	ld	hl, (hl)
+	ld	(ix + -3), hl
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB7_2
+	push	bc
+	pop	de
+	ld	iy, (ix + -3)
 	ld	a, (iy + 10)
+	ld	iy, (ix + -3)
 	ld	l, (iy + 11)
 	push	hl
 	ld	l, a
 	push	hl
-	ld	hl, (ix + 6)
+	push	de
+	ld	hl, (ix + -3)
 	push	hl
-	push	iy
 	call	_optix_AlignTransformToTransform
 	pop	hl
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	iy, (ix + 6)
+	ld	iy, (ix + -3)
 	ld	hl, (iy + 22)
-	ld	de, (ix + -3)
-	add	hl, de
-	ld	hl, (hl)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB7_21
+	ld	hl, (ix + -3)
+	ld	a, (hl)
+	cp	a, 3
+	jq	nz, BB7_19
+	ld	hl, (ix + -3)
+	push	hl
+	call	_optix_AlignMenu
+	jq	BB7_20
+BB7_19:
+	ld	hl, (ix + -3)
 	push	hl
 	call	_optix_RecursiveAlign
-	ld	bc, (ix + -3)
+BB7_20:
 	pop	hl
+BB7_21:
 	ld	iy, (ix + 6)
+	lea	bc, iy + 0
 	ld	hl, (iy + 22)
 	ld	de, 3
-	push	bc
-	pop	iy
+	ld	iy, (ix + -6)
 	add	iy, de
 	lea	de, iy + 0
-	jq	BB7_14
+	jq	BB7_15
 	section	.text,"ax",@progbits
 
 	section	.rodata,"a",@progbits

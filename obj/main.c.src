@@ -50,119 +50,166 @@ _minimize_window:
 	section	.text,"ax",@progbits
 	public	_main
 _main:
-	ld	hl, -361
+	ld	hl, -499
 	call	__frameset
-	ld	de, -188
+	ld	de, -170
 	lea	hl, ix + 0
 	add	hl, de
-	ld	de, -337
+	ld	de, -484
 	lea	iy, ix + 0
 	add	iy, de
 	ld	(iy + 0), hl
-	ld	de, -316
+	ld	de, -307
 	lea	hl, ix + 0
 	add	hl, de
-	push	ix
-	ld	de, -319
-	add	ix, de
-	ld	(ix + 0), hl
-	pop	ix
-	lea	bc, ix + -34
-	push	ix
-	ld	de, -346
-	add	ix, de
-	ld	(ix + 0), bc
-	pop	ix
-	lea	de, ix + -46
+	push	hl
+	pop	bc
 	ld	(ix + -3), bc
 	push	ix
-	ld	bc, -352
+	ld	bc, -436
+	add	ix, bc
+	lea	de, ix + 0
+	pop	ix
+	push	ix
+	ld	bc, -439
 	add	ix, bc
 	ld	(ix + 0), de
 	pop	ix
-	lea	de, ix + -92
+	lea	hl, ix + -34
 	push	ix
-	ld	bc, -322
+	ld	bc, -457
 	add	ix, bc
-	ld	(ix + 0), de
+	ld	(ix + 0), hl
 	pop	ix
-	lea	de, ix + -123
+	lea	hl, ix + -46
 	push	ix
-	ld	bc, -340
+	ld	bc, -487
 	add	ix, bc
-	ld	(ix + 0), de
+	ld	(ix + 0), hl
 	pop	ix
+	lea	hl, ix + -92
 	push	ix
-	ld	bc, -337
+	ld	bc, -442
 	add	ix, bc
-	ld	iy, (ix + 0)
+	ld	(ix + 0), hl
 	pop	ix
-	lea	de, iy + 34
-	ld	bc, -343
-	lea	iy, ix + 0
-	add	iy, bc
-	ld	(iy + 0), de
-	push	hl
-	pop	iy
-	lea	de, iy + 124
-	ld	bc, -328
+	lea	hl, ix + -123
+	push	ix
+	ld	bc, -475
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	ld	bc, -484
 	lea	hl, ix + 0
 	add	hl, bc
-	ld	(hl), de
-	lea	de, iy + 112
-	push	ix
-	ld	bc, -361
-	add	ix, bc
-	ld	(ix + 0), de
-	pop	ix
-	lea	de, iy + 84
-	push	ix
-	ld	bc, -349
-	add	ix, bc
-	ld	(ix + 0), de
-	pop	ix
-	lea	de, iy + 52
-	push	ix
-	ld	bc, -334
-	add	ix, bc
-	ld	(ix + 0), de
-	pop	ix
-	lea	de, iy + 46
-	push	ix
-	ld	bc, -358
-	add	ix, bc
-	ld	(ix + 0), de
-	pop	ix
-	lea	de, iy + 15
-	push	ix
-	ld	bc, -325
-	add	ix, bc
-	ld	(ix + 0), de
-	pop	ix
-	lea	de, iy + 9
-	push	ix
-	ld	bc, -355
-	add	ix, bc
-	ld	(ix + 0), de
-	pop	ix
-	lea	de, iy + 0
-	ld	bc, -331
+	ld	iy, (hl)
+	lea	hl, iy + 16
+	ld	bc, -478
 	lea	iy, ix + 0
 	add	iy, bc
-	ld	(iy + 0), de
+	ld	(iy + 0), hl
 	ld	bc, (ix + -3)
+	push	bc
+	pop	iy
+	ld	bc, -445
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	(hl), iy
+	lea	hl, iy + 115
+	push	ix
+	ld	bc, -469
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 103
+	push	ix
+	ld	bc, -499
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 97
+	push	ix
+	ld	bc, -481
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 51
+	push	ix
+	ld	bc, -472
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 23
+	push	ix
+	ld	bc, -448
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 17
+	ld	bc, -496
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	(iy + 0), hl
+	push	de
+	pop	iy
+	lea	hl, iy + 118
+	push	ix
+	ld	bc, -466
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 80
+	push	ix
+	ld	bc, -460
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 74
+	push	ix
+	ld	bc, -493
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 46
+	push	ix
+	ld	bc, -463
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 18
+	push	ix
+	ld	bc, -451
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 12
+	push	ix
+	ld	bc, -490
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 0
+	ld	bc, -454
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	(iy + 0), hl
+	call	_optix_InitializeFont
 	ld	hl, 28
 	push	hl
 	ld	hl, L___const.main.test_rectangle
 	push	hl
-	push	bc
+	ld	bc, -457
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
 	call	_memcpy
 	pop	hl
 	pop	hl
 	pop	hl
 	ld	hl, 7
 	push	hl
-	ld	bc, -346
+	ld	bc, -457
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -174,7 +221,7 @@ _main:
 	push	hl
 	ld	hl, L___const.main.test_text
 	push	hl
-	ld	bc, -352
+	ld	bc, -487
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -187,7 +234,7 @@ _main:
 	push	hl
 	ld	hl, L___const.main.test_menu
 	push	hl
-	ld	bc, -322
+	ld	bc, -442
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -198,14 +245,14 @@ _main:
 	pop	hl
 	ld	hl, 0
 	push	hl
-	ld	bc, -352
+	ld	bc, -487
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	push	hl
 	ld	hl, 4
 	push	hl
-	ld	bc, -322
+	ld	bc, -442
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -221,7 +268,7 @@ _main:
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -340
+	ld	bc, -475
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -230,7 +277,7 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -322
+	ld	bc, -442
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -239,7 +286,7 @@ _main:
 	ld	(ix + -93), 1
 	ld	hl, 6
 	push	hl
-	ld	bc, -340
+	ld	bc, -475
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -252,7 +299,7 @@ _main:
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -343
+	ld	bc, -478
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -261,7 +308,7 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -322
+	ld	bc, -442
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -273,7 +320,7 @@ _main:
 	ld	(ix + -126), 1
 	ld	hl, 6
 	push	hl
-	ld	bc, -343
+	ld	bc, -478
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -281,22 +328,18 @@ _main:
 	call	_optix_InitializeWidget
 	pop	hl
 	pop	hl
-	ld	bc, -319
+	ld	bc, -445
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
-	ld	(iy + 124), 0
+	ld	(iy + 115), 0
 	ld	hl, 100
-	ld	(iy + 125), hl
-	ld	bc, -337
-	lea	iy, ix + 0
-	add	iy, bc
-	ld	iy, (iy + 0)
-	ld	(iy + 0), hl
-	ld	(iy + 3), l
-	ld	(iy + 4), h
-	ld	(iy + 5), 100
-	ld	bc, -328
+	ld	(iy + 116), hl
+	ld	(iy + 119), hl
+	ld	(iy + 122), l
+	ld	(iy + 123), h
+	ld	(iy + 124), 100
+	ld	bc, -469
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
@@ -310,52 +353,156 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -319
+	ld	bc, -442
 	lea	hl, ix + 0
 	add	hl, bc
-	ld	iy, (hl)
-	push	ix
-	ld	bc, -322
-	add	ix, bc
-	ld	hl, (ix + 0)
-	pop	ix
+	ld	hl, (hl)
+	ld	bc, -445
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	iy, (iy + 0)
+	ld	(iy + 103), hl
+	ld	bc, -475
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	ld	(iy + 106), hl
+	ld	bc, -478
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	ld	(iy + 109), hl
+	ld	hl, 0
 	ld	(iy + 112), hl
-	ld	bc, -340
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	hl, (hl)
-	ld	(iy + 115), hl
-	ld	bc, -343
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	hl, (hl)
-	ld	(iy + 118), hl
-	ld	hl, 0
-	ld	(iy + 121), hl
-	ld	bc, -337
+	ld	bc, -484
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
 	push	ix
-	ld	bc, -361
+	ld	bc, -499
 	add	ix, bc
 	ld	hl, (ix + 0)
 	pop	ix
-	ld	(iy + 18), hl
-	ld	(iy + 21), 1
-	ld	hl, 0
-	ld	(iy + 22), hl
-	ld	(iy + 25), hl
-	ld	(iy + 28), l
-	ld	(iy + 29), h
+	ld	(iy + 0), hl
+	ld	(iy + 3), 1
+	or	a, a
+	sbc	hl, hl
+	ld	(iy + 4), hl
+	ld	(iy + 7), hl
+	ld	(iy + 10), l
+	ld	(iy + 11), h
 	ld.sis	hl, 50
-	ld	(iy + 30), l
-	ld	(iy + 31), h
-	ld	(iy + 32), 50
-	ld	(iy + 33), 0
+	ld	(iy + 12), l
+	ld	(iy + 13), h
+	ld	(iy + 14), 50
+	ld	(iy + 15), 0
 	ld	hl, 4
 	push	hl
-	ld	bc, -328
+	ld	bc, -469
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	call	_optix_InitializeWidget
+	pop	hl
+	pop	hl
+	ld	hl, 6
+	push	hl
+	ld	hl, L___const.main.button_action_text
+	push	hl
+	ld	bc, -481
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	call	_memcpy
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 40
+	push	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	ld	bc, -472
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	call	_memset
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	bc, -445
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	iy, (hl)
+	ld.sis	hl, 24
+	ld	(iy + 58), l
+	ld	(iy + 59), h
+	ld	(iy + 60), 12
+	ld	(iy + 61), 2
+	ld	(iy + 62), 1
+	ld	hl, 1
+	ld	(iy + 91), hl
+	ld	de, 2
+	ld	(iy + 94), de
+	dec	hl
+	push	hl
+	ld	bc, -481
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	push	de
+	ld	bc, -472
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	call	_optix_InitializeMenu
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 22
+	push	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	ld	bc, -448
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	call	_memset
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	bc, -472
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	ld	bc, -445
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	iy, (iy + 0)
+	ld	(iy + 17), hl
+	ld	hl, 0
+	ld	(iy + 20), hl
+	ld	bc, -496
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	ld	(iy + 45), hl
+	ld	bc, -469
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	ld	(iy + 48), hl
+	ld	hl, 5
+	push	hl
+	ld	bc, -448
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -365,9 +512,9 @@ _main:
 	pop	hl
 	ld	hl, 28
 	push	hl
-	ld	hl, L___const.main.button_text
+	ld	hl, L___const.main.test_text2
 	push	hl
-	ld	bc, -349
+	ld	bc, -466
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -376,58 +523,10 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	hl, 22
-	push	hl
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -334
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	hl, (hl)
-	push	hl
-	call	_memset
-	pop	hl
-	pop	hl
-	pop	hl
-	ld	bc, -319
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	iy, (hl)
-	ld.sis	hl, 12
-	ld	(iy + 59), l
-	ld	(iy + 60), h
-	ld	(iy + 61), 12
-	ld	bc, -349
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	de, (hl)
-	ld	(iy + 46), de
-	ld	hl, 0
-	ld	(iy + 49), hl
-	ld	bc, -358
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	hl, (hl)
-	ld	(iy + 74), hl
-	ld	hl, _minimize_window
-	ld	(iy + 77), hl
-	ld	bc, -328
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	hl, (hl)
-	ld	(iy + 80), hl
-	ld	(iy + 83), 0
-	or	a, a
-	sbc	hl, hl
-	push	hl
-	push	de
-	call	_optix_InitializeWidget
-	pop	hl
-	pop	hl
-	ld	hl, 2
-	push	hl
-	ld	bc, -334
+	ld	bc, -466
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -435,51 +534,147 @@ _main:
 	call	_optix_InitializeWidget
 	pop	hl
 	pop	hl
-	ld	bc, -319
+	ld	bc, -445
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
-	ld	(iy + 62), 2
-	ld	hl, 22
-	push	hl
-	or	a, a
-	sbc	hl, hl
-	push	hl
-	ld	bc, -325
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	hl, (hl)
-	push	hl
-	call	_memset
-	pop	hl
-	pop	hl
-	pop	hl
-	ld	bc, -334
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	hl, (hl)
-	ld	bc, -319
+	ld	(iy + 0), 0
+	ld	(iy + -1), 0
+	ld	(iy + 2), 2
+	ld	(iy + 1), 2
+	ld	bc, -439
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
-	ld	(iy + 9), hl
+	ld	(iy + 80), 0
+	ld	hl, 200
+	ld	(iy + 81), hl
+	ld	hl, 100
+	ld	(iy + 84), hl
+	ld	(iy + 87), l
+	ld	(iy + 88), h
+	ld	(iy + 89), 100
+	ld	bc, -460
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	iy, (hl)
+	ld	hl, 12
+	push	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	pea	iy + 10
+	call	_memset
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	bc, -439
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	iy, (hl)
+	push	ix
+	ld	bc, -466
+	add	ix, bc
+	ld	hl, (ix + 0)
+	pop	ix
+	ld	(iy + 74), hl
 	ld	hl, 0
-	ld	(iy + 12), hl
-	ld	bc, -355
+	ld	(iy + 77), hl
+	ld	bc, -493
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	(iy + 37), hl
-	ld	bc, -328
+	ld	(iy + 102), hl
+	ld	(iy + 105), 1
+	or	a, a
+	sbc	hl, hl
+	ld	(iy + 106), hl
+	ld	(iy + 109), hl
+	ld	(iy + 112), l
+	ld	(iy + 113), h
+	ld.sis	hl, 50
+	ld	(iy + 114), l
+	ld	(iy + 115), h
+	ld	(iy + 116), 50
+	ld	(iy + 117), 0
+	ld	hl, 4
+	push	hl
+	ld	bc, -460
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	call	_optix_InitializeWidget
+	pop	hl
+	pop	hl
+	ld	hl, 28
+	push	hl
+	ld	hl, L___const.main.test_title_bar2_text
+	push	hl
+	ld	bc, -463
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	call	_memcpy
+	pop	hl
+	pop	hl
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	ld	bc, -463
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	call	_optix_InitializeWidget
+	pop	hl
+	pop	hl
+	ld	bc, -439
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	iy, (hl)
+	ld	(iy + 56), 0
+	ld	(iy + 58), 2
+	ld	hl, 22
+	push	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	ld	bc, -451
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	call	_memset
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	bc, -463
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	ld	bc, -439
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	iy, (iy + 0)
+	ld	(iy + 12), hl
+	ld	hl, 0
+	ld	(iy + 15), hl
+	ld	bc, -490
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	ld	(iy + 40), hl
-	ld	hl, L_.str.5
+	ld	bc, -460
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
 	ld	(iy + 43), hl
 	ld	hl, 5
 	push	hl
-	ld	bc, -325
+	ld	bc, -451
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -487,29 +682,41 @@ _main:
 	call	_optix_InitializeWidget
 	pop	hl
 	pop	hl
-	ld	bc, -325
+	ld	bc, -448
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	push	hl
 	call	_optix_RecursiveAlign
 	pop	hl
-	ld	bc, -346
+	ld	bc, -451
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	bc, -319
+	push	hl
+	call	_optix_RecursiveAlign
+	pop	hl
+	ld	bc, -457
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	ld	bc, -439
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
 	ld	(iy + 0), hl
-	ld	bc, -325
+	ld	bc, -448
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	ld	(iy + 3), hl
-	ld	hl, 0
+	ld	bc, -451
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
 	ld	(iy + 6), hl
+	ld	hl, 0
+	ld	(iy + 9), hl
 	call	_optix_InitializeColors
 	call	_gfx_Begin
 	ld	hl, 1
@@ -517,7 +724,7 @@ _main:
 	call	_gfx_SetDraw
 	pop	hl
 BB3_1:
-	ld	bc, -331
+	ld	bc, -454
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -525,7 +732,7 @@ BB3_1:
 	call	_optix_UpdateGUI
 	pop	hl
 	call	_gfx_ZeroScreen
-	ld	bc, -331
+	ld	bc, -454
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -625,36 +832,59 @@ L___const.main.test_menu:
 	section	.rodata,"a",@progbits
 	private	L_.str.4
 L_.str.4:
-	db	"_",000o
-
-	section	.rodata,"a",@progbits
-	private	L___const.main.button_text
-L___const.main.button_text:
-	db	25 dup 0
-	dl	L_.str.4
+	db	"-",000o
 
 	section	.rodata,"a",@progbits
 	private	L_.str.5
 L_.str.5:
-	db	"Test",000o
+	db	"X",000o
+
+	section	.rodata,"a",@progbits
+	private	L___const.main.button_action_text
+L___const.main.button_action_text:
+	dl	L_.str.4
+	dl	L_.str.5
+
+	section	.rodata,"a",@progbits
+	private	L_.str.6
+L_.str.6:
+	db	"FontlibC is cool",000o
+
+	section	.rodata,"a",@progbits
+	private	L___const.main.test_text2
+L___const.main.test_text2:
+	db	25 dup 0
+	dl	L_.str.6
+
+	section	.rodata,"a",@progbits
+	private	L_.str.7
+L_.str.7:
+	db	"FontlibC",000o
+
+	section	.rodata,"a",@progbits
+	private	L___const.main.test_title_bar2_text
+L___const.main.test_title_bar2_text:
+	db	25 dup 0
+	dl	L_.str.7
 
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
 	extern	_memset
 	extern	__Unwind_SjLj_Register
-	extern	_gfx_Blit
 	extern	__frameset
+	extern	_optix_InitializeWidget
+	extern	_gfx_Begin
+	extern	_optix_InitializeColors
+	extern	_optix_InitializeFont
+	extern	_memcpy
+	extern	_optix_RecursiveAlign
+	extern	_optix_InitializeMenu
+	extern	_gfx_SetDraw
 	extern	__Unwind_SjLj_Unregister
+	extern	_gfx_Blit
 	extern	_gfx_FillRectangle
 	extern	_gfx_ZeroScreen
-	extern	_optix_InitializeWidget
 	extern	_gfx_SetColor
-	extern	_gfx_Begin
 	extern	_optix_UpdateGUI
-	extern	_optix_InitializeColors
-	extern	_gfx_End
 	extern	_optix_RenderGUI
+	extern	_gfx_End
 	extern	__frameset0
-	extern	_memcpy
-	extern	_optix_InitializeMenu
-	extern	_optix_RecursiveAlign
-	extern	_gfx_SetDraw

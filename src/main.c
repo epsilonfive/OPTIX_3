@@ -54,6 +54,7 @@ void minimize_window(void *args) {
 }
 
 void main(void) {
+   optix_InitializeFont();
    struct optix_rectangle test_rectangle = {
       .widget = {
          .transform = {
@@ -118,30 +119,64 @@ void main(void) {
    };
    optix_InitializeWidget(&test_window.widget, OPTIX_WINDOW_TYPE);
    //a button that will minimize the window when pressed
-   struct optix_text button_text = {.text = "_"};
-   struct optix_button minimize_button = {
+   char *button_action_text[] = {"-", "X"};
+   struct optix_menu menu_actions = {
       .widget = {
          .transform = {
-            .width = 12,
+            .width = 24,
             .height = 12,
          },
-         .child = (struct optix_widget *[]) {&button_text.widget, NULL}
+         .centering = {
+            .x_centering = OPTIX_CENTERING_RIGHT,
+            .y_centering = OPTIX_CENTERING_CENTERED,
+         },
       },
-      .click_action = minimize_window,
-      .click_args = &test_window,
+      .rows = 1,
+      .columns = 2,
    };
-   optix_InitializeWidget(&button_text.widget, OPTIX_TEXT_TYPE);
-   optix_InitializeWidget(&minimize_button.widget, OPTIX_BUTTON_TYPE);
-   minimize_button.widget.centering.x_centering = OPTIX_CENTERING_RIGHT;
+   optix_InitializeMenu(&menu_actions, 2, &button_action_text, NULL);
+   //optix_AlignMenu(&menu_actions);
    struct optix_window_title_bar test_title_bar = {
-      .widget = {.child = (struct optix_widget *[]) {&minimize_button.widget, NULL}},
+      .widget = {.child = (struct optix_widget *[]) {&menu_actions.widget, NULL}},
       .window = &test_window,
-      .title = "Test",
    };
    optix_InitializeWidget(&test_title_bar.widget, OPTIX_WINDOW_TITLE_BAR_TYPE);
+   //another window
+   struct optix_text test_text2 = {.text = "FontlibC is cool"};
+   optix_InitializeWidget(&test_text2.widget, OPTIX_TEXT_TYPE);
+   test_text2.widget.centering.x_centering = test_text2.widget.centering.y_centering = 0;
+   test_text2.widget.centering.x_offset = test_text2.widget.centering.y_offset = 2;
+   struct optix_window test_window2 = {
+      .widget = {
+         .transform = {
+            .x = 200,
+            .y = 100,
+            .width = 100,
+            .height = 100,
+         },
+         .child = (struct optix_widget *[]) {&test_text2.widget, NULL},
+      },
+      .resize_info = {
+         .resizable = true,
+         .min_width = 50,
+         .min_height = 50,
+      },
+   };
+   optix_InitializeWidget(&test_window2.widget, OPTIX_WINDOW_TYPE);
+   //title
+   struct optix_text test_title_bar2_text = {.text = "FontlibC"};
+   optix_InitializeWidget(&test_title_bar2_text.widget, OPTIX_TEXT_TYPE);
+   test_title_bar2_text.widget.centering.x_centering = OPTIX_CENTERING_LEFT;
+   test_title_bar2_text.widget.centering.x_offset = 2;
+   struct optix_window_title_bar test_title_bar2 = {
+      .widget = {.child = (struct optix_widget *[]) {&test_title_bar2_text.widget, NULL}},
+      .window = &test_window2,
+   };
+   optix_InitializeWidget(&test_title_bar2.widget, OPTIX_WINDOW_TITLE_BAR_TYPE);
    //finally, align everything
    optix_RecursiveAlign(&test_title_bar.widget);
-   struct optix_widget *test_stack[] = {&test_rectangle.widget, &test_title_bar.widget, NULL};   
+   optix_RecursiveAlign(&test_title_bar2.widget);
+   struct optix_widget *test_stack[] = {&test_rectangle.widget, &test_title_bar.widget, &test_title_bar2.widget, NULL};   
    optix_InitializeColors();
    //graphics
    gfx_Begin();

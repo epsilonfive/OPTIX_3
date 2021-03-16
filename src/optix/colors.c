@@ -71,8 +71,11 @@ void optix_BlackText(void) {
 
 //fg will be the foreground color, bg will be both the background and transparent colors
 void optix_SetTextColor(uint8_t fg, uint8_t bg) {
-    gfx_SetTextFGColor(fg);
-    gfx_SetTextBGColor(bg);
-    gfx_SetTextTransparentColor(bg);
+    if (optix_gui_data.font_valid) fontlib_SetColors(fg, bg);
+    else {
+        gfx_SetTextFGColor(fg);
+        gfx_SetTextBGColor(bg);
+        gfx_SetTextTransparentColor(bg);
+    }
 }
 

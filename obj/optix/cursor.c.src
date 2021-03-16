@@ -33,16 +33,19 @@ _optix_RenderCursor_default:
 _optix_UpdateCursor_default:
 	ld	hl, -6
 	call	__frameset
-	ld	bc, 0
-	ld	hl, -720866
+	or	a, a
+	sbc	hl, hl
+	ld	bc, -720866
 	ld	de, (_optix_cursor+1)
 	ld	(_optix_cursor+25), de
 	ld	iy, (_optix_cursor+4)
 	ld	(_optix_cursor+28), iy
-	ld	(_optix_cursor+31), bc
+	ld	(_optix_cursor+31), hl
 	ld	a, (_optix_cursor+15)
-	inc	c
-	xor	a, c
+	inc	l
+	xor	a, l
+	push	bc
+	pop	hl
 	push	de
 	ld	e, (hl)
 	inc	hl
@@ -53,55 +56,41 @@ _optix_UpdateCursor_default:
 	ld.sis	bc, 8
 	call	__sand
 	bit	0, a
-	jq	z, BB1_5
+	jq	z, BB1_6
 	ld	a, l
 	or	a, a
-	jq	nz, BB1_28
-	ld	hl, -720866
-	push	de
-	ld	e, (hl)
-	inc	hl
-	ld	d, (hl)
-	ld	l, e
-	ld	h, d
-	pop	de
+	jq	nz, BB1_8
+	ld	iy, -720866
+	ld	l, (iy)
+	ld	h, (iy + 1)
 	ld.sis	bc, 1
 	call	__sand
 	ld	a, l
 	ld	l, 1
 	xor	a, l
-	xor	a, l
 	bit	0, a
-	jq	nz, BB1_28
-	ld	hl, -720866
-	push	de
-	ld	e, (hl)
-	inc	hl
-	ld	d, (hl)
-	ld	l, e
-	ld	h, d
-	pop	de
+	jq	z, BB1_30
+	ld	l, (iy)
+	ld	h, (iy + 1)
 	ld	a, l
 	bit	1, a
-	jq	nz, BB1_28
-	ld	hl, -720866
-	push	de
-	ld	e, (hl)
-	inc	hl
-	ld	d, (hl)
-	ld	l, e
-	ld	h, d
-	pop	de
-	jq	BB1_28
-BB1_5:
+	jq	nz, BB1_31
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	ld	a, l
+	bit	2, a
+	jq	nz, BB1_32
+	ld	hl, 4
+	jq	BB1_33
+BB1_6:
 	ld	(ix + -3), de
 	ld	de, -3
 	ld	a, l
 	or	a, a
-	jq	z, BB1_8
+	jq	z, BB1_10
 	add	iy, de
 	ld	(_optix_cursor+4), iy
-BB1_8:
+BB1_10:
 	ld	e, 1
 	ld.sis	bc, 1
 	ld	hl, -720866
@@ -116,14 +105,14 @@ BB1_8:
 	ld	a, l
 	xor	a, e
 	bit	0, a
-	jq	nz, BB1_12
+	jq	nz, BB1_14
 	ld	de, 3
 	add	iy, de
 	ld	(_optix_cursor+4), iy
-BB1_12:
+BB1_14:
 	lea	bc, iy + 0
-	ld	iy, (ix + -3)
 	ld	hl, -720866
+	ld	iy, (ix + -3)
 	push	de
 	ld	e, (hl)
 	inc	hl
@@ -133,12 +122,12 @@ BB1_12:
 	pop	de
 	ld	a, l
 	bit	1, a
-	jq	z, BB1_16
+	jq	z, BB1_18
 	ld	de, -3
 	add	iy, de
 	ld	(ix + -3), iy
 	ld	(_optix_cursor+1), iy
-BB1_16:
+BB1_18:
 	ld	hl, 320
 	ld	iy, -720866
 	ld	e, (iy)
@@ -146,21 +135,25 @@ BB1_16:
 	ld	a, e
 	bit	2, a
 	ld	(ix + -6), bc
-	jq	nz, BB1_18
+	jq	nz, BB1_20
 	push	hl
 	pop	de
-	jq	BB1_19
-BB1_18:
+	jq	BB1_21
+BB1_8:
+	or	a, a
+	sbc	hl, hl
+	jq	BB1_33
+BB1_20:
+	ld	de, 3
 	push	hl
 	pop	bc
 	ld	hl, (ix + -3)
-	ld	de, 3
 	add	hl, de
 	ld	(_optix_cursor+1), hl
 	ld	(ix + -3), hl
 	push	bc
 	pop	hl
-BB1_19:
+BB1_21:
 	ld	iy, _optix_cursor+7
 	ld	c, (iy)
 	ld	b, (iy + 1)
@@ -177,11 +170,11 @@ BB1_19:
 	call	__setflag
 	push	de
 	pop	iy
-	jq	p, BB1_22
+	jq	p, BB1_24
 	ld	(_optix_cursor+1), bc
 	push	bc
 	pop	iy
-BB1_22:
+BB1_24:
 	ld	a, (_optix_cursor+9)
 	ld	de, 0
 	ld	e, a
@@ -194,28 +187,39 @@ BB1_22:
 	or	a, a
 	sbc	hl, bc
 	call	__setflag
-	jq	p, BB1_24
+	jq	p, BB1_26
 	ld	(_optix_cursor+4), de
 	push	de
 	pop	bc
-BB1_24:
+BB1_26:
 	ld	de, 0
 	lea	hl, iy + 0
 	or	a, a
 	sbc	hl, de
 	call	__setflag
 	ld	iy, 0
-	jq	p, BB1_26
+	jq	p, BB1_28
 	ld	(_optix_cursor+1), iy
-BB1_26:
+BB1_28:
 	push	bc
 	pop	hl
 	or	a, a
 	sbc	hl, de
 	call	__setflag
-	jq	p, BB1_28
+	jq	p, BB1_34
 	ld	(_optix_cursor+4), iy
-BB1_28:
+	jq	BB1_34
+BB1_30:
+	ld	hl, 1
+	jq	BB1_33
+BB1_31:
+	ld	hl, 2
+	jq	BB1_33
+BB1_32:
+	ld	hl, 3
+BB1_33:
+	ld	(_optix_cursor+34), hl
+BB1_34:
 	ld	sp, ix
 	pop	ix
 	ret
@@ -245,6 +249,21 @@ _optix_InitializeCursor:
 	ret
 	section	.text,"ax",@progbits
 
+	section	.text,"ax",@progbits
+	public	_optix_FindNearestElement
+_optix_FindNearestElement:
+	call	__frameset0
+	ld	hl, (ix + 12)
+	ld	hl, (hl)
+BB3_1:
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	nz, BB3_1
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
 	section	.data,"aw",@progbits
 	public	_optix_cursor
 _optix_cursor:
@@ -258,6 +277,8 @@ _optix_cursor:
 	db	1
 	dl	_optix_RenderCursor_default
 	dl	_optix_UpdateCursor_default
+	dl	0
+	dl	0
 	dl	0
 	dl	0
 	dl	0
@@ -278,11 +299,12 @@ L___const.optix_RenderCursor_default.spr:
 	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister
 	extern	__frameset
-	extern	_cursor_pointer_data
 	extern	_gfx_SetTransparentColor
 	extern	__imulu
-	extern	_cursor_move_data
+	extern	_cursor_pointer_data
 	extern	_cursor_normal_data
 	extern	_gfx_TransparentSprite_NoClip
 	extern	_cursor_resize_horizontal_data
 	extern	__sand
+	extern	__frameset0
+	extern	_cursor_move_data

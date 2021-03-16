@@ -6,38 +6,12 @@ _optix_UpdateButton_default:
 	call	__frameset0
 	ld	iy, (ix + 6)
 	ld	a, (iy + 15)
-	ld	d, 1
-	xor	a, d
+	ld	e, 1
+	xor	a, e
 	bit	0, a
 	jq	nz, BB0_13
-	ld.sis	bc, 1
-	ld	hl, (_optix_cursor+31)
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	nz, BB0_4
-	ld	hl, _optix_cursor
-	push	iy
-	push	hl
-	call	_optix_CheckTransformOverlap
-	ld.sis	bc, 1
-	ld	d, 1
-	ld	e, 0
-	ld	iy, (ix + 6)
-	pop	hl
-	pop	hl
-	xor	a, d
-	bit	0, a
-	jq	nz, BB0_4
-	ld	hl, 1
-	ld	(iy + 14), 1
-	ld	(_optix_cursor+31), hl
-	jq	BB0_5
-BB0_4:
-	ld	e, 1
-	ld	(iy + 14), 0
-BB0_5:
 	ld	hl, -720868
+	ld.sis	bc, 1
 	push	de
 	ld	e, (hl)
 	inc	hl
@@ -47,10 +21,10 @@ BB0_5:
 	pop	de
 	call	__sand
 	ld	a, l
-	xor	a, d
-	xor	a, d
+	xor	a, e
+	xor	a, e
 	bit	0, a
-	jq	nz, BB0_7
+	jq	nz, BB0_3
 	ld	hl, -720878
 	push	de
 	ld	e, (hl)
@@ -61,26 +35,55 @@ BB0_5:
 	pop	de
 	ld	a, l
 	bit	5, a
-	jq	nz, BB0_7
+	jq	nz, BB0_3
 	ld	(iy + 31), 0
-	jq	BB0_13
-BB0_7:
-	bit	0, (iy + 31)
-	jq	nz, BB0_13
-	bit	0, e
-	jq	nz, BB0_13
+	jq	BB0_9
+BB0_3:
+	ld	a, (iy + 31)
+	xor	a, e
+	xor	a, e
+	bit	0, a
+	jq	nz, BB0_9
+	ld	a, (iy + 14)
+	xor	a, e
+	bit	0, a
+	jq	nz, BB0_9
 	ld	hl, (iy + 25)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB0_11
+	jq	z, BB0_7
 	ld	de, (iy + 28)
 	push	de
 	call	__indcallhl
 	ld	iy, (ix + 6)
 	pop	hl
-BB0_11:
+BB0_7:
 	ld	(iy + 31), 1
+BB0_9:
+	ld	hl, (_optix_cursor+31)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	nz, BB0_12
+	ld	hl, _optix_cursor
+	push	iy
+	push	hl
+	call	_optix_CheckTransformOverlap
+	ld	iy, (ix + 6)
+	pop	hl
+	pop	hl
+	ld	l, 1
+	xor	a, l
+	bit	0, a
+	jq	nz, BB0_12
+	ld	hl, 1
+	ld	(iy + 14), 1
+	ld	(_optix_cursor+31), hl
+	jq	BB0_13
+BB0_12:
+	ld	(iy + 31), 0
+	ld	(iy + 14), 0
 BB0_13:
 	pop	ix
 	ret
@@ -197,9 +200,9 @@ BB1_17:
 	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister
 	extern	__frameset
+	extern	_optix_RenderStack
 	extern	__indcallhl
 	extern	_optix_cursor
-	extern	_optix_RenderStack
 	extern	_optix_colors
 	extern	_optix_SetTextColor
 	extern	__sand

@@ -86,7 +86,7 @@ void optix_UpdateMenu_default(struct optix_widget *widget) {
     if (optix_CheckTransformOverlap(&optix_cursor.widget, widget)) widget->state.selected = true;
     else widget->state.selected = false;
     //see which option is selected
-    while (widget->child[i] != NULL) {
+    while (widget->child[i]) {
         //we're hoping this is a button
         if (widget->state.selected) {
             if (found_selection) widget->child[i]->state.selected = false;

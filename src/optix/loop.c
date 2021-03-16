@@ -28,6 +28,8 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
     bool found_window = false;
     bool window_needs_focus = false;
     bool found_window_with_focus = false;
+    //start things out by doing the thing
+    if (!optix_settings.cursor_active) optix_cursor.current_selection = optix_FindNearestElement(optix_cursor.direction, optix_cursor.current_selection, *stack);
     //the value of i at the end will also be the number of elements in the stack
     while ((*stack)[i]) {
         //if this has been selected, we want to loop through and make sure nothing else is selected

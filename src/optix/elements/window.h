@@ -26,7 +26,6 @@ struct optix_window {
 struct optix_window_title_bar {
     struct optix_widget widget;
     struct optix_window *window;
-    const char *title;
 };
 
 //functions

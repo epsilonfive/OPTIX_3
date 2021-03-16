@@ -16,11 +16,11 @@
 #define OPTIX_RECTANGLE_TYPE        7
 //centering types
 //always the same
-#define OPTIX_CENTERING_CENTERED 1
-#define OPTIX_CENTERING_LEFT     0
-#define OPTIX_CENTERING_RIGHT    2
-#define OPTIX_CENTERING_TOP      0
-#define OPTIX_CENTERING_BOTTOM   2
+#define OPTIX_CENTERING_CENTERED    1
+#define OPTIX_CENTERING_LEFT        0
+#define OPTIX_CENTERING_RIGHT       2
+#define OPTIX_CENTERING_TOP         0
+#define OPTIX_CENTERING_BOTTOM      2
 
 //functions
 void optix_InitializeGUIState(void);
@@ -28,13 +28,15 @@ void optix_InitializeGUIState(void);
 //structs
 //and yes, these do really need to be global Mateo
 typedef struct {
-    
-
+    //whether or not we should use the Windows-style cursor instead of the box-based navigation mode
+    bool cursor_active;
 } optix_settings_t;
 extern optix_settings_t optix_settings;
 
 typedef struct {
     bool gui_needs_full_redraw;
+    //if the font was loaded correctly, if not then the library should just use graphx for the text rendering
+    bool font_valid;
 } optix_gui_data_t;
 extern optix_gui_data_t optix_gui_data;
 
