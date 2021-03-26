@@ -1,178 +1,1611 @@
 	section	.text,"ax",@progbits
 	assume	adl = 1
+	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\text.c" md5 0xe597a47b8291c8af0083f8c25da1ced5
+	file	1 "D:\Data\Programming\TI\CEdev\include\fontlibc.h" md5 0x0fd9767b6de67be1d5c23fabbe7ff59d
+	file	2 "D:\Data\Programming\TI\CEdev\include\stdint.h" md5 0x82cbaa55f693a5a19696046350717638
+	file	3 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\globals.h" md5 0xae75058b2ac38408e594dce96e184587
+	file	4 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\text.h" md5 0x3e22d29b3dbcacfc046b9d694733def6
 	section	.text,"ax",@progbits
 	public	_optix_InitializeTextTransform
 _optix_InitializeTextTransform:
+	private	func_begin0
+func_begin0:
+	file	5 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\text.c" md5 0xe597a47b8291c8af0083f8c25da1ced5
+	loc	5 4 0
+	cfi_sections .debug_frame
+	cfi_startproc
 	call	__frameset0
+	private	tmp0
+tmp0:
+	cfi_def_cfa ix, 6
+	cfi_offset ix, -6
 	ld	iy, (ix + 6)
 	or	a, a
 	sbc	hl, hl
+	private	tmp1
+tmp1:
+	loc	5 5 30 prologue_end
 	ld	(iy + 1), hl
+	loc	5 6 30
 	ld	(iy + 4), hl
+	private	tmp2
+tmp2:
+	loc	5 7 24
 	ld	a, (_optix_gui_data+1)
 	inc	l
 	xor	a, l
-	ld	hl, (iy + 25)
+	private	tmp3
+tmp3:
+	loc	5 0 0 is_stmt 0
+	ld	hl, (iy + 26)
+	private	tmp4
+tmp4:
+	loc	5 7 9
 	bit	0, a
 	jq	z, BB0_1
+	private	tmp5
+tmp5:
+	loc	5 11 40 is_stmt 1
 	push	hl
 	call	_gfx_GetStringWidth
+	private	tmp6
+tmp6:
+	loc	5 0 40 is_stmt 0
 	ld	a, 8
+	loc	5 11 40
 	pop	de
+	loc	5 11 38
 	ld	iy, (ix + 6)
 	ld	(iy + 7), l
 	ld	(iy + 8), h
 	jq	BB0_3
+	private	tmp7
+tmp7:
 BB0_1:
+	loc	5 8 40 is_stmt 1
 	push	hl
 	call	_fontlib_GetStringWidth
+	private	tmp8
+tmp8:
 	pop	de
+	loc	5 8 38 is_stmt 0
 	ld	iy, (ix + 6)
 	ld	(iy + 7), l
 	ld	(iy + 8), h
+	loc	5 9 41 is_stmt 1
 	call	_fontlib_GetCurrentFontHeight
+	private	tmp9
+tmp9:
 BB0_3:
+	loc	5 0 41 is_stmt 0
 	ld	hl, (ix + 6)
 	push	hl
 	pop	iy
+	private	tmp10
+tmp10:
+	loc	5 12 39 is_stmt 1
 	ld	(iy + 9), a
+	private	tmp11
+tmp11:
+	loc	5 14 40
 	ld	(iy + 10), 1
+	loc	5 15 40
 	ld	(iy + 11), 1
+	loc	5 16 71
 	ld	(iy + 13), 0
+	loc	5 16 37 is_stmt 0
 	ld	(iy + 12), 0
+	loc	5 17 1 is_stmt 1
 	pop	ix
+	cfi_def_cfa sp, 3
+	cfi_restore ix
 	ret
+	private	tmp12
+tmp12:
 	section	.text,"ax",@progbits
+	private	func_end0
+func_end0:
+	cfi_endproc
+	file	6 "D:\Data\Programming\TI\CEdev\include\graphx.h" md5 0x6fbdcd846ef31912194280a2afa35252
 
 	section	.text,"ax",@progbits
 	public	_optix_RenderText_default
 _optix_RenderText_default:
+	private	func_begin1
+func_begin1:
+	loc	5 20 0
+	cfi_startproc
 	call	__frameset0
+	private	tmp13
+tmp13:
+	cfi_def_cfa ix, 6
+	cfi_offset ix, -6
 	ld	iy, (ix + 6)
+	private	tmp14
+tmp14:
+	loc	5 22 23 prologue_end
 	ld	a, (iy + 15)
 	ld	l, 1
 	xor	a, l
+	loc	5 22 31 is_stmt 0
 	bit	0, a
-	jq	nz, BB1_5
+	jq	nz, BB1_6
+	private	tmp15
+tmp15:
+	loc	5 22 48
+	ld	a, (iy + 16)
+	xor	a, l
+	private	tmp16
+tmp16:
+	loc	5 22 9
+	bit	0, a
+	jq	nz, BB1_6
+	private	tmp17
+tmp17:
+	loc	5 23 28 is_stmt 1
 	ld	a, (_optix_gui_data+1)
 	xor	a, l
+	private	tmp18
+tmp18:
+	loc	5 23 13 is_stmt 0
 	bit	0, a
-	jq	z, BB1_3
-	ld	hl, (iy + 25)
+	jq	z, BB1_4
+	private	tmp19
+tmp19:
+	loc	5 27 40 is_stmt 1
+	ld	hl, (iy + 26)
+	loc	5 27 64 is_stmt 0
 	ld	de, (iy + 1)
+	loc	5 27 85
 	ld	bc, (iy + 4)
+	loc	5 27 16
 	push	bc
 	push	de
 	push	hl
 	call	_gfx_PrintStringXY
+	private	tmp20
+tmp20:
 	pop	hl
 	pop	hl
-	jq	BB1_4
-BB1_3:
+	jq	BB1_5
+BB1_4:
+	private	tmp21
+tmp21:
+	loc	5 24 49 is_stmt 1
 	ld	hl, (iy + 1)
+	loc	5 24 70 is_stmt 0
 	ld	a, (iy + 4)
+	loc	5 24 91
 	ld	e, (iy + 7)
 	ld	d, (iy + 8)
+	loc	5 24 73
 	ld	bc, 0
 	ld	c, e
 	ld	b, d
+	loc	5 24 116
 	ld	e, (iy + 9)
+	loc	5 24 13
 	push	de
 	push	bc
 	ld	e, a
 	push	de
 	push	hl
 	call	_fontlib_SetWindow
+	private	tmp22
+tmp22:
 	pop	hl
 	pop	hl
 	pop	hl
 	pop	hl
 	ld	iy, (ix + 6)
+	loc	5 25 57 is_stmt 1
 	ld	hl, (iy + 1)
+	loc	5 25 78 is_stmt 0
 	ld	a, (iy + 4)
+	loc	5 25 13
 	ld	e, a
 	push	de
 	push	hl
 	call	_fontlib_SetCursorPosition
+	private	tmp23
+tmp23:
 	pop	hl
 	pop	hl
+	loc	5 26 38 is_stmt 1
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 25)
+	ld	hl, (iy + 26)
+	loc	5 26 13 is_stmt 0
 	push	hl
 	call	_fontlib_DrawString
-BB1_4:
-	pop	hl
+	private	tmp24
+tmp24:
 BB1_5:
+	loc	5 0 0
+	pop	hl
+	private	tmp25
+tmp25:
+BB1_6:
+	loc	5 29 1 is_stmt 1
 	pop	ix
+	cfi_def_cfa sp, 3
+	cfi_restore ix
 	ret
+	private	tmp26
+tmp26:
 	section	.text,"ax",@progbits
+	private	func_end1
+func_end1:
+	cfi_endproc
 
 	section	.text,"ax",@progbits
 	public	_optix_InitializeFont
 _optix_InitializeFont:
+	private	func_begin2
+func_begin2:
+	loc	5 32 0
+	cfi_startproc
 	ld	hl, -3
 	call	__frameset
+	private	tmp27
+tmp27:
+	cfi_def_cfa ix, 6
+	cfi_offset ix, -6
+	loc	5 0 0 prologue_end
 	ld	hl, L_.str
 	ld	de, 0
+	loc	5 34 21
 	push	de
 	push	hl
 	call	_fontlib_GetFontByIndex
+	private	tmp28
+tmp28:
 	pop	de
 	pop	de
+	private	tmp29
+tmp29:
+	loc	5 34 9 is_stmt 0
 	add	hl, bc
+	private	tmp30
+tmp30:
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB2_2
+	loc	5 0 9
 	ld	de, 0
+	private	tmp31
+tmp31:
+	loc	5 35 9 is_stmt 1
 	push	de
 	push	hl
 	ld	(ix + -3), hl
 	call	_fontlib_SetFont
+	private	tmp32
+tmp32:
 	pop	hl
 	pop	hl
+	loc	5 36 9
 	or	a, a
 	sbc	hl, hl
 	push	hl
 	dec	hl
 	push	hl
 	call	_fontlib_SetColors
+	private	tmp33
+tmp33:
 	pop	hl
 	pop	hl
 	ld	hl, 1
+	loc	5 37 9
 	push	hl
 	call	_fontlib_SetTransparency
+	private	tmp34
+tmp34:
+	loc	5 0 9 is_stmt 0
 	ld	hl, (ix + -3)
+	loc	5 37 9
 	pop	de
+	private	tmp35
+tmp35:
 BB2_2:
+	loc	5 0 9
+	ld	de, -327680
+	ld	bc, L_.str.1
+	private	tmp36
+tmp36:
+	loc	5 34 19 is_stmt 1
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	nz, BB2_3
+	private	tmp37
+tmp37:
+	loc	5 0 19 is_stmt 0
 	ld	l, 0
 	jq	BB2_5
 BB2_3:
 	ld	l, 1
 BB2_5:
+	loc	5 39 31 is_stmt 1
+	ld	(ix + -3), l
 	ld	a, l
 	and	a, 1
 	ld	(_optix_gui_data+1), a
+	loc	5 40 5
 	ld	a, l
+	and	a, 1
+	or	a, a
+	sbc	hl, hl
+	ld	l, a
+	push	hl
+	push	bc
+	push	de
+	call	_sprintf
+	private	tmp38
+tmp38:
+	pop	hl
+	pop	hl
+	pop	hl
+	loc	5 41 5
+	ld	a, (ix + -3)
 	pop	hl
 	pop	ix
+	cfi_def_cfa sp, 3
+	cfi_restore ix
 	ret
+	private	tmp39
+tmp39:
 	section	.text,"ax",@progbits
+	private	func_end2
+func_end2:
+	cfi_endproc
 
 	section	.rodata,"a",@progbits
 	private	L_.str
 L_.str:
 	db	"DRSANS",000o
 
+	section	.rodata,"a",@progbits
+	private	L_.str.1
+L_.str.1:
+	db	"Font pack %d",012o,000o
+
+	section	.debug_loclists,"",@progbits
+	dd	debug_list_header_end0-debug_list_header_start0
+	private	debug_list_header_start0
+debug_list_header_start0:
+	dw	5
+	db	3
+	db	0
+	dd	4
+	private	loclists_table_base0
+loclists_table_base0:
+	dd	debug_loc0-loclists_table_base0
+	dd	debug_loc1-loclists_table_base0
+	dd	debug_loc2-loclists_table_base0
+	dd	debug_loc3-loclists_table_base0
+	private	debug_loc0
+debug_loc0:
+	db	4
+	uleb128	tmp1-func_begin0
+	uleb128	tmp3-func_begin0
+	db	1
+	db	85
+	db	0
+	private	debug_loc1
+debug_loc1:
+	db	4
+	uleb128	tmp14-func_begin0
+	uleb128	tmp20-func_begin0
+	db	1
+	db	85
+	db	4
+	uleb128	tmp21-func_begin0
+	uleb128	tmp22-func_begin0
+	db	1
+	db	85
+	db	0
+	private	debug_loc2
+debug_loc2:
+	db	4
+	uleb128	tmp14-func_begin0
+	uleb128	tmp20-func_begin0
+	db	1
+	db	85
+	db	4
+	uleb128	tmp21-func_begin0
+	uleb128	tmp22-func_begin0
+	db	1
+	db	85
+	db	0
+	private	debug_loc3
+debug_loc3:
+	db	4
+	uleb128	tmp29-func_begin0
+	uleb128	tmp30-func_begin0
+	db	1
+	db	82
+	db	0
+	private	debug_list_header_end0
+debug_list_header_end0:
+	section	.debug_abbrev,"",@progbits
+	private	abbrev_start115
+abbrev_start115:
+	db	1
+	db	17
+	db	1
+	db	37
+	db	37
+	db	19
+	db	5
+	db	3
+	db	37
+	db	114
+	db	23
+	db	16
+	db	23
+	db	27
+	db	37
+	db	17
+	db	27
+	db	18
+	db	6
+	db	115
+	db	23
+	db	"",214o,001o
+	db	23
+	db	0
+	db	0
+	db	2
+	db	4
+	db	1
+	db	73
+	db	19
+	db	11
+	db	11
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	3
+	db	40
+	db	0
+	db	3
+	db	37
+	db	28
+	db	15
+	db	0
+	db	0
+	db	4
+	db	36
+	db	0
+	db	3
+	db	37
+	db	62
+	db	11
+	db	11
+	db	11
+	db	0
+	db	0
+	db	5
+	db	15
+	db	0
+	db	73
+	db	19
+	db	0
+	db	0
+	db	6
+	db	19
+	db	1
+	db	3
+	db	37
+	db	11
+	db	11
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	7
+	db	13
+	db	0
+	db	3
+	db	37
+	db	73
+	db	19
+	db	58
+	db	11
+	db	59
+	db	11
+	db	56
+	db	11
+	db	0
+	db	0
+	db	8
+	db	22
+	db	0
+	db	73
+	db	19
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	9
+	db	21
+	db	1
+	db	39
+	db	25
+	db	0
+	db	0
+	db	10
+	db	5
+	db	0
+	db	73
+	db	19
+	db	0
+	db	0
+	db	11
+	db	38
+	db	0
+	db	73
+	db	19
+	db	0
+	db	0
+	db	12
+	db	46
+	db	1
+	db	17
+	db	27
+	db	18
+	db	6
+	db	64
+	db	24
+	db	122
+	db	25
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	39
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	13
+	db	5
+	db	0
+	db	2
+	db	34
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	73
+	db	19
+	db	0
+	db	0
+	db	14
+	db	72
+	db	0
+	db	127
+	db	19
+	db	125
+	db	27
+	db	0
+	db	0
+	db	15
+	db	46
+	db	1
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	5
+	db	39
+	db	25
+	db	73
+	db	19
+	db	60
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	16
+	db	46
+	db	0
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	5
+	db	39
+	db	25
+	db	73
+	db	19
+	db	60
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	17
+	db	52
+	db	0
+	db	2
+	db	34
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	73
+	db	19
+	db	0
+	db	0
+	db	18
+	db	46
+	db	1
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	5
+	db	39
+	db	25
+	db	60
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	19
+	db	46
+	db	1
+	db	17
+	db	27
+	db	18
+	db	6
+	db	64
+	db	24
+	db	122
+	db	25
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	39
+	db	25
+	db	73
+	db	19
+	db	63
+	db	25
+	db	0
+	db	0
+	db	20
+	db	19
+	db	1
+	db	11
+	db	11
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	0
+	section	.debug_info,"",@progbits
+	private	cu_begin0
+cu_begin0:
+	dd	debug_info_end0-debug_info_start0
+	private	debug_info_start0
+debug_info_start0:
+	dw	5
+	db	1
+	db	3
+	dd	abbrev_start115
+	db	1
+	db	0
+	dw	12
+	db	1
+	dd	str_offsets_base0
+	dd	line_table_start0
+	db	2
+	db	0
+	dd	func_end2-func_begin0
+	dd	addr_table_base0
+	dd	loclists_table_base0
+	db	2
+	dd	51
+	db	3
+	db	1
+	db	55
+	db	3
+	db	4
+	db	1
+	db	0
+	db	4
+	db	3
+	db	7
+	db	3
+	db	5
+	dd	60
+	db	6
+	db	38
+	db	29
+	db	4
+	db	9
+	db	7
+	db	5
+	dd	84
+	db	4
+	db	10
+	db	0
+	db	7
+	db	36
+	dd	336
+	db	4
+	db	11
+	db	26
+	db	0
+	db	6
+	db	35
+	db	26
+	db	3
+	db	63
+	db	7
+	db	6
+	dd	153
+	db	3
+	db	64
+	db	0
+	db	7
+	db	9
+	dd	165
+	db	3
+	db	65
+	db	1
+	db	7
+	db	18
+	dd	223
+	db	3
+	db	66
+	db	10
+	db	7
+	db	26
+	dd	277
+	db	3
+	db	67
+	db	14
+	db	7
+	db	32
+	dd	314
+	db	3
+	db	68
+	db	17
+	db	7
+	db	33
+	dd	314
+	db	3
+	db	70
+	db	20
+	db	7
+	db	34
+	dd	331
+	db	3
+	db	73
+	db	23
+	db	0
+	db	8
+	dd	161
+	db	8
+	db	2
+	db	15
+	db	4
+	db	7
+	db	8
+	db	1
+	db	6
+	db	17
+	db	9
+	db	3
+	db	49
+	db	7
+	db	10
+	dd	207
+	db	3
+	db	50
+	db	0
+	db	7
+	db	12
+	dd	207
+	db	3
+	db	51
+	db	3
+	db	7
+	db	13
+	dd	211
+	db	3
+	db	52
+	db	6
+	db	7
+	db	16
+	dd	153
+	db	3
+	db	53
+	db	8
+	db	0
+	db	4
+	db	11
+	db	5
+	db	3
+	db	8
+	dd	219
+	db	15
+	db	2
+	db	39
+	db	4
+	db	14
+	db	7
+	db	2
+	db	6
+	db	25
+	db	4
+	db	3
+	db	29
+	db	7
+	db	19
+	dd	153
+	db	3
+	db	30
+	db	0
+	db	7
+	db	20
+	dd	153
+	db	3
+	db	31
+	db	1
+	db	7
+	db	21
+	dd	265
+	db	3
+	db	32
+	db	2
+	db	7
+	db	24
+	dd	265
+	db	3
+	db	33
+	db	3
+	db	0
+	db	8
+	dd	273
+	db	23
+	db	2
+	db	10
+	db	4
+	db	22
+	db	6
+	db	1
+	db	6
+	db	31
+	db	3
+	db	3
+	db	57
+	db	7
+	db	27
+	dd	310
+	db	3
+	db	58
+	db	0
+	db	7
+	db	29
+	dd	310
+	db	3
+	db	59
+	db	1
+	db	7
+	db	30
+	dd	310
+	db	3
+	db	60
+	db	2
+	db	0
+	db	4
+	db	28
+	db	2
+	db	1
+	db	5
+	dd	319
+	db	9
+
+	db	10
+	dd	326
+	db	0
+	db	5
+	dd	84
+	db	5
+	dd	326
+	db	5
+	dd	341
+	db	11
+	dd	346
+	db	4
+	db	37
+	db	6
+	db	1
+	db	5
+	dd	346
+	db	12
+	db	0
+	dd	func_end0-func_begin0
+	db	1
+	db	84
+
+	db	64
+	db	5
+	db	4
+
+
+	db	13
+	db	0
+	db	36
+	db	5
+	db	4
+	dd	55
+	db	14
+	dd	394
+	db	1
+	db	14
+	dd	409
+	db	2
+	db	14
+	dd	424
+	db	3
+	db	0
+	db	15
+	db	39
+	db	6
+	dw	1427
+
+	dd	51
+
+
+	db	10
+	dd	336
+	db	0
+	db	15
+	db	40
+	db	1
+	dw	597
+
+	dd	51
+
+
+	db	10
+	dd	336
+	db	0
+	db	16
+	db	41
+	db	1
+	dw	486
+
+	dd	161
+
+
+	db	12
+	db	4
+	dd	func_end1-func_begin1
+	db	1
+	db	84
+
+	db	65
+	db	5
+	db	20
+
+
+	db	13
+	db	2
+	db	5
+	db	5
+	db	20
+	dd	326
+	db	17
+	db	1
+	db	36
+	db	5
+	db	21
+	dd	55
+	db	14
+	dd	487
+	db	5
+	db	14
+	dd	508
+	db	6
+	db	14
+	dd	534
+	db	7
+	db	14
+	dd	550
+	db	8
+	db	0
+	db	18
+	db	42
+	db	6
+	dw	1027
+
+
+
+	db	10
+	dd	336
+	db	10
+	dd	207
+	db	10
+	dd	207
+	db	0
+	db	18
+	db	43
+	db	1
+	dw	317
+
+
+
+	db	10
+	dd	51
+	db	10
+	dd	161
+	db	10
+	dd	51
+	db	10
+	dd	161
+	db	0
+	db	18
+	db	44
+	db	1
+	dw	350
+
+
+
+	db	10
+	dd	51
+	db	10
+	dd	161
+	db	0
+	db	15
+	db	45
+	db	1
+	dw	658
+
+	dd	51
+
+
+	db	10
+	dd	336
+	db	0
+	db	19
+	db	9
+	dd	func_end2-func_begin2
+	db	1
+	db	84
+
+	db	66
+	db	5
+	db	32
+
+	dd	310
+
+	db	17
+	db	3
+	db	67
+	db	5
+	db	33
+	dd	835
+	db	14
+	dd	614
+	db	10
+	db	14
+	dd	778
+	db	11
+	db	14
+	dd	808
+	db	12
+	db	14
+	dd	824
+	db	13
+	db	0
+	db	15
+	db	46
+	db	1
+	dw	781
+
+	dd	634
+
+
+	db	10
+	dd	336
+	db	10
+	dd	161
+	db	0
+	db	5
+	dd	639
+	db	20
+	db	18
+	db	1
+	db	172
+	db	7
+	db	47
+	dd	153
+	db	1
+	db	177
+	db	0
+	db	7
+	db	16
+	dd	153
+	db	1
+	db	181
+	db	1
+	db	7
+	db	48
+	dd	153
+	db	1
+	db	186
+	db	2
+	db	7
+	db	49
+	dd	153
+	db	1
+	db	191
+	db	3
+	db	7
+	db	50
+	dd	770
+	db	1
+	db	197
+	db	4
+	db	7
+	db	52
+	dd	770
+	db	1
+	db	203
+	db	7
+	db	7
+	db	53
+	dd	153
+	db	1
+	db	209
+	db	10
+	db	7
+	db	54
+	dd	153
+	db	1
+	db	216
+	db	11
+	db	7
+	db	55
+	dd	153
+	db	1
+	db	217
+	db	12
+	db	7
+	db	56
+	dd	153
+	db	1
+	db	222
+	db	13
+	db	7
+	db	57
+	dd	153
+	db	1
+	db	227
+	db	14
+	db	7
+	db	58
+	dd	153
+	db	1
+	db	232
+	db	15
+	db	7
+	db	59
+	dd	153
+	db	1
+	db	233
+	db	16
+	db	7
+	db	60
+	dd	153
+	db	1
+	db	234
+	db	17
+	db	0
+	db	8
+	dd	207
+	db	51
+	db	2
+	db	59
+	db	15
+	db	61
+	db	1
+	dw	391
+
+	dd	310
+
+
+	db	10
+	dd	798
+	db	10
+	dd	39
+	db	0
+	db	5
+	dd	803
+	db	11
+	dd	639
+	db	18
+	db	62
+	db	1
+	dw	413
+
+
+
+	db	10
+	dd	161
+	db	10
+	dd	161
+	db	0
+	db	18
+	db	63
+	db	1
+	dw	435
+
+
+
+	db	10
+	dd	310
+	db	0
+	db	5
+	dd	840
+	db	8
+	dd	639
+	db	68
+	db	1
+	db	235
+	db	0
+	private	debug_info_end0
+debug_info_end0:
+	section	.debug_str_offsets,"",@progbits
+	dd	280
+	dw	5
+	dw	0
+	private	str_offsets_base0
+str_offsets_base0:
+	section	.debug_str,"MS",@progbits,1
+	private	info_string0
+info_string0:
+	db	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)",000o
+	private	info_string1
+info_string1:
+	db	"D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\text.c",000o
+	private	info_string2
+info_string2:
+	db	"D:\Data\Programming\TI\Projects\Main\OPTIX",000o
+	private	info_string3
+info_string3:
+	db	"unsigned int",000o
+	private	info_string4
+info_string4:
+	db	"FONTLIB_IGNORE_LINE_SPACING",000o
+	private	info_string5
+info_string5:
+	db	"widget",000o
+	private	info_string6
+info_string6:
+	db	"type",000o
+	private	info_string7
+info_string7:
+	db	"unsigned char",000o
+	private	info_string8
+info_string8:
+	db	"uint8_t",000o
+	private	info_string9
+info_string9:
+	db	"transform",000o
+	private	info_string10
+info_string10:
+	db	"x",000o
+	private	info_string11
+info_string11:
+	db	"int",000o
+	private	info_string12
+info_string12:
+	db	"y",000o
+	private	info_string13
+info_string13:
+	db	"width",000o
+	private	info_string14
+info_string14:
+	db	"unsigned short",000o
+	private	info_string15
+info_string15:
+	db	"uint16_t",000o
+	private	info_string16
+info_string16:
+	db	"height",000o
+	private	info_string17
+info_string17:
+	db	"optix_transform",000o
+	private	info_string18
+info_string18:
+	db	"centering",000o
+	private	info_string19
+info_string19:
+	db	"x_centering",000o
+	private	info_string20
+info_string20:
+	db	"y_centering",000o
+	private	info_string21
+info_string21:
+	db	"x_offset",000o
+	private	info_string22
+info_string22:
+	db	"signed char",000o
+	private	info_string23
+info_string23:
+	db	"int8_t",000o
+	private	info_string24
+info_string24:
+	db	"y_offset",000o
+	private	info_string25
+info_string25:
+	db	"optix_centering",000o
+	private	info_string26
+info_string26:
+	db	"state",000o
+	private	info_string27
+info_string27:
+	db	"selected",000o
+	private	info_string28
+info_string28:
+	db	"_Bool",000o
+	private	info_string29
+info_string29:
+	db	"visible",000o
+	private	info_string30
+info_string30:
+	db	"needs_redraw",000o
+	private	info_string31
+info_string31:
+	db	"optix_state",000o
+	private	info_string32
+info_string32:
+	db	"render",000o
+	private	info_string33
+info_string33:
+	db	"update",000o
+	private	info_string34
+info_string34:
+	db	"child",000o
+	private	info_string35
+info_string35:
+	db	"optix_widget",000o
+	private	info_string36
+info_string36:
+	db	"text",000o
+	private	info_string37
+info_string37:
+	db	"char",000o
+	private	info_string38
+info_string38:
+	db	"optix_text",000o
+	private	info_string39
+info_string39:
+	db	"gfx_GetStringWidth",000o
+	private	info_string40
+info_string40:
+	db	"fontlib_GetStringWidth",000o
+	private	info_string41
+info_string41:
+	db	"fontlib_GetCurrentFontHeight",000o
+	private	info_string42
+info_string42:
+	db	"gfx_PrintStringXY",000o
+	private	info_string43
+info_string43:
+	db	"fontlib_SetWindow",000o
+	private	info_string44
+info_string44:
+	db	"fontlib_SetCursorPosition",000o
+	private	info_string45
+info_string45:
+	db	"fontlib_DrawString",000o
+	private	info_string46
+info_string46:
+	db	"fontlib_GetFontByIndex",000o
+	private	info_string47
+info_string47:
+	db	"fontVersion",000o
+	private	info_string48
+info_string48:
+	db	"total_glyphs",000o
+	private	info_string49
+info_string49:
+	db	"first_glyph",000o
+	private	info_string50
+info_string50:
+	db	"widths_table",000o
+	private	info_string51
+info_string51:
+	db	"int24_t",000o
+	private	info_string52
+info_string52:
+	db	"bitmaps",000o
+	private	info_string53
+info_string53:
+	db	"italic_space_adjust",000o
+	private	info_string54
+info_string54:
+	db	"space_above",000o
+	private	info_string55
+info_string55:
+	db	"space_below",000o
+	private	info_string56
+info_string56:
+	db	"weight",000o
+	private	info_string57
+info_string57:
+	db	"style",000o
+	private	info_string58
+info_string58:
+	db	"cap_height",000o
+	private	info_string59
+info_string59:
+	db	"x_height",000o
+	private	info_string60
+info_string60:
+	db	"baseline_height",000o
+	private	info_string61
+info_string61:
+	db	"fontlib_SetFont",000o
+	private	info_string62
+info_string62:
+	db	"fontlib_SetColors",000o
+	private	info_string63
+info_string63:
+	db	"fontlib_SetTransparency",000o
+	private	info_string64
+info_string64:
+	db	"optix_InitializeTextTransform",000o
+	private	info_string65
+info_string65:
+	db	"optix_RenderText_default",000o
+	private	info_string66
+info_string66:
+	db	"optix_InitializeFont",000o
+	private	info_string67
+info_string67:
+	db	"font_pack",000o
+	private	info_string68
+info_string68:
+	db	"fontlib_font_t",000o
+	section	.debug_str_offsets,"",@progbits
+	dd	info_string0
+	dd	info_string1
+	dd	info_string2
+	dd	info_string3
+	dd	info_string4
+	dd	info_string5
+	dd	info_string6
+	dd	info_string7
+	dd	info_string8
+	dd	info_string9
+	dd	info_string10
+	dd	info_string11
+	dd	info_string12
+	dd	info_string13
+	dd	info_string14
+	dd	info_string15
+	dd	info_string16
+	dd	info_string17
+	dd	info_string18
+	dd	info_string19
+	dd	info_string20
+	dd	info_string21
+	dd	info_string22
+	dd	info_string23
+	dd	info_string24
+	dd	info_string25
+	dd	info_string26
+	dd	info_string27
+	dd	info_string28
+	dd	info_string29
+	dd	info_string30
+	dd	info_string31
+	dd	info_string32
+	dd	info_string33
+	dd	info_string34
+	dd	info_string35
+	dd	info_string36
+	dd	info_string37
+	dd	info_string38
+	dd	info_string39
+	dd	info_string40
+	dd	info_string41
+	dd	info_string42
+	dd	info_string43
+	dd	info_string44
+	dd	info_string45
+	dd	info_string46
+	dd	info_string47
+	dd	info_string48
+	dd	info_string49
+	dd	info_string50
+	dd	info_string51
+	dd	info_string52
+	dd	info_string53
+	dd	info_string54
+	dd	info_string55
+	dd	info_string56
+	dd	info_string57
+	dd	info_string58
+	dd	info_string59
+	dd	info_string60
+	dd	info_string61
+	dd	info_string62
+	dd	info_string63
+	dd	info_string64
+	dd	info_string65
+	dd	info_string66
+	dd	info_string67
+	dd	info_string68
+	section	.debug_addr,"",@progbits
+	dd	debug_addr_end0-debug_addr_start0
+	private	debug_addr_start0
+debug_addr_start0:
+	dw	5
+	db	3
+	db	0
+	private	addr_table_base0
+addr_table_base0:
+	dl	func_begin0
+	dl	tmp6
+	dl	tmp8
+	dl	tmp9
+	dl	func_begin1
+	dl	tmp20
+	dl	tmp22
+	dl	tmp23
+	dl	tmp24
+	dl	func_begin2
+	dl	tmp28
+	dl	tmp32
+	dl	tmp33
+	dl	tmp34
+	private	debug_addr_end0
+debug_addr_end0:
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
+	section	.debug_line,"",@progbits
+line_table_start0:
 	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister
 	extern	__frameset
 	extern	_fontlib_GetFontByIndex
 	extern	_fontlib_SetTransparency
+	extern	_sprintf
 	extern	_fontlib_DrawString
 	extern	_gfx_GetStringWidth
 	extern	_fontlib_GetStringWidth

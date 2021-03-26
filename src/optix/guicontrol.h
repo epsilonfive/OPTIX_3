@@ -30,6 +30,8 @@ void optix_InitializeGUIState(void);
 typedef struct {
     //whether or not we should use the Windows-style cursor instead of the box-based navigation mode
     bool cursor_active;
+    //whether or not the whole GUI should be redrawn every frame
+    bool constant_refresh;
 } optix_settings_t;
 extern optix_settings_t optix_settings;
 
@@ -37,6 +39,7 @@ typedef struct {
     bool gui_needs_full_redraw;
     //if the font was loaded correctly, if not then the library should just use graphx for the text rendering
     bool font_valid;
+    bool can_press;
 } optix_gui_data_t;
 extern optix_gui_data_t optix_gui_data;
 

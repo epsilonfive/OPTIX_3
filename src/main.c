@@ -60,34 +60,34 @@ void main(void) {
          .transform = {
             .x = 0,
             .y = 0,
-            .width = 100,
-            .height = 100,
+            .width = LCD_WIDTH,
+            .height = LCD_HEIGHT,
          },
       },
       .filled = true,
-      .border_color = 224,
-      .fill_color = 255,
+      .border_color = 0,
+      .fill_color = 0,
    };
    optix_InitializeWidget(&test_rectangle.widget, OPTIX_RECTANGLE_TYPE);
-   char *test_text[] = {"1", "2", "3", "4"};
+   char *test_text[] = {"1", "2", "3", "4", "5", "6", "7", "8"};
    struct optix_menu test_menu = {
       .widget = {
          .transform = {
             .width = 50,
-            .height = 100,
+            .height = 50,
          },
       },
       .resize_info = {
          .resizable = true,
          .x_lock = true,
-         .y_lock = true,
-         .min_width = 50,
-         .min_height = 20,
+         .y_lock = false,
+         .min_width = 25,
+         .min_height = 25,
       },
-      .rows = 4,
-      .columns = 1,
+      .rows = 2,
+      .columns = 2,
    };
-   optix_InitializeMenu(&test_menu, 4, &test_text, NULL);
+   optix_InitializeMenu(&test_menu, 8, &test_text, NULL);
    test_menu.widget.centering.x_centering = OPTIX_CENTERING_LEFT;
    struct optix_divider test_divider = {
       .alignment = DIVIDER_ALIGNMENT_RIGHT,
@@ -149,7 +149,7 @@ void main(void) {
    struct optix_window test_window2 = {
       .widget = {
          .transform = {
-            .x = 200,
+            .x = 150,
             .y = 100,
             .width = 100,
             .height = 100,
@@ -176,14 +176,14 @@ void main(void) {
    //finally, align everything
    optix_RecursiveAlign(&test_title_bar.widget);
    optix_RecursiveAlign(&test_title_bar2.widget);
-   struct optix_widget *test_stack[] = {&test_rectangle.widget, &test_title_bar.widget, &test_title_bar2.widget, NULL};   
+   struct optix_widget *test_stack[] = {&test_rectangle.widget, &test_title_bar2.widget,  &test_title_bar.widget, NULL};   
    optix_InitializeColors();
+   optix_InitializeCursor();
    //graphics
    gfx_Begin();
    gfx_SetDraw(1);
    do {
       optix_UpdateGUI(&test_stack);
-      gfx_ZeroScreen();
       optix_RenderGUI(test_stack);
       gfx_Blit(1);
    } while (!(kb_Data[6] & kb_Clear));

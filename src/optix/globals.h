@@ -57,6 +57,7 @@ struct optix_transform {
 struct optix_state {
     bool selected;
     bool visible;
+    bool needs_redraw;
 };
 
 struct optix_widget {

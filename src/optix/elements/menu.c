@@ -1,25 +1,25 @@
 #include "menu.h"
 
 //quick function to align 
-void optix_AlignMenu(struct optix_menu *menu) {
+void optix_AlignMenu(struct optix_menu *menu, int menu_min) {
     int i = 0;
     while (menu->widget.child[i]) {
         struct optix_widget *child = menu->widget.child[i];
         //just continue if this won't be visible, but set it to invisible as well
-        if (i > menu->rows * menu->columns - 1) {
-            child->state.visible = false;
+        if (i > menu->rows * menu->columns + menu->menu_min - 1 || i < menu->menu_min) {
+            menu->widget.child[i]->state.visible = false;
             i++;
             continue;
-        } else child->state.visible = true;
+        } else menu->widget.child[i]->state.visible = true;
         if (child->type == OPTIX_BUTTON_TYPE) {
             int default_width = menu->widget.transform.width / menu->columns;
             int default_height = menu->widget.transform.height / menu->rows;
             //resize the last entry in the row if it isn't the right size, because it irritates me if it's not
-            child->transform.width = default_width + (i % (menu->columns - 1) == 0) * (menu->widget.transform.width % menu->columns);
+            child->transform.width = default_width + ((i - menu->menu_min) % (menu->columns - 1) == 0) * (menu->widget.transform.width % menu->columns);
             //the last row, i / menu->rows will be equal to 1
-            child->transform.height = default_height + (i / (menu->rows - 1)) * (menu->widget.transform.height % menu->rows);
-            child->transform.x = menu->widget.transform.x + i % menu->columns * default_width;
-            child->transform.y = menu->widget.transform.y + i / menu->columns * default_height;
+            child->transform.height = default_height + ((i - menu->menu_min) / (menu->rows - 1)) * (menu->widget.transform.height % menu->rows);
+            child->transform.x = menu->widget.transform.x + (i - menu->menu_min) % menu->columns * default_width;
+            child->transform.y = menu->widget.transform.y + (i - menu->menu_min) / menu->columns * default_height;
             //realign it if necessary
             if (child->child) {
                 int j = 0;
@@ -39,6 +39,35 @@ void optix_AlignMenu(struct optix_menu *menu) {
         i++;
     }
 }
+
+//check if a menu needs to be scrolled
+void optix_ScrollMenu(struct optix_menu *menu) {
+    if (optix_gui_data.can_press && kb_Data[7]) {
+        int att_option = menu->selection;
+        //first, get the number of options that are in the menu
+        int num_options = 0;
+        if (menu->widget.child) while (menu->widget.child[num_options]) num_options++;
+        if (num_options <= menu->rows * menu->columns) return;
+        if (kb_Data[7] & kb_Up)         att_option -= menu->columns;
+        else if (kb_Data[7] & kb_Down)  att_option += menu->columns;
+        else if (kb_Data[7] & kb_Right) att_option += ((menu->selection % menu->columns != 0 && menu->selection % menu->columns != menu->columns - 1) || menu->columns == 1);
+        else if (kb_Data[7] & kb_Left)  att_option -= ((menu->selection % menu->columns != 0 && menu->selection % menu->columns != menu->columns - 1) || menu->columns == 1);
+        //wrap if necessary
+        //eh just do this later
+        //actually scroll it, starting with the menu min
+        if (att_option < menu->menu_min || att_option > menu->menu_min + menu->rows * menu->columns - 1) {
+            if (att_option < menu->menu_min) menu->menu_min -= menu->columns;
+            else menu->menu_min += menu->columns;
+            dbg_sprintf(dbgout, "Success.\n");
+            optix_AlignMenu(menu, menu->menu_min);
+            menu->widget.state.needs_redraw = true;
+            dbg_sprintf(dbgout, "Menu min: %d, menu selection: %d", menu->menu_min, menu->selection);
+            optix_gui_data.can_press = false;
+            optix_cursor.current_selection = menu->widget.child[att_option];
+        }
+    }
+}
+
 
 //function to quickly initialize menu, because I was noticing I had to write this out a lot
 //it does allocate things itself so the freeing function will have to be called at some point to get rid of those
@@ -85,12 +114,18 @@ void optix_UpdateMenu_default(struct optix_widget *widget) {
     //check if it overlaps with the cursor
     if (optix_CheckTransformOverlap(&optix_cursor.widget, widget)) widget->state.selected = true;
     else widget->state.selected = false;
+    optix_ScrollMenu(menu);
     //see which option is selected
     while (widget->child[i]) {
         //we're hoping this is a button
-        if (widget->state.selected) {
-            if (found_selection) widget->child[i]->state.selected = false;
-            else {
+        if (widget->state.visible && widget->state.selected) {
+            if (found_selection) {
+                if (widget->child[i]->type == OPTIX_BUTTON_TYPE && widget->child[i]->state.selected) {
+                    widget->child[i]->state.needs_redraw = true;
+                    optix_RecursiveSetNeedsRedraw(widget->child);
+                }
+                widget->child[i]->state.selected = false;
+            } else {
                 widget->child[i]->update(widget->child[i]);
                 if (widget->child[i]->type == OPTIX_BUTTON_TYPE) {
                     //check if it's selected now
@@ -101,12 +136,18 @@ void optix_UpdateMenu_default(struct optix_widget *widget) {
                     }
                 }
             }
-        } else widget->child[i]->state.selected = false;
+        } else {
+            if (widget->child[i]->type == OPTIX_BUTTON_TYPE && widget->child[i]->state.selected) {
+                widget->child[i]->state.needs_redraw = true;
+                optix_RecursiveSetNeedsRedraw(widget->child);
+            }
+            widget->child[i]->state.selected = false;
+        }
         i++;
     }
 }
 
 void optix_RenderMenu_default(struct optix_widget *widget) {
     struct optix_menu *menu = (struct optix_menu *) widget;
-    if (widget->child != NULL) optix_RenderStack(widget->child);
+    if (widget->child) optix_RenderStack(widget->child);
 }

@@ -5,17 +5,26 @@
 //this should be a pointer to an array of pointers
 void optix_UpdateGUI(struct optix_widget *(*stack)[]) {
     kb_Scan();
-    optix_cursor.widget.update(NULL);
+    //start with this I suppose
+    optix_HandleShortcuts(*stack);
     optix_UpdateStack_TopLevel(stack);
+    optix_cursor.widget.update(NULL);
 }
 
 void optix_UpdateStack(struct optix_widget *stack[]) {
     int i = 0;
     while (stack[i]) {
         if (stack[i]->update) stack[i]->update(stack[i]);
+        if (stack[i]->state.needs_redraw && stack[i]->child) {
+            optix_RecursiveSetNeedsRedraw(stack[i]->child);
+            if (stack[i]->type == OPTIX_WINDOW_TITLE_BAR_TYPE) optix_RecursiveSetNeedsRedraw(((struct optix_window_title_bar *) stack[i])->window->widget.child);
+        }
         //if this has been selected, we want to loop through and make sure nothing else is selected
         //this is so that what's on top will be selected, or what is rendered last
-        if (stack[i]->state.selected) for (int j = 0; j < i; j++) stack[j]->state.selected = false;
+        if (stack[i]->state.selected) {
+            for (int j = 0; j < i; j++) stack[j]->state.selected = false;
+            break;
+        }
         i++;
     }
 }
@@ -29,13 +38,17 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
     bool window_needs_focus = false;
     bool found_window_with_focus = false;
     //start things out by doing the thing
-    if (!optix_settings.cursor_active) optix_cursor.current_selection = optix_FindNearestElement(optix_cursor.direction, optix_cursor.current_selection, *stack);
     //the value of i at the end will also be the number of elements in the stack
     while ((*stack)[i]) {
         //if this has been selected, we want to loop through and make sure nothing else is selected
         //this is so that what's on top will be selected, or what is rendered last
         //only one window can be selected at a time
-        if ((*stack)[i]->update != NULL) (*stack)[i]->update((*stack)[i]);
+        if ((*stack)[i]->update) (*stack)[i]->update((*stack)[i]);
+        //if it needs to be redrawn handle that
+        if ((*stack)[i]->state.needs_redraw && (*stack)[i]->child) {
+            optix_RecursiveSetNeedsRedraw((*stack)[i]->child);
+            if ((*stack)[i]->type == OPTIX_WINDOW_TITLE_BAR_TYPE) optix_RecursiveSetNeedsRedraw(((struct optix_window_title_bar *) (*stack)[i])->window->widget.child);
+        }
         //if we've found a focused window, just continue
         if (found_window_with_focus) {
             i++;
@@ -56,9 +69,26 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
             found_window = true;
             curr_window_index = i;
             curr_window = (*stack)[i];
-            //check if it needs focus   
         }
         i++;
+    }
+    //handle this as well
+    //start with this, because why not
+    if (optix_gui_data.gui_needs_full_redraw) optix_RecursiveSetNeedsRedraw(*stack);
+    //cursor stuff
+    if (!optix_settings.cursor_active && optix_cursor.direction != OPTIX_CURSOR_NO_DIR) {
+        struct optix_widget *possible_selection = NULL;
+        struct optix_widget **temp = NULL;
+        if (!optix_cursor.current_selection) optix_cursor.current_selection = (*stack)[0];
+        possible_selection = optix_FindNearestElement(optix_cursor.direction, optix_cursor.current_selection,
+        //LINE 69 HAHAHAHAHAAHAHAHAHAHA
+        (temp = (curr_window->type == OPTIX_WINDOW_TYPE ? curr_window->child : ((struct optix_window_title_bar *) curr_window)->window->widget.child)) ? temp : *stack);
+        //move the cursor to that position
+        if (possible_selection) {
+            optix_cursor.current_selection = possible_selection;
+            optix_cursor.widget.transform.x = optix_cursor.current_selection->transform.x;
+            optix_cursor.widget.transform.y = optix_cursor.current_selection->transform.y;
+        }
     }
     //if it's already the last entry don't bother
     if (!found_window) return;
@@ -81,21 +111,16 @@ void optix_RenderGUI(struct optix_widget *stack[]) {
     optix_RenderStack(stack);
     //the cursor should be on top of everything else
     optix_cursor.widget.render(NULL);
+    optix_gui_data.gui_needs_full_redraw = false;
 }
 
 void optix_RenderStack(struct optix_widget *stack[]) {
     int i = 0;
     while (stack[i]) {
-        if (stack[i]->render) stack[i]->render(stack[i]);
+        if (stack[i]->render) {
+            stack[i]->render(stack[i]);
+            stack[i]->state.needs_redraw = false;
+        }
         i++;
-    }
-}
-
-//mark the entire GUI as needing a redraw
-void optix_MarkWholeGUIVisible(struct optix_widget *stack[]) {
-    int i = 0;
-    while (stack[i]) {
-        stack[i]->state.visible = true;
-        if (stack[i]->child) optix_MarkWholeGUIVisible(stack[i]->child);
     }
 }

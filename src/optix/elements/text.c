@@ -19,7 +19,7 @@ void optix_InitializeTextTransform(struct optix_text *text) {
 
 void optix_RenderText_default(struct optix_widget *widget) {
     struct optix_text *text = (struct optix_text *) widget;
-    if (widget->state.visible) {
+    if (widget->state.visible && widget->state.needs_redraw) {
         if (optix_gui_data.font_valid) {
             fontlib_SetWindow(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height);
             fontlib_SetCursorPosition(widget->transform.x, widget->transform.y);
@@ -37,6 +37,7 @@ bool optix_InitializeFont(void) {
         fontlib_SetTransparency(true);
     }
     optix_gui_data.font_valid = (bool) font_pack;
+    dbg_sprintf(dbgout, "Font pack %d\n", (bool) font_pack);
     return (bool) font_pack;
 }
 

@@ -3,7 +3,7 @@
 //functions
 void optix_RenderRectangle_default(struct optix_widget *widget) {
     struct optix_rectangle *rectangle = (struct optix_rectangle *) widget;
-    if (widget->state.visible) {
+    if (widget->state.visible && widget->state.needs_redraw) {
         if (rectangle->filled) {
             gfx_SetColor(rectangle->fill_color);
             gfx_FillRectangle(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height);

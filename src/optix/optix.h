@@ -8,6 +8,7 @@
 #include "shapes.h"
 #include "util.h"
 #include "colors.h"
+#include "shortcuts.h"
 #include "elements/button.h"
 #include "elements/text.h"
 #include "elements/menu.h"

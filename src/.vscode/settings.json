@@ -2,6 +2,8 @@
     "files.associations": {
         "cursor.h": "c",
         "main.h": "c",
-        "vargfx.h": "c"
+        "vargfx.h": "c",
+        "shortcuts.h": "c",
+        "window.h": "c"
     }
 }

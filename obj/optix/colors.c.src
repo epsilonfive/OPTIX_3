@@ -1,92 +1,207 @@
 	section	.text,"ax",@progbits
 	assume	adl = 1
+	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\colors.c" md5 0x2afbcd1ba3fd919f5941f1891b1157b0
+	file	1 "D:\Data\Programming\TI\CEdev\include\stdint.h" md5 0x82cbaa55f693a5a19696046350717638
+	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\colors.h" md5 0xcb9ca3a82edcb38ce6cbf47806228ce5
+	file	3 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\colors.c" md5 0x2afbcd1ba3fd919f5941f1891b1157b0
 	section	.text,"ax",@progbits
 	public	_optix_InitializeColors
 _optix_InitializeColors:
+	private	func_begin0
+func_begin0:
+	loc	3 34 0
+	cfi_sections .debug_frame
+	cfi_startproc
+	loc	3 58 1 prologue_end
 	ret
+	private	tmp0
+tmp0:
 	section	.text,"ax",@progbits
+	private	func_end0
+func_end0:
+	cfi_endproc
 
 	section	.text,"ax",@progbits
 	public	_optix_WhiteText
 _optix_WhiteText:
+	private	func_begin1
+func_begin1:
+	loc	3 60 0
+	cfi_startproc
 	ld	hl, -1
+	private	tmp1
+tmp1:
+	loc	3 61 5 prologue_end
 	push	hl
+	cfi_adjust_cfa_offset 3
 	call	_gfx_SetTextFGColor
+	private	tmp2
+tmp2:
 	pop	hl
+	cfi_adjust_cfa_offset -3
 	or	a, a
 	sbc	hl, hl
+	loc	3 62 5
 	push	hl
+	cfi_adjust_cfa_offset 3
 	call	_gfx_SetTextBGColor
+	private	tmp3
+tmp3:
 	pop	hl
+	cfi_adjust_cfa_offset -3
+	loc	3 63 5
 	or	a, a
 	sbc	hl, hl
 	push	hl
+	cfi_adjust_cfa_offset 3
 	call	_gfx_SetTextTransparentColor
+	private	tmp4
+tmp4:
 	pop	hl
+	cfi_adjust_cfa_offset -3
+	loc	3 64 1
 	ret
+	private	tmp5
+tmp5:
 	section	.text,"ax",@progbits
+	private	func_end1
+func_end1:
+	cfi_endproc
+	file	4 "D:\Data\Programming\TI\CEdev\include\graphx.h" md5 0x6fbdcd846ef31912194280a2afa35252
 
 	section	.text,"ax",@progbits
 	public	_optix_BlackText
 _optix_BlackText:
+	private	func_begin2
+func_begin2:
+	loc	3 66 0
+	cfi_startproc
 	or	a, a
 	sbc	hl, hl
+	private	tmp6
+tmp6:
+	loc	3 67 5 prologue_end
 	push	hl
+	cfi_adjust_cfa_offset 3
 	call	_gfx_SetTextFGColor
+	private	tmp7
+tmp7:
 	pop	hl
+	cfi_adjust_cfa_offset -3
 	ld	hl, -1
+	loc	3 68 5
 	push	hl
+	cfi_adjust_cfa_offset 3
 	call	_gfx_SetTextBGColor
+	private	tmp8
+tmp8:
 	pop	hl
+	cfi_adjust_cfa_offset -3
+	loc	3 69 5
 	or	a, a
 	sbc	hl, hl
 	push	hl
+	cfi_adjust_cfa_offset 3
 	call	_gfx_SetTextTransparentColor
+	private	tmp9
+tmp9:
 	pop	hl
+	cfi_adjust_cfa_offset -3
+	loc	3 70 1
 	ret
+	private	tmp10
+tmp10:
 	section	.text,"ax",@progbits
+	private	func_end2
+func_end2:
+	cfi_endproc
 
 	section	.text,"ax",@progbits
 	public	_optix_SetTextColor
 _optix_SetTextColor:
+	private	func_begin3
+func_begin3:
+	loc	3 73 0
+	cfi_startproc
 	ld	hl, -3
 	call	__frameset
+	private	tmp11
+tmp11:
+	cfi_def_cfa ix, 6
+	cfi_offset ix, -6
 	ld	l, (ix + 6)
 	ld	h, (ix + 9)
+	private	tmp12
+tmp12:
+	loc	3 74 24 prologue_end
 	ld	a, (_optix_gui_data+1)
 	ld	e, 1
 	xor	a, e
+	private	tmp13
+tmp13:
+	loc	3 74 9 is_stmt 0
 	bit	0, a
 	jq	z, BB3_2
+	private	tmp14
+tmp14:
+	loc	3 76 9 is_stmt 1
 	push	hl
 	call	_gfx_SetTextFGColor
+	private	tmp15
+tmp15:
 	pop	hl
+	loc	3 0 0 is_stmt 0
 	ld	a, (ix + 9)
 	ld	l, a
+	loc	3 77 9 is_stmt 1
 	ld	(ix + -3), hl
 	push	hl
 	call	_gfx_SetTextBGColor
+	private	tmp16
+tmp16:
 	pop	hl
+	loc	3 78 9
 	ld	hl, (ix + -3)
 	push	hl
 	call	_gfx_SetTextTransparentColor
+	private	tmp17
+tmp17:
+	loc	3 0 9 is_stmt 0
 	jq	BB3_3
+	private	tmp18
+tmp18:
 BB3_2:
+	loc	3 74 54 is_stmt 1
 	ld	de, 0
 	push	de
 	pop	bc
 	ld	c, l
+	loc	3 74 58 is_stmt 0
 	ld	e, h
+	loc	3 74 36
 	push	de
 	push	bc
 	call	_fontlib_SetColors
+	private	tmp19
+tmp19:
 	pop	hl
 BB3_3:
+	loc	3 0 0
 	pop	hl
+	private	tmp20
+tmp20:
+	loc	3 80 1 is_stmt 1
 	pop	hl
 	pop	ix
+	cfi_def_cfa sp, 3
+	cfi_restore ix
 	ret
+	private	tmp21
+tmp21:
 	section	.text,"ax",@progbits
+	private	func_end3
+func_end3:
+	cfi_endproc
 
 	section	.data,"aw",@progbits
 	public	_optix_colors
@@ -115,7 +230,741 @@ _optix_colors:
 	db	158
 	db	255
 
+	section	.debug_loclists,"",@progbits
+	dd	debug_list_header_end0-debug_list_header_start0
+	private	debug_list_header_start0
+debug_list_header_start0:
+	dw	5
+	db	3
+	db	0
+	dd	2
+	private	loclists_table_base0
+loclists_table_base0:
+	dd	debug_loc0-loclists_table_base0
+	dd	debug_loc1-loclists_table_base0
+	private	debug_loc0
+debug_loc0:
+	db	4
+	uleb128	tmp12-func_begin0
+	uleb128	tmp15-func_begin0
+	db	4
+	db	82
+	db	157
+	db	8
+	db	8
+	db	4
+	uleb128	tmp18-func_begin0
+	uleb128	tmp19-func_begin0
+	db	4
+	db	82
+	db	157
+	db	8
+	db	8
+	db	0
+	private	debug_loc1
+debug_loc1:
+	db	4
+	uleb128	tmp12-func_begin0
+	uleb128	tmp15-func_begin0
+	db	1
+	db	82
+	db	4
+	uleb128	tmp18-func_begin0
+	uleb128	tmp19-func_begin0
+	db	1
+	db	82
+	db	0
+	private	debug_list_header_end0
+debug_list_header_end0:
+	section	.debug_abbrev,"",@progbits
+	private	abbrev_start49
+abbrev_start49:
+	db	1
+	db	17
+	db	1
+	db	37
+	db	37
+	db	19
+	db	5
+	db	3
+	db	37
+	db	114
+	db	23
+	db	16
+	db	23
+	db	27
+	db	37
+	db	17
+	db	27
+	db	18
+	db	6
+	db	115
+	db	23
+	db	"",214o,001o
+	db	23
+	db	0
+	db	0
+	db	2
+	db	52
+	db	0
+	db	3
+	db	37
+	db	73
+	db	19
+	db	63
+	db	25
+	db	58
+	db	11
+	db	59
+	db	11
+	db	2
+	db	24
+	db	0
+	db	0
+	db	3
+	db	22
+	db	0
+	db	73
+	db	19
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	4
+	db	19
+	db	1
+	db	11
+	db	11
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	5
+	db	13
+	db	0
+	db	3
+	db	37
+	db	73
+	db	19
+	db	58
+	db	11
+	db	59
+	db	11
+	db	56
+	db	11
+	db	0
+	db	0
+	db	6
+	db	36
+	db	0
+	db	3
+	db	37
+	db	62
+	db	11
+	db	11
+	db	11
+	db	0
+	db	0
+	db	7
+	db	46
+	db	0
+	db	17
+	db	27
+	db	18
+	db	6
+	db	64
+	db	24
+	db	122
+	db	25
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	39
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	8
+	db	46
+	db	1
+	db	17
+	db	27
+	db	18
+	db	6
+	db	64
+	db	24
+	db	122
+	db	25
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	39
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	9
+	db	72
+	db	0
+	db	127
+	db	19
+	db	125
+	db	27
+	db	0
+	db	0
+	db	10
+	db	46
+	db	1
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	5
+	db	39
+	db	25
+	db	73
+	db	19
+	db	60
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	11
+	db	5
+	db	0
+	db	73
+	db	19
+	db	0
+	db	0
+	db	12
+	db	5
+	db	0
+	db	2
+	db	34
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	73
+	db	19
+	db	0
+	db	0
+	db	0
+	section	.debug_info,"",@progbits
+	private	cu_begin0
+cu_begin0:
+	dd	debug_info_end0-debug_info_start0
+	private	debug_info_start0
+debug_info_start0:
+	dw	5
+	db	1
+	db	3
+	dd	abbrev_start49
+	db	1
+	db	0
+	dw	12
+	db	1
+	dd	str_offsets_base0
+	dd	line_table_start0
+	db	2
+	db	1
+	dd	func_end3-func_begin0
+	dd	addr_table_base0
+	dd	loclists_table_base0
+	db	2
+	db	3
+	dd	50
+
+	db	3
+	db	3
+	db	2
+	db	161
+	db	0
+	db	3
+	dd	58
+	db	29
+	db	2
+	db	74
+	db	4
+	db	23
+	db	2
+	db	45
+	db	5
+	db	4
+	dd	270
+	db	2
+	db	47
+	db	0
+	db	5
+	db	7
+	dd	270
+	db	2
+	db	49
+	db	1
+	db	5
+	db	8
+	dd	270
+	db	2
+	db	50
+	db	2
+	db	5
+	db	9
+	dd	270
+	db	2
+	db	51
+	db	3
+	db	5
+	db	10
+	dd	270
+	db	2
+	db	52
+	db	4
+	db	5
+	db	11
+	dd	270
+	db	2
+	db	53
+	db	5
+	db	5
+	db	12
+	dd	270
+	db	2
+	db	54
+	db	6
+	db	5
+	db	13
+	dd	270
+	db	2
+	db	55
+	db	7
+	db	5
+	db	14
+	dd	270
+	db	2
+	db	56
+	db	8
+	db	5
+	db	15
+	dd	270
+	db	2
+	db	58
+	db	9
+	db	5
+	db	16
+	dd	270
+	db	2
+	db	59
+	db	10
+	db	5
+	db	17
+	dd	270
+	db	2
+	db	60
+	db	11
+	db	5
+	db	18
+	dd	270
+	db	2
+	db	61
+	db	12
+	db	5
+	db	19
+	dd	270
+	db	2
+	db	62
+	db	13
+	db	5
+	db	20
+	dd	270
+	db	2
+	db	63
+	db	14
+	db	5
+	db	21
+	dd	270
+	db	2
+	db	64
+	db	15
+	db	5
+	db	22
+	dd	270
+	db	2
+	db	65
+	db	16
+	db	5
+	db	23
+	dd	270
+	db	2
+	db	66
+	db	17
+	db	5
+	db	24
+	dd	270
+	db	2
+	db	67
+	db	18
+	db	5
+	db	25
+	dd	270
+	db	2
+	db	69
+	db	19
+	db	5
+	db	26
+	dd	270
+	db	2
+	db	70
+	db	20
+	db	5
+	db	27
+	dd	270
+	db	2
+	db	72
+	db	21
+	db	5
+	db	28
+	dd	270
+	db	2
+	db	73
+	db	22
+	db	0
+	db	3
+	dd	278
+	db	6
+	db	1
+	db	15
+	db	6
+	db	5
+	db	8
+	db	1
+	db	7
+	db	1
+	dd	func_end0-func_begin0
+	db	1
+	db	87
+
+	db	33
+	db	3
+	db	34
+
+
+	db	8
+	db	2
+	dd	func_end1-func_begin1
+	db	1
+	db	87
+
+	db	34
+	db	3
+	db	60
+
+
+	db	9
+	dd	323
+	db	3
+	db	9
+	dd	338
+	db	4
+	db	9
+	dd	353
+	db	5
+	db	0
+	db	10
+	db	30
+	db	4
+	dw	1071
+
+	dd	278
+
+
+	db	11
+	dd	278
+	db	0
+	db	10
+	db	31
+	db	4
+	dw	1080
+
+	dd	278
+
+
+	db	11
+	dd	278
+	db	0
+	db	10
+	db	32
+	db	4
+	dw	1089
+
+	dd	278
+
+
+	db	11
+	dd	278
+	db	0
+	db	8
+	db	6
+	dd	func_end2-func_begin2
+	db	1
+	db	87
+
+	db	35
+	db	3
+	db	66
+
+
+	db	9
+	dd	323
+	db	7
+	db	9
+	dd	338
+	db	8
+	db	9
+	dd	353
+	db	9
+	db	0
+	db	8
+	db	10
+	dd	func_end3-func_begin3
+	db	1
+	db	84
+
+	db	36
+	db	3
+	db	73
+
+
+	db	12
+	db	1
+	db	37
+	db	3
+	db	73
+	dd	270
+	db	12
+	db	0
+	db	4
+	db	3
+	db	73
+	dd	270
+	db	9
+	dd	323
+	db	11
+	db	9
+	dd	338
+	db	12
+	db	9
+	dd	353
+	db	13
+	db	0
+	db	0
+	private	debug_info_end0
+debug_info_end0:
+	section	.debug_str_offsets,"",@progbits
+	dd	156
+	dw	5
+	dw	0
+	private	str_offsets_base0
+str_offsets_base0:
+	section	.debug_str,"MS",@progbits,1
+	private	info_string0
+info_string0:
+	db	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)",000o
+	private	info_string1
+info_string1:
+	db	"D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\colors.c",000o
+	private	info_string2
+info_string2:
+	db	"D:\Data\Programming\TI\Projects\Main\OPTIX",000o
+	private	info_string3
+info_string3:
+	db	"optix_colors",000o
+	private	info_string4
+info_string4:
+	db	"bg",000o
+	private	info_string5
+info_string5:
+	db	"unsigned char",000o
+	private	info_string6
+info_string6:
+	db	"uint8_t",000o
+	private	info_string7
+info_string7:
+	db	"window_bg",000o
+	private	info_string8
+info_string8:
+	db	"window_title_bar_unselected",000o
+	private	info_string9
+info_string9:
+	db	"window_title_bar_selected",000o
+	private	info_string10
+info_string10:
+	db	"window_border",000o
+	private	info_string11
+info_string11:
+	db	"window_title_text_fg_unselected",000o
+	private	info_string12
+info_string12:
+	db	"window_title_text_bg_unselected",000o
+	private	info_string13
+info_string13:
+	db	"window_title_text_fg_selected",000o
+	private	info_string14
+info_string14:
+	db	"window_title_text_bg_selected",000o
+	private	info_string15
+info_string15:
+	db	"button_bg_unselected",000o
+	private	info_string16
+info_string16:
+	db	"button_bg_selected",000o
+	private	info_string17
+info_string17:
+	db	"button_bg_pressed",000o
+	private	info_string18
+info_string18:
+	db	"button_border",000o
+	private	info_string19
+info_string19:
+	db	"button_text_fg_unselected",000o
+	private	info_string20
+info_string20:
+	db	"button_text_bg_unselected",000o
+	private	info_string21
+info_string21:
+	db	"button_text_fg_selected",000o
+	private	info_string22
+info_string22:
+	db	"button_text_bg_selected",000o
+	private	info_string23
+info_string23:
+	db	"button_text_fg_pressed",000o
+	private	info_string24
+info_string24:
+	db	"button_text_bg_pressed",000o
+	private	info_string25
+info_string25:
+	db	"text_fg",000o
+	private	info_string26
+info_string26:
+	db	"text_bg",000o
+	private	info_string27
+info_string27:
+	db	"highlight",000o
+	private	info_string28
+info_string28:
+	db	"divider",000o
+	private	info_string29
+info_string29:
+	db	"optix_colors_t",000o
+	private	info_string30
+info_string30:
+	db	"gfx_SetTextFGColor",000o
+	private	info_string31
+info_string31:
+	db	"gfx_SetTextBGColor",000o
+	private	info_string32
+info_string32:
+	db	"gfx_SetTextTransparentColor",000o
+	private	info_string33
+info_string33:
+	db	"optix_InitializeColors",000o
+	private	info_string34
+info_string34:
+	db	"optix_WhiteText",000o
+	private	info_string35
+info_string35:
+	db	"optix_BlackText",000o
+	private	info_string36
+info_string36:
+	db	"optix_SetTextColor",000o
+	private	info_string37
+info_string37:
+	db	"fg",000o
+	section	.debug_str_offsets,"",@progbits
+	dd	info_string0
+	dd	info_string1
+	dd	info_string2
+	dd	info_string3
+	dd	info_string4
+	dd	info_string5
+	dd	info_string6
+	dd	info_string7
+	dd	info_string8
+	dd	info_string9
+	dd	info_string10
+	dd	info_string11
+	dd	info_string12
+	dd	info_string13
+	dd	info_string14
+	dd	info_string15
+	dd	info_string16
+	dd	info_string17
+	dd	info_string18
+	dd	info_string19
+	dd	info_string20
+	dd	info_string21
+	dd	info_string22
+	dd	info_string23
+	dd	info_string24
+	dd	info_string25
+	dd	info_string26
+	dd	info_string27
+	dd	info_string28
+	dd	info_string29
+	dd	info_string30
+	dd	info_string31
+	dd	info_string32
+	dd	info_string33
+	dd	info_string34
+	dd	info_string35
+	dd	info_string36
+	dd	info_string37
+	section	.debug_addr,"",@progbits
+	dd	debug_addr_end0-debug_addr_start0
+	private	debug_addr_start0
+debug_addr_start0:
+	dw	5
+	db	3
+	db	0
+	private	addr_table_base0
+addr_table_base0:
+	dl	_optix_colors
+	dl	func_begin0
+	dl	func_begin1
+	dl	tmp2
+	dl	tmp3
+	dl	tmp4
+	dl	func_begin2
+	dl	tmp7
+	dl	tmp8
+	dl	tmp9
+	dl	func_begin3
+	dl	tmp15
+	dl	tmp16
+	dl	tmp17
+	private	debug_addr_end0
+debug_addr_end0:
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
+	section	.debug_line,"",@progbits
+line_table_start0:
 	extern	_gfx_SetTextTransparentColor
 	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister

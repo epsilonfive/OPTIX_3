@@ -1,21 +1,338 @@
 	section	.text,"ax",@progbits
 	assume	adl = 1
+	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\guicontrol.c" md5 0xda7f1cc94478738b4447b9d6b8f5c32a
+	file	1 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\guicontrol.h" md5 0x40881e44d8a2fd1ee582def26ab39043
+	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\guicontrol.c" md5 0xda7f1cc94478738b4447b9d6b8f5c32a
 	section	.text,"ax",@progbits
 	public	_optix_InitializeGUIState
 _optix_InitializeGUIState:
+	private	func_begin0
+func_begin0:
+	loc	2 7 0
+	cfi_sections .debug_frame
+	cfi_startproc
+	loc	2 8 1 prologue_end
 	ret
+	private	tmp0
+tmp0:
 	section	.text,"ax",@progbits
+	private	func_end0
+func_end0:
+	cfi_endproc
 
 	section	.bss,"aw",@nobits
 	public	_optix_settings
 _optix_settings:
-	rb	1
+	rb	2
 
 	section	.bss,"aw",@nobits
 	public	_optix_gui_data
 _optix_gui_data:
-	rb	2
+	rb	3
 
+	section	.debug_abbrev,"",@progbits
+	private	abbrev_start13
+abbrev_start13:
+	db	1
+	db	17
+	db	1
+	db	37
+	db	37
+	db	19
+	db	5
+	db	3
+	db	37
+	db	114
+	db	23
+	db	16
+	db	23
+	db	27
+	db	37
+	db	17
+	db	27
+	db	18
+	db	6
+	db	115
+	db	23
+	db	0
+	db	0
+	db	2
+	db	52
+	db	0
+	db	3
+	db	37
+	db	73
+	db	19
+	db	63
+	db	25
+	db	58
+	db	11
+	db	59
+	db	11
+	db	2
+	db	24
+	db	0
+	db	0
+	db	3
+	db	22
+	db	0
+	db	73
+	db	19
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	4
+	db	19
+	db	1
+	db	11
+	db	11
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	5
+	db	13
+	db	0
+	db	3
+	db	37
+	db	73
+	db	19
+	db	58
+	db	11
+	db	59
+	db	11
+	db	56
+	db	11
+	db	0
+	db	0
+	db	6
+	db	36
+	db	0
+	db	3
+	db	37
+	db	62
+	db	11
+	db	11
+	db	11
+	db	0
+	db	0
+	db	7
+	db	46
+	db	0
+	db	17
+	db	27
+	db	18
+	db	6
+	db	64
+	db	24
+	db	122
+	db	25
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	39
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	0
+	section	.debug_info,"",@progbits
+	private	cu_begin0
+cu_begin0:
+	dd	debug_info_end0-debug_info_start0
+	private	debug_info_start0
+debug_info_start0:
+	dw	5
+	db	1
+	db	3
+	dd	abbrev_start13
+	db	1
+	db	0
+	dw	12
+	db	1
+	dd	str_offsets_base0
+	dd	line_table_start0
+	db	2
+	db	2
+	dd	func_end0-func_begin0
+	dd	addr_table_base0
+	db	2
+	db	3
+	dd	46
+
+	db	2
+	db	3
+	db	2
+	db	161
+	db	0
+	db	3
+	dd	54
+	db	7
+	db	1
+	db	35
+	db	4
+	db	2
+	db	1
+	db	30
+	db	5
+	db	4
+	dd	77
+	db	1
+	db	32
+	db	0
+	db	5
+	db	6
+	dd	77
+	db	1
+	db	34
+	db	1
+	db	0
+	db	6
+	db	5
+	db	2
+	db	1
+	db	2
+	db	8
+	dd	92
+
+	db	2
+	db	4
+	db	2
+	db	161
+	db	1
+	db	3
+	dd	100
+	db	12
+	db	1
+	db	43
+	db	4
+	db	3
+	db	1
+	db	38
+	db	5
+	db	9
+	dd	77
+	db	1
+	db	39
+	db	0
+	db	5
+	db	10
+	dd	77
+	db	1
+	db	41
+	db	1
+	db	5
+	db	11
+	dd	77
+	db	1
+	db	42
+	db	2
+	db	0
+	db	7
+	db	2
+	dd	func_end0-func_begin0
+	db	1
+	db	87
+
+	db	13
+	db	2
+	db	7
+
+
+	db	0
+	private	debug_info_end0
+debug_info_end0:
+	section	.debug_str_offsets,"",@progbits
+	dd	60
+	dw	5
+	dw	0
+	private	str_offsets_base0
+str_offsets_base0:
+	section	.debug_str,"MS",@progbits,1
+	private	info_string0
+info_string0:
+	db	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)",000o
+	private	info_string1
+info_string1:
+	db	"D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\guicontrol.c",000o
+	private	info_string2
+info_string2:
+	db	"D:\Data\Programming\TI\Projects\Main\OPTIX",000o
+	private	info_string3
+info_string3:
+	db	"optix_settings",000o
+	private	info_string4
+info_string4:
+	db	"cursor_active",000o
+	private	info_string5
+info_string5:
+	db	"_Bool",000o
+	private	info_string6
+info_string6:
+	db	"constant_refresh",000o
+	private	info_string7
+info_string7:
+	db	"optix_settings_t",000o
+	private	info_string8
+info_string8:
+	db	"optix_gui_data",000o
+	private	info_string9
+info_string9:
+	db	"gui_needs_full_redraw",000o
+	private	info_string10
+info_string10:
+	db	"font_valid",000o
+	private	info_string11
+info_string11:
+	db	"can_press",000o
+	private	info_string12
+info_string12:
+	db	"optix_gui_data_t",000o
+	private	info_string13
+info_string13:
+	db	"optix_InitializeGUIState",000o
+	section	.debug_str_offsets,"",@progbits
+	dd	info_string0
+	dd	info_string1
+	dd	info_string2
+	dd	info_string3
+	dd	info_string4
+	dd	info_string5
+	dd	info_string6
+	dd	info_string7
+	dd	info_string8
+	dd	info_string9
+	dd	info_string10
+	dd	info_string11
+	dd	info_string12
+	dd	info_string13
+	section	.debug_addr,"",@progbits
+	dd	debug_addr_end0-debug_addr_start0
+	private	debug_addr_start0
+debug_addr_start0:
+	dw	5
+	db	3
+	db	0
+	private	addr_table_base0
+addr_table_base0:
+	dl	_optix_settings
+	dl	_optix_gui_data
+	dl	func_begin0
+	private	debug_addr_end0
+debug_addr_end0:
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
+	section	.debug_line,"",@progbits
+line_table_start0:
 	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister

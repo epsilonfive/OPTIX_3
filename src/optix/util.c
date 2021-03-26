@@ -48,6 +48,7 @@ void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
     optix_gui_data.gui_needs_full_redraw = true;
     widget->type = type;
     widget->state.selected = false;
+    widget->state.needs_redraw = true;
     widget->state.visible = true;
     widget->update = update[type];
     widget->render = render[type];
@@ -93,7 +94,6 @@ void optix_SetObjectChildren(struct optix_widget *widget, struct optix_widget **
 void optix_SetPosition(struct optix_widget *widget, int x, int y) {
     if (!widget) return;
     //start by figuring out what the difference is between the new and old positions
-    dbg_sprintf(dbgout, "Setting position...\n");
     int x_shift = x - widget->transform.x;
     int y_shift = y - widget->transform.y;
     //shift the widget itself
@@ -108,7 +108,6 @@ void optix_SetPosition(struct optix_widget *widget, int x, int y) {
             i++;
         }
     }
-    dbg_sprintf(dbgout, "Success.\n");
 }
 
 //Aligns a transform to another transform. Use OPTIX_CENTERING_LEFT, RIGHT, etc.
@@ -138,7 +137,7 @@ void optix_RecursiveAlign(struct optix_widget *widget) {
                 struct optix_widget *child = widget->child[i];
                 optix_AlignTransformToTransform(child, widget, child->centering.x_centering, child->centering.y_centering);
                 if (child->child) {
-                    if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child);
+                    if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child, 0);
                     else optix_RecursiveAlign(child);
                 }
                 i++;
@@ -153,10 +152,64 @@ void optix_RecursiveAlign(struct optix_widget *widget) {
             struct optix_widget *child = widget->child[i];
             optix_AlignTransformToTransform(child, widget, child->centering.x_centering, child->centering.y_centering);
             if (child->child) {
-                if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child);
+                if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child, 0);
                 else optix_RecursiveAlign(child);
             }
             i++;
         }
     }
 }
+
+//mark the entire GUI as needing a redraw
+void optix_RecursiveSetNeedsRedraw(struct optix_widget *stack[]) {
+    int i = 0;
+    if (!stack) return;
+    while (stack[i]) {
+        stack[i]->state.needs_redraw = true;
+        if (stack[i]->child) optix_RecursiveSetNeedsRedraw(stack[i]->child);
+        if (stack[i]->type == OPTIX_WINDOW_TITLE_BAR_TYPE) {
+            ((struct optix_window_title_bar *) stack[i])->window->widget.state.needs_redraw = true;
+            optix_RecursiveSetNeedsRedraw(((struct optix_window_title_bar *) stack[i])->window->widget.child);
+        }
+        i++;
+    }
+}
+
+//handles the [alt][tab] kind of thing where holding down [y=] in box-based mode lets you cycle between things on the top level
+void optix_CycleSelectedElement(struct optix_widget *stack[]) {
+    //start by finding the currently selected element
+    //just return if something went badly
+    if (stack && stack[0]) {
+        struct optix_widget *new_selection = NULL;
+        int i = 0;
+        int selected_index = 0;
+        while (stack[i]) {
+            if (stack[i]->state.selected) {
+                selected_index = i;
+                break;
+            }
+            i++;
+        }
+        //deselect the currently selected one
+        stack[selected_index]->state.selected = false;
+        if (stack[selected_index]->type == OPTIX_WINDOW_TITLE_BAR_TYPE)
+            ((struct optix_window_title_bar *) stack[selected_index])->window->widget.state.selected = false;
+        //check if the next one is eligible
+        new_selection = stack[selected_index + 1] ? stack[selected_index + 1] : stack[0];
+        new_selection->state.selected = new_selection->state.needs_redraw = true;
+        //apparently this could cause issues?
+        if (new_selection->type == OPTIX_WINDOW_TITLE_BAR_TYPE) {
+            struct optix_window *window = ((struct optix_window_title_bar *) new_selection)->window;
+            window->widget.state.needs_redraw = window->widget.state.selected = true;
+        }
+        if (new_selection->child) {
+            //just have it be the first child I guess
+            optix_cursor.widget.transform.x = new_selection->child[0]->transform.x;
+            optix_cursor.widget.transform.y = new_selection->child[0]->transform.y;
+        } else {
+            optix_cursor.widget.transform.x = new_selection->transform.x;
+            optix_cursor.widget.transform.y = new_selection->transform.y;
+        }
+    }
+}
+
