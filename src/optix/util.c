@@ -10,7 +10,7 @@ void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
     struct optix_window *window = (struct optix_window *) window_title_bar->window;
     void (*update[OPTIX_NUM_TYPES])(struct optix_widget *) = {
         //text
-        NULL,
+        optix_UpdateText_default,
         //sprite
         NULL,
         //button
@@ -25,6 +25,8 @@ void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
         NULL,
         //rectangle
         NULL,
+        //input box
+        optix_UpdateInputBox_default,
     };
     void (*render[OPTIX_NUM_TYPES])(struct optix_widget *) = {
         //text
@@ -43,6 +45,8 @@ void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
         optix_RenderDivider_default,
         //rectangle
         optix_RenderRectangle_default,
+        //input box
+        optix_RenderInputBox_default,
     };
     //if we're adding stuff we probably want this
     optix_gui_data.gui_needs_full_redraw = true;
@@ -56,7 +60,7 @@ void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
     switch (type) {
         case OPTIX_TEXT_TYPE:
             widget->child = NULL;
-            optix_InitializeTextTransform((struct optix_text *) widget);
+            //optix_InitializeTextTransform((struct optix_text *) widget);
             //no break here, we want it to fall through
         case OPTIX_BUTTON_TYPE:
         case OPTIX_SPRITE_TYPE:
@@ -126,34 +130,29 @@ bool optix_CheckTransformOverlap(struct optix_widget *test, struct optix_widget 
 
 //pass it in a widget, and it will recursively align all of its children
 void optix_RecursiveAlign(struct optix_widget *widget) {
-    int i = 0;
     //we need to align this as well
-    if (widget->type == OPTIX_WINDOW_TITLE_BAR_TYPE) {
-        //we're also going to refresh the title bar
-        struct optix_window_title_bar *window_title_bar = (struct optix_window_title_bar *) widget;
-        if (widget->child) {
-            i = 0;
-            while (widget->child[i]) {
-                struct optix_widget *child = widget->child[i];
-                optix_AlignTransformToTransform(child, widget, child->centering.x_centering, child->centering.y_centering);
-                if (child->child) {
-                    if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child, 0);
-                    else optix_RecursiveAlign(child);
-                }
-                i++;
-            }
-        }
-        //make us align the window instead
-        widget = (struct optix_widget *) window_title_bar->window;
+    if (widget->type == OPTIX_WINDOW_TITLE_BAR_TYPE) optix_RecursiveAlign(((struct optix_window_title_bar *) widget)->window);
+    else if (widget->type == OPTIX_INPUT_BOX_TYPE) {
+        struct optix_input_box *input_box = (struct optix_input_box *) widget;
+        optix_AlignTransformToTransform(input_box->text, input_box, input_box->text->widget.centering.x_centering, input_box->text->widget.centering.y_centering);
+        dbg_sprintf(dbgout, "Type was input box\n");
     }
     if (widget->child) {
-        i = 0;
+        int i = 0;
         while (widget->child[i]) {
             struct optix_widget *child = widget->child[i];
+            dbg_sprintf(dbgout, "Type: %d\n", child->type);
             optix_AlignTransformToTransform(child, widget, child->centering.x_centering, child->centering.y_centering);
+            //also do this if it's an input box
+            if (child->type == OPTIX_INPUT_BOX_TYPE) {
+                struct optix_input_box *input_box = (struct optix_input_box *) child;
+                optix_AlignTransformToTransform(input_box->text, input_box, input_box->text->widget.centering.x_centering, input_box->text->widget.centering.y_centering);
+                dbg_sprintf(dbgout, "Type was input box\n");
+            }
             if (child->child) {
-                if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child, 0);
-                else optix_RecursiveAlign(child);
+                //if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child, 0);
+                //else optix_RecursiveAlign(child);
+                optix_RecursiveAlign(child);
             }
             i++;
         }
@@ -183,6 +182,7 @@ void optix_CycleSelectedElement(struct optix_widget *stack[]) {
         struct optix_widget *new_selection = NULL;
         int i = 0;
         int selected_index = 0;
+        int new_index = 0;
         while (stack[i]) {
             if (stack[i]->state.selected) {
                 selected_index = i;
@@ -190,25 +190,41 @@ void optix_CycleSelectedElement(struct optix_widget *stack[]) {
             }
             i++;
         }
+        //cycle through and find the new one
+        i = stack[selected_index + 1] ? selected_index + 1 : 0;
+        while (true) {
+            if (stack[i]->type == OPTIX_WINDOW_TYPE || stack[i]->type == OPTIX_WINDOW_TITLE_BAR_TYPE) {
+                new_index = i;
+                break;
+            }
+            i++;
+            if (!stack[i]) i = 0;
+        }
         //deselect the currently selected one
         stack[selected_index]->state.selected = false;
         if (stack[selected_index]->type == OPTIX_WINDOW_TITLE_BAR_TYPE)
             ((struct optix_window_title_bar *) stack[selected_index])->window->widget.state.selected = false;
         //check if the next one is eligible
-        new_selection = stack[selected_index + 1] ? stack[selected_index + 1] : stack[0];
+        new_selection = stack[new_index];
         new_selection->state.selected = new_selection->state.needs_redraw = true;
         //apparently this could cause issues?
         if (new_selection->type == OPTIX_WINDOW_TITLE_BAR_TYPE) {
             struct optix_window *window = ((struct optix_window_title_bar *) new_selection)->window;
             window->widget.state.needs_redraw = window->widget.state.selected = true;
         }
-        if (new_selection->child) {
+        if (!optix_settings.cursor_active) {
             //just have it be the first child I guess
-            optix_cursor.widget.transform.x = new_selection->child[0]->transform.x;
-            optix_cursor.widget.transform.y = new_selection->child[0]->transform.y;
-        } else {
-            optix_cursor.widget.transform.x = new_selection->transform.x;
-            optix_cursor.widget.transform.y = new_selection->transform.y;
+            if (new_selection->type != OPTIX_WINDOW_TITLE_BAR_TYPE && new_selection->child) {
+                optix_cursor.widget.transform.x = new_selection->child[0]->transform.x;
+                optix_cursor.widget.transform.y = new_selection->child[0]->transform.y;
+            } else if (new_selection->type == OPTIX_WINDOW_TITLE_BAR_TYPE && ((struct optix_window_title_bar *) new_selection)->window->widget.child) {
+                struct optix_window_title_bar *window_title_bar = (struct optix_window_title_bar *) new_selection;
+                optix_cursor.widget.transform.x = window_title_bar->window->widget.child[0]->transform.x;
+                optix_cursor.widget.transform.y = window_title_bar->window->widget.child[0]->transform.y;
+            } else {
+                optix_cursor.widget.transform.x = new_selection->transform.x;
+                optix_cursor.widget.transform.y = new_selection->transform.y;
+            }
         }
     }
 }

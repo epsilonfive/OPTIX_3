@@ -1,276 +1,38 @@
 	section	.text,"ax",@progbits
 	assume	adl = 1
-	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\divider.c" md5 0x3a15f64f97f8f6937c7fe837940b970a
+	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\scroll_bar.c" md5 0x034ac0949ce8c5c414fa003b6e8e4a5e
 	file	1 "D:\Data\Programming\TI\CEdev\include\stdint.h" md5 0x82cbaa55f693a5a19696046350717638
 	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\globals.h" md5 0x70b8a1d50dc6a33a8fdd8a7bbb3f79c5
-	file	3 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\divider.h" md5 0x9a7e56dd9822fcd19322ff2bc7b640ac
+	file	3 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\scroll_bar.h" md5 0xfb348d35bee104202b7571ad10212bc8
 	section	.text,"ax",@progbits
-	public	_optix_RenderDivider_default
-_optix_RenderDivider_default:
+	public	_optix_UpdateScrollBar_default
+_optix_UpdateScrollBar_default:
 	private	func_begin0
 func_begin0:
-	file	4 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\divider.c" md5 0x3a15f64f97f8f6937c7fe837940b970a
-	loc	4 6 0
+	file	4 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\scroll_bar.c" md5 0x034ac0949ce8c5c414fa003b6e8e4a5e
+	loc	4 4 0
 	cfi_sections .debug_frame
 	cfi_startproc
-	ld	hl, -9
-	call	__frameset
+	call	__frameset0
 	private	tmp0
 tmp0:
 	cfi_def_cfa ix, 6
 	cfi_offset ix, -6
-	ld	iy, (ix + 6)
-	private	tmp1
-tmp1:
-	loc	4 10 23 prologue_end
-	ld	a, (iy + 16)
-	ld	l, 1
-	xor	a, l
-	private	tmp2
-tmp2:
-	loc	4 10 9 is_stmt 0
-	bit	0, a
-	jq	nz, BB0_16
-	private	tmp3
-tmp3:
-	loc	4 0 9
-	ld	hl, _optix_colors+1
-	private	tmp4
-tmp4:
-	loc	4 11 22 is_stmt 1
-	ld	a, (iy + 29)
-	loc	4 11 59 is_stmt 0
-	cp	a, 1
-	jq	z, BB0_5
-	private	tmp5
-tmp5:
-	cp	a, 3
-	jq	z, BB0_5
-	private	tmp6
-tmp6:
-	loc	4 0 59
-	ld	hl, _optix_colors+2
-	private	tmp7
-tmp7:
-BB0_5:
-	ld	de, (iy + 26)
-	private	tmp8
-tmp8:
-	ld	(ix + -3), de
-	private	tmp9
-tmp9:
-	ld	a, (hl)
-	ld	l, a
-	push	hl
-	call	_gfx_SetColor
-	private	tmp10
-tmp10:
-	pop	hl
-	private	tmp11
-tmp11:
-	loc	4 13 26 is_stmt 1
-	ld	iy, (ix + 6)
-	ld	l, (iy + 29)
-	loc	4 13 9 is_stmt 0
-	ld	a, l
-	cp	a, 2
-	jq	nc, BB0_8
-	private	tmp12
-tmp12:
-	loc	4 0 9
-	ld	iy, (ix + -3)
-	private	tmp13
-tmp13:
-	loc	4 16 42 is_stmt 1
-	ld	de, (iy + 1)
-	loc	4 16 56 is_stmt 0
-	ld	(ix + -6), de
-	ld	de, (iy + 4)
-	loc	4 16 58
-	dec	de
-	ld	(ix + -9), de
-	loc	4 16 116
-	ld	de, 0
-	loc	4 16 113
-	ld	a, l
-	cp	a, 1
-	jq	z, BB0_11
-	private	tmp14
-tmp14:
-	loc	4 0 113
-	ld	bc, 0
-	jq	BB0_12
-	private	tmp15
-tmp15:
-BB0_8:
-	ld	iy, (ix + -3)
-	loc	4 13 9 is_stmt 1
-	ld	a, l
-	sub	a, 2
-	cp	a, 2
-	ld	bc, 0
-	jq	nc, BB0_16
-	private	tmp16
-tmp16:
-	loc	4 20 41
-	ld	de, (iy + 1)
-	loc	4 20 43 is_stmt 0
-	dec	de
-	ld	(ix + -6), de
-	loc	4 20 100
-	ld	de, 0
-	loc	4 20 97
-	ld	a, l
-	cp	a, 3
-	jq	nz, BB0_14
-	private	tmp17
-tmp17:
-	loc	4 0 97
-	ld	l, (iy + 7)
-	ld	h, (iy + 8)
-	push	de
-	pop	bc
-	ld	c, l
-	ld	b, h
-	inc	bc
-	private	tmp18
-tmp18:
-BB0_14:
-	loc	4 20 47
-	ld	hl, (ix + -6)
-	add	hl, bc
-	ld	(ix + -6), hl
-	loc	4 20 134
-	ld	bc, (iy + 4)
-	loc	4 20 148
-	ld	e, (iy + 9)
-	loc	4 20 166
-	ld	iy, (ix + 6)
-	ld	a, (iy + 31)
-	loc	4 20 157
-	ld	l, a
-	rlc	l
-	sbc	hl, hl
-	ld	l, a
-	loc	4 20 155
-	add	hl, de
-	loc	4 20 17
-	push	hl
-	push	bc
-	ld	hl, (ix + -6)
-	push	hl
-	call	_gfx_VertLine
-	private	tmp19
-tmp19:
-	loc	4 0 17
-	jq	BB0_15
-	private	tmp20
-tmp20:
-BB0_11:
-	ld	a, (iy + 9)
-	push	de
-	pop	bc
-	ld	c, a
-	inc	bc
-	private	tmp21
-tmp21:
-BB0_12:
-	ld	hl, (ix + -9)
-	loc	4 16 62 is_stmt 1
-	add	hl, bc
-	push	hl
-	pop	bc
-	loc	4 16 151 is_stmt 0
-	ld	e, (iy + 7)
-	ld	d, (iy + 8)
-	loc	4 16 168
-	ld	iy, (ix + 6)
-	ld	a, (iy + 30)
-	loc	4 16 159
-	ld	l, a
-	rlc	l
-	sbc	hl, hl
-	ld	l, a
-	loc	4 16 157
-	add	hl, de
-	loc	4 16 17
-	push	hl
-	push	bc
-	ld	hl, (ix + -6)
-	push	hl
-	call	_gfx_HorizLine
-	private	tmp22
-tmp22:
-BB0_15:
-	loc	4 0 0
-	pop	hl
-	pop	hl
-	pop	hl
-	private	tmp23
-tmp23:
-BB0_16:
-	loc	4 24 1 is_stmt 1
-	ld	sp, ix
+	loc	4 8 1 prologue_end
 	pop	ix
 	cfi_def_cfa sp, 3
 	cfi_restore ix
 	ret
-	private	tmp24
-tmp24:
+	private	tmp1
+tmp1:
 	section	.text,"ax",@progbits
 	private	func_end0
 func_end0:
 	cfi_endproc
-	file	5 "D:\Data\Programming\TI\CEdev\include\graphx.h" md5 0x6fbdcd846ef31912194280a2afa35252
 
-	section	.debug_loclists,"",@progbits
-	dd	debug_list_header_end0-debug_list_header_start0
-	private	debug_list_header_start0
-debug_list_header_start0:
-	dw	5
-	db	3
-	db	0
-	dd	3
-	private	loclists_table_base0
-loclists_table_base0:
-	dd	debug_loc0-loclists_table_base0
-	dd	debug_loc1-loclists_table_base0
-	dd	debug_loc2-loclists_table_base0
-	private	debug_loc0
-debug_loc0:
-	db	4
-	uleb128	tmp9-func_begin0
-	uleb128	tmp23-func_begin0
-	db	7
-	db	116
-	db	6
-	db	148
-	db	3
-	db	35
-	db	1
-	db	159
-	db	0
-	private	debug_loc1
-debug_loc1:
-	db	4
-	uleb128	tmp1-func_begin0
-	uleb128	tmp10-func_begin0
-	db	1
-	db	85
-	db	0
-	private	debug_loc2
-debug_loc2:
-	db	4
-	uleb128	tmp1-func_begin0
-	uleb128	tmp10-func_begin0
-	db	1
-	db	85
-	db	0
-	private	debug_list_header_end0
-debug_list_header_end0:
 	section	.debug_abbrev,"",@progbits
-	private	abbrev_start60
-abbrev_start60:
+	private	abbrev_start44
+abbrev_start44:
 	db	1
 	db	17
 	db	1
@@ -291,8 +53,6 @@ abbrev_start60:
 	db	18
 	db	6
 	db	115
-	db	23
-	db	"",214o,001o
 	db	23
 	db	0
 	db	0
@@ -395,8 +155,6 @@ abbrev_start60:
 	db	10
 	db	5
 	db	0
-	db	2
-	db	34
 	db	3
 	db	37
 	db	58
@@ -410,8 +168,6 @@ abbrev_start60:
 	db	11
 	db	52
 	db	0
-	db	2
-	db	34
 	db	3
 	db	37
 	db	58
@@ -420,51 +176,6 @@ abbrev_start60:
 	db	11
 	db	73
 	db	19
-	db	0
-	db	0
-	db	12
-	db	72
-	db	0
-	db	127
-	db	19
-	db	125
-	db	27
-	db	0
-	db	0
-	db	13
-	db	46
-	db	1
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	5
-	db	39
-	db	25
-	db	73
-	db	19
-	db	60
-	db	25
-	db	63
-	db	25
-	db	0
-	db	0
-	db	14
-	db	46
-	db	1
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	5
-	db	39
-	db	25
-	db	60
-	db	25
-	db	63
-	db	25
 	db	0
 	db	0
 	db	0
@@ -477,7 +188,7 @@ debug_info_start0:
 	dw	5
 	db	1
 	db	3
-	dd	abbrev_start60
+	dd	abbrev_start44
 	db	1
 	db	0
 	dw	12
@@ -488,44 +199,31 @@ debug_info_start0:
 	db	0
 	dd	func_end0-func_begin0
 	dd	addr_table_base0
-	dd	loclists_table_base0
 	db	2
-	dd	44
+	dd	40
 	db	3
-	db	38
+	db	36
 	db	32
 	db	3
-	db	13
+	db	10
 	db	4
 	db	3
-	dd	95
+	dd	73
 	db	3
-	db	14
+	db	11
 	db	0
 	db	4
 	db	34
-	dd	337
+	dd	325
 	db	3
-	db	15
+	db	13
 	db	26
 	db	4
 	db	35
-	dd	164
+	dd	325
 	db	3
-	db	16
+	db	14
 	db	29
-	db	4
-	db	36
-	dd	276
-	db	3
-	db	18
-	db	30
-	db	4
-	db	37
-	dd	276
-	db	3
-	db	19
-	db	31
 	db	0
 	db	3
 	db	33
@@ -534,49 +232,49 @@ debug_info_start0:
 	db	63
 	db	4
 	db	4
-	dd	164
+	dd	142
 	db	2
 	db	64
 	db	0
 	db	4
 	db	7
-	dd	176
+	dd	154
 	db	2
 	db	65
 	db	1
 	db	4
 	db	16
-	dd	234
+	dd	212
 	db	2
 	db	66
 	db	10
 	db	4
 	db	24
-	dd	288
+	dd	266
 	db	2
 	db	67
 	db	14
 	db	4
 	db	30
-	dd	325
+	dd	303
 	db	2
 	db	68
 	db	17
 	db	4
 	db	31
-	dd	325
+	dd	303
 	db	2
 	db	70
 	db	20
 	db	4
 	db	32
-	dd	342
+	dd	320
 	db	2
 	db	73
 	db	23
 	db	0
 	db	5
-	dd	172
+	dd	150
 	db	6
 	db	1
 	db	15
@@ -591,25 +289,25 @@ debug_info_start0:
 	db	49
 	db	4
 	db	8
-	dd	218
+	dd	196
 	db	2
 	db	50
 	db	0
 	db	4
 	db	10
-	dd	218
+	dd	196
 	db	2
 	db	51
 	db	3
 	db	4
 	db	11
-	dd	222
+	dd	200
 	db	2
 	db	52
 	db	6
 	db	4
 	db	14
-	dd	164
+	dd	142
 	db	2
 	db	53
 	db	8
@@ -619,7 +317,7 @@ debug_info_start0:
 	db	5
 	db	3
 	db	5
-	dd	230
+	dd	208
 	db	13
 	db	1
 	db	39
@@ -634,31 +332,31 @@ debug_info_start0:
 	db	29
 	db	4
 	db	17
-	dd	164
+	dd	142
 	db	2
 	db	30
 	db	0
 	db	4
 	db	18
-	dd	164
+	dd	142
 	db	2
 	db	31
 	db	1
 	db	4
 	db	19
-	dd	276
+	dd	254
 	db	2
 	db	32
 	db	2
 	db	4
 	db	22
-	dd	276
+	dd	254
 	db	2
 	db	33
 	db	3
 	db	0
 	db	5
-	dd	284
+	dd	262
 	db	21
 	db	1
 	db	10
@@ -673,19 +371,19 @@ debug_info_start0:
 	db	57
 	db	4
 	db	25
-	dd	321
+	dd	299
 	db	2
 	db	58
 	db	0
 	db	4
 	db	27
-	dd	321
+	dd	299
 	db	2
 	db	59
 	db	1
 	db	4
 	db	28
-	dd	321
+	dd	299
 	db	2
 	db	60
 	db	2
@@ -695,101 +393,45 @@ debug_info_start0:
 	db	2
 	db	1
 	db	2
-	dd	330
+	dd	308
 	db	7
 
 	db	8
-	dd	337
+	dd	315
 	db	0
 	db	2
-	dd	95
+	dd	73
 	db	2
-	dd	337
+	dd	315
 	db	2
-	dd	176
+	dd	196
 	db	9
 	db	0
 	dd	func_end0-func_begin0
 	db	1
 	db	84
 
-	db	42
+	db	37
 	db	4
-	db	6
+	db	4
 
 
 	db	10
-	db	2
 	db	3
 	db	4
-	db	6
-	dd	337
-	db	11
-	db	0
-	db	34
 	db	4
-	db	8
-	dd	347
+	dd	315
 	db	11
-	db	1
-	db	43
+	db	38
 	db	4
-	db	7
-	dd	39
-	db	12
-	dd	409
-	db	1
-	db	12
-	dd	424
-	db	2
-	db	12
-	dd	445
-	db	3
-	db	0
-	db	13
-	db	39
 	db	5
-	dw	503
-
-	dd	172
-
-
-	db	8
-	dd	172
-	db	0
-	db	14
-	db	40
-	db	5
-	dw	630
-
-
-
-	db	8
-	dd	218
-	db	8
-	dd	218
-	db	8
-	dd	218
-	db	0
-	db	14
-	db	41
-	db	5
-	dw	604
-
-
-
-	db	8
-	dd	218
-	db	8
-	dd	218
-	db	8
-	dd	218
+	dd	35
 	db	0
 	db	0
 	private	debug_info_end0
 debug_info_end0:
 	section	.debug_str_offsets,"",@progbits
-	dd	180
+	dd	160
 	dw	5
 	dw	0
 	private	str_offsets_base0
@@ -800,7 +442,7 @@ info_string0:
 	db	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)",000o
 	private	info_string1
 info_string1:
-	db	"D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\divider.c",000o
+	db	"D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\scroll_bar.c",000o
 	private	info_string2
 info_string2:
 	db	"D:\Data\Programming\TI\Projects\Main\OPTIX",000o
@@ -899,34 +541,19 @@ info_string33:
 	db	"optix_widget",000o
 	private	info_string34
 info_string34:
-	db	"reference",000o
+	db	"num_rows",000o
 	private	info_string35
 info_string35:
-	db	"alignment",000o
+	db	"rows_displayed",000o
 	private	info_string36
 info_string36:
-	db	"width_increase",000o
+	db	"optix_scroll_bar",000o
 	private	info_string37
 info_string37:
-	db	"height_increase",000o
+	db	"optix_UpdateScrollBar_default",000o
 	private	info_string38
 info_string38:
-	db	"optix_divider",000o
-	private	info_string39
-info_string39:
-	db	"gfx_SetColor",000o
-	private	info_string40
-info_string40:
-	db	"gfx_VertLine",000o
-	private	info_string41
-info_string41:
-	db	"gfx_HorizLine",000o
-	private	info_string42
-info_string42:
-	db	"optix_RenderDivider_default",000o
-	private	info_string43
-info_string43:
-	db	"divider",000o
+	db	"scroll_bar",000o
 	section	.debug_str_offsets,"",@progbits
 	dd	info_string0
 	dd	info_string1
@@ -967,11 +594,6 @@ info_string43:
 	dd	info_string36
 	dd	info_string37
 	dd	info_string38
-	dd	info_string39
-	dd	info_string40
-	dd	info_string41
-	dd	info_string42
-	dd	info_string43
 	section	.debug_addr,"",@progbits
 	dd	debug_addr_end0-debug_addr_start0
 	private	debug_addr_start0
@@ -982,18 +604,11 @@ debug_addr_start0:
 	private	addr_table_base0
 addr_table_base0:
 	dl	func_begin0
-	dl	tmp10
-	dl	tmp19
-	dl	tmp22
 	private	debug_addr_end0
 debug_addr_end0:
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
 	section	.debug_line,"",@progbits
 line_table_start0:
 	extern	__Unwind_SjLj_Register
-	extern	_gfx_VertLine
-	extern	__frameset
 	extern	__Unwind_SjLj_Unregister
-	extern	_gfx_SetColor
-	extern	_optix_colors
-	extern	_gfx_HorizLine
+	extern	__frameset0

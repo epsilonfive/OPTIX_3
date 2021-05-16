@@ -16,7 +16,7 @@
 #include <intce.h>
 #include <math.h>
 //most things are definitely going to need this
-#include "guicontrol.h"
+#include "gui_control.h"
 #include "colors.h"
 //#include "util.h"
 

@@ -7,7 +7,7 @@ void optix_HandleShortcuts(struct optix_widget *stack[]) {
                 optix_AltTab(stack);
                 optix_gui_data.can_press = false;
             }
-        } else if (!(kb_Data[5] & kb_Tan)) optix_gui_data.can_press = true;
+        } //else if (!(kb_Data[5] & kb_Tan)) optix_gui_data.can_press = true;
     }
 }
 

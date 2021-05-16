@@ -5,7 +5,7 @@
 #include "globals.h"
 
 //definitions
-#define OPTIX_NUM_TYPES             8
+#define OPTIX_NUM_TYPES             9
 #define OPTIX_TEXT_TYPE             0
 #define OPTIX_SPRITE_TYPE           1
 #define OPTIX_BUTTON_TYPE           2
@@ -14,6 +14,7 @@
 #define OPTIX_WINDOW_TITLE_BAR_TYPE 5
 #define OPTIX_DIVIDER_TYPE          6
 #define OPTIX_RECTANGLE_TYPE        7
+#define OPTIX_INPUT_BOX_TYPE        8
 //centering types
 //always the same
 #define OPTIX_CENTERING_CENTERED    1
@@ -40,7 +41,17 @@ typedef struct {
     //if the font was loaded correctly, if not then the library should just use graphx for the text rendering
     bool font_valid;
     bool can_press;
+    //skKey
+    uint8_t key;
 } optix_gui_data_t;
 extern optix_gui_data_t optix_gui_data;
+
+//do this later
+/*struct optix_context_t {
+    struct optix_settings_t settings;
+    struct optix_gui_data_t data;
+    struct optix_widget **stack;
+};*/
+
 
 #endif

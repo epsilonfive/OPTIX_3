@@ -2,11 +2,14 @@
 
 optix_colors_t optix_colors = {
     .bg =                              BG_COLOR_DEFAULT,
+    .border_bevel_dark =               WINDOW_BORDER_BEVEL_DARK_DEFAULT,
+    .border_bevel_light =              WINDOW_BORDER_BEVEL_LIGHT_DEFAULT,
+    .border_bevel_medium =             WINDOW_BORDER_BEVEL_MEDIUM_DEFAULT,
     //window colors
     .window_bg =                       WINDOW_BG_COLOR_DEFAULT,
     .window_title_bar_unselected =     WINDOW_TITLE_BAR_COLOR_UNSELECTED_DEFAULT,
     .window_title_bar_selected =       WINDOW_TITLE_BAR_COLOR_SELECTED_DEFAULT,
-    .window_border =                   WINDOW_BORDER_COLOR_DEFAULT,
+    //.window_border =                 WINDOW_BORDER_COLOR_DEFAULT,
     .window_title_text_fg_unselected = WINDOW_TITLE_TEXT_FG_COLOR_UNSELECTED_DEFAULT,
     .window_title_text_bg_unselected = WINDOW_TITLE_TEXT_BG_COLOR_UNSELECTED_DEFAULT,
     .window_title_text_fg_selected =   WINDOW_TITLE_TEXT_FG_COLOR_SELECTED_DEFAULT,
@@ -15,7 +18,7 @@ optix_colors_t optix_colors = {
     .button_bg_unselected =            BUTTON_BG_COLOR_UNSELECTED_DEFAULT,
     .button_bg_selected =              BUTTON_BG_COLOR_SELECTED_DEFAULT,
     .button_bg_pressed =               BUTTON_BG_COLOR_PRESSED_DEFAULT,
-    .button_border =                   BUTTON_BORDER_COLOR_DEFAULT,
+    //.button_border =                 BUTTON_BORDER_COLOR_DEFAULT,
     .button_text_fg_unselected =       BUTTON_TEXT_FG_COLOR_UNSELECTED_DEFAULT,
     .button_text_bg_unselected =       BUTTON_TEXT_BG_COLOR_UNSELECTED_DEFAULT,
     .button_text_fg_selected =         BUTTON_TEXT_FG_COLOR_SELECTED_DEFAULT,

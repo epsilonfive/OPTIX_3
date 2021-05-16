@@ -1,430 +1,276 @@
 	section	.text,"ax",@progbits
 	assume	adl = 1
-	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\menu.c" md5 0x7d6980f211a10d61f29e58eb7f9a9482
+	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\menu.c" md5 0x8b319cdd344872f7259955984ce04de4
 	file	1 "D:\Data\Programming\TI\CEdev\include\stdint.h" md5 0x82cbaa55f693a5a19696046350717638
-	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\globals.h" md5 0xae75058b2ac38408e594dce96e184587
-	file	3 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/../elements\text.h" md5 0x3e22d29b3dbcacfc046b9d694733def6
-	file	4 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/../elements\sprite.h" md5 0xcf72d8106dd58f386ba8ec8a2e3021b4
-	file	5 "D:\Data\Programming\TI\CEdev\include\graphx.h" md5 0x6fbdcd846ef31912194280a2afa35252
-	file	6 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/../elements\menu.h" md5 0xd7ee58fed646a0eb393a829641efa1d4
+	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\globals.h" md5 0x70b8a1d50dc6a33a8fdd8a7bbb3f79c5
+	file	3 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/../elements\menu.h" md5 0x3c6ac52036998cae58e39e757749df25
+	file	4 "D:\Data\Programming\TI\CEdev\include\graphx.h" md5 0x6fbdcd846ef31912194280a2afa35252
 	section	.text,"ax",@progbits
-	public	_optix_AlignMenu
-_optix_AlignMenu:
+	public	_optix_GetMenuOptionWidth
+_optix_GetMenuOptionWidth:
 	private	func_begin0
 func_begin0:
-	file	7 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\menu.c" md5 0x7d6980f211a10d61f29e58eb7f9a9482
-	loc	7 4 0
+	file	5 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\menu.c" md5 0x8b319cdd344872f7259955984ce04de4
+	loc	5 158 0
 	cfi_sections .debug_frame
 	cfi_startproc
-	ld	hl, -30
+	ld	hl, -6
 	call	__frameset
 	private	tmp0
 tmp0:
 	cfi_def_cfa ix, 6
 	cfi_offset ix, -6
 	ld	iy, (ix + 6)
-	ld	de, 0
-	ld	bc, 3
+	ld	bc, (ix + 12)
+	ld	l, (ix + 15)
+	ld	h, (ix + 16)
 	private	tmp1
 tmp1:
-BB0_1:
-	loc	7 6 25 prologue_end
-	ld	hl, (iy + 23)
-	loc	7 6 12 is_stmt 0
-	ld	(ix + -3), hl
-	push	de
-	pop	hl
-	call	__imulu
+	loc	5 159 13 prologue_end
+	ld	de, 0
+	ld	e, l
+	ld	d, h
 	private	tmp2
 tmp2:
-	push	hl
-	pop	bc
-	ld	hl, (ix + -3)
-	add	hl, bc
-	ld	hl, (hl)
-	ld	(ix + -3), hl
-	loc	7 6 5
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB0_15
-	private	tmp3
-tmp3:
-	loc	7 9 23 is_stmt 1
-	ld	bc, (iy + 44)
-	loc	7 9 36 is_stmt 0
-	ld	hl, (iy + 47)
-	ld	(ix + -9), hl
-	ld	(ix + -12), bc
-	loc	7 9 28
-	call	__imulu
-	private	tmp4
-tmp4:
-	loc	7 9 52
-	ld	bc, (iy + 41)
-	push	hl
-	pop	iy
-	loc	7 9 44
-	add	iy, bc
-	ld	(ix + -6), de
-	loc	7 9 65
-	ex	de, hl
-	private	tmp5
-tmp5:
-	loc	7 0 65
-	ld	(ix + -15), bc
-	loc	7 9 65
-	or	a, a
-	sbc	hl, bc
-	call	__setflag
-	private	tmp6
-tmp6:
-	jq	m, BB0_4
-	private	tmp7
-tmp7:
-	loc	7 0 0
-	lea	bc, iy + 0
-	loc	7 9 65
-	ld	hl, (ix + -6)
-	or	a, a
-	sbc	hl, bc
-	call	__setflag
-	private	tmp8
-tmp8:
-	jq	m, BB0_5
-	private	tmp9
-tmp9:
-BB0_4:
-	loc	7 10 50 is_stmt 1
-	ld	iy, (ix + -3)
-	ld	(iy + 15), 0
-	private	tmp10
-tmp10:
-BB0_14:
-	loc	7 0 50 is_stmt 0
-	ld	de, (ix + -6)
-	inc	de
-	private	tmp11
-tmp11:
-	ld	iy, (ix + 6)
-	ld	bc, 3
-	jq	BB0_1
-	private	tmp12
-tmp12:
-BB0_5:
-	ld	iy, (ix + -3)
-	private	tmp13
-tmp13:
-	loc	7 13 53 is_stmt 1
-	ld	(iy + 15), 1
-	private	tmp14
-tmp14:
-	loc	7 14 20
-	ld	a, (iy)
-	private	tmp15
-tmp15:
-	loc	7 14 13 is_stmt 0
-	cp	a, 2
-	jq	nz, BB0_14
-	private	tmp16
-tmp16:
-	loc	7 0 13
-	ld	iy, (ix + 6)
-	private	tmp17
-tmp17:
-	loc	7 15 56 is_stmt 1
-	ld	c, (iy + 7)
-	ld	b, (iy + 8)
-	loc	7 15 33 is_stmt 0
-	ld	de, 0
+	loc	5 159 19 is_stmt 0
 	push	de
 	pop	hl
-	ld	l, c
-	ld	h, b
-	loc	7 15 62
-	ld	(ix + -27), hl
-	ld	bc, (ix + -9)
 	call	__idivs
-	private	tmp18
-tmp18:
-	ld	(ix + -18), hl
-	private	tmp19
-tmp19:
-	loc	7 16 57 is_stmt 1
-	ld	a, (iy + 9)
-	loc	7 16 34 is_stmt 0
-	ld	e, a
-	ld	(ix + -24), de
-	loc	7 16 64
-	ex	de, hl
-	ld	bc, (ix + -12)
-	call	__idivs
-	private	tmp20
-tmp20:
-	ld	(ix + -21), hl
-	private	tmp21
-tmp21:
-	loc	7 18 58 is_stmt 1
-	ld	hl, (ix + -6)
-	ld	de, (ix + -15)
-	or	a, a
-	sbc	hl, de
-	ld	de, (ix + -9)
-	loc	7 18 93 is_stmt 0
-	push	de
-	pop	bc
-	dec	bc
-	ld	(ix + -15), hl
-	loc	7 18 76
+	private	tmp3
+tmp3:
+	ld	(ix + -3), hl
+	loc	5 159 49
+	inc	iy
+	private	tmp4
+tmp4:
+	loc	5 159 54
+	lea	hl, iy + 0
 	call	__irems
-	private	tmp22
-tmp22:
-	ld	(ix + -30), hl
-	private	tmp23
-tmp23:
-	loc	7 0 76
-	ld	hl, (ix + -18)
-	push	de
-	pop	bc
+	private	tmp5
+tmp5:
+	ld	(ix + -6), hl
+	ld	hl, (ix + -3)
 	call	__imulu
-	private	tmp24
-tmp24:
+	private	tmp6
+tmp6:
+	loc	5 0 54
 	push	hl
-	pop	de
-	ld	hl, (ix + -27)
+	pop	bc
+	private	tmp7
+tmp7:
+	ex	de, hl
+	private	tmp8
+tmp8:
 	or	a, a
-	sbc	hl, de
+	sbc	hl, bc
 	push	hl
 	pop	iy
-	loc	7 18 104
-	ld	hl, (ix + -30)
+	loc	5 159 70
+	ld	hl, (ix + -6)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB0_8
-	private	tmp25
-tmp25:
+	jq	z, BB0_2
+	private	tmp9
+tmp9:
 	ld	iy, 0
-	private	tmp26
-tmp26:
-BB0_8:
-	loc	7 18 52
-	ld	de, (ix + -18)
+BB0_2:
+	loc	5 159 30
+	ld	de, (ix + -3)
 	add	iy, de
-	loc	7 18 38
+	loc	5 159 5
 	ex	de, hl
 	ld	e, iyl
 	ld	d, iyh
 	ex	de, hl
-	loc	7 18 36
-	ld	iy, (ix + -3)
-	ld	(iy + 7), l
-	ld	(iy + 8), h
-	ld	iy, (ix + -12)
-	loc	7 20 92 is_stmt 1
-	lea	bc, iy + 0
-	dec	bc
-	loc	7 20 78 is_stmt 0
-	ld	hl, (ix + -15)
-	call	__idivs
-	private	tmp27
-tmp27:
-	ld	(ix + -27), hl
-	ld	hl, (ix + -21)
-	private	tmp28
-tmp28:
-	loc	7 14 13 is_stmt 1
-	ld	d, l
-	ld	e, iyl
-	mlt	de
-	ld	bc, (ix + -24)
-	ld	a, c
-	sub	a, e
-	ld	d, a
-	ld	bc, (ix + -27)
-	ld	e, c
-	private	tmp29
-tmp29:
-	loc	7 20 98
-	mlt	de
-	loc	7 20 54 is_stmt 0
-	ld	a, e
-	add	a, l
-	loc	7 20 37
-	ld	iy, (ix + -3)
-	ld	(iy + 9), a
-	ld	iy, (ix + 6)
-	loc	7 21 57 is_stmt 1
-	ld	hl, (iy + 1)
-	loc	7 22 82
-	ld	(ix + -12), hl
-	ld	iy, (ix + -15)
-	lea	hl, iy + 0
-	ld	bc, (ix + -9)
-	call	__idivs
-	private	tmp30
-tmp30:
-	push	hl
-	pop	de
-	call	__imulu
-	private	tmp31
-tmp31:
-	loc	7 0 82 is_stmt 0
-	push	hl
-	pop	bc
-	lea	hl, iy + 0
-	or	a, a
-	sbc	hl, bc
-	loc	7 21 98 is_stmt 1
-	ld	bc, (ix + -18)
-	call	__imulu
-	private	tmp32
-tmp32:
-	loc	7 21 59 is_stmt 0
-	ld	bc, (ix + -12)
-	add	hl, bc
-	loc	7 21 32
-	ld	iy, (ix + -3)
-	ld	(iy + 1), hl
-	loc	7 22 57 is_stmt 1
-	ld	iy, (ix + 6)
-	ld	iy, (iy + 4)
-	loc	7 22 98 is_stmt 0
-	ex	de, hl
-	ld	bc, (ix + -21)
-	call	__imulu
-	private	tmp33
-tmp33:
-	loc	7 0 98
-	lea	de, iy + 0
-	loc	7 22 59
-	add	hl, de
-	ld	iy, (ix + -3)
-	loc	7 22 32
-	ld	(iy + 4), hl
-	private	tmp34
-tmp34:
-	loc	7 24 24 is_stmt 1
-	ld	de, (iy + 23)
-	private	tmp35
-tmp35:
-	loc	7 24 17 is_stmt 0
-	push	de
-	pop	hl
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB0_14
-	private	tmp36
-tmp36:
-	loc	7 26 31 is_stmt 1
-	or	a, a
-	sbc	hl, hl
-	private	tmp37
-tmp37:
-BB0_10:
-	loc	7 0 31 is_stmt 0
-	ld	(ix + -9), hl
-	loc	7 26 24
-	push	hl
-	pop	bc
-	push	de
-	pop	hl
-	add	hl, bc
-	ld	iy, (hl)
-	loc	7 26 17
-	lea	hl, iy + 0
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB0_14
-	private	tmp38
-tmp38:
-	loc	7 27 42 is_stmt 1
-	ld	a, (iy)
-	private	tmp39
-tmp39:
-	loc	7 27 25 is_stmt 0
-	or	a, a
-	jq	nz, BB0_13
-	private	tmp40
-tmp40:
-	loc	7 29 110 is_stmt 1
-	ld	a, (iy + 10)
-	loc	7 29 152 is_stmt 0
-	ld	l, (iy + 11)
-	loc	7 29 25
-	push	hl
-	ld	l, a
-	push	hl
-	ld	hl, (ix + -3)
-	push	hl
-	push	iy
-	call	_optix_AlignTransformToTransform
-	private	tmp41
-tmp41:
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-	private	tmp42
-tmp42:
-	loc	7 26 31 is_stmt 1
-	ld	iy, (ix + -3)
-	ld	de, (iy + 23)
-	private	tmp43
-tmp43:
-BB0_13:
-	loc	7 26 17 is_stmt 0
-	ld	bc, 3
-	ld	hl, (ix + -9)
-	add	hl, bc
-	jq	BB0_10
-	private	tmp44
-tmp44:
-BB0_15:
-	loc	7 41 1 is_stmt 1
 	ld	sp, ix
 	pop	ix
 	cfi_def_cfa sp, 3
 	cfi_restore ix
 	ret
-	private	tmp45
-tmp45:
+	private	tmp10
+tmp10:
 	section	.text,"ax",@progbits
 	private	func_end0
 func_end0:
 	cfi_endproc
-	file	8 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\util.h" md5 0x92a3bb02bc803408866c35ed0ca60423
 
 	section	.text,"ax",@progbits
-	public	_optix_ScrollMenu
-_optix_ScrollMenu:
+	public	_optix_GetMenuOptionHeight
+_optix_GetMenuOptionHeight:
 	private	func_begin1
 func_begin1:
-	loc	7 44 0
+	loc	5 162 0 is_stmt 1
 	cfi_startproc
-	ld	hl, -12
+	ld	hl, -6
 	call	__frameset
-	private	tmp46
-tmp46:
+	private	tmp11
+tmp11:
 	cfi_def_cfa ix, 6
 	cfi_offset ix, -6
+	ld	de, (ix + 9)
+	ld	a, (ix + 18)
+	private	tmp12
+tmp12:
+	loc	5 163 13 prologue_end
+	ld	iy, 0
+	ld	iyl, a
+	private	tmp13
+tmp13:
+	loc	5 163 20 is_stmt 0
+	lea	hl, iy + 0
+	push	de
+	pop	bc
+	call	__idivs
+	private	tmp14
+tmp14:
+	ld	(ix + -3), hl
+	loc	5 163 46
+	ld	hl, (ix + 6)
+	private	tmp15
+tmp15:
+	ld	bc, (ix + 12)
+	private	tmp16
+tmp16:
+	call	__idivs
+	private	tmp17
+tmp17:
+	ld	(ix + -6), hl
+	push	de
+	pop	bc
+	private	tmp18
+tmp18:
+	loc	5 163 64
+	dec	de
+	ld	hl, (ix + -3)
+	call	__imulu
+	private	tmp19
+tmp19:
+	loc	5 0 64
+	push	hl
+	pop	bc
+	private	tmp20
+tmp20:
+	lea	hl, iy + 0
+	or	a, a
+	sbc	hl, bc
+	push	hl
+	pop	bc
+	loc	5 163 69
+	ld	hl, (ix + -6)
+	or	a, a
+	sbc	hl, de
+	jq	z, BB1_2
+	private	tmp21
+tmp21:
+	ld	bc, 0
+	private	tmp22
+tmp22:
+BB1_2:
+	loc	5 163 28
+	ld	a, c
+	ld	hl, (ix + -3)
+	add	a, l
+	loc	5 163 5
+	ld	sp, ix
+	pop	ix
+	cfi_def_cfa sp, 3
+	cfi_restore ix
+	ret
+	private	tmp23
+tmp23:
+	section	.text,"ax",@progbits
+	private	func_end1
+func_end1:
+	cfi_endproc
+
+	section	.text,"ax",@progbits
+	public	_optix_UpdateMenu_default
+_optix_UpdateMenu_default:
+	private	func_begin2
+func_begin2:
+	loc	5 166 0 is_stmt 1
+	cfi_startproc
+	ld	hl, -18
+	call	__frameset
+	private	tmp24
+tmp24:
+	cfi_def_cfa ix, 6
+	cfi_offset ix, -6
+	ld	iy, (ix + 6)
+	private	tmp25
+tmp25:
+	loc	5 0 0 prologue_end
+	ld	hl, _optix_cursor
 	ld	de, 0
-	private	tmp47
-tmp47:
-	loc	7 45 24 prologue_end
-	ld	a, (_optix_gui_data+2)
-	ld	l, 1
-	xor	a, l
-	loc	7 45 34 is_stmt 0
+	private	tmp26
+tmp26:
+	loc	5 170 34
+	ld	(ix + -3), de
+	ld	de, (iy + 52)
+	loc	5 170 26 is_stmt 0
+	ld	(iy + 67), de
+	private	tmp27
+tmp27:
+	loc	5 172 9 is_stmt 1
+	push	iy
+	push	hl
+	call	_optix_CheckTransformOverlap
+	private	tmp28
+tmp28:
+	pop	hl
+	pop	hl
+	ld	c, 1
+	private	tmp29
+tmp29:
+	loc	5 172 9 is_stmt 0
+	xor	a, c
 	bit	0, a
-	jq	nz, BB1_34
-	private	tmp48
-tmp48:
-	loc	7 0 34
+	jq	nz, BB2_8
+	private	tmp30
+tmp30:
+	loc	5 0 9
+	ld	a, (_optix_settings)
+	ld	l, a
+	ld	iy, (ix + 6)
+	private	tmp31
+tmp31:
+	loc	5 174 37 is_stmt 1
+	or	a, (iy + 14)
+	or	a, a
+	jq	nz, BB2_3
+	private	tmp32
+tmp32:
+	loc	5 175 37
+	ld	de, (iy + 67)
+	loc	5 175 29 is_stmt 0
+	ld	(iy + 52), de
+	loc	5 176 40 is_stmt 1
+	ld	(iy + 16), 1
+	private	tmp33
+tmp33:
+BB2_3:
+	loc	5 178 32
+	ld	(iy + 14), 1
+	loc	5 180 13
+	ld	a, l
+	or	a, a
+	jq	nz, BB2_9
+	private	tmp34
+tmp34:
+	loc	5 197 32
+	ld	a, (_optix_gui_data+2)
+	xor	a, c
+	loc	5 197 42 is_stmt 0
+	bit	0, a
+	jq	nz, BB2_6
+	private	tmp35
+tmp35:
+	loc	5 0 42
 	ld	hl, -720866
-	loc	7 45 37
+	push	hl
+	pop	de
+	loc	5 197 45
 	push	de
 	ld	e, (hl)
 	inc	hl
@@ -432,1345 +278,1780 @@ tmp48:
 	ld	l, e
 	ld	h, d
 	pop	de
-	private	tmp49
-tmp49:
-	loc	7 45 9
+	private	tmp36
+tmp36:
+	loc	5 197 17
 	ld	a, l
 	or	a, a
-	jq	z, BB1_34
+	jq	nz, BB2_28
+	private	tmp37
+tmp37:
+BB2_6:
+	loc	5 214 48 is_stmt 1
+	call	_kb_AnyKey
+	private	tmp38
+tmp38:
+	loc	5 214 47 is_stmt 0
+	or	a, a
+	jq	z, BB2_19
+	private	tmp39
+tmp39:
+	loc	5 0 47
+	ld	a, 0
+	jq	BB2_20
+	private	tmp40
+tmp40:
+BB2_8:
+	ld	hl, -1
+	ld	de, (ix + 6)
+	push	de
+	pop	iy
+	private	tmp41
+tmp41:
+	loc	5 228 25 is_stmt 1
+	ld	(iy + 52), hl
+	loc	5 229 32
+	ld	(iy + 14), 0
+	jq	BB2_47
+	private	tmp42
+tmp42:
+BB2_9:
+	loc	5 181 83
+	ld	bc, (iy + 61)
+	loc	5 181 110 is_stmt 0
+	ld	l, (iy + 7)
+	ld	h, (iy + 8)
+	private	tmp43
+tmp43:
+	loc	5 159 13 is_stmt 1
+	ld	de, 0
+	ld	e, l
+	ld	d, h
+	private	tmp44
+tmp44:
+	loc	5 159 19 is_stmt 0
+	push	de
+	pop	hl
+	call	__idivs
+	private	tmp45
+tmp45:
+	push	hl
+	pop	iy
+	loc	5 159 54
+	ld	hl, 1
+	call	__irems
+	private	tmp46
+tmp46:
+	ld	(ix + -9), hl
+	ld	(ix + -6), iy
+	lea	hl, iy + 0
+	ld	(ix + -12), bc
+	private	tmp47
+tmp47:
+	loc	5 0 54
+	call	__imulu
+	private	tmp48
+tmp48:
+	push	hl
+	pop	bc
+	ex	de, hl
+	private	tmp49
+tmp49:
+	or	a, a
+	sbc	hl, bc
+	push	hl
+	pop	de
+	loc	5 159 70
+	ld	hl, (ix + -9)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ex	de, hl
+	jq	z, BB2_11
 	private	tmp50
 tmp50:
-	loc	7 0 9
-	ld	iy, (ix + 6)
+	or	a, a
+	sbc	hl, hl
 	private	tmp51
 tmp51:
-	ld	hl, -1
+BB2_11:
+	loc	5 159 30
+	ld	de, (ix + -6)
+	add	hl, de
 	private	tmp52
 tmp52:
+	loc	5 0 30
 	ld	(ix + -6), hl
 	private	tmp53
 tmp53:
-	loc	7 49 26 is_stmt 1
-	ld	iy, (iy + 23)
-	private	tmp54
-tmp54:
-	loc	7 49 13 is_stmt 0
-	lea	hl, iy + 0
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB1_5
-	private	tmp55
-tmp55:
-	loc	7 0 0
-	ld	de, -1
-	private	tmp56
-tmp56:
-BB1_4:
-	loc	7 49 40
-	ld	hl, (iy)
-	private	tmp57
-tmp57:
-	loc	7 49 33
-	inc	de
-	private	tmp58
-tmp58:
-	lea	iy, iy + 3
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	nz, BB1_4
-	private	tmp59
-tmp59:
-BB1_5:
-	loc	7 0 33
 	ld	hl, (ix + 6)
 	push	hl
 	pop	iy
-	ld	hl, (iy + 38)
+	private	tmp54
+tmp54:
+	loc	5 182 72 is_stmt 1
+	ld	bc, (iy + 58)
+	loc	5 182 136 is_stmt 0
+	ld	a, (iy + 9)
+	private	tmp55
+tmp55:
+	loc	5 0 136
+	ld	de, 0
+	private	tmp56
+tmp56:
+	loc	5 163 13 is_stmt 1
+	ld	e, a
+	private	tmp57
+tmp57:
+	loc	5 163 20 is_stmt 0
+	push	de
+	pop	hl
+	call	__idivs
+	private	tmp58
+tmp58:
+	loc	5 163 64
+	push	bc
+	pop	iy
+	dec	iy
+	ld	(ix + -9), hl
+	call	__imulu
+	private	tmp59
+tmp59:
+	loc	5 0 64
+	push	hl
+	pop	bc
 	private	tmp60
 tmp60:
-	ld	(ix + -9), hl
+	ex	de, hl
 	private	tmp61
 tmp61:
-	loc	7 50 34 is_stmt 1
-	ld	bc, (iy + 44)
-	loc	7 50 47 is_stmt 0
-	ld	hl, (iy + 47)
-	ld	(ix + -3), hl
-	loc	7 50 39
-	call	__imulu
+	lea	de, iy + 0
+	or	a, a
+	sbc	hl, bc
+	push	hl
+	pop	iy
+	loc	5 163 69
+	push	de
+	pop	hl
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB2_13
 	private	tmp62
 tmp62:
-	push	hl
-	pop	bc
+	ld	iy, 0
 	private	tmp63
 tmp63:
-	loc	7 50 13
-	or	a, a
-	sbc	hl, de
-	call	__setflag
+BB2_13:
+	loc	5 163 28
+	ld	bc, (ix + -9)
+	add	iy, bc
 	private	tmp64
 tmp64:
-	loc	7 0 13
-	ld	iy, -720866
-	loc	7 50 13
-	jq	p, BB1_34
-	private	tmp65
-tmp65:
-	loc	7 51 13 is_stmt 1
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	loc	7 51 24 is_stmt 0
-	ld	a, l
-	private	tmp66
-tmp66:
-	loc	7 51 13
-	bit	3, a
-	ld	(ix + -12), bc
-	jq	nz, BB1_11
-	private	tmp67
-tmp67:
-	loc	7 0 13
-	ld.sis	bc, 1
-	private	tmp68
-tmp68:
-	loc	7 52 18 is_stmt 1
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	loc	7 52 29 is_stmt 0
-	call	__sand
-	private	tmp69
-tmp69:
-	ld	a, l
+	loc	5 184 32 is_stmt 1
+	ld	(ix + -9), iy
+	ld	a, (_optix_gui_data+2)
 	ld	l, 1
 	xor	a, l
+	loc	5 184 42 is_stmt 0
+	bit	0, a
+	private	tmp65
+tmp65:
+	jq	nz, BB2_37
+	private	tmp66
+tmp66:
+	loc	5 0 42
+	ld	hl, -720868
+	loc	5 184 45
+	ld	c, (hl)
+	inc	hl
+	ld	b, (hl)
+	dec	hl
+	loc	5 184 56
+	ld	a, c
+	private	tmp67
+tmp67:
+	loc	5 184 17
+	bit	1, a
+	jq	nz, BB2_33
+	private	tmp68
+tmp68:
+	loc	5 188 52 is_stmt 1
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	loc	5 188 63 is_stmt 0
+	ld	a, l
+	private	tmp69
+tmp69:
+	loc	5 188 24
+	bit	2, a
+	jq	z, BB2_37
 	private	tmp70
 tmp70:
-	loc	7 52 18
-	bit	0, a
-	jq	z, BB1_12
+	loc	5 0 24
+	ld	iy, (ix + 6)
 	private	tmp71
 tmp71:
-	loc	7 53 18 is_stmt 1
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	loc	7 53 29 is_stmt 0
-	ld	a, l
+	loc	5 189 35 is_stmt 1
+	ld	hl, (iy + 55)
+	loc	5 189 39 is_stmt 0
+	ld	de, (ix + -12)
+	or	a, a
+	sbc	hl, de
+	push	hl
+	pop	de
+	loc	5 189 29
+	ld	bc, 1
+	or	a, a
+	sbc	hl, bc
+	call	__setflag
 	private	tmp72
 tmp72:
-	loc	7 53 18
-	bit	2, a
-	jq	nz, BB1_13
+	jq	p, BB2_36
 	private	tmp73
 tmp73:
-	loc	7 54 18 is_stmt 1
-	ld	l, (iy)
-	ld	h, (iy + 1)
-	loc	7 54 29 is_stmt 0
-	ld	a, l
+	ld	de, 0
+	jq	BB2_36
 	private	tmp74
 tmp74:
-	loc	7 54 18
-	bit	1, a
-	jq	nz, BB1_17
+BB2_19:
+	loc	5 0 29
+	ld	a, 1
 	private	tmp75
 tmp75:
-	loc	7 0 0
-	ld	hl, (ix + -9)
-	jq	BB1_29
+BB2_20:
+	loc	5 214 45 is_stmt 1
+	and	a, 1
+	ld	b, a
+	or	a, a
+	sbc	hl, hl
 	private	tmp76
 tmp76:
-BB1_11:
-	loc	7 51 52 is_stmt 1
-	ld	hl, (ix + -9)
-	ld	de, (ix + -3)
+BB2_21:
+	loc	5 0 0 is_stmt 0
+	ld	a, b
+	ld	(_optix_gui_data+2), a
+	ex	de, hl
 	private	tmp77
 tmp77:
-	or	a, a
-	sbc	hl, de
+BB2_22:
+	ld	(ix + -6), de
+	loc	5 216 37 is_stmt 1
+	ld	iy, (ix + 6)
+	ld	de, (iy + 52)
+BB2_23:
 	private	tmp78
 tmp78:
-	loc	7 0 52 is_stmt 0
-	jq	BB1_29
+	loc	5 216 31 is_stmt 0
+	ld	bc, 0
+	push	de
+	pop	hl
+	or	a, a
+	sbc	hl, bc
+	call	__setflag
 	private	tmp79
 tmp79:
-BB1_12:
-	loc	7 52 52 is_stmt 1
-	ld	hl, (ix + -3)
-	jq	BB1_28
+	jq	m, BB2_27
 	private	tmp80
 tmp80:
-BB1_13:
-	loc	7 53 73
-	ld	hl, (ix + -9)
-	ld	bc, (ix + -3)
-	call	__irems
+	loc	5 216 84
+	ld	iy, (ix + 6)
+	ld	bc, (iy + 64)
+	loc	5 216 58
+	push	de
+	pop	hl
+	or	a, a
+	sbc	hl, bc
+	call	__setflag
 	private	tmp81
 tmp81:
-	loc	7 0 73 is_stmt 0
-	ld	bc, (ix + -3)
-	loc	7 53 94
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB1_15
+	jq	m, BB2_26
+	loc	5 0 58
+	dec	bc
+	loc	5 216 58
+	push	bc
+	pop	de
+BB2_26:
+	loc	5 216 31
+	ld	(ix + -3), de
+BB2_27:
+	loc	5 0 31
+	ld	iy, (ix + 6)
+	ld	de, (ix + -3)
+	loc	5 216 29
+	ld	(iy + 52), de
+	loc	5 217 13 is_stmt 1
+	ld	hl, (iy + 67)
+	ld	bc, (ix + -6)
+	push	bc
+	push	hl
+	push	de
+	ld	hl, L_.str
+	push	hl
+	ld	hl, -327680
+	push	hl
+	call	_sprintf
 	private	tmp82
 tmp82:
-	loc	7 0 94
-	push	bc
-	pop	de
+	loc	5 0 13 is_stmt 0
+	ld	iy, (ix + 6)
+	loc	5 217 13
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
 	private	tmp83
 tmp83:
-	dec	de
-	loc	7 53 94
-	or	a, a
-	sbc	hl, de
-	jq	nz, BB1_23
+	loc	5 220 19 is_stmt 1
+	ld	de, (iy + 52)
+	loc	5 220 37 is_stmt 0
+	ld	bc, (iy + 55)
+	jq	BB2_42
 	private	tmp84
 tmp84:
-BB1_15:
-	loc	7 53 168
-	ld	de, 1
-	push	bc
+BB2_28:
+	loc	5 0 37
+	ld	b, 1
+	push	de
 	pop	hl
-	or	a, a
-	sbc	hl, de
-	jq	z, BB1_21
 	private	tmp85
 tmp85:
-	loc	7 0 168
-	ld	a, 0
-	jq	BB1_22
+	loc	5 198 49 is_stmt 1
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	loc	5 198 60 is_stmt 0
+	ld	a, l
 	private	tmp86
 tmp86:
-BB1_17:
-	loc	7 54 73 is_stmt 1
-	ld	hl, (ix + -9)
-	ld	bc, (ix + -3)
-	call	__irems
+	loc	5 198 21
+	bit	3, a
+	jq	nz, BB2_48
 	private	tmp87
 tmp87:
-	loc	7 0 73 is_stmt 0
-	ld	bc, (ix + -3)
-	loc	7 54 94
+	loc	5 0 21
+	ld.sis	bc, 1
+	push	de
+	pop	hl
+	private	tmp88
+tmp88:
+	loc	5 202 56 is_stmt 1
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	loc	5 202 67 is_stmt 0
+	call	__sand
+	private	tmp89
+tmp89:
+	ld	a, l
+	xor	a, c
+	private	tmp90
+tmp90:
+	loc	5 202 28
+	bit	0, a
+	jq	z, BB2_50
+	private	tmp91
+tmp91:
+	loc	5 0 28
+	push	de
+	pop	iy
+	private	tmp92
+tmp92:
+	loc	5 206 56 is_stmt 1
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	loc	5 206 67 is_stmt 0
+	ld	a, l
+	loc	5 206 77
+	bit	1, a
+	private	tmp93
+tmp93:
+	loc	5 0 0
+	ld	l, 0
+	private	tmp94
+tmp94:
+	loc	5 206 77
+	jq	z, BB2_65
+	private	tmp95
+tmp95:
+	loc	5 0 77
+	ld	hl, (ix + 6)
+	push	hl
+	pop	iy
+	loc	5 206 101
+	ld	de, (iy + 52)
+	loc	5 206 119
+	ld	bc, (iy + 61)
+	loc	5 206 111
+	push	de
+	pop	hl
+	call	__irems
+	private	tmp96
+tmp96:
+	loc	5 206 127
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB1_19
-	private	tmp88
-tmp88:
-	loc	7 0 94
-	push	bc
-	pop	de
-	private	tmp89
-tmp89:
-	dec	de
-	loc	7 54 94
-	or	a, a
-	sbc	hl, de
-	jq	nz, BB1_27
-	private	tmp90
-tmp90:
-BB1_19:
-	loc	7 54 168
-	ld	de, 1
-	push	bc
-	pop	hl
-	or	a, a
-	sbc	hl, de
-	jq	z, BB1_25
-	private	tmp91
-tmp91:
-	loc	7 0 168
-	ld	a, 0
-	jq	BB1_26
-	private	tmp92
-tmp92:
-BB1_21:
-	ld	a, 1
-	private	tmp93
-tmp93:
-BB1_22:
-	loc	7 53 151 is_stmt 1
-	and	a, 1
-	or	a, a
-	sbc	hl, hl
-	ld	l, a
-	jq	BB1_28
-	private	tmp94
-tmp94:
-BB1_23:
-	loc	7 0 151 is_stmt 0
-	ld	hl, 1
-	jq	BB1_28
-	private	tmp95
-tmp95:
-BB1_25:
-	ld	a, 1
-	private	tmp96
-tmp96:
-BB1_26:
-	loc	7 54 151 is_stmt 1
-	rrc	a
-	sbc	hl, hl
-	ld	(ix + -6), hl
+	jq	z, BB2_62
 	private	tmp97
 tmp97:
-BB1_27:
-	loc	7 0 151 is_stmt 0
-	ld	hl, (ix + -6)
+	loc	5 0 127
+	ld	a, 0
+	jq	BB2_63
 	private	tmp98
 tmp98:
-BB1_28:
-	ld	de, (ix + -9)
-	add	hl, de
+BB2_33:
+	ld	hl, (ix + 6)
+	push	hl
+	pop	iy
 	private	tmp99
 tmp99:
-BB1_29:
-	loc	7 58 32 is_stmt 1
-	ld	iy, (ix + 6)
-	ld	iy, (iy + 41)
+	loc	5 185 35 is_stmt 1
+	ld	iy, (iy + 55)
+	ld	(ix + -18), iy
+	ld	bc, (ix + -12)
+	loc	5 185 39 is_stmt 0
+	add	iy, bc
+	ld	(ix + -15), iy
 	push	hl
-	pop	bc
+	pop	iy
+	loc	5 185 63
+	ld	hl, (iy + 64)
+	loc	5 185 94
+	ld	(ix + -3), hl
+	ex	de, hl
+	call	__imulu
 	private	tmp100
 tmp100:
-	loc	7 58 41 is_stmt 0
-	lea	de, iy + 0
+	push	hl
+	pop	de
+	loc	5 185 75
+	ld	hl, (ix + -3)
+	or	a, a
+	sbc	hl, de
+	push	hl
+	pop	de
+	ld	iy, (ix + -15)
+	loc	5 185 29
+	lea	hl, iy + 0
 	or	a, a
 	sbc	hl, de
 	call	__setflag
 	private	tmp101
 tmp101:
-	ld	(ix + -6), bc
-	jq	p, BB1_31
+	lea	de, iy + 0
+	jq	m, BB2_35
 	private	tmp102
 tmp102:
-	loc	7 59 61 is_stmt 1
-	lea	hl, iy + 0
-	ld	de, (ix + -3)
-	or	a, a
-	sbc	hl, de
-	jq	BB1_33
+	ld	de, (ix + -18)
 	private	tmp103
 tmp103:
-BB1_31:
-	loc	7 58 72
-	lea	hl, iy + 0
-	ld	de, (ix + -12)
-	add	hl, de
-	ex	de, hl
-	private	tmp104
-tmp104:
-	loc	7 58 13 is_stmt 0
-	push	bc
-	pop	hl
-	or	a, a
-	sbc	hl, de
-	call	__setflag
-	private	tmp105
-tmp105:
-	jq	m, BB1_34
-	private	tmp106
-tmp106:
-	loc	7 60 33 is_stmt 1
-	ld	de, (ix + -3)
-	add	iy, de
-	loc	7 0 0 is_stmt 0
-	lea	hl, iy + 0
-	private	tmp107
-tmp107:
-BB1_33:
-	ld	de, -327680
-	ld	iy, (ix + 6)
-	ld	(iy + 41), hl
-	private	tmp108
-tmp108:
-	loc	7 61 13 is_stmt 1
-	ld	hl, L_.str
-	push	hl
-	push	de
-	call	_sprintf
-	private	tmp109
-tmp109:
-	pop	hl
-	pop	hl
-	loc	7 62 13
-	push	hl
+BB2_35:
+	loc	5 0 29
 	ld	hl, (ix + 6)
 	push	hl
-	call	_optix_AlignMenu
-	private	tmp110
-tmp110:
-	pop	hl
-	pop	hl
-	ld	iy, (ix + 6)
-	loc	7 63 45
-	ld	(iy + 16), 1
-	loc	7 64 13
-	ld	hl, (iy + 41)
-	ld	de, (iy + 38)
-	push	de
-	push	hl
-	ld	hl, L_.str.1
-	push	hl
-	ld	hl, -327680
-	push	hl
-	call	_sprintf
-	private	tmp111
-tmp111:
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-	loc	7 65 38
+	pop	iy
+	private	tmp104
+tmp104:
+BB2_36:
+	ld	(iy + 55), de
 	xor	a, a
 	ld	(_optix_gui_data+2), a
-	loc	7 66 59
+	ld	(iy + 16), 1
+	private	tmp105
+tmp105:
+BB2_37:
+	loc	5 193 41 is_stmt 1
+	call	_kb_AnyKey
+	private	tmp106
+tmp106:
+	loc	5 193 40 is_stmt 0
+	or	a, a
+	jq	z, BB2_39
+	private	tmp107
+tmp107:
+	loc	5 0 40
+	ld	a, 0
+	jq	BB2_40
+	private	tmp108
+tmp108:
+BB2_39:
+	ld	a, 1
+	private	tmp109
+tmp109:
+BB2_40:
 	ld	iy, (ix + 6)
-	ld	iy, (iy + 23)
-	loc	7 66 46 is_stmt 0
-	ld	hl, (ix + -6)
-	ld	bc, 3
+	loc	5 193 38
+	and	a, 1
+	ld	(_optix_gui_data+2), a
+	loc	5 194 37 is_stmt 1
+	ld	hl, (iy + 55)
+	loc	5 194 76 is_stmt 0
+	ld	(ix + -3), hl
+	ld	hl, (_optix_cursor+4)
+	loc	5 194 98
+	ld	de, (iy + 4)
+	loc	5 194 78
+	or	a, a
+	sbc	hl, de
+	push	hl
+	pop	de
+	loc	5 194 103
+	ld	hl, (ix + -9)
+	ld	bc, 255
+	call	__iand
+	private	tmp110
+tmp110:
+	push	hl
+	pop	bc
+	loc	5 194 101
+	ex	de, hl
+	call	__idivs
+	private	tmp111
+tmp111:
+	push	hl
+	pop	bc
+	loc	5 194 126
+	ld	hl, (iy + 61)
+	loc	5 194 118
 	call	__imulu
 	private	tmp112
 tmp112:
+	ld	(ix + -9), hl
+	loc	5 195 45 is_stmt 1
+	ld	hl, (_optix_cursor+1)
+	loc	5 195 67 is_stmt 0
+	ld	iy, (ix + 6)
+	ld	de, (iy + 1)
+	loc	5 195 47
+	or	a, a
+	sbc	hl, de
 	push	hl
 	pop	de
-	add	iy, de
-	ld	hl, (iy)
-	loc	7 66 44
-	ld	(_optix_cursor+38), hl
+	loc	5 195 72
+	ld	hl, (ix + -6)
+	ld	bc, 65535
+	call	__iand
 	private	tmp113
 tmp113:
-BB1_34:
-	loc	7 0 44
+	push	hl
+	pop	bc
+	loc	5 195 70
+	ex	de, hl
+	call	__idivs
+	private	tmp114
+tmp114:
+	loc	5 0 70
+	ld	bc, (ix + -3)
+	loc	5 195 70
+	push	hl
+	pop	de
+	ld	hl, (ix + -9)
+	loc	5 194 134 is_stmt 1
+	add	hl, bc
+	loc	5 194 41 is_stmt 0
+	add	hl, de
+	loc	5 194 29
+	ld	iy, (ix + 6)
+	ld	(iy + 52), hl
+	ex	de, hl
+	ld	iy, (ix + 6)
+	private	tmp115
+tmp115:
+BB2_42:
+	loc	5 220 13 is_stmt 1
+	push	de
+	pop	hl
+	or	a, a
+	sbc	hl, bc
+	call	__setflag
+	private	tmp116
+tmp116:
+	jq	p, BB2_44
+	private	tmp117
+tmp117:
+	loc	5 221 56
+	ld	bc, (iy + 61)
+	loc	5 221 65 is_stmt 0
+	push	de
+	pop	hl
+	call	__irems
+	private	tmp118
+tmp118:
+	push	hl
+	pop	bc
+	ex	de, hl
+	or	a, a
+	sbc	hl, bc
+	jq	BB2_46
+	private	tmp119
+tmp119:
+BB2_44:
+	loc	5 223 57 is_stmt 1
+	ld	hl, (iy + 58)
+	loc	5 223 62 is_stmt 0
+	dec	hl
+	ld	(ix + -3), bc
+	loc	5 223 75
+	ld	bc, (iy + 61)
+	ld	(ix + -6), hl
+	ld	(ix + -9), bc
+	loc	5 223 67
+	call	__imulu
+	private	tmp120
+tmp120:
+	loc	5 0 67
+	push	de
+	pop	bc
+	loc	5 223 48
+	ld	de, (ix + -3)
+	add	hl, de
+	private	tmp121
+tmp121:
+	loc	5 223 20
+	or	a, a
+	sbc	hl, bc
+	call	__setflag
+	private	tmp122
+tmp122:
+	jq	p, BB2_47
+	private	tmp123
+tmp123:
+	loc	5 224 48 is_stmt 1
+	push	bc
+	pop	hl
+	ld	bc, (ix + -9)
+	call	__idivs
+	private	tmp124
+tmp124:
+	loc	5 224 64 is_stmt 0
+	ld	de, (ix + -6)
+	or	a, a
+	sbc	hl, de
+	loc	5 224 84
+	call	__imulu
+	private	tmp125
+tmp125:
+BB2_46:
+	loc	5 0 0
+	ld	(iy + 55), hl
+	ld	(iy + 16), 1
+	private	tmp126
+tmp126:
+BB2_47:
+	loc	5 233 1 is_stmt 1
 	ld	sp, ix
 	pop	ix
 	cfi_def_cfa sp, 3
 	cfi_restore ix
 	ret
-	section	.text,"ax",@progbits
-	private	func_end1
-func_end1:
-	cfi_endproc
-
-	section	.text,"ax",@progbits
-	public	_optix_InitializeMenu
-_optix_InitializeMenu:
-	private	func_begin2
-func_begin2:
-	loc	7 76 0 is_stmt 1
-	cfi_startproc
-	ld	hl, -18
-	call	__frameset
-	private	tmp114
-tmp114:
-	cfi_def_cfa ix, 6
-	cfi_offset ix, -6
-	ld	hl, (ix + 6)
-	ld	(ix + -12), hl
-	ld	de, (ix + 9)
-	ld	(ix + -15), de
-	ld	hl, (ix + 12)
-	ld	(ix + -6), hl
-	ld	hl, (ix + 15)
-	ld	(ix + -9), hl
-	ld	bc, 3
-	or	a, a
-	sbc	hl, hl
-	ld	(ix + -3), hl
-	private	tmp115
-tmp115:
-	loc	7 79 51 prologue_end
-	ex	de, hl
-	private	tmp116
-tmp116:
-	call	__imulu
-	private	tmp117
-tmp117:
-	add	hl, bc
-	loc	7 79 26 is_stmt 0
-	push	hl
-	call	_malloc
-	private	tmp118
-tmp118:
-	pop	de
-	private	tmp119
-tmp119:
-	loc	7 79 24
-	ld	iy, (ix + -12)
-	ld	(iy + 23), hl
-	push	hl
-	pop	iy
-	ld	de, (ix + -15)
-	private	tmp120
-tmp120:
-	loc	7 0 24
-	ld	bc, 3
-	loc	7 80 5 is_stmt 1
-	push	de
-	pop	hl
-	call	__imulu
-	private	tmp121
-tmp121:
-	push	hl
-	pop	bc
-	add	iy, bc
-	loc	7 80 37 is_stmt 0
-	ld	hl, 0
-	ld	(iy), hl
-	private	tmp122
-tmp122:
-	loc	7 82 10 is_stmt 1
-	ld	bc, 1
-	push	de
-	pop	hl
-	or	a, a
-	sbc	hl, bc
-	call	__setflag
-	private	tmp123
-tmp123:
-	jq	p, BB2_2
-	private	tmp124
-tmp124:
-	ld	de, 0
-	private	tmp125
-tmp125:
-BB2_2:
-	loc	7 0 10 is_stmt 0
-	ld	iy, (ix + -6)
-	private	tmp126
-tmp126:
-BB2_3:
-	loc	7 82 5
-	push	de
-	pop	hl
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB2_29
+BB2_48:
 	private	tmp127
 tmp127:
-	loc	7 0 5
-	ld	(ix + -15), de
+	loc	5 199 60
+	ld	hl, (iy + 52)
+	loc	5 199 70 is_stmt 0
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB2_52
 	private	tmp128
 tmp128:
-	loc	7 84 33 is_stmt 1
-	ld	hl, 33
-	push	hl
-	call	_malloc
+	loc	5 0 70
+	ld	a, 0
+	jq	BB2_53
 	private	tmp129
 tmp129:
-	push	hl
-	pop	bc
-	pop	de
-	loc	7 84 22 is_stmt 0
-	ld	iy, (ix + -12)
-	ld	hl, (iy + 23)
-	loc	7 84 31
-	ld	de, (ix + -3)
-	add	hl, de
-	ld	(hl), bc
-	loc	7 85 45 is_stmt 1
-	ld	hl, (iy + 23)
-	loc	7 85 32 is_stmt 0
-	add	hl, de
-	ld	hl, (hl)
-	loc	7 85 9
-	ld	de, 2
+BB2_50:
+	loc	5 203 60 is_stmt 1
+	ld	de, (iy + 52)
+	loc	5 203 79 is_stmt 0
+	ld	bc, (iy + 64)
+	loc	5 203 91
+	dec	bc
+	loc	5 203 70
 	push	de
-	push	hl
-	call	_optix_InitializeWidget
+	pop	hl
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB2_55
 	private	tmp130
 tmp130:
-	pop	hl
-	pop	hl
-	loc	7 89 58 is_stmt 1
-	ld	hl, (ix + -6)
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	ld	iy, 1
-	jq	z, BB2_8
+	loc	5 0 70
+	ld	a, 0
+	jq	BB2_56
 	private	tmp131
 tmp131:
-	loc	7 89 61 is_stmt 0
-	ld	de, (ix + -3)
-	ld	hl, (ix + -6)
-	add	hl, de
-	ld	hl, (hl)
-	loc	7 89 50
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	ld	iy, 1
-	jq	z, BB2_7
+BB2_52:
+	ld	a, 1
 	private	tmp132
 tmp132:
-	ld	iy, 2
+BB2_53:
+	loc	5 199 39 is_stmt 1
+	bit	0, a
+	ld	de, 0
+	jq	nz, BB2_60
 	private	tmp133
 tmp133:
-BB2_7:
-BB2_8:
-	loc	7 89 80
-	ld	hl, (ix + -9)
-	add	hl, bc
+	loc	5 199 107 is_stmt 0
+	ld	de, (iy + 61)
+	loc	5 199 99
 	or	a, a
-	sbc	hl, bc
-	loc	7 0 0
-	ld	a, 0
-	ld	l, a
-	loc	7 89 80
-	jq	z, BB2_12
+	sbc	hl, de
+	push	hl
+	pop	de
+	jq	BB2_60
 	private	tmp134
 tmp134:
-	loc	7 89 83
-	ld	de, (ix + -3)
-	ld	hl, (ix + -9)
-	add	hl, de
-	ld	hl, (hl)
-	loc	7 89 80
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
+BB2_55:
+	loc	5 0 99
 	ld	a, 1
-	ld	l, a
-	jq	nz, BB2_11
 	private	tmp135
 tmp135:
-	ld	a, 0
-	ld	l, a
+BB2_56:
+	ld	b, 1
 	private	tmp136
 tmp136:
-BB2_11:
-BB2_12:
-	ld	bc, 1
-	call	__iand
+	loc	5 203 39 is_stmt 1
+	bit	0, a
+	ld	c, 1
+	jq	nz, BB2_60
 	private	tmp137
 tmp137:
-	push	hl
-	pop	de
-	loc	7 89 73
-	add	iy, de
-	loc	7 89 95
-	lea	hl, iy + 0
-	ld	bc, 3
-	call	__imulu
+	loc	5 203 147 is_stmt 0
+	ld	hl, (iy + 61)
+	loc	5 203 139
+	add	hl, de
+	ex	de, hl
 	private	tmp138
 tmp138:
-	loc	7 89 40
-	push	hl
-	call	_malloc
+BB2_60:
+	loc	5 0 0
+	and	a, 1
 	private	tmp139
 tmp139:
-	ld	(ix + -18), hl
-	pop	de
-	loc	7 89 22
-	ld	iy, (ix + -12)
-	ld	hl, (iy + 23)
-	lea	bc, iy + 0
-	loc	7 89 9
-	ld	de, (ix + -3)
-	add	hl, de
-	ld	iy, (hl)
-	loc	7 89 38
-	ld	hl, (ix + -18)
-	ld	(iy + 23), hl
-	push	bc
-	pop	iy
-	loc	7 91 22 is_stmt 1
-	ld	hl, (iy + 23)
-	loc	7 91 9 is_stmt 0
-	add	hl, de
-	ld	iy, (hl)
-	loc	7 91 32
-	ld	iy, (iy + 23)
-	loc	7 91 44
-	ld	hl, (ix + -6)
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	loc	7 0 0
-	ld	a, 0
 	ld	l, a
-	loc	7 91 44
-	jq	z, BB2_16
+	ld	(iy + 52), de
+	xor	a, a
+	ld	(_optix_gui_data+2), a
 	private	tmp140
 tmp140:
-	loc	7 91 47
-	ld	de, (ix + -3)
-	ld	hl, (ix + -6)
-	add	hl, de
-	ld	hl, (hl)
-	loc	7 91 44
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	ld	a, 1
-	ld	l, a
-	jq	nz, BB2_15
+BB2_61:
+	loc	5 213 21 is_stmt 1
+	ld	a, l
+	xor	a, c
 	private	tmp141
 tmp141:
-	ld	a, 0
-	ld	l, a
+	loc	5 213 21 is_stmt 0
+	bit	0, a
+	ld	hl, 0
 	private	tmp142
 tmp142:
-BB2_15:
-BB2_16:
-	ld	bc, 1
-	call	__iand
-	private	tmp143
-tmp143:
+	loc	5 0 21
 	push	hl
 	pop	de
-	loc	7 91 66
-	ld	hl, (ix + -9)
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	loc	7 0 0
-	ld	a, 0
-	ld	l, a
-	loc	7 91 66
-	jq	z, BB2_20
+	inc	hl
+	loc	5 213 21
+	jq	z, BB2_21
+	jq	BB2_22
+BB2_62:
+	private	tmp143
+tmp143:
+	loc	5 0 21
+	ld	a, 1
 	private	tmp144
 tmp144:
-	loc	7 91 69
-	ld	bc, (ix + -3)
-	ld	hl, (ix + -9)
-	add	hl, bc
-	ld	hl, (hl)
-	loc	7 91 66
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	ld	a, 1
-	ld	l, a
-	jq	nz, BB2_19
+BB2_63:
+	ld	c, 1
+	ld	l, 1
+	ld	iy, -720866
 	private	tmp145
 tmp145:
-	ld	a, 0
-	ld	l, a
+	loc	5 206 28 is_stmt 1
+	bit	0, a
+	jq	z, BB2_68
 	private	tmp146
 tmp146:
-BB2_19:
-BB2_20:
-	ld	bc, 1
-	call	__iand
+BB2_65:
+	loc	5 209 56
+	ld	e, (iy)
+	ld	d, (iy + 1)
+	loc	5 209 67 is_stmt 0
+	ld	a, e
+	loc	5 209 78
+	bit	2, a
+	ld	b, 1
+	jq	z, BB2_61
 	private	tmp147
 tmp147:
-	loc	7 91 59
-	add	hl, de
-	loc	7 91 9
-	ld	bc, 3
-	call	__imulu
+	loc	5 0 78
+	ld	hl, (ix + 6)
 	private	tmp148
 tmp148:
 	push	hl
-	pop	de
-	add	iy, de
-	loc	7 91 81
-	ld	hl, 0
-	ld	(iy), hl
-	ld	iy, (ix + -6)
+	pop	iy
+	loc	5 209 105
+	ld	de, (iy + 52)
+	loc	5 209 115
+	inc	de
+	loc	5 209 128
+	ld	bc, (iy + 61)
+	loc	5 209 120
+	push	de
+	pop	hl
+	call	__irems
 	private	tmp149
 tmp149:
-	loc	7 93 18 is_stmt 1
-	lea	hl, iy + 0
+	loc	5 0 120
+	ld	b, 1
+	loc	5 209 137
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB2_23
+	ld	hl, 1
+	jq	z, BB2_69
 	private	tmp150
 tmp150:
-	loc	7 93 21 is_stmt 0
-	ld	de, (ix + -3)
-	lea	hl, iy + 0
-	add	hl, de
-	ld	hl, (hl)
+	loc	5 0 137
+	ld	a, 0
+	jq	BB2_70
+BB2_68:
 	private	tmp151
 tmp151:
-	loc	7 93 13
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB2_23
+	loc	5 207 36 is_stmt 1
+	dec	de
+	jq	BB2_71
 	private	tmp152
 tmp152:
-	loc	7 94 79 is_stmt 1
-	ld	hl, 29
-	push	hl
-	call	_malloc
+BB2_69:
+	loc	5 0 36 is_stmt 0
+	ld	a, 1
+BB2_70:
 	private	tmp153
 tmp153:
-	pop	de
-	loc	7 94 58 is_stmt 0
-	ld	iy, (ix + -12)
-	ld	iy, (iy + 23)
-	loc	7 94 45
-	ld	de, (ix + -3)
-	add	iy, de
-	ld	iy, (iy)
-	loc	7 94 68
-	ld	iy, (iy + 23)
-	push	hl
-	pop	bc
-	loc	7 94 77
-	ld	(iy), bc
+	loc	5 209 28 is_stmt 1
+	bit	0, a
+	jq	nz, BB2_21
 	private	tmp154
 tmp154:
-	loc	7 95 54 is_stmt 1
-	ld	hl, (ix + -6)
-	add	hl, de
-	ld	hl, (hl)
-	push	bc
-	pop	iy
+BB2_71:
+	loc	5 0 0 is_stmt 0
+	xor	a, a
 	private	tmp155
 tmp155:
-	loc	7 95 52 is_stmt 0
-	ld	(iy + 26), hl
-	lea	de, iy + 0
+	ld	(_optix_gui_data+2), a
 	private	tmp156
 tmp156:
-	loc	7 0 52
 	or	a, a
 	sbc	hl, hl
-	loc	7 96 13 is_stmt 1
-	push	hl
-	push	de
-	call	_optix_InitializeWidget
+	ld	(ix + -6), hl
+	jq	BB2_23
 	private	tmp157
 tmp157:
-	loc	7 0 13 is_stmt 0
-	ld	iy, (ix + -6)
-	loc	7 96 13
-	pop	hl
-	pop	hl
-	private	tmp158
-tmp158:
-BB2_23:
-	loc	7 99 17 is_stmt 1
-	ld	hl, (ix + -9)
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	ld	hl, (ix + -3)
-	jq	z, BB2_28
-	private	tmp159
-tmp159:
-	loc	7 99 20 is_stmt 0
-	push	hl
-	pop	de
-	push	hl
-	pop	bc
-	ld	hl, (ix + -9)
-	add	hl, de
-	ld	hl, (hl)
-	private	tmp160
-tmp160:
-	loc	7 99 13
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	push	bc
-	pop	hl
-	jq	z, BB2_28
-	private	tmp161
-tmp161:
-	loc	7 0 13
-	ld	(ix + -3), hl
-	private	tmp162
-tmp162:
-	loc	7 100 95 is_stmt 1
-	ld	hl, 33
-	push	hl
-	call	_malloc
-	private	tmp163
-tmp163:
-	ld	(ix + -18), hl
-	pop	hl
-	loc	7 100 57 is_stmt 0
-	ld	iy, (ix + -12)
-	ld	hl, (iy + 23)
-	loc	7 100 44
-	ld	de, (ix + -3)
-	add	hl, de
-	ld	iy, (hl)
-	loc	7 100 67
-	ld	iy, (iy + 23)
-	loc	7 100 73
-	ld	hl, (ix + -6)
-	add	hl, de
-	ld	hl, (hl)
-	loc	7 100 84
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	ld	a, 1
-	jq	nz, BB2_27
-	private	tmp164
-tmp164:
-	ld	a, 0
-	private	tmp165
-tmp165:
-BB2_27:
-	and	a, 1
-	or	a, a
-	sbc	hl, hl
-	ld	l, a
-	loc	7 100 44
-	ld	bc, 3
-	call	__imulu
-	private	tmp166
-tmp166:
-	push	hl
-	pop	de
-	add	iy, de
-	lea	hl, iy + 0
-	ld	iy, (ix + -18)
-	loc	7 100 93
-	ld	(hl), iy
-	private	tmp167
-tmp167:
-	loc	7 101 54 is_stmt 1
-	ld	de, (ix + -3)
-	ld	hl, (ix + -9)
-	add	hl, de
-	ld	hl, (hl)
-	loc	7 101 52 is_stmt 0
-	ld	(iy + 26), hl
-	loc	7 102 13 is_stmt 1
-	ld	hl, 1
-	push	hl
-	push	iy
-	call	_optix_InitializeWidget
-	private	tmp168
-tmp168:
-	pop	hl
-	pop	hl
-	ld	hl, (ix + -3)
-	ld	iy, (ix + -6)
-	private	tmp169
-tmp169:
-BB2_28:
-	loc	7 0 13 is_stmt 0
-	ld	de, (ix + -15)
-	loc	7 82 5 is_stmt 1
-	dec	de
-	ld	bc, 3
-	add	hl, bc
-	ld	(ix + -3), hl
-	jq	BB2_3
-	private	tmp170
-tmp170:
-BB2_29:
-	loc	7 106 5
-	ld	hl, (ix + -12)
-	ld	(ix + 6), hl
-	ld	hl, 3
-	ld	(ix + 9), hl
-	private	tmp171
-tmp171:
-	ld	sp, ix
-	pop	ix
-	cfi_def_cfa sp, 3
-	cfi_restore ix
-	jp	_optix_InitializeWidget
-	private	tmp172
-tmp172:
 	section	.text,"ax",@progbits
 	private	func_end2
 func_end2:
 	cfi_endproc
+	file	6 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\util.h" md5 0xae7c04897c4cd8b8be08f9a16b45d62d
+	file	7 "D:\Data\Programming\TI\CEdev\include\keypadc.h" md5 0xd17058819d09a1d1648f44cb70e71de1
 
 	section	.text,"ax",@progbits
-	public	_optix_UpdateMenu_default
-_optix_UpdateMenu_default:
+	public	_optix_RenderMenu_default
+_optix_RenderMenu_default:
 	private	func_begin3
 func_begin3:
-	loc	7 110 0
+	loc	5 235 0 is_stmt 1
 	cfi_startproc
-	ld	hl, -13
+	ld	hl, -155
 	call	__frameset
-	private	tmp173
-tmp173:
+	private	tmp158
+tmp158:
 	cfi_def_cfa ix, 6
 	cfi_offset ix, -6
-	ld	de, (ix + 6)
-	private	tmp174
-tmp174:
-	loc	7 0 0 prologue_end
-	ld	hl, _optix_cursor
-	xor	a, a
-	ld	(ix + -13), a
-	private	tmp175
-tmp175:
-	loc	7 115 9
-	push	de
-	private	tmp176
-tmp176:
-	push	hl
-	call	_optix_CheckTransformOverlap
-	private	tmp177
-tmp177:
-	pop	hl
-	pop	hl
-	and	a, 1
-	ld	iy, (ix + 6)
-	private	tmp178
-tmp178:
-	loc	7 115 91 is_stmt 0
-	ld	(iy + 14), a
-	private	tmp179
-tmp179:
-	loc	7 117 5 is_stmt 1
+	ld	iy, 38
+	ld	bc, 0
+	lea	hl, ix + -44
+	push	ix
+	ld	de, -140
+	add	ix, de
+	ld	(ix + 0), hl
+	pop	ix
+	lea	de, ix + -77
+	ld	(ix + -128), de
+	lea	de, ix + -86
+	ld	(ix + -3), bc
+	push	ix
+	ld	bc, -137
+	add	ix, bc
+	ld	(ix + 0), de
+	pop	ix
+	lea	de, ix + -119
+	private	tmp159
+tmp159:
+	loc	5 239 23 prologue_end
+	ld	(ix + -125), de
+	private	tmp160
+tmp160:
 	push	iy
-	private	tmp180
-tmp180:
-	call	_optix_ScrollMenu
-	private	tmp181
-tmp181:
+	ld	bc, (ix + -3)
+	push	bc
+	push	hl
+	call	_memset
+	private	tmp161
+tmp161:
 	pop	hl
+	pop	hl
+	pop	hl
+	loc	5 240 25
+	ld	hl, 33
+	push	hl
 	or	a, a
 	sbc	hl, hl
-	loc	7 119 20
-	ld	iy, (ix + 6)
-	ld	iy, (iy + 23)
-	loc	7 0 0 is_stmt 0
-	ld	(ix + -9), hl
-	private	tmp182
-tmp182:
-BB3_1:
-	loc	7 119 12
 	push	hl
-	pop	bc
-	ex	de, hl
-	lea	hl, iy + 0
+	ld	hl, (ix + -128)
+	push	hl
+	call	_memset
+	private	tmp162
+tmp162:
+	pop	hl
+	pop	hl
+	pop	hl
+	loc	5 241 46
+	ld	bc, -140
+	lea	hl, ix + 0
 	add	hl, bc
-	lea	bc, iy + 0
 	ld	hl, (hl)
-	ld	(ix + -3), hl
-	loc	7 119 5
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	jq	z, BB3_24
-	private	tmp183
-tmp183:
-	loc	7 0 5
-	ld	(ix + -6), bc
-	ld	(ix + -12), de
-	ld	iy, (ix + 6)
-	private	tmp184
-tmp184:
-	loc	7 121 27 is_stmt 1
-	ld	a, (iy + 15)
-	ld	l, 1
-	ld	e, l
-	xor	a, e
-	loc	7 121 35 is_stmt 0
-	bit	0, a
-	jq	nz, BB3_4
-	private	tmp185
-tmp185:
-	loc	7 121 52
-	ld	iy, (ix + 6)
-	ld	a, (iy + 14)
-	xor	a, e
-	private	tmp186
-tmp186:
-	loc	7 121 13
-	bit	0, a
-	jq	z, BB3_11
-	private	tmp187
-tmp187:
-BB3_4:
-	loc	7 140 35 is_stmt 1
-	ld	hl, (ix + -3)
-	ld	a, (hl)
-	loc	7 140 61 is_stmt 0
-	cp	a, 2
-	jq	nz, BB3_8
-	private	tmp188
-tmp188:
-	loc	7 140 88
-	ld	iy, (ix + -3)
-	ld	a, (iy + 14)
-	xor	a, e
-	private	tmp189
-tmp189:
-	loc	7 140 17
-	bit	0, a
-	jq	nz, BB3_8
-	private	tmp190
-tmp190:
-	loc	7 141 54 is_stmt 1
-	ld	iy, (ix + -3)
-	ld	(iy + 16), 1
-	loc	7 142 17
-	ld	hl, (ix + -6)
+	ld	(ix + -86), hl
+	ld	hl, (ix + -128)
+	ld	(ix + -83), hl
+	ld	hl, 0
+	ld	(ix + -80), hl
+	loc	5 242 25
+	ld	hl, 33
 	push	hl
-	call	_optix_RecursiveSetNeedsRedraw
-	private	tmp191
-tmp191:
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	ld	hl, (ix + -125)
+	push	hl
+	call	_memset
+	private	tmp163
+tmp163:
 	pop	hl
-	private	tmp192
-tmp192:
-	loc	7 144 21
-	ld	iy, (ix + 6)
-	ld	hl, (iy + 23)
-	ld	(ix + -6), hl
-	private	tmp193
-tmp193:
-BB3_8:
-	loc	7 0 21 is_stmt 0
-	ld	bc, (ix + -12)
-	loc	7 144 13
-	push	bc
-	pop	de
-	ld	hl, (ix + -6)
-	add	hl, de
-	ld	iy, (hl)
-	push	bc
 	pop	hl
-	loc	7 144 46
-	ld	(iy + 14), 0
-	ld	iy, (ix + -6)
-	private	tmp194
-tmp194:
-BB3_9:
-	loc	7 0 46
-	ld	de, (ix + -9)
-	private	tmp195
-tmp195:
-BB3_10:
-	loc	7 146 10 is_stmt 1
-	inc	de
-	private	tmp196
-tmp196:
-	loc	7 0 10 is_stmt 0
-	ld	(ix + -9), de
-	private	tmp197
-tmp197:
-	loc	7 119 5 is_stmt 1
-	ld	bc, 3
+	pop	hl
+	loc	5 242 45 is_stmt 0
+	ld	bc, -137
+	lea	hl, ix + 0
 	add	hl, bc
-	jq	BB3_1
-	private	tmp198
-tmp198:
-BB3_11:
-	loc	7 122 17
-	ld	a, (ix + -13)
-	and	a, 1
-	xor	a, e
-	private	tmp199
-tmp199:
-	loc	7 122 17 is_stmt 0
-	bit	0, a
-	jq	z, BB3_16
-	private	tmp200
-tmp200:
-	loc	7 0 17
-	ld	iy, (ix + -3)
-	private	tmp201
-tmp201:
-	loc	7 129 35 is_stmt 1
-	ld	hl, (iy + 20)
-	loc	7 129 17 is_stmt 0
-	push	iy
-	call	__indcallhl
-	private	tmp202
-tmp202:
-	pop	hl
-	private	tmp203
-tmp203:
-	loc	7 130 29 is_stmt 1
+	ld	hl, (hl)
+	ld	(ix + -96), hl
+	ld	hl, 2
+	loc	5 243 5 is_stmt 1
+	push	hl
+	ld	hl, (ix + -125)
+	push	hl
+	call	_optix_InitializeWidget
+	private	tmp164
+tmp164:
+	loc	5 0 5 is_stmt 0
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 23)
-	loc	7 130 21 is_stmt 0
-	ld	bc, (ix + -12)
-	ld	(ix + -6), hl
-	add	hl, bc
-	ld	iy, (hl)
-	loc	7 130 39
-	ld	a, (iy)
-	private	tmp204
-tmp204:
-	loc	7 130 21
-	cp	a, 2
-	jq	nz, BB3_19
-	private	tmp205
-tmp205:
-	loc	7 132 49 is_stmt 1
-	ld	a, (iy + 14)
+	private	tmp165
+tmp165:
+	loc	5 243 5
+	pop	hl
+	pop	hl
+	private	tmp166
+tmp166:
+	loc	5 245 24 is_stmt 1
+	ld	a, (iy + 16)
 	ld	l, 1
 	xor	a, l
-	private	tmp206
-tmp206:
-	loc	7 132 25 is_stmt 0
+	loc	5 245 37 is_stmt 0
+	xor	a, l
 	bit	0, a
-	ld	de, (ix + -9)
-	jq	nz, BB3_14
-	private	tmp207
-tmp207:
-	loc	7 133 41 is_stmt 1
-	ld	iy, (ix + 6)
-	ld	(iy + 38), de
-	private	tmp208
-tmp208:
-	loc	7 0 0 is_stmt 0
-	ld	(ix + -13), l
-	private	tmp209
-tmp209:
-BB3_14:
-	ld	hl, (ix + -12)
-	jq	BB3_15
-	private	tmp210
-tmp210:
-BB3_16:
-	loc	7 123 39 is_stmt 1
-	ld	hl, (ix + -3)
-	ld	a, (hl)
-	loc	7 123 65 is_stmt 0
-	cp	a, 2
-	jq	nz, BB3_20
-	private	tmp211
-tmp211:
-	loc	7 123 92
-	ld	iy, (ix + -3)
-	ld	a, (iy + 14)
-	xor	a, e
-	private	tmp212
-tmp212:
-	loc	7 123 21
-	bit	0, a
-	jq	z, BB3_22
-	private	tmp213
-tmp213:
-BB3_20:
-	loc	7 0 21
-	ld	iy, (ix + -6)
-	jq	BB3_23
-	private	tmp214
-tmp214:
-BB3_19:
-	ld	hl, (ix + -12)
-	ld	de, (ix + -9)
-	private	tmp215
-tmp215:
-BB3_15:
-	ld	iy, (ix + -6)
-	jq	BB3_10
-	private	tmp216
-tmp216:
-BB3_22:
-	loc	7 124 58 is_stmt 1
-	ld	iy, (ix + -3)
-	ld	(iy + 16), 1
-	loc	7 125 21
-	ld	hl, (ix + -6)
-	push	hl
-	call	_optix_RecursiveSetNeedsRedraw
-	private	tmp217
-tmp217:
-	pop	hl
-	private	tmp218
-tmp218:
-	loc	7 127 25
-	ld	iy, (ix + 6)
-	ld	iy, (iy + 23)
-	private	tmp219
-tmp219:
-BB3_23:
-	loc	7 0 25 is_stmt 0
-	ld	bc, (ix + -12)
-	loc	7 127 17
-	push	bc
-	pop	de
-	lea	hl, iy + 0
-	add	hl, de
-	lea	de, iy + 0
-	ld	iy, (hl)
-	push	bc
-	pop	hl
-	loc	7 127 50
-	ld	(iy + 14), 0
-	push	de
-	pop	iy
-	jq	BB3_9
-	private	tmp220
-tmp220:
-BB3_24:
-	loc	7 148 1 is_stmt 1
+	jq	nz, BB3_2
+	private	tmp167
+tmp167:
+	loc	5 245 46
+	ld	hl, (iy + 52)
+	loc	5 245 65
+	ld	de, (iy + 67)
+	private	tmp168
+tmp168:
+	loc	5 245 9
+	or	a, a
+	sbc	hl, de
+	jq	nz, BB3_2
+	private	tmp169
+tmp169:
+BB3_31:
+	loc	5 281 1 is_stmt 1
 	ld	sp, ix
 	pop	ix
 	cfi_def_cfa sp, 3
 	cfi_restore ix
 	ret
+BB3_2:
+	private	tmp170
+tmp170:
+	loc	5 0 1 is_stmt 0
+	ld	bc, 3
+	private	tmp171
+tmp171:
+	loc	5 247 24 is_stmt 1
+	ld	de, (iy + 55)
+	private	tmp172
+tmp172:
+	loc	5 247 10 is_stmt 0
+	push	de
+	pop	hl
+	call	__imulu
+	private	tmp173
+tmp173:
+	ld	(ix + -3), bc
+	push	ix
+	ld	bc, -131
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	push	ix
+	ld	bc, -134
+	add	ix, bc
+	ld	(ix + 0), de
+	pop	ix
+	private	tmp174
+tmp174:
+	loc	5 0 10
+	ld	bc, (ix + -3)
+	private	tmp175
+tmp175:
+BB3_3:
+	loc	5 247 51
+	ld	bc, (iy + 58)
+	loc	5 247 64
+	ld	hl, (iy + 61)
+	loc	5 247 56
+	call	__imulu
+	private	tmp176
+tmp176:
+	loc	5 247 43
+	ld	(ix + -3), de
+	ld	de, -134
+	private	tmp177
+tmp177:
+	lea	iy, ix + 0
+	add	iy, de
+	ld	bc, (iy + 0)
+	add	hl, bc
+	push	hl
+	pop	bc
+	ld	de, (ix + -3)
+	ld	(ix + -122), de
+	private	tmp178
+tmp178:
+	loc	5 247 5
+	ex	de, hl
+	or	a, a
+	sbc	hl, bc
+	call	__setflag
+	private	tmp179
+tmp179:
+	jq	p, BB3_31
+	private	tmp180
+tmp180:
+	loc	5 248 27 is_stmt 1
+	ld	iy, (ix + 6)
+	ld	a, (iy + 16)
+	ld	l, 1
+	xor	a, l
+	loc	5 248 40 is_stmt 0
+	xor	a, l
+	bit	0, a
+	jq	nz, BB3_7
+	private	tmp181
+tmp181:
+	loc	5 248 54
+	ld	iy, (ix + 6)
+	ld	bc, (iy + 52)
+	loc	5 248 64
+	ld	hl, (ix + -122)
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB3_7
+	private	tmp182
+tmp182:
+	loc	5 248 78
+	ld	iy, (ix + 6)
+	ld	bc, (iy + 67)
+	private	tmp183
+tmp183:
+	loc	5 248 13
+	ld	hl, (ix + -122)
+	or	a, a
+	sbc	hl, bc
+	jq	nz, BB3_30
+	private	tmp184
+tmp184:
+BB3_7:
+	loc	5 249 33 is_stmt 1
+	ld	bc, -137
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	ld	(ix + -96), hl
+	ld	iy, (ix + 6)
+	private	tmp185
+tmp185:
+	loc	5 252 23
+	ld	hl, (iy + 46)
+	loc	5 252 28 is_stmt 0
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB3_10
+	private	tmp186
+tmp186:
+	loc	5 252 31
+	push	ix
+	ld	bc, -131
+	add	ix, bc
+	private	tmp187
+tmp187:
+	ld	de, (ix + 0)
+	pop	ix
+	add	hl, de
+	ld	hl, (hl)
+	private	tmp188
+tmp188:
+	loc	5 252 17
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	nz, BB3_9
+BB3_10:
+	private	tmp189
+tmp189:
+	loc	5 257 30 is_stmt 1
+	ld	hl, 0
+	ld	(ix + -16), hl
+	jq	BB3_11
+BB3_9:
+	private	tmp190
+tmp190:
+	loc	5 253 27
+	ld	(ix + -16), hl
+	or	a, a
+	sbc	hl, hl
+	loc	5 254 17
+	push	hl
+	ld	bc, -140
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	call	_optix_InitializeWidget
+	private	tmp191
+tmp191:
+	loc	5 0 17 is_stmt 0
+	ld	iy, (ix + 6)
+	loc	5 254 17
+	pop	hl
+	pop	hl
+	loc	5 255 74 is_stmt 1
+	ld	a, (iy + 38)
+	loc	5 255 51 is_stmt 0
+	ld	(ix + -34), a
+	loc	5 256 74 is_stmt 1
+	ld	a, (iy + 39)
+	loc	5 256 51 is_stmt 0
+	ld	(ix + -33), a
+	private	tmp192
+tmp192:
+BB3_11:
+	loc	5 259 23 is_stmt 1
+	ld	iy, (iy + 49)
+	loc	5 259 27 is_stmt 0
+	lea	hl, iy + 0
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	bc, (ix + -122)
+	jq	z, BB3_18
+	loc	5 259 30
+	ld	(ix + -3), bc
+	ld	bc, -131
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	de, (hl)
+	lea	hl, iy + 0
+	add	hl, de
+	ld	hl, (hl)
+	private	tmp193
+tmp193:
+	loc	5 259 17
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	bc, (ix + -3)
+	jq	nz, BB3_13
+BB3_18:
+	loc	5 0 17
+	ld	de, 0
+	private	tmp194
+tmp194:
+	loc	5 264 31 is_stmt 1
+	ld	(ix + -51), de
+	jq	BB3_19
+BB3_13:
+	private	tmp195
+tmp195:
+	loc	5 260 46
+	ld	hl, (ix + -16)
+	loc	5 260 51 is_stmt 0
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	loc	5 0 0
+	ld	a, 0
+	ld	e, a
+	loc	5 260 51
+	jq	z, BB3_17
+	loc	5 260 54
+	push	bc
+	pop	de
+	add	hl, de
+	ld	a, (hl)
+	loc	5 260 51
+	or	a, a
+	ld	a, 1
+	ld	e, a
+	jq	nz, BB3_16
+	ld	a, 0
+	ld	e, a
+BB3_16:
+BB3_17:
+	ex	de, hl
+	ld	de, 1
+	push	de
+	pop	bc
+	call	__iand
+	private	tmp196
+tmp196:
+	loc	5 260 30
+	ld	bc, 3
+	call	__imulu
+	private	tmp197
+tmp197:
+	push	hl
+	pop	de
+	add	iy, de
+	ld	hl, (iy)
+	loc	5 260 28
+	ld	(ix + -51), hl
+	loc	5 261 17 is_stmt 1
+	ld	hl, 1
+	push	hl
+	ld	hl, (ix + -128)
+	push	hl
+	call	_optix_InitializeWidget
+	private	tmp198
+tmp198:
+	pop	hl
+	pop	hl
+	ld	hl, (ix + 6)
+	push	hl
+	pop	iy
+	loc	5 262 78
+	ld	a, (iy + 42)
+	loc	5 262 53 is_stmt 0
+	ld	(ix + -67), a
+	loc	5 263 78 is_stmt 1
+	ld	a, (iy + 43)
+	loc	5 263 53 is_stmt 0
+	ld	(ix + -66), a
+	private	tmp199
+tmp199:
+	loc	5 266 63 is_stmt 1
+	ld	de, (ix + -51)
+BB3_19:
+	loc	5 266 27 is_stmt 0
+	ld	hl, (ix + -96)
+	ld	bc, -134
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	(iy + 0), hl
+	loc	5 266 39
+	ld	hl, (ix + -16)
+	loc	5 266 44
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	a, 1
+	jq	nz, BB3_21
+	ld	a, 0
+BB3_21:
+	and	a, 1
+	ld	iy, 0
+	lea	bc, iy + 0
+	ld	c, a
+	loc	5 266 67
+	ex	de, hl
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	a, 1
+	jq	nz, BB3_23
+	ld	a, 0
+BB3_23:
+	and	a, 1
+	lea	hl, iy + 0
+	ld	l, a
+	loc	5 266 53
+	add	hl, bc
+	loc	5 266 13
+	ld	bc, 3
+	call	__imulu
+	private	tmp200
+tmp200:
+	push	hl
+	pop	de
+	ld	(ix + -3), bc
+	ld	bc, -134
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	iy, (iy + 0)
+	add	iy, de
+	loc	5 266 77
+	ld	hl, 0
+	ld	(iy), hl
+	ld	hl, (ix + 6)
+	push	hl
+	pop	iy
+	loc	5 269 59 is_stmt 1
+	ld	hl, (iy + 1)
+	push	ix
+	ld	de, -146
+	add	ix, de
+	ld	(ix + 0), hl
+	pop	ix
+	loc	5 269 74 is_stmt 0
+	ld	bc, (ix + -3)
+	ld	bc, (iy + 61)
+	loc	5 269 66
+	ld	hl, (ix + -122)
+	call	__irems
+	private	tmp201
+tmp201:
+	push	ix
+	ld	de, -149
+	add	ix, de
+	ld	(ix + 0), hl
+	pop	ix
+	loc	5 270 77 is_stmt 1
+	ld	de, (iy + 52)
+	or	a, a
+	sbc	hl, hl
+	loc	5 270 133 is_stmt 0
+	ld	l, (iy + 7)
+	ld	h, (iy + 8)
+	private	tmp202
+tmp202:
+	loc	5 159 19 is_stmt 1
+	ld	(ix + -3), de
+	ld	de, -152
+	lea	iy, ix + 0
+	add	iy, de
+	ld	(iy + 0), hl
+	private	tmp203
+tmp203:
+	call	__idivs
+	private	tmp204
+tmp204:
+	push	hl
+	pop	iy
+	ld	de, (ix + -3)
+	private	tmp205
+tmp205:
+	loc	5 0 19 is_stmt 0
+	ld	(ix + -3), bc
+	push	ix
+	ld	bc, -143
+	private	tmp206
+tmp206:
+	add	ix, bc
+	private	tmp207
+tmp207:
+	ld	(ix + 0), de
+	pop	ix
+	private	tmp208
+tmp208:
+	loc	5 159 49
+	ex	de, hl
+	lea	de, iy + 0
+	inc	hl
+	loc	5 159 54
+	ld	bc, (ix + -3)
+	call	__irems
+	private	tmp209
+tmp209:
+	ld	(ix + -3), bc
+	ld	bc, -155
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	(iy + 0), hl
+	push	de
+	pop	hl
+	ld	bc, (ix + -3)
+	ld	(ix + -3), de
+	push	ix
+	ld	de, -134
+	add	ix, de
+	private	tmp210
+tmp210:
+	loc	5 0 54
+	ld	(ix + 0), bc
+	pop	ix
+	private	tmp211
+tmp211:
+	call	__imulu
+	private	tmp212
+tmp212:
+	push	hl
+	pop	bc
+	push	ix
+	ld	de, -152
+	add	ix, de
+	private	tmp213
+tmp213:
+	ld	hl, (ix + 0)
+	pop	ix
+	or	a, a
+	sbc	hl, bc
+	push	hl
+	pop	iy
+	loc	5 159 70
+	push	ix
+	ld	bc, -155
+	add	ix, bc
+	ld	hl, (ix + 0)
+	pop	ix
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	de, (ix + -3)
+	jq	z, BB3_25
+	private	tmp214
+tmp214:
+	ld	iy, 0
+BB3_25:
+	loc	5 159 30
+	add	iy, de
+	loc	5 159 12
+	ex	de, hl
+	ld	e, iyl
+	ld	d, iyh
+	ex	de, hl
+	private	tmp215
+tmp215:
+	loc	5 270 44 is_stmt 1
+	ld	(ix + -112), l
+	ld	(ix + -111), h
+	loc	5 270 13 is_stmt 0
+	lea	hl, iy + 0
+	ld	bc, 65535
+	call	__iand
+	private	tmp216
+tmp216:
+	loc	5 269 82 is_stmt 1
+	ld	de, -149
+	lea	iy, ix + 0
+	add	iy, de
+	ld	bc, (iy + 0)
+	call	__imulu
+	private	tmp217
+tmp217:
+	loc	5 269 61 is_stmt 0
+	ld	(ix + -3), bc
+	push	ix
+	ld	bc, -146
+	add	ix, bc
+	ld	de, (ix + 0)
+	pop	ix
+	add	hl, de
+	loc	5 269 39
+	ld	(ix + -118), hl
+	ld	hl, (ix + 6)
+	push	hl
+	pop	iy
+	loc	5 272 59 is_stmt 1
+	ld	hl, (iy + 4)
+	push	ix
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	loc	5 272 75 is_stmt 0
+	ld	de, (iy + 55)
+	or	a, a
+	sbc	hl, hl
+	loc	5 272 80
+	or	a, a
+	sbc	hl, de
+	push	hl
+	pop	de
+	ld	hl, (ix + -122)
+	add	hl, de
+	ld	bc, (ix + -3)
+	push	ix
+	ld	de, -134
+	add	ix, de
+	ld	bc, (ix + 0)
+	pop	ix
+	call	__idivs
+	private	tmp218
+tmp218:
+	push	ix
+	ld	de, -149
+	add	ix, de
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 0
+	loc	5 273 96 is_stmt 1
+	ld	de, (iy + 58)
+	loc	5 273 160 is_stmt 0
+	ld	a, (iy + 9)
+	private	tmp219
+tmp219:
+	loc	5 0 160
+	or	a, a
+	sbc	hl, hl
+	private	tmp220
+tmp220:
+	loc	5 163 13 is_stmt 1
+	ld	l, a
 	private	tmp221
 tmp221:
+	loc	5 163 20 is_stmt 0
+	ld	(ix + -3), bc
+	ld	bc, -152
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	(iy + 0), hl
+	private	tmp222
+tmp222:
+	ld	bc, (ix + -3)
+	push	de
+	pop	bc
+	call	__idivs
+	private	tmp223
+tmp223:
+	push	hl
+	pop	iy
+	loc	5 163 46
+	ld	(ix + -3), de
+	push	ix
+	ld	de, -143
+	private	tmp224
+tmp224:
+	add	ix, de
+	private	tmp225
+tmp225:
+	ld	hl, (ix + 0)
+	pop	ix
+	push	ix
+	ld	de, -134
+	add	ix, de
+	ld	bc, (ix + 0)
+	pop	ix
+	call	__idivs
+	private	tmp226
+tmp226:
+	push	ix
+	ld	de, -143
+	add	ix, de
+	ld	(ix + 0), hl
+	pop	ix
+	ld	de, (ix + -3)
+	push	de
+	pop	bc
+	private	tmp227
+tmp227:
+	loc	5 163 64
+	dec	de
+	ld	(ix + -3), de
+	push	ix
+	ld	de, -134
+	add	ix, de
+	ld	(ix + 0), iy
+	pop	ix
+	lea	hl, iy + 0
+	call	__imulu
+	private	tmp228
+tmp228:
+	loc	5 0 64
+	push	hl
+	pop	bc
+	private	tmp229
+tmp229:
+	ld	de, -152
+	lea	iy, ix + 0
+	add	iy, de
+	ld	hl, (iy + 0)
+	or	a, a
+	sbc	hl, bc
+	push	hl
+	pop	iy
+	loc	5 163 69
+	push	ix
+	ld	bc, -143
+	add	ix, bc
+	ld	hl, (ix + 0)
+	pop	ix
+	ld	de, (ix + -3)
+	or	a, a
+	sbc	hl, de
+	jq	z, BB3_27
+	private	tmp230
+tmp230:
+	ld	iy, 0
+BB3_27:
+	loc	5 163 28
+	ld	bc, -134
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	de, (hl)
+	add	iy, de
+	loc	5 163 12
+	ld	a, iyl
+	private	tmp231
+tmp231:
+	loc	5 273 45 is_stmt 1
+	ld	(ix + -110), a
+	loc	5 273 13 is_stmt 0
+	lea	hl, iy + 0
+	ld	bc, 255
+	call	__iand
+	private	tmp232
+tmp232:
+	loc	5 272 96 is_stmt 1
+	ld	de, -149
+	lea	iy, ix + 0
+	add	iy, de
+	ld	bc, (iy + 0)
+	call	__imulu
+	private	tmp233
+tmp233:
+	loc	5 272 61 is_stmt 0
+	ld	(ix + -3), bc
+	push	ix
+	ld	bc, -146
+	add	ix, bc
+	ld	de, (ix + 0)
+	pop	ix
+	add	hl, de
+	loc	5 272 39
+	ld	(ix + -115), hl
+	loc	5 274 13 is_stmt 1
+	ld	hl, (ix + -125)
+	push	hl
+	ld	bc, (ix + -3)
+	call	_optix_RecursiveAlign
+	private	tmp234
+tmp234:
+	pop	hl
+	loc	5 276 55
+	ld	iy, (ix + 6)
+	ld	de, (iy + 52)
+	loc	5 276 46 is_stmt 0
+	ld	hl, (ix + -122)
+	or	a, a
+	sbc	hl, de
+	ld	a, 1
+	jq	z, BB3_29
+	ld	a, 0
+BB3_29:
+	loc	5 276 42
+	and	a, 1
+	ld	(ix + -105), a
+	loc	5 277 57 is_stmt 1
+	ld	hl, (ix + -96)
+	loc	5 277 13 is_stmt 0
+	push	hl
+	call	_optix_RecursiveSetNeedsRedraw
+	private	tmp235
+tmp235:
+	pop	hl
+	loc	5 278 27 is_stmt 1
+	ld	hl, (ix + -102)
+	loc	5 278 13 is_stmt 0
+	ld	de, (ix + -125)
+	push	de
+	call	__indcallhl
+	private	tmp236
+tmp236:
+	pop	hl
+	ld	iy, (ix + 6)
+	private	tmp237
+tmp237:
+	loc	5 247 39 is_stmt 1
+	ld	hl, (iy + 55)
+	ld	bc, -134
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	(iy + 0), hl
+BB3_30:
+	loc	5 0 39 is_stmt 0
+	ld	de, (ix + -122)
+	loc	5 247 74
+	inc	de
+	private	tmp238
+tmp238:
+	loc	5 247 5
+	ld	bc, 3
+	ld	(ix + -3), de
+	ld	de, -131
+	private	tmp239
+tmp239:
+	lea	hl, ix + 0
+	add	hl, de
+	ld	hl, (hl)
+	add	hl, bc
+	ld	bc, -131
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	(iy + 0), hl
+	ld	iy, (ix + 6)
+	ld	de, (ix + -3)
+	jq	BB3_3
+	private	tmp240
+tmp240:
 	section	.text,"ax",@progbits
 	private	func_end3
 func_end3:
 	cfi_endproc
 
-	section	.text,"ax",@progbits
-	public	_optix_RenderMenu_default
-_optix_RenderMenu_default:
-	private	func_begin4
-func_begin4:
-	loc	7 150 0
-	cfi_startproc
-	call	__frameset0
-	private	tmp222
-tmp222:
-	cfi_def_cfa ix, 6
-	cfi_offset ix, -6
-	ld	iy, (ix + 6)
-	private	tmp223
-tmp223:
-	loc	7 152 17 prologue_end
-	ld	hl, (iy + 23)
-	private	tmp224
-tmp224:
-	loc	7 152 9 is_stmt 0
-	add	hl, bc
-	or	a, a
-	sbc	hl, bc
-	private	tmp225
-tmp225:
-	loc	7 152 24
-	push	hl
-	call	nz, _optix_RenderStack
-	private	tmp226
-tmp226:
-	pop	hl
-	private	tmp227
-tmp227:
-	loc	7 153 1 is_stmt 1
-	pop	ix
-	cfi_def_cfa sp, 3
-	cfi_restore ix
-	ret
-	private	tmp228
-tmp228:
-	section	.text,"ax",@progbits
-	private	func_end4
-func_end4:
-	cfi_endproc
-	file	9 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\loop.h" md5 0x8c91efb33eb5c4c489579fb47b736abc
-
 	section	.rodata,"a",@progbits
 	private	L_.str
 L_.str:
-	db	"Success.",012o,000o
+	db	"Selection: %d, Last: %d Needs jump: %d",012o,000o
 
-	section	.rodata,"a",@progbits
-	private	L_.str.1
-L_.str.1:
-	db	"Menu min: %d, menu selection: %d",000o
-
+	file	8 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/../elements\text.h" md5 0x08b65f7f105d3a79efd8ad98293473ab
+	file	9 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/../elements\sprite.h" md5 0xcf72d8106dd58f386ba8ec8a2e3021b4
+	file	10 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/../elements\button.h" md5 0x454909b9ba27e8ad67152663d2ce791e
 	section	.debug_loclists,"",@progbits
 	dd	debug_list_header_end0-debug_list_header_start0
 	private	debug_list_header_start0
@@ -1778,7 +2059,7 @@ debug_list_header_start0:
 	dw	5
 	db	3
 	db	0
-	dd	19
+	dd	26
 	private	loclists_table_base0
 loclists_table_base0:
 	dd	debug_loc0-loclists_table_base0
@@ -1800,315 +2081,528 @@ loclists_table_base0:
 	dd	debug_loc16-loclists_table_base0
 	dd	debug_loc17-loclists_table_base0
 	dd	debug_loc18-loclists_table_base0
+	dd	debug_loc19-loclists_table_base0
+	dd	debug_loc20-loclists_table_base0
+	dd	debug_loc21-loclists_table_base0
+	dd	debug_loc22-loclists_table_base0
+	dd	debug_loc23-loclists_table_base0
+	dd	debug_loc24-loclists_table_base0
+	dd	debug_loc25-loclists_table_base0
 	private	debug_loc0
 debug_loc0:
 	db	4
 	uleb128	tmp1-func_begin0
-	uleb128	tmp5-func_begin0
+	uleb128	tmp2-func_begin0
 	db	1
-	db	81
+	db	82
 	db	4
-	uleb128	tmp11-func_begin0
-	uleb128	tmp12-func_begin0
-	db	1
-	db	81
-	db	4
-	uleb128	tmp44-func_begin0
-	uleb128	func_end0-func_begin0
+	uleb128	tmp2-func_begin0
+	uleb128	tmp8-func_begin0
 	db	1
 	db	81
 	db	0
 	private	debug_loc1
 debug_loc1:
 	db	4
-	uleb128	tmp19-func_begin0
-	uleb128	tmp23-func_begin0
-	db	2
-	db	116
-	db	12
+	uleb128	tmp1-func_begin0
+	uleb128	tmp7-func_begin0
+	db	1
+	db	80
 	db	0
 	private	debug_loc2
 debug_loc2:
 	db	4
-	uleb128	tmp21-func_begin0
-	uleb128	tmp44-func_begin0
-	db	2
-	db	116
-	db	9
+	uleb128	tmp1-func_begin0
+	uleb128	tmp4-func_begin0
+	db	1
+	db	85
 	db	0
 	private	debug_loc3
 debug_loc3:
 	db	4
-	uleb128	tmp40-func_begin0
-	uleb128	tmp41-func_begin0
+	uleb128	tmp12-func_begin0
+	uleb128	tmp13-func_begin0
+	db	4
+	db	83
+	db	157
+	db	8
+	db	8
+	db	4
+	uleb128	tmp13-func_begin0
+	uleb128	func_end1-func_begin0
 	db	1
 	db	85
 	db	0
 	private	debug_loc4
 debug_loc4:
 	db	4
-	uleb128	tmp51-func_begin0
-	uleb128	tmp53-func_begin0
+	uleb128	tmp16-func_begin0
+	uleb128	tmp18-func_begin0
 	db	1
-	db	85
+	db	80
 	db	0
 	private	debug_loc5
 debug_loc5:
 	db	4
-	uleb128	tmp61-func_begin0
-	uleb128	tmp78-func_begin0
-	db	2
-	db	116
-	db	3
-	db	4
-	uleb128	tmp78-func_begin0
-	uleb128	tmp79-func_begin0
+	uleb128	tmp12-func_begin0
+	uleb128	tmp18-func_begin0
 	db	1
-	db	82
+	db	81
 	db	4
-	uleb128	tmp79-func_begin0
-	uleb128	tmp99-func_begin0
-	db	2
-	db	116
-	db	3
-	db	4
-	uleb128	tmp99-func_begin0
-	uleb128	tmp100-func_begin0
-	db	1
-	db	82
-	db	4
-	uleb128	tmp100-func_begin0
-	uleb128	tmp109-func_begin0
+	uleb128	tmp18-func_begin0
+	uleb128	tmp20-func_begin0
 	db	1
 	db	80
 	db	0
 	private	debug_loc6
 debug_loc6:
 	db	4
-	uleb128	tmp53-func_begin0
-	uleb128	tmp56-func_begin0
-	db	3
-	db	17
-	db	0
-	db	159
-	db	4
-	uleb128	tmp56-func_begin0
-	uleb128	tmp57-func_begin0
-	db	3
-	db	113
+	uleb128	tmp15-func_begin0
+	uleb128	tmp17-func_begin0
 	db	1
-	db	159
-	db	4
-	uleb128	tmp57-func_begin0
-	uleb128	tmp58-func_begin0
-	db	3
-	db	113
-	db	2
-	db	159
-	db	4
-	uleb128	tmp60-func_begin0
-	uleb128	tmp77-func_begin0
-	db	1
-	db	81
-	db	4
-	uleb128	tmp79-func_begin0
-	uleb128	tmp83-func_begin0
-	db	1
-	db	81
-	db	4
-	uleb128	tmp86-func_begin0
-	uleb128	tmp89-func_begin0
-	db	1
-	db	81
+	db	82
 	db	0
 	private	debug_loc7
 debug_loc7:
 	db	4
-	uleb128	tmp115-func_begin0
-	uleb128	tmp126-func_begin0
-	db	3
-	db	17
-	db	0
-	db	159
-	db	0
-	private	debug_loc8
-debug_loc8:
-	db	4
-	uleb128	tmp115-func_begin0
-	uleb128	tmp171-func_begin0
-	db	2
-	db	116
-	db	9
-	db	4
-	uleb128	tmp171-func_begin0
-	uleb128	func_end2-func_begin0
-	db	4
-	db	116
-	db	24
-	db	35
-	db	9
-	db	0
-	private	debug_loc9
-debug_loc9:
-	db	4
-	uleb128	tmp115-func_begin0
-	uleb128	tmp116-func_begin0
-	db	1
-	db	81
-	db	4
-	uleb128	tmp116-func_begin0
-	uleb128	tmp120-func_begin0
-	db	2
-	db	116
-	db	3
-	db	4
-	uleb128	tmp120-func_begin0
-	uleb128	tmp125-func_begin0
-	db	1
-	db	81
-	db	0
-	private	debug_loc10
-debug_loc10:
-	db	4
-	uleb128	tmp115-func_begin0
-	uleb128	tmp119-func_begin0
-	db	2
-	db	116
-	db	6
-	db	0
-	private	debug_loc11
-debug_loc11:
-	db	4
-	uleb128	tmp154-func_begin0
-	uleb128	tmp155-func_begin0
-	db	1
-	db	80
-	db	4
-	uleb128	tmp155-func_begin0
-	uleb128	tmp156-func_begin0
-	db	1
-	db	85
-	db	4
-	uleb128	tmp156-func_begin0
-	uleb128	tmp157-func_begin0
-	db	1
-	db	81
-	db	0
-	private	debug_loc12
-debug_loc12:
-	db	4
-	uleb128	tmp167-func_begin0
-	uleb128	tmp168-func_begin0
-	db	1
-	db	85
-	db	0
-	private	debug_loc13
-debug_loc13:
-	db	4
-	uleb128	tmp175-func_begin0
-	uleb128	tmp182-func_begin0
-	db	3
-	db	17
-	db	0
-	db	159
-	db	4
-	uleb128	tmp182-func_begin0
-	uleb128	tmp196-func_begin0
-	db	2
-	db	116
-	db	4
-	db	4
-	uleb128	tmp196-func_begin0
-	uleb128	tmp197-func_begin0
-	db	1
-	db	81
-	db	4
-	uleb128	tmp197-func_begin0
-	uleb128	func_end3-func_begin0
-	db	2
-	db	116
-	db	4
-	db	0
-	private	debug_loc14
-debug_loc14:
-	db	4
-	uleb128	tmp175-func_begin0
-	uleb128	tmp182-func_begin0
+	uleb128	tmp26-func_begin0
+	uleb128	tmp76-func_begin0
 	db	2
 	db	48
 	db	159
 	db	4
-	uleb128	tmp182-func_begin0
-	uleb128	tmp208-func_begin0
+	uleb128	tmp84-func_begin0
+	uleb128	tmp115-func_begin0
 	db	2
-	db	116
-	db	0
-	db	4
-	uleb128	tmp208-func_begin0
-	uleb128	tmp209-func_begin0
-	db	2
-	db	49
+	db	48
 	db	159
 	db	4
-	uleb128	tmp210-func_begin0
-	uleb128	tmp215-func_begin0
+	uleb128	tmp127-func_begin0
+	uleb128	tmp132-func_begin0
 	db	2
-	db	116
-	db	0
+	db	48
+	db	159
 	db	4
-	uleb128	tmp216-func_begin0
-	uleb128	func_end3-func_begin0
+	uleb128	tmp132-func_begin0
+	uleb128	tmp134-func_begin0
+	db	22
+	db	115
+	db	0
+	db	56
+	db	37
+	db	16
+	db	255
+	db	1
+	db	26
+	db	168
+	db	"",253o,200o,200o,000o
+	db	168
+	db	"",257o,200o,200o,000o
+	db	159
+	db	157
+	db	8
+	db	8
+	db	4
+	uleb128	tmp134-func_begin0
+	uleb128	tmp136-func_begin0
+	db	2
+	db	48
+	db	159
+	db	4
+	uleb128	tmp136-func_begin0
+	uleb128	tmp139-func_begin0
+	db	22
+	db	115
+	db	0
+	db	56
+	db	37
+	db	16
+	db	255
+	db	1
+	db	26
+	db	168
+	db	"",253o,200o,200o,000o
+	db	168
+	db	"",257o,200o,200o,000o
+	db	159
+	db	157
+	db	8
+	db	8
+	db	4
+	uleb128	tmp140-func_begin0
+	uleb128	tmp142-func_begin0
+	db	1
+	db	82
+	db	4
+	uleb128	tmp143-func_begin0
+	uleb128	tmp145-func_begin0
+	db	2
+	db	48
+	db	159
+	db	4
+	uleb128	tmp145-func_begin0
+	uleb128	tmp146-func_begin0
+	db	22
+	db	115
+	db	0
+	db	56
+	db	37
+	db	16
+	db	255
+	db	1
+	db	26
+	db	168
+	db	"",253o,200o,200o,000o
+	db	168
+	db	"",257o,200o,200o,000o
+	db	159
+	db	157
+	db	8
+	db	8
+	db	4
+	uleb128	tmp146-func_begin0
+	uleb128	tmp148-func_begin0
+	db	1
+	db	82
+	db	4
+	uleb128	tmp151-func_begin0
+	uleb128	tmp152-func_begin0
+	db	22
+	db	115
+	db	0
+	db	56
+	db	37
+	db	16
+	db	255
+	db	1
+	db	26
+	db	168
+	db	"",253o,200o,200o,000o
+	db	168
+	db	"",257o,200o,200o,000o
+	db	159
+	db	157
+	db	8
+	db	8
+	db	4
+	uleb128	tmp153-func_begin0
+	uleb128	tmp155-func_begin0
+	db	22
+	db	115
+	db	0
+	db	56
+	db	37
+	db	16
+	db	255
+	db	1
+	db	26
+	db	168
+	db	"",253o,200o,200o,000o
+	db	168
+	db	"",257o,200o,200o,000o
+	db	159
+	db	157
+	db	8
+	db	8
+	db	0
+	private	debug_loc8
+debug_loc8:
+	db	4
+	uleb128	tmp26-func_begin0
+	uleb128	tmp27-func_begin0
+	db	1
+	db	85
+	db	0
+	private	debug_loc9
+debug_loc9:
+	db	4
+	uleb128	tmp26-func_begin0
+	uleb128	tmp27-func_begin0
+	db	1
+	db	85
+	db	0
+	private	debug_loc10
+debug_loc10:
+	db	4
+	uleb128	tmp43-func_begin0
+	uleb128	tmp44-func_begin0
+	db	1
+	db	82
+	db	4
+	uleb128	tmp44-func_begin0
+	uleb128	tmp49-func_begin0
+	db	1
+	db	81
+	db	0
+	private	debug_loc11
+debug_loc11:
+	db	4
+	uleb128	tmp43-func_begin0
+	uleb128	tmp47-func_begin0
+	db	1
+	db	80
+	db	4
+	uleb128	tmp47-func_begin0
+	uleb128	tmp62-func_begin0
 	db	2
 	db	116
+	db	6
 	db	0
+	private	debug_loc12
+debug_loc12:
+	db	4
+	uleb128	tmp52-func_begin0
+	uleb128	tmp53-func_begin0
+	db	13
+	db	114
+	db	0
+	db	168
+	db	"",263o,200o,200o,000o
+	db	168
+	db	"",267o,200o,200o,000o
+	db	159
+	db	4
+	uleb128	tmp53-func_begin0
+	uleb128	tmp74-func_begin0
+	db	15
+	db	116
+	db	12
+	db	148
+	db	3
+	db	168
+	db	"",263o,200o,200o,000o
+	db	168
+	db	"",267o,200o,200o,000o
+	db	159
+	db	4
+	uleb128	tmp98-func_begin0
+	uleb128	tmp115-func_begin0
+	db	15
+	db	116
+	db	12
+	db	148
+	db	3
+	db	168
+	db	"",263o,200o,200o,000o
+	db	168
+	db	"",267o,200o,200o,000o
+	db	159
+	db	0
+	private	debug_loc13
+debug_loc13:
+	db	4
+	uleb128	tmp56-func_begin0
+	uleb128	tmp57-func_begin0
+	db	4
+	db	83
+	db	157
+	db	8
+	db	8
+	db	4
+	uleb128	tmp57-func_begin0
+	uleb128	tmp61-func_begin0
+	db	1
+	db	81
+	db	0
+	private	debug_loc14
+debug_loc14:
+	db	4
+	uleb128	tmp56-func_begin0
+	uleb128	tmp60-func_begin0
+	db	1
+	db	80
 	db	0
 	private	debug_loc15
 debug_loc15:
 	db	4
-	uleb128	tmp175-func_begin0
-	uleb128	tmp176-func_begin0
-	db	1
-	db	81
+	uleb128	tmp64-func_begin0
+	uleb128	tmp65-func_begin0
+	db	13
+	db	117
+	db	0
+	db	168
+	db	"",263o,200o,200o,000o
+	db	168
+	db	"",257o,200o,200o,000o
+	db	159
 	db	4
-	uleb128	tmp178-func_begin0
-	uleb128	tmp180-func_begin0
-	db	1
-	db	85
+	uleb128	tmp65-func_begin0
+	uleb128	tmp74-func_begin0
+	db	15
+	db	116
+	db	9
+	db	148
+	db	3
+	db	168
+	db	"",263o,200o,200o,000o
+	db	168
+	db	"",257o,200o,200o,000o
+	db	159
+	db	4
+	uleb128	tmp98-func_begin0
+	uleb128	tmp115-func_begin0
+	db	15
+	db	116
+	db	9
+	db	148
+	db	3
+	db	168
+	db	"",263o,200o,200o,000o
+	db	168
+	db	"",257o,200o,200o,000o
+	db	159
 	db	0
 	private	debug_loc16
 debug_loc16:
 	db	4
-	uleb128	tmp175-func_begin0
-	uleb128	tmp176-func_begin0
+	uleb128	tmp165-func_begin0
+	uleb128	tmp169-func_begin0
 	db	1
-	db	81
+	db	85
 	db	4
-	uleb128	tmp178-func_begin0
-	uleb128	tmp180-func_begin0
+	uleb128	tmp170-func_begin0
+	uleb128	tmp175-func_begin0
 	db	1
 	db	85
 	db	0
 	private	debug_loc17
 debug_loc17:
 	db	4
-	uleb128	tmp223-func_begin0
-	uleb128	tmp226-func_begin0
+	uleb128	tmp165-func_begin0
+	uleb128	tmp169-func_begin0
+	db	1
+	db	85
+	db	4
+	uleb128	tmp170-func_begin0
+	uleb128	tmp175-func_begin0
 	db	1
 	db	85
 	db	0
 	private	debug_loc18
 debug_loc18:
 	db	4
-	uleb128	tmp223-func_begin0
-	uleb128	tmp226-func_begin0
+	uleb128	tmp172-func_begin0
+	uleb128	tmp174-func_begin0
 	db	1
-	db	85
+	db	81
+	db	4
+	uleb128	tmp174-func_begin0
+	uleb128	tmp175-func_begin0
+	db	2
+	db	116
+	db	21
+	db	4
+	uleb128	tmp175-func_begin0
+	uleb128	tmp177-func_begin0
+	db	1
+	db	81
+	db	4
+	uleb128	tmp178-func_begin0
+	uleb128	tmp187-func_begin0
+	db	2
+	db	116
+	db	33
+	db	4
+	uleb128	tmp238-func_begin0
+	uleb128	tmp239-func_begin0
+	db	1
+	db	81
+	db	0
+	private	debug_loc19
+debug_loc19:
+	db	4
+	uleb128	tmp203-func_begin0
+	uleb128	tmp207-func_begin0
+	db	2
+	db	116
+	db	3
+	db	0
+	private	debug_loc20
+debug_loc20:
+	db	4
+	uleb128	tmp203-func_begin0
+	uleb128	tmp206-func_begin0
+	db	1
+	db	80
+	db	4
+	uleb128	tmp211-func_begin0
+	uleb128	tmp213-func_begin0
+	db	2
+	db	116
+	db	21
+	db	0
+	private	debug_loc21
+debug_loc21:
+	db	4
+	uleb128	tmp203-func_begin0
+	uleb128	tmp205-func_begin0
+	db	1
+	db	81
+	db	4
+	uleb128	tmp208-func_begin0
+	uleb128	tmp210-func_begin0
+	db	2
+	db	116
+	db	12
+	db	0
+	private	debug_loc22
+debug_loc22:
+	db	4
+	uleb128	tmp220-func_begin0
+	uleb128	tmp221-func_begin0
+	db	4
+	db	83
+	db	157
+	db	8
+	db	8
+	db	4
+	uleb128	tmp221-func_begin0
+	uleb128	tmp222-func_begin0
+	db	1
+	db	82
+	db	4
+	uleb128	tmp222-func_begin0
+	uleb128	tmp225-func_begin0
+	db	2
+	db	116
+	db	3
+	db	0
+	private	debug_loc23
+debug_loc23:
+	db	4
+	uleb128	tmp220-func_begin0
+	uleb128	tmp225-func_begin0
+	db	2
+	db	116
+	db	21
+	db	0
+	private	debug_loc24
+debug_loc24:
+	db	4
+	uleb128	tmp220-func_begin0
+	uleb128	tmp224-func_begin0
+	db	1
+	db	81
+	db	4
+	uleb128	tmp227-func_begin0
+	uleb128	tmp229-func_begin0
+	db	1
+	db	80
+	db	0
+	private	debug_loc25
+debug_loc25:
+	db	4
+	uleb128	tmp220-func_begin0
+	uleb128	tmp225-func_begin0
+	db	2
+	db	116
+	db	12
 	db	0
 	private	debug_list_header_end0
 debug_list_header_end0:
 	section	.debug_abbrev,"",@progbits
-	private	abbrev_start147
-abbrev_start147:
+	private	abbrev_start186
+abbrev_start186:
 	db	1
 	db	17
 	db	1
@@ -2137,13 +2631,24 @@ abbrev_start147:
 	db	0
 	db	0
 	db	2
+	db	36
+	db	0
+	db	3
+	db	37
+	db	62
+	db	11
+	db	11
+	db	11
+	db	0
+	db	0
+	db	3
 	db	15
 	db	0
 	db	73
 	db	19
 	db	0
 	db	0
-	db	3
+	db	4
 	db	19
 	db	1
 	db	3
@@ -2156,7 +2661,7 @@ abbrev_start147:
 	db	11
 	db	0
 	db	0
-	db	4
+	db	5
 	db	13
 	db	0
 	db	3
@@ -2171,7 +2676,7 @@ abbrev_start147:
 	db	11
 	db	0
 	db	0
-	db	5
+	db	6
 	db	22
 	db	0
 	db	73
@@ -2181,17 +2686,6 @@ abbrev_start147:
 	db	58
 	db	11
 	db	59
-	db	11
-	db	0
-	db	0
-	db	6
-	db	36
-	db	0
-	db	3
-	db	37
-	db	62
-	db	11
-	db	11
 	db	11
 	db	0
 	db	0
@@ -2210,13 +2704,6 @@ abbrev_start147:
 	db	0
 	db	0
 	db	9
-	db	38
-	db	0
-	db	73
-	db	19
-	db	0
-	db	0
-	db	10
 	db	19
 	db	1
 	db	11
@@ -2227,21 +2714,21 @@ abbrev_start147:
 	db	11
 	db	0
 	db	0
-	db	11
+	db	10
 	db	1
 	db	1
 	db	73
 	db	19
 	db	0
 	db	0
-	db	12
+	db	11
 	db	33
 	db	0
 	db	73
 	db	19
 	db	0
 	db	0
-	db	13
+	db	12
 	db	36
 	db	0
 	db	3
@@ -2252,19 +2739,82 @@ abbrev_start147:
 	db	11
 	db	0
 	db	0
-	db	14
+	db	13
 	db	53
 	db	0
 	db	73
 	db	19
 	db	0
 	db	0
-	db	15
+	db	14
 	db	15
 	db	0
+	db	0
+	db	0
+	db	15
+	db	46
+	db	1
+	db	17
+	db	27
+	db	18
+	db	6
+	db	64
+	db	24
+	db	122
+	db	25
+	db	49
+	db	19
 	db	0
 	db	0
 	db	16
+	db	5
+	db	0
+	db	2
+	db	34
+	db	49
+	db	19
+	db	0
+	db	0
+	db	17
+	db	5
+	db	0
+	db	49
+	db	19
+	db	0
+	db	0
+	db	18
+	db	46
+	db	1
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	39
+	db	25
+	db	73
+	db	19
+	db	63
+	db	25
+	db	32
+	db	11
+	db	0
+	db	0
+	db	19
+	db	5
+	db	0
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	73
+	db	19
+	db	0
+	db	0
+	db	20
 	db	46
 	db	1
 	db	17
@@ -2287,21 +2837,8 @@ abbrev_start147:
 	db	25
 	db	0
 	db	0
-	db	17
+	db	21
 	db	5
-	db	0
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	11
-	db	73
-	db	19
-	db	0
-	db	0
-	db	18
-	db	52
 	db	0
 	db	2
 	db	34
@@ -2315,40 +2852,11 @@ abbrev_start147:
 	db	19
 	db	0
 	db	0
-	db	19
-	db	11
-	db	1
-	db	17
-	db	27
-	db	18
-	db	6
-	db	0
-	db	0
-	db	20
-	db	52
-	db	0
-	db	2
-	db	24
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	11
-	db	73
-	db	19
-	db	0
-	db	0
-	db	21
-	db	11
-	db	1
-	db	85
-	db	35
-	db	0
-	db	0
 	db	22
 	db	52
 	db	0
+	db	2
+	db	34
 	db	3
 	db	37
 	db	58
@@ -2360,6 +2868,39 @@ abbrev_start147:
 	db	0
 	db	0
 	db	23
+	db	11
+	db	1
+	db	85
+	db	35
+	db	0
+	db	0
+	db	24
+	db	29
+	db	1
+	db	49
+	db	19
+	db	17
+	db	27
+	db	18
+	db	6
+	db	88
+	db	11
+	db	89
+	db	11
+	db	87
+	db	11
+	db	0
+	db	0
+	db	25
+	db	5
+	db	0
+	db	28
+	db	13
+	db	49
+	db	19
+	db	0
+	db	0
+	db	26
 	db	72
 	db	0
 	db	127
@@ -2368,53 +2909,6 @@ abbrev_start147:
 	db	27
 	db	0
 	db	0
-	db	24
-	db	46
-	db	1
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	11
-	db	39
-	db	25
-	db	60
-	db	25
-	db	63
-	db	25
-	db	0
-	db	0
-	db	25
-	db	5
-	db	0
-	db	2
-	db	34
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	11
-	db	73
-	db	19
-	db	0
-	db	0
-	db	26
-	db	5
-	db	0
-	db	2
-	db	24
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	11
-	db	73
-	db	19
-	db	0
-	db	0
 	db	27
 	db	46
 	db	1
@@ -2432,6 +2926,92 @@ abbrev_start147:
 	db	25
 	db	63
 	db	25
+	db	0
+	db	0
+	db	28
+	db	46
+	db	0
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	39
+	db	25
+	db	73
+	db	19
+	db	60
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	29
+	db	52
+	db	0
+	db	2
+	db	24
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	73
+	db	19
+	db	0
+	db	0
+	db	30
+	db	11
+	db	1
+	db	17
+	db	27
+	db	18
+	db	6
+	db	0
+	db	0
+	db	31
+	db	29
+	db	1
+	db	49
+	db	19
+	db	17
+	db	27
+	db	18
+	db	6
+	db	88
+	db	11
+	db	89
+	db	5
+	db	87
+	db	11
+	db	0
+	db	0
+	db	32
+	db	46
+	db	1
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	39
+	db	25
+	db	60
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	33
+	db	33
+	db	0
+	db	73
+	db	19
+	db	55
+	db	11
 	db	0
 	db	0
 	db	0
@@ -2444,7 +3024,7 @@ debug_info_start0:
 	dw	5
 	db	1
 	db	3
-	dd	abbrev_start147
+	dd	abbrev_start186
 	db	1
 	db	0
 	dw	12
@@ -2453,736 +3033,904 @@ debug_info_start0:
 	dd	line_table_start0
 	db	2
 	db	0
-	dd	func_end4-func_begin0
+	dd	func_end3-func_begin0
 	dd	addr_table_base0
 	dd	rnglists_table_base0
 	dd	loclists_table_base0
 	db	2
-	dd	48
-	db	3
-	db	36
-	db	29
-	db	3
-	db	9
-	db	4
-	db	3
-	dd	72
-	db	3
-	db	10
+	db	69
+	db	7
 	db	0
+	db	2
+	db	68
+	db	7
+	db	1
+	db	2
+	db	67
+	db	7
+	db	3
+	db	2
+	db	66
+	db	7
+	db	2
+	db	3
+	dd	64
 	db	4
+	db	57
+	db	70
+	db	3
+	db	18
+	db	5
+	db	3
+	dd	178
+	db	3
+	db	19
+	db	0
+	db	5
 	db	34
-	dd	324
+	dd	430
 	db	3
-	db	11
+	db	20
 	db	26
-	db	0
+	db	5
+	db	43
+	dd	317
 	db	3
+	db	22
+	db	38
+	db	5
+	db	44
+	dd	317
+	db	3
+	db	23
+	db	42
+	db	5
+	db	45
+	dd	504
+	db	3
+	db	24
+	db	46
+	db	5
+	db	47
+	dd	518
+	db	3
+	db	25
+	db	49
+	db	5
+	db	51
+	dd	301
+	db	3
+	db	27
+	db	52
+	db	5
+	db	52
+	dd	301
+	db	3
+	db	29
+	db	55
+	db	5
+	db	53
+	dd	301
+	db	3
+	db	30
+	db	58
+	db	5
+	db	54
+	dd	301
+	db	3
+	db	31
+	db	61
+	db	5
+	db	55
+	dd	301
+	db	3
+	db	32
+	db	64
+	db	5
+	db	56
+	dd	301
+	db	3
+	db	34
+	db	67
+	db	0
+	db	4
 	db	33
 	db	26
 	db	2
 	db	63
+	db	5
 	db	4
-	db	4
-	dd	141
+	dd	247
 	db	2
 	db	64
 	db	0
-	db	4
+	db	5
 	db	7
-	dd	153
+	dd	259
 	db	2
 	db	65
 	db	1
-	db	4
+	db	5
 	db	16
-	dd	211
+	dd	317
 	db	2
 	db	66
 	db	10
-	db	4
+	db	5
 	db	24
-	dd	265
+	dd	371
 	db	2
 	db	67
 	db	14
-	db	4
+	db	5
 	db	30
-	dd	302
+	dd	408
 	db	2
 	db	68
 	db	17
-	db	4
+	db	5
 	db	31
-	dd	302
+	dd	408
 	db	2
 	db	70
 	db	20
-	db	4
+	db	5
 	db	32
-	dd	319
+	dd	425
 	db	2
 	db	73
 	db	23
 	db	0
-	db	5
-	dd	149
+	db	6
+	dd	255
 	db	6
 	db	1
 	db	15
-	db	6
+	db	2
 	db	5
 	db	8
 	db	1
-	db	3
+	db	4
 	db	15
 	db	9
 	db	2
 	db	49
-	db	4
+	db	5
 	db	8
-	dd	195
+	dd	301
 	db	2
 	db	50
 	db	0
-	db	4
+	db	5
 	db	10
-	dd	195
+	dd	301
 	db	2
 	db	51
 	db	3
-	db	4
+	db	5
 	db	11
-	dd	199
+	dd	305
 	db	2
 	db	52
 	db	6
-	db	4
+	db	5
 	db	14
-	dd	141
+	dd	247
 	db	2
 	db	53
 	db	8
 	db	0
-	db	6
+	db	2
 	db	9
 	db	5
 	db	3
-	db	5
-	dd	207
+	db	6
+	dd	313
 	db	13
 	db	1
 	db	39
-	db	6
+	db	2
 	db	12
 	db	7
 	db	2
-	db	3
+	db	4
 	db	23
 	db	4
 	db	2
 	db	29
-	db	4
+	db	5
 	db	17
-	dd	141
+	dd	247
 	db	2
 	db	30
 	db	0
-	db	4
+	db	5
 	db	18
-	dd	141
+	dd	247
 	db	2
 	db	31
 	db	1
-	db	4
+	db	5
 	db	19
-	dd	253
+	dd	359
 	db	2
 	db	32
 	db	2
-	db	4
+	db	5
 	db	22
-	dd	253
+	dd	359
 	db	2
 	db	33
 	db	3
 	db	0
-	db	5
-	dd	261
+	db	6
+	dd	367
 	db	21
 	db	1
 	db	10
-	db	6
+	db	2
 	db	20
 	db	6
 	db	1
-	db	3
+	db	4
 	db	29
 	db	3
 	db	2
 	db	57
-	db	4
+	db	5
 	db	25
-	dd	298
+	dd	404
 	db	2
 	db	58
 	db	0
-	db	4
+	db	5
 	db	27
-	dd	298
+	dd	404
 	db	2
 	db	59
 	db	1
-	db	4
+	db	5
 	db	28
-	dd	298
+	dd	404
 	db	2
 	db	60
 	db	2
 	db	0
-	db	6
+	db	2
 	db	26
 	db	2
 	db	1
-	db	2
-	dd	307
+	db	3
+	dd	413
 	db	7
 
 	db	8
-	dd	314
+	dd	420
 	db	0
-	db	2
-	dd	72
-	db	2
-	dd	314
-	db	2
-	dd	329
-	db	9
-	dd	334
-	db	6
-	db	35
-	db	6
-	db	1
-	db	2
-	dd	343
 	db	3
-	db	45
-	db	33
-	db	4
-	db	7
-	db	4
+	dd	178
 	db	3
-	dd	72
-	db	4
-	db	8
-	db	0
-	db	4
-	db	37
-	dd	403
-	db	4
-	db	9
-	db	26
-	db	4
-	db	41
-	dd	141
-	db	4
-	db	11
-	db	29
+	dd	420
 	db	4
 	db	42
-	dd	141
-	db	4
 	db	12
-	db	30
-	db	4
-	db	43
-	dd	298
-	db	4
-	db	14
-	db	31
-	db	4
-	db	44
-	dd	141
-	db	4
-	db	15
-	db	32
+	db	2
+	db	37
+	db	5
+	db	35
+	dd	404
+	db	2
+	db	38
 	db	0
-	db	2
-	dd	408
 	db	5
-	dd	416
+	db	36
+	dd	404
+	db	2
 	db	40
+	db	1
 	db	5
-	db	78
-	db	10
+	db	37
+	dd	404
+	db	2
+	db	41
 	db	2
 	db	5
-	db	74
-	db	4
-	db	11
-	dd	141
+	db	38
+	dd	499
+	db	2
+	db	43
+	db	3
 	db	5
+	db	39
+	dd	499
+	db	2
+	db	44
+	db	6
+	db	5
+	db	40
+	dd	305
+	db	2
+	db	45
+	db	9
+	db	5
+	db	41
+	dd	247
+	db	2
+	db	46
+	db	11
+	db	0
+	db	3
+	dd	259
+	db	3
+	dd	509
+	db	3
+	dd	514
+	db	2
+	db	46
+	db	6
+	db	1
+	db	3
+	dd	523
+	db	3
+	dd	528
+	db	6
+	dd	536
+	db	50
+	db	4
+	db	78
+	db	9
+	db	2
+	db	4
+	db	74
+	db	5
+	db	11
+	dd	247
+	db	4
 	db	75
 	db	0
-	db	4
-	db	14
-	dd	141
 	db	5
+	db	14
+	dd	247
+	db	4
 	db	76
 	db	1
-	db	4
-	db	38
-	dd	448
 	db	5
+	db	48
+	dd	568
+	db	4
 	db	77
 	db	2
 	db	0
+	db	10
+	dd	247
 	db	11
-	dd	141
-	db	12
-	dd	459
+	dd	579
 	db	0
-	db	13
-	db	39
+	db	12
+	db	49
 	db	8
 	db	7
-	db	2
-	dd	468
+	db	3
+	dd	588
+	db	13
+	dd	305
 	db	14
-	dd	199
-	db	2
-	dd	334
 	db	15
-	db	2
-	dd	484
-	db	3
-	db	59
-	db	50
-	db	6
-	db	16
-	db	4
-	db	3
-	dd	72
-	db	6
-	db	17
-	db	0
-	db	4
-	db	46
-	dd	544
-	db	6
-	db	18
-	db	26
-	db	4
-	db	55
-	dd	195
-	db	6
-	db	19
-	db	38
-	db	4
-	db	56
-	dd	195
-	db	6
-	db	20
-	db	41
-	db	4
-	db	57
-	dd	195
-	db	6
-	db	21
-	db	44
-	db	4
-	db	58
-	dd	195
-	db	6
-	db	22
-	db	47
-	db	0
-	db	3
-	db	54
-	db	12
-	db	2
-	db	37
-	db	4
-	db	47
-	dd	298
-	db	2
-	db	38
-	db	0
-	db	4
-	db	48
-	dd	298
-	db	2
-	db	40
-	db	1
-	db	4
-	db	49
-	dd	298
-	db	2
-	db	41
-	db	2
-	db	4
-	db	50
-	dd	613
-	db	2
-	db	43
-	db	3
-	db	4
-	db	51
-	dd	613
-	db	2
-	db	44
-	db	6
-	db	4
-	db	52
-	dd	199
-	db	2
-	db	45
-	db	9
-	db	4
-	db	53
-	dd	141
-	db	2
-	db	46
-	db	11
-	db	0
-	db	2
-	dd	153
-	db	16
 	db	0
 	dd	func_end0-func_begin0
 	db	1
 	db	84
 
-	db	65
-	db	7
-	db	4
-
-
-	db	17
-	db	71
-	db	7
-	db	4
-	dd	479
-	db	17
-	db	56
-	db	7
-	db	4
-	dd	195
-	db	18
-	db	0
-	db	70
-	db	7
-	db	5
-	dd	195
-	db	19
-	db	3
-	dd	tmp44-tmp3
-	db	20
+	dd	677
+	db	16
 	db	2
-	db	145
-	db	27
-	db	32
-	db	7
-	db	7
-	dd	314
-	db	21
-	db	0
-	db	18
+	dd	686
+	db	17
+	dd	694
+	db	16
 	db	1
-	db	72
-	db	7
+	dd	702
+	db	16
+	db	0
+	dd	710
+	db	17
+	dd	718
+	db	0
 	db	15
-	dd	195
-	db	18
-	db	2
-	db	73
-	db	7
-	db	16
-	dd	195
-	db	19
-	db	2
-	dd	tmp44-tmp36
-	db	22
-	db	74
-	db	7
-	db	25
-	dd	195
-	db	19
 	db	1
-	dd	tmp42-tmp40
-	db	18
-	db	3
-	db	75
-	db	7
-	db	28
-	dd	43
-	db	0
-	db	0
-	db	0
-	db	0
-	db	23
-	dd	731
-	db	4
-	db	0
-	db	24
-	db	60
-	db	8
-	db	19
-
-
-
-	db	8
-	dd	314
-	db	8
-	dd	314
-	db	8
-	dd	149
-	db	8
-	dd	149
-	db	0
-	db	16
-	db	5
 	dd	func_end1-func_begin1
 	db	1
 	db	84
 
-	db	66
-	db	7
-	db	44
-
-
-	db	25
-	db	4
-	db	71
-	db	7
-	db	44
-	dd	479
-	db	19
-	db	6
-	dd	tmp113-tmp53
-	db	18
-	db	5
-	db	76
-	db	7
-	db	46
-	dd	195
-	db	18
-	db	6
-	db	77
-	db	7
-	db	48
-	dd	195
-	db	0
-	db	23
-	dd	618
-	db	7
-	db	0
+	dd	727
 	db	16
-	db	8
+	db	6
+	dd	736
+	db	16
+	db	5
+	dd	744
+	db	16
+	db	4
+	dd	752
+	db	17
+	dd	760
+	db	16
+	db	3
+	dd	768
+	db	0
+	db	18
+	db	58
+	db	5
+	db	158
+
+	dd	305
+
+	db	1
+	db	19
+	db	59
+	db	5
+	db	158
+	dd	301
+	db	19
+	db	53
+	db	5
+	db	158
+	dd	301
+	db	19
+	db	54
+	db	5
+	db	158
+	dd	301
+	db	19
+	db	11
+	db	5
+	db	158
+	dd	305
+	db	19
+	db	14
+	db	5
+	db	158
+	dd	247
+	db	0
+	db	18
+	db	60
+	db	5
+	db	162
+
+	dd	247
+
+	db	1
+	db	19
+	db	59
+	db	5
+	db	162
+	dd	301
+	db	19
+	db	53
+	db	5
+	db	162
+	dd	301
+	db	19
+	db	54
+	db	5
+	db	162
+	dd	301
+	db	19
+	db	11
+	db	5
+	db	162
+	dd	305
+	db	19
+	db	14
+	db	5
+	db	162
+	dd	247
+	db	0
+	db	20
+	db	2
 	dd	func_end2-func_begin2
 	db	1
 	db	84
 
-	db	67
-	db	7
-	db	76
-
-
-	db	25
-	db	10
-	db	71
-	db	7
-	db	76
-	dd	479
-	db	25
-	db	9
-	db	77
-	db	7
-	db	76
-	dd	195
-	db	26
-	db	2
-	db	145
-	db	12
-	db	34
-	db	7
-	db	76
-	dd	1095
-	db	25
-	db	8
-	db	37
-	db	7
-	db	76
-	dd	1079
-	db	18
-	db	7
 	db	70
-	db	7
-	db	77
-	dd	195
-	db	19
+	db	5
+	db	166
+
+
+	db	21
 	db	9
-	dd	tmp158-tmp152
-	db	18
-	db	11
-	db	78
+	db	3
+	db	5
+	db	166
+	dd	420
+	db	22
 	db	7
-	db	94
-	dd	314
+	db	72
+	db	5
+	db	169
+	dd	404
+	db	22
+	db	8
+	db	73
+	db	5
+	db	167
+	dd	59
+	db	23
 	db	0
-	db	19
+	db	22
+	db	12
+	db	74
+	db	5
+	db	181
+	dd	305
+	db	22
+	db	15
+	db	75
+	db	5
+	db	182
+	dd	247
+	db	24
+	dd	677
+	db	3
+	dd	tmp54-tmp43
+	db	5
+	db	181
+	db	37
+	db	25
+	db	0
+	dd	686
+	db	17
+	dd	694
+	db	16
+	db	11
+	dd	702
+	db	16
 	db	10
-	dd	tmp169-tmp162
-	db	18
-	db	12
-	db	79
-	db	7
-	db	100
-	dd	314
-	db	0
-	db	23
-	dd	917
-	db	11
-	db	23
-	dd	917
-	db	12
-	db	23
-	dd	917
-	db	13
+	dd	710
+	db	17
+	dd	718
 	db	0
 	db	24
-	db	61
-	db	8
-	db	14
-
-
-
-	db	8
-	dd	314
-	db	8
-	dd	149
+	dd	727
+	db	4
+	dd	tmp64-tmp56
+	db	5
+	db	182
+	db	37
+	db	25
 	db	0
+	dd	736
 	db	16
 	db	14
+	dd	744
+	db	17
+	dd	752
+	db	17
+	dd	760
+	db	16
+	db	13
+	dd	768
+	db	0
+	db	0
+	db	26
+	dd	939
+	db	5
+	db	26
+	dd	958
+	db	6
+	db	26
+	dd	958
+	db	7
+	db	0
+	db	27
+	db	61
+	db	6
+	db	21
+
+	dd	404
+
+
+	db	8
+	dd	420
+	db	8
+	dd	420
+	db	0
+	db	28
+	db	62
+	db	7
+	db	39
+
+	dd	255
+
+
+	db	20
+	db	8
 	dd	func_end3-func_begin3
 	db	1
 	db	84
 
-	db	68
-	db	7
-	db	110
-
-
-	db	25
-	db	16
-	db	3
-	db	7
-	db	110
-	dd	314
-	db	18
-	db	13
-	db	70
-	db	7
-	db	113
-	dd	195
-	db	18
-	db	14
-	db	80
-	db	7
-	db	112
-	dd	298
-	db	18
-	db	15
 	db	71
-	db	7
-	db	111
-	dd	479
-	db	23
-	dd	1004
-	db	15
-	db	23
-	dd	756
+	db	5
+	db	235
+
+
+	db	21
+	db	17
+	db	3
+	db	5
+	db	235
+	dd	420
+	db	29
+	db	3
+	db	145
+	db	"",357o,000o
+	db	45
+	db	5
+	db	239
+	dd	1211
+	db	29
+	db	3
+	db	145
+	db	"",316o,000o
+	db	81
+	db	5
+	db	240
+	dd	1280
+	db	29
+	db	3
+	db	145
+	db	"",305o,000o
+	db	87
+	db	5
+	db	241
+	dd	1340
+	db	29
+	db	2
+	db	145
+	db	36
+	db	88
+	db	5
+	db	242
+	dd	1352
+	db	22
+	db	16
+	db	73
+	db	5
+	db	236
+	dd	59
+	db	30
+	db	11
+	dd	tmp240-tmp171
+	db	22
+	db	18
+	db	93
+	db	5
+	db	247
+	dd	301
+	db	31
+	dd	677
+	db	9
+	dd	tmp215-tmp202
+	db	5
+	dw	270
+	db	46
+	db	16
+	db	21
+	dd	686
+	db	17
+	dd	694
+	db	16
+	db	20
+	dd	702
+	db	16
+	db	19
+	dd	710
+	db	17
+	dd	718
+	db	0
+	db	31
+	dd	727
+	db	10
+	dd	tmp231-tmp220
+	db	5
+	dw	273
+	db	47
+	db	16
+	db	25
+	dd	736
+	db	16
+	db	24
+	dd	744
 	db	16
 	db	23
-	dd	1023
+	dd	752
 	db	17
-	db	23
-	dd	1023
-	db	18
+	dd	760
+	db	16
+	db	22
+	dd	768
 	db	0
-	db	27
-	db	62
-	db	8
-	db	20
-
-	dd	298
-
-
-	db	8
-	dd	314
-	db	8
-	dd	314
 	db	0
-	db	24
+	db	26
+	dd	1176
+	db	12
+	db	26
+	dd	1176
+	db	13
+	db	26
+	dd	1176
+	db	14
+	db	26
+	dd	1191
+	db	15
+	db	26
+	dd	1201
+	db	16
+	db	0
+	db	32
 	db	63
+	db	6
+	db	15
+
+
+
 	db	8
+	dd	420
+	db	8
+	dd	255
+	db	0
+	db	32
+	db	64
+	db	6
 	db	22
 
 
 
 	db	8
-	dd	319
+	dd	420
 	db	0
-	db	16
-	db	19
-	dd	func_end4-func_begin4
-	db	1
-	db	84
-
-	db	69
-	db	7
-	db	150
-
-
-	db	25
-	db	18
-	db	3
-	db	7
-	db	150
-	dd	314
-	db	18
-	db	17
-	db	71
-	db	7
-	db	151
-	dd	479
+	db	32
+	db	65
+	db	6
 	db	23
-	dd	1069
-	db	20
-	db	0
-	db	24
-	db	64
-	db	9
-	db	13
 
 
 
 	db	8
-	dd	319
+	dd	425
 	db	0
-	db	2
-	dd	1084
-	db	11
-	dd	403
-	db	12
-	dd	459
+	db	4
+	db	80
+	db	38
+	db	8
+	db	13
+	db	5
+	db	3
+	dd	178
+	db	8
+	db	14
 	db	0
-	db	2
-	dd	1100
+	db	5
+	db	76
+	dd	247
+	db	8
+	db	16
+	db	26
+	db	5
+	db	19
+	dd	359
+	db	8
+	db	17
+	db	27
+	db	5
+	db	45
+	dd	509
+	db	8
+	db	18
+	db	28
+	db	5
+	db	77
+	dd	504
+	db	8
+	db	20
+	db	31
+	db	5
+	db	78
+	dd	301
+	db	8
+	db	22
+	db	34
+	db	5
+	db	79
+	dd	404
+	db	8
+	db	24
+	db	37
+	db	0
+	db	4
+	db	86
+	db	33
+	db	9
+	db	7
+	db	5
+	db	3
+	dd	178
+	db	9
+	db	8
+	db	0
+	db	5
+	db	47
+	dd	523
+	db	9
+	db	9
+	db	26
+	db	5
+	db	82
+	dd	247
+	db	9
 	db	11
-	dd	324
+	db	29
+	db	5
+	db	83
+	dd	247
+	db	9
 	db	12
-	dd	459
+	db	30
+	db	5
+	db	84
+	dd	404
+	db	9
+	db	14
+	db	31
+	db	5
+	db	85
+	dd	247
+	db	9
+	db	15
+	db	32
+	db	0
+	db	10
+	dd	420
+	db	33
+	dd	579
+	db	3
+	db	0
+	db	4
+	db	92
+	db	33
+	db	10
+	db	12
+	db	5
+	db	3
+	dd	178
+	db	10
+	db	13
+	db	0
+	db	5
+	db	89
+	dd	1394
+	db	10
+	db	16
+	db	26
+	db	5
+	db	90
+	dd	593
+	db	10
+	db	17
+	db	29
+	db	5
+	db	91
+	dd	404
+	db	10
+	db	19
+	db	32
+	db	0
+	db	3
+	dd	1399
+	db	7
+
+	db	8
+	dd	593
 	db	0
 	db	0
 	private	debug_info_end0
@@ -3201,16 +3949,16 @@ rnglists_table_base0:
 	private	debug_ranges0
 debug_ranges0:
 	db	4
-	uleb128	tmp17-func_begin0
-	uleb128	tmp28-func_begin0
+	uleb128	tmp42-func_begin0
+	uleb128	tmp74-func_begin0
 	db	4
-	uleb128	tmp29-func_begin0
-	uleb128	tmp44-func_begin0
+	uleb128	tmp99-func_begin0
+	uleb128	tmp115-func_begin0
 	db	0
 	private	debug_list_header_end1
 debug_list_header_end1:
 	section	.debug_str_offsets,"",@progbits
-	dd	328
+	dd	380
 	dw	5
 	dw	0
 	private	str_offsets_base0
@@ -3320,145 +4068,184 @@ info_string33:
 	db	"optix_widget",000o
 	private	info_string34
 info_string34:
-	db	"text",000o
+	db	"resize_info",000o
 	private	info_string35
 info_string35:
-	db	"char",000o
+	db	"resizable",000o
 	private	info_string36
 info_string36:
-	db	"optix_text",000o
+	db	"x_lock",000o
 	private	info_string37
 info_string37:
-	db	"spr",000o
+	db	"y_lock",000o
 	private	info_string38
 info_string38:
-	db	"data",000o
+	db	"x_reference_transform",000o
 	private	info_string39
 info_string39:
-	db	"__ARRAY_SIZE_TYPE__",000o
+	db	"y_reference_transform",000o
 	private	info_string40
 info_string40:
-	db	"gfx_sprite_t",000o
+	db	"min_width",000o
 	private	info_string41
 info_string41:
-	db	"x_scale",000o
+	db	"min_height",000o
 	private	info_string42
 info_string42:
-	db	"y_scale",000o
+	db	"optix_resize_info",000o
 	private	info_string43
 info_string43:
-	db	"transparent",000o
+	db	"text_centering",000o
 	private	info_string44
 info_string44:
-	db	"transparent_color",000o
+	db	"sprite_centering",000o
 	private	info_string45
 info_string45:
-	db	"optix_sprite",000o
+	db	"text",000o
 	private	info_string46
 info_string46:
-	db	"resize_info",000o
+	db	"char",000o
 	private	info_string47
 info_string47:
-	db	"resizable",000o
+	db	"spr",000o
 	private	info_string48
 info_string48:
-	db	"x_lock",000o
+	db	"data",000o
 	private	info_string49
 info_string49:
-	db	"y_lock",000o
+	db	"__ARRAY_SIZE_TYPE__",000o
 	private	info_string50
 info_string50:
-	db	"x_reference_transform",000o
+	db	"gfx_sprite_t",000o
 	private	info_string51
 info_string51:
-	db	"y_reference_transform",000o
+	db	"selection",000o
 	private	info_string52
 info_string52:
-	db	"min_width",000o
+	db	"min",000o
 	private	info_string53
 info_string53:
-	db	"min_height",000o
+	db	"rows",000o
 	private	info_string54
 info_string54:
-	db	"optix_resize_info",000o
+	db	"columns",000o
 	private	info_string55
 info_string55:
-	db	"selection",000o
+	db	"num_options",000o
 	private	info_string56
 info_string56:
-	db	"menu_min",000o
+	db	"last_selection",000o
 	private	info_string57
 info_string57:
-	db	"rows",000o
+	db	"optix_menu",000o
 	private	info_string58
 info_string58:
-	db	"columns",000o
+	db	"optix_GetMenuOptionWidth",000o
 	private	info_string59
 info_string59:
-	db	"optix_menu",000o
+	db	"curr_selection",000o
 	private	info_string60
 info_string60:
-	db	"optix_AlignTransformToTransform",000o
+	db	"optix_GetMenuOptionHeight",000o
 	private	info_string61
 info_string61:
-	db	"optix_InitializeWidget",000o
+	db	"optix_CheckTransformOverlap",000o
 	private	info_string62
 info_string62:
-	db	"optix_CheckTransformOverlap",000o
+	db	"kb_AnyKey",000o
 	private	info_string63
 info_string63:
-	db	"optix_RecursiveSetNeedsRedraw",000o
+	db	"optix_InitializeWidget",000o
 	private	info_string64
 info_string64:
-	db	"optix_RenderStack",000o
+	db	"optix_RecursiveAlign",000o
 	private	info_string65
 info_string65:
-	db	"optix_AlignMenu",000o
+	db	"optix_RecursiveSetNeedsRedraw",000o
 	private	info_string66
 info_string66:
-	db	"optix_ScrollMenu",000o
+	db	"DW_ATE_unsigned_16",000o
 	private	info_string67
 info_string67:
-	db	"optix_InitializeMenu",000o
+	db	"DW_ATE_unsigned_24",000o
 	private	info_string68
 info_string68:
-	db	"optix_UpdateMenu_default",000o
+	db	"DW_ATE_unsigned_8",000o
 	private	info_string69
 info_string69:
-	db	"optix_RenderMenu_default",000o
+	db	"DW_ATE_unsigned_1",000o
 	private	info_string70
 info_string70:
-	db	"i",000o
+	db	"optix_UpdateMenu_default",000o
 	private	info_string71
 info_string71:
-	db	"menu",000o
+	db	"optix_RenderMenu_default",000o
 	private	info_string72
 info_string72:
-	db	"default_width",000o
+	db	"needs_jump",000o
 	private	info_string73
 info_string73:
-	db	"default_height",000o
+	db	"menu",000o
 	private	info_string74
 info_string74:
-	db	"j",000o
+	db	"option_width",000o
 	private	info_string75
 info_string75:
-	db	"child_text",000o
+	db	"option_height",000o
 	private	info_string76
 info_string76:
-	db	"att_option",000o
+	db	"alignment",000o
 	private	info_string77
 info_string77:
-	db	"num_options",000o
+	db	"offsets",000o
 	private	info_string78
 info_string78:
-	db	"new_text",000o
+	db	"num_lines",000o
 	private	info_string79
 info_string79:
-	db	"new_spr",000o
+	db	"needs_offset_update",000o
 	private	info_string80
 info_string80:
-	db	"found_selection",000o
+	db	"optix_text",000o
+	private	info_string81
+info_string81:
+	db	"sprite",000o
+	private	info_string82
+info_string82:
+	db	"x_scale",000o
+	private	info_string83
+info_string83:
+	db	"y_scale",000o
+	private	info_string84
+info_string84:
+	db	"transparent",000o
+	private	info_string85
+info_string85:
+	db	"transparent_color",000o
+	private	info_string86
+info_string86:
+	db	"optix_sprite",000o
+	private	info_string87
+info_string87:
+	db	"button_children",000o
+	private	info_string88
+info_string88:
+	db	"button",000o
+	private	info_string89
+info_string89:
+	db	"click_action",000o
+	private	info_string90
+info_string90:
+	db	"click_args",000o
+	private	info_string91
+info_string91:
+	db	"pressed",000o
+	private	info_string92
+info_string92:
+	db	"optix_button",000o
+	private	info_string93
+info_string93:
+	db	"i",000o
 	section	.debug_str_offsets,"",@progbits
 	dd	info_string0
 	dd	info_string1
@@ -3541,6 +4328,19 @@ info_string80:
 	dd	info_string78
 	dd	info_string79
 	dd	info_string80
+	dd	info_string81
+	dd	info_string82
+	dd	info_string83
+	dd	info_string84
+	dd	info_string85
+	dd	info_string86
+	dd	info_string87
+	dd	info_string88
+	dd	info_string89
+	dd	info_string90
+	dd	info_string91
+	dd	info_string92
+	dd	info_string93
 	section	.debug_addr,"",@progbits
 	dd	debug_addr_end0-debug_addr_start0
 	private	debug_addr_start0
@@ -3551,48 +4351,44 @@ debug_addr_start0:
 	private	addr_table_base0
 addr_table_base0:
 	dl	func_begin0
-	dl	tmp40
-	dl	tmp36
-	dl	tmp3
-	dl	tmp41
 	dl	func_begin1
-	dl	tmp53
-	dl	tmp110
 	dl	func_begin2
-	dl	tmp152
-	dl	tmp162
-	dl	tmp130
-	dl	tmp157
-	dl	tmp168
+	dl	tmp43
+	dl	tmp56
+	dl	tmp28
+	dl	tmp38
+	dl	tmp106
 	dl	func_begin3
-	dl	tmp177
-	dl	tmp181
+	dl	tmp202
+	dl	tmp220
+	dl	tmp171
+	dl	tmp164
 	dl	tmp191
-	dl	tmp217
-	dl	func_begin4
-	dl	tmp226
+	dl	tmp198
+	dl	tmp234
+	dl	tmp235
 	private	debug_addr_end0
 debug_addr_end0:
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
 	section	.debug_line,"",@progbits
 line_table_start0:
 	extern	_optix_CheckTransformOverlap
+	extern	_memset
 	extern	__Unwind_SjLj_Register
 	extern	__frameset
-	extern	_malloc
+	extern	_kb_AnyKey
 	extern	_sprintf
 	extern	_optix_InitializeWidget
-	extern	_optix_cursor
 	extern	__indcallhl
+	extern	_optix_cursor
+	extern	_optix_settings
 	extern	__sand
+	extern	_optix_RecursiveAlign
 	extern	__idivs
 	extern	__setflag
 	extern	__Unwind_SjLj_Unregister
 	extern	__iand
 	extern	__irems
-	extern	_optix_RenderStack
 	extern	__imulu
-	extern	_optix_AlignTransformToTransform
 	extern	_optix_RecursiveSetNeedsRedraw
 	extern	_optix_gui_data
-	extern	__frameset0

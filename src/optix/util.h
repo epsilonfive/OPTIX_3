@@ -9,6 +9,7 @@
 #include "elements/sprite.h"
 #include "elements/divider.h"
 #include "elements/rectangle.h"
+#include "elements/input_box.h"
 
 void optix_CycleSelectedElement(struct optix_widget *stack[]);
 void optix_InitializeWidget(struct optix_widget *widget, uint8_t type);

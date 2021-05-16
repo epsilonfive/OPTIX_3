@@ -8,7 +8,9 @@ void optix_UpdateWindow_default(struct optix_widget *widget) {
         if (kb_Data[6] & kb_Enter || kb_Data[1] & kb_2nd) {
             //rescale it if necessary
             //if the cursor didn't move just continue
-            if (widget->state.selected && optix_CheckTransformOverlap(&optix_cursor.widget, widget) && 
+            if (widget->state.selected && 
+            gfx_CheckRectangleHotspot(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height,         //the window
+            optix_cursor.widget.transform.x, optix_cursor.widget.transform.y, OPTIX_CURSOR_RESIZE_WIDTH, OPTIX_CURSOR_RESIZE_HEIGHT) &&    //the cursor
             (optix_cursor.last_x != optix_cursor.widget.transform.x || optix_cursor.last_y != optix_cursor.widget.transform.y)) {
                 int center_x = widget->transform.x + widget->transform.width / 2;
                 int center_y = widget->transform.y + widget->transform.height / 2;
@@ -16,16 +18,16 @@ void optix_UpdateWindow_default(struct optix_widget *widget) {
                 int x_shift = 0, y_shift = 0;
                 //if we're colliding with the left or right edges of the window
                 //left edge
-                if (abs(optix_cursor.widget.transform.x - widget->transform.x) < OPTIX_CURSOR_WIDTH + 2) {
+                if (abs(optix_cursor.widget.transform.x - widget->transform.x) < OPTIX_CURSOR_RESIZE_WIDTH + 2) {
                     if (widget->transform.x >= 1) {
                         x_shift = optix_cursor.widget.transform.x - optix_cursor.last_x;
                         x_size_change = -x_shift;
                         optix_cursor.state = OPTIX_CURSOR_RESIZE_HORIZ;
                     }
-                } else if (abs(optix_cursor.widget.transform.x - (widget->transform.x + widget->transform.width)) < OPTIX_CURSOR_WIDTH + 2) {
+                } else if (abs(optix_cursor.widget.transform.x - (widget->transform.x + widget->transform.width)) < OPTIX_CURSOR_RESIZE_WIDTH + 2) {
                     x_size_change = optix_cursor.widget.transform.x - optix_cursor.last_x;
                     optix_cursor.state = OPTIX_CURSOR_RESIZE_HORIZ;
-                } else if (abs(optix_cursor.widget.transform.y - (widget->transform.y + widget->transform.height)) < OPTIX_CURSOR_HEIGHT + 2) {
+                } else if (abs(optix_cursor.widget.transform.y - (widget->transform.y + widget->transform.height)) < OPTIX_CURSOR_RESIZE_HEIGHT + 2) {
                     y_size_change = optix_cursor.widget.transform.y - optix_cursor.last_y;
                     optix_cursor.state = OPTIX_CURSOR_RESIZE_VERT;
                 }
@@ -50,7 +52,8 @@ void optix_RenderWindow_default(struct optix_widget *widget) {
     int element_size = 10;
     if (widget->state.visible) {
         if (widget->state.needs_redraw)
-            optix_OutlinedRectangle(widget->transform.x - 1, widget->transform.y - 1, widget->transform.width + 2, widget->transform.height + 2, optix_colors.window_bg, optix_colors.window_border);
+            optix_OutlinedRectangle_WithBevel(widget->transform.x - 1, widget->transform.y - 1, widget->transform.width + 2, widget->transform.height + 2, 
+            optix_colors.window_bg, optix_colors.border_bevel_light, optix_colors.border_bevel_dark);
         //render everything in it
         if (widget->child) optix_RenderStack(widget->child);
     }
@@ -66,6 +69,14 @@ void optix_UpdateWindowTitleBar_default(struct optix_widget *widget) {
         //windows are children of the title bar
         //make it so you can move the windows around while holding the selection key and moving the mouse
         //this is for the moving
+        //only update it if we need to
+        window_title_bar->window->widget.update((struct optix_widget *) window_title_bar->window);
+        widget->state.needs_redraw = window_title_bar->window->widget.state.needs_redraw;
+        if (window_title_bar->window->widget.transform.x != widget->transform.x || window_title_bar->window->widget.transform.width != widget->transform.width)
+            optix_RefreshWindowTitleBarTransform(window_title_bar);
+        //kind of hacky but oh well
+        if (window_title_bar->window->widget.state.selected != widget->state.selected) widget->state.needs_redraw = true;
+        widget->state.selected = window_title_bar->window->widget.state.selected;
         if (optix_CheckTransformOverlap(&optix_cursor.widget, widget)) {
             if (kb_Data[6] & kb_Enter || kb_Data[1] & kb_2nd) {
                 if (window_selected && (optix_cursor.last_x != optix_cursor.widget.transform.x || optix_cursor.last_y != optix_cursor.widget.transform.y)) {
@@ -131,15 +142,6 @@ void optix_UpdateWindowTitleBar_default(struct optix_widget *widget) {
             //change the cursor icon
             if (optix_cursor.state == OPTIX_CURSOR_NORMAL && window_selected) optix_cursor.state = OPTIX_CURSOR_MOVE;
         }
-        //only update it if we need to
-        window_title_bar->window->widget.update((struct optix_widget *) window_title_bar->window);
-        widget->state.needs_redraw = window_title_bar->window->widget.state.needs_redraw;
-        if (window_title_bar->window->widget.transform.x != widget->transform.x || window_title_bar->window->widget.transform.width != widget->transform.width)
-            optix_RefreshWindowTitleBarTransform(window_title_bar);
-
-        //kind of hacky but oh well
-        if (window_title_bar->window->widget.state.selected != widget->state.selected) widget->state.needs_redraw = true;
-        widget->state.selected = window_title_bar->window->widget.state.selected;
     } else widget->state.visible = false;
 }
 
@@ -147,23 +149,23 @@ void optix_RenderWindowTitleBar_default(struct optix_widget *widget) {
     struct optix_window_title_bar *window_title_bar = (struct optix_window_title_bar *) widget;
     //those settextcolors are in there in case there's a title, which should change color on select
     if (widget->state.visible) {
+        if (window_title_bar->window) {
+            window_title_bar->window->widget.render(window_title_bar->window);
+            window_title_bar->window->widget.state.needs_redraw = false;
+        }
         if (widget->state.needs_redraw) {
             if (window_title_bar->window->widget.state.selected) {
-                optix_OutlinedRectangle(widget->transform.x - 1, widget->transform.y, widget->transform.width + 2, widget->transform.height, //transform
-                optix_colors.window_title_bar_selected, optix_colors.window_border);                                                         //color
+                optix_OutlinedRectangle_WithBevel(widget->transform.x - 1, widget->transform.y, widget->transform.width + 2, widget->transform.height, //transform
+                optix_colors.window_title_bar_selected, optix_colors.border_bevel_light, optix_colors.border_bevel_dark);                    //color
                 optix_SetTextColor(optix_colors.window_title_text_fg_selected, optix_colors.window_title_text_bg_selected);
             } else {
-                optix_OutlinedRectangle(widget->transform.x - 1, widget->transform.y, widget->transform.width + 2, widget->transform.height, //transform
-                optix_colors.window_title_bar_unselected, optix_colors.window_border);                                                       //color
+                optix_OutlinedRectangle_WithBevel(widget->transform.x - 1, widget->transform.y, widget->transform.width + 2, widget->transform.height, //transform
+                optix_colors.window_title_bar_unselected, optix_colors.border_bevel_light, optix_colors.border_bevel_dark);                  //color
                 optix_SetTextColor(optix_colors.window_title_text_fg_unselected, optix_colors.window_title_text_bg_unselected);
             }
         }
         if (widget->child) optix_RenderStack(widget->child);
         optix_SetTextColor(optix_colors.text_fg, optix_colors.text_bg);
-        if (window_title_bar->window) {
-            window_title_bar->window->widget.render(window_title_bar->window);
-            window_title_bar->window->widget.state.needs_redraw = false;
-        }
     }
 }
 

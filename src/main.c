@@ -53,6 +53,10 @@ void minimize_window(void *args) {
    window->widget.state.visible = false;
 }
 
+void toggle_cursor(void *args) {
+   optix_settings.cursor_active = !optix_settings.cursor_active;
+}
+
 void main(void) {
    optix_InitializeFont();
    struct optix_rectangle test_rectangle = {
@@ -69,26 +73,56 @@ void main(void) {
       .fill_color = 0,
    };
    optix_InitializeWidget(&test_rectangle.widget, OPTIX_RECTANGLE_TYPE);
-   char *test_text[] = {"1", "2", "3", "4", "5", "6", "7", "8"};
+   char *test_text[] = {"Programs", "Appvars", "Files", "Search", "Settings", "Refresh", "About", "Exit"};
    struct optix_menu test_menu = {
       .widget = {
          .transform = {
-            .width = 50,
-            .height = 50,
+            .width = 100,
+            .height = 48,
          },
       },
       .resize_info = {
          .resizable = true,
          .x_lock = true,
-         .y_lock = false,
+         .y_lock = true,
          .min_width = 25,
          .min_height = 25,
       },
+      .text_centering = {.y_centering = OPTIX_CENTERING_CENTERED, .x_centering = OPTIX_CENTERING_CENTERED},
       .rows = 2,
       .columns = 2,
+      .num_options = 8,
+      .text = test_text,
+      .spr = NULL,
+      .min = 0,
    };
-   optix_InitializeMenu(&test_menu, 8, &test_text, NULL);
-   test_menu.widget.centering.x_centering = OPTIX_CENTERING_LEFT;
+   optix_InitializeWidget(&test_menu.widget, OPTIX_MENU_TYPE);
+   char *test_text_b[] = {"01", "02", "03", "04", "05", "06", "07", "08"};
+   struct optix_menu test_menu_b = {
+      .widget = {
+         .transform = {
+            .width = 50,
+            .height = 24,
+         },
+      },
+      .resize_info = {
+         .resizable = true,
+         .x_lock = true,
+         .y_lock = true,
+         .min_width = 25,
+         .min_height = 25,
+      },
+      .text_centering = {.y_centering = OPTIX_CENTERING_CENTERED, .x_centering = OPTIX_CENTERING_CENTERED},
+      .rows = 2,
+      .columns = 2,
+      .num_options = 8,
+      .text = test_text_b,
+      .spr = NULL,
+      .min = 0,
+   };
+   optix_InitializeWidget(&test_menu_b.widget, OPTIX_MENU_TYPE);
+   test_menu_b.widget.centering.x_centering = OPTIX_CENTERING_RIGHT;
+   test_menu_b.widget.centering.y_centering = OPTIX_CENTERING_TOP;
    struct optix_divider test_divider = {
       .alignment = DIVIDER_ALIGNMENT_RIGHT,
       .reference = &test_menu.widget,
@@ -104,12 +138,12 @@ void main(void) {
    struct optix_window test_window = {
       .widget = {
          .transform = {
-            .x = 100,
+            .x = 10,
             .y = 100,
-            .width = 100,
+            .width = 200,
             .height = 100,
          },
-         .child = (struct optix_widget *[]) {&test_menu.widget, &test_divider.widget, &test_divider2.widget, NULL},
+         .child = (struct optix_widget *[]) {&test_menu.widget, &test_divider.widget, &test_divider2.widget, &test_menu_b.widget, NULL},
       },
       .resize_info = {
          .resizable = true,
@@ -133,8 +167,10 @@ void main(void) {
       },
       .rows = 1,
       .columns = 2,
+      .text = button_action_text,
+      .spr = NULL,
    };
-   optix_InitializeMenu(&menu_actions, 2, &button_action_text, NULL);
+   //optix_InitializeMenu(&menu_actions, 2, &button_action_text, NULL);
    //optix_AlignMenu(&menu_actions);
    struct optix_window_title_bar test_title_bar = {
       .widget = {.child = (struct optix_widget *[]) {&menu_actions.widget, NULL}},
@@ -142,10 +178,30 @@ void main(void) {
    };
    optix_InitializeWidget(&test_title_bar.widget, OPTIX_WINDOW_TITLE_BAR_TYPE);
    //another window
-   struct optix_text test_text2 = {.text = "FontlibC is cool"};
+   char temp[100] = "NO";
+   char *temp_b = "Here is some test text to see if the word wrapping routine works as it should. Hopefully it does.";
+   struct optix_text test_text2 = {
+      .widget = {.transform = {.width = 80, .height = 50}},
+      .text = temp_b,
+      .alignment = OPTIX_CENTERING_CENTERED,
+      .x_offset = 0,
+      .needs_offset_update = true,
+   };
    optix_InitializeWidget(&test_text2.widget, OPTIX_TEXT_TYPE);
-   test_text2.widget.centering.x_centering = test_text2.widget.centering.y_centering = 0;
-   test_text2.widget.centering.x_offset = test_text2.widget.centering.y_offset = 2;
+   test_text2.widget.update(&test_text2.widget);
+   test_text2.widget.centering.x_centering = test_text2.widget.centering.y_centering = OPTIX_CENTERING_CENTERED;
+   struct optix_input_box test_input_box = {
+      .widget = {
+         .transform = {.width = 100, .height = 12},
+         .child = NULL,
+         .centering = {.x_centering = OPTIX_CENTERING_CENTERED, .y_centering = OPTIX_CENTERING_TOP},
+      },
+      .cursor_offset = 0,
+      .has_max_length = false,
+      .mode = 0,
+      .text = &test_text2,
+   };
+   optix_InitializeWidget(&test_input_box.widget, OPTIX_INPUT_BOX_TYPE);
    struct optix_window test_window2 = {
       .widget = {
          .transform = {
@@ -173,12 +229,28 @@ void main(void) {
       .window = &test_window2,
    };
    optix_InitializeWidget(&test_title_bar2.widget, OPTIX_WINDOW_TITLE_BAR_TYPE);
+   //button
+   struct optix_button test_button = {
+      .widget = {
+         .transform = {
+            .x = 0,
+            .y = 0,
+            .width = 10,
+            .height = 10,
+         },
+         .child = NULL,
+      },
+      .click_action = toggle_cursor,
+      .click_args = NULL,
+   };
+   optix_InitializeWidget(&test_button.widget, OPTIX_BUTTON_TYPE);
    //finally, align everything
    optix_RecursiveAlign(&test_title_bar.widget);
    optix_RecursiveAlign(&test_title_bar2.widget);
-   struct optix_widget *test_stack[] = {&test_rectangle.widget, &test_title_bar2.widget,  &test_title_bar.widget, NULL};   
+   struct optix_widget *test_stack[] = {&test_button.widget, &test_rectangle.widget, &test_title_bar2.widget,  &test_title_bar.widget, NULL};   
    optix_InitializeColors();
    optix_InitializeCursor();
+   optix_cursor.current_selection = &test_button.widget;
    //graphics
    gfx_Begin();
    gfx_SetDraw(1);

@@ -1,4 +1,4 @@
-#include "guicontrol.h"
+#include "gui_control.h"
 
 optix_settings_t optix_settings;
 optix_gui_data_t optix_gui_data;

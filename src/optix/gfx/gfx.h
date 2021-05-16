@@ -11,6 +11,10 @@ extern "C" {
 #include "cursor_move.h"
 #include "cursor_resize_horizontal.h"
 #include "cursor_resize_vertical.h"
+#include "cursor_text.h"
+#include "cursor_text_upper.h"
+#include "cursor_text_lower.h"
+#include "cursor_text_math.h"
 
 #ifdef __cplusplus
 }

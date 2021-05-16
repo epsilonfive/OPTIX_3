@@ -5,6 +5,9 @@
 //this should be a pointer to an array of pointers
 void optix_UpdateGUI(struct optix_widget *(*stack)[]) {
     kb_Scan();
+    optix_gui_data.key = os_GetCSC();
+    //we need this here unfortunately
+    optix_cursor.state = OPTIX_CURSOR_NORMAL;
     //start with this I suppose
     optix_HandleShortcuts(*stack);
     optix_UpdateStack_TopLevel(stack);
@@ -108,6 +111,8 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
 //takes an array of optix_widgets
 //please have a NULL as the last entry in this array, so we'll know when to stop
 void optix_RenderGUI(struct optix_widget *stack[]) {
+    //do this first
+    optix_RenderCursorBackground();
     optix_RenderStack(stack);
     //the cursor should be on top of everything else
     optix_cursor.widget.render(NULL);

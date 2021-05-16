@@ -1,8 +1,9 @@
 	section	.text,"ax",@progbits
 	assume	adl = 1
-	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\guicontrol.c" md5 0xda7f1cc94478738b4447b9d6b8f5c32a
-	file	1 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\guicontrol.h" md5 0x40881e44d8a2fd1ee582def26ab39043
-	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\guicontrol.c" md5 0xda7f1cc94478738b4447b9d6b8f5c32a
+	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\gui_control.c" md5 0x4474c056c22094862cb06283c7600cb7
+	file	1 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\gui_control.h" md5 0xe95b182a7b95e1d13135b7a9282b47bf
+	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\gui_control.c" md5 0x4474c056c22094862cb06283c7600cb7
+	file	3 "D:\Data\Programming\TI\CEdev\include\stdint.h" md5 0x82cbaa55f693a5a19696046350717638
 	section	.text,"ax",@progbits
 	public	_optix_InitializeGUIState
 _optix_InitializeGUIState:
@@ -28,11 +29,11 @@ _optix_settings:
 	section	.bss,"aw",@nobits
 	public	_optix_gui_data
 _optix_gui_data:
-	rb	3
+	rb	4
 
 	section	.debug_abbrev,"",@progbits
-	private	abbrev_start13
-abbrev_start13:
+	private	abbrev_start16
+abbrev_start16:
 	db	1
 	db	17
 	db	1
@@ -156,7 +157,7 @@ debug_info_start0:
 	dw	5
 	db	1
 	db	3
-	dd	abbrev_start13
+	dd	abbrev_start16
 	db	1
 	db	0
 	dw	12
@@ -180,22 +181,22 @@ debug_info_start0:
 	dd	54
 	db	7
 	db	1
-	db	35
+	db	36
 	db	4
 	db	2
 	db	1
-	db	30
+	db	31
 	db	5
 	db	4
 	dd	77
 	db	1
-	db	32
+	db	33
 	db	0
 	db	5
 	db	6
 	dd	77
 	db	1
-	db	34
+	db	35
 	db	1
 	db	0
 	db	6
@@ -213,39 +214,54 @@ debug_info_start0:
 	db	1
 	db	3
 	dd	100
-	db	12
+	db	15
 	db	1
-	db	43
+	db	46
 	db	4
-	db	3
+	db	4
 	db	1
-	db	38
+	db	39
 	db	5
 	db	9
 	dd	77
 	db	1
-	db	39
+	db	40
 	db	0
 	db	5
 	db	10
 	dd	77
 	db	1
-	db	41
+	db	42
 	db	1
 	db	5
 	db	11
 	dd	77
 	db	1
-	db	42
+	db	43
 	db	2
+	db	5
+	db	12
+	dd	141
+	db	1
+	db	45
+	db	3
 	db	0
+	db	3
+	dd	149
+	db	14
+	db	3
+	db	15
+	db	6
+	db	13
+	db	8
+	db	1
 	db	7
 	db	2
 	dd	func_end0-func_begin0
 	db	1
 	db	87
 
-	db	13
+	db	16
 	db	2
 	db	7
 
@@ -254,7 +270,7 @@ debug_info_start0:
 	private	debug_info_end0
 debug_info_end0:
 	section	.debug_str_offsets,"",@progbits
-	dd	60
+	dd	72
 	dw	5
 	dw	0
 	private	str_offsets_base0
@@ -265,7 +281,7 @@ info_string0:
 	db	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)",000o
 	private	info_string1
 info_string1:
-	db	"D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\guicontrol.c",000o
+	db	"D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\gui_control.c",000o
 	private	info_string2
 info_string2:
 	db	"D:\Data\Programming\TI\Projects\Main\OPTIX",000o
@@ -298,9 +314,18 @@ info_string11:
 	db	"can_press",000o
 	private	info_string12
 info_string12:
-	db	"optix_gui_data_t",000o
+	db	"key",000o
 	private	info_string13
 info_string13:
+	db	"unsigned char",000o
+	private	info_string14
+info_string14:
+	db	"uint8_t",000o
+	private	info_string15
+info_string15:
+	db	"optix_gui_data_t",000o
+	private	info_string16
+info_string16:
 	db	"optix_InitializeGUIState",000o
 	section	.debug_str_offsets,"",@progbits
 	dd	info_string0
@@ -317,6 +342,9 @@ info_string13:
 	dd	info_string11
 	dd	info_string12
 	dd	info_string13
+	dd	info_string14
+	dd	info_string15
+	dd	info_string16
 	section	.debug_addr,"",@progbits
 	dd	debug_addr_end0-debug_addr_start0
 	private	debug_addr_start0

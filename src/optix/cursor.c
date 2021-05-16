@@ -3,10 +3,10 @@
 struct optix_cursor_t optix_cursor = {
     .widget = {
         .transform = {
-            .x = LCD_WIDTH / 2 -  OPTIX_CURSOR_WIDTH / 2,
-            .y = LCD_HEIGHT / 2 - OPTIX_CURSOR_HEIGHT / 2,
-            .width =  OPTIX_CURSOR_WIDTH,
-            .height = OPTIX_CURSOR_HEIGHT,
+            .x = LCD_WIDTH / 2 -  OPTIX_CURSOR_SPRITE_WIDTH / 2,
+            .y = LCD_HEIGHT / 2 - OPTIX_CURSOR_SPRITE_HEIGHT / 2,
+            .width =  OPTIX_CURSOR_SPRITE_WIDTH,
+            .height = OPTIX_CURSOR_SPRITE_HEIGHT,
         },
         .child = NULL,
         .state = {.visible = true},
@@ -27,8 +27,8 @@ void optix_InitializeCursor(void) {
     widget->state.visible = true;
     optix_cursor.current_selection = NULL;
     optix_cursor.direction = OPTIX_CURSOR_NO_DIR;
-    optix_settings.cursor_active = false;
-    optix_cursor.back = gfx_MallocSprite(OPTIX_CURSOR_WIDTH, OPTIX_CURSOR_HEIGHT);
+    optix_settings.cursor_active = true;
+    optix_cursor.back = gfx_MallocSprite(OPTIX_CURSOR_SPRITE_WIDTH, OPTIX_CURSOR_SPRITE_HEIGHT);
 }
 
 //this will also handle the box-based mode
@@ -37,7 +37,6 @@ void optix_UpdateCursor_default(void) {
     //start by updating the last x and y position of the cursor
     optix_cursor.last_x = transform->x;
     optix_cursor.last_y = transform->y;
-    optix_cursor.state = OPTIX_CURSOR_NORMAL;
     if (optix_settings.cursor_active) {
         if (kb_Data[7] & kb_Up)    transform->y -= OPTIX_CURSOR_SPEED;
         if (kb_Data[7] & kb_Down)  transform->y += OPTIX_CURSOR_SPEED;
@@ -49,7 +48,6 @@ void optix_UpdateCursor_default(void) {
         if (transform->y < 0) transform->y = 0;
     } else if (optix_gui_data.can_press) {
         //kb_Scan will be called elsewhere
-        optix_gui_data.can_press = !(kb_Data[7]);
         if (kb_Data[7] & kb_Up)         optix_cursor.direction = OPTIX_CURSOR_UP;
         else if (kb_Data[7] & kb_Down)  optix_cursor.direction = OPTIX_CURSOR_DOWN;
         else if (kb_Data[7] & kb_Left)  optix_cursor.direction = OPTIX_CURSOR_LEFT;
@@ -69,8 +67,12 @@ void optix_RenderCursor_default(void) {
         cursor_move,
         cursor_resize_horizontal,
         cursor_resize_vertical,
+        cursor_text,
+        cursor_text_upper,
+        cursor_text_lower,
+        cursor_text_math,
     };
-    if (optix_settings.cursor_active) {
+    if (true || optix_settings.cursor_active) {
         if (!optix_settings.constant_refresh) optix_RefreshCursorBackground();
         gfx_SetTransparentColor(255);
         gfx_TransparentSprite_NoClip(spr[optix_cursor.state], optix_cursor.widget.transform.x, optix_cursor.widget.transform.y);
@@ -79,11 +81,14 @@ void optix_RenderCursor_default(void) {
 
 //to refresh the cursor background
 void optix_RefreshCursorBackground(void) {
-    gfx_Sprite(optix_cursor.back, optix_cursor.last_x, optix_cursor.last_y);
+    //gfx_Sprite(optix_cursor.back, optix_cursor.last_x, optix_cursor.last_y);
     //get the new one
     gfx_GetSprite(optix_cursor.back, optix_cursor.widget.transform.x, optix_cursor.widget.transform.y);
 }
 
+void optix_RenderCursorBackground(void) {
+    if (true || optix_settings.cursor_active) gfx_Sprite(optix_cursor.back, optix_cursor.last_x, optix_cursor.last_y);
+}
 
 
 //returns a pointer to the closest element found within the array
@@ -102,7 +107,11 @@ struct optix_widget *optix_FindNearestElement(uint8_t direction, struct optix_wi
         struct optix_widget *current;
         if (stack[i]->type == OPTIX_WINDOW_TITLE_BAR_TYPE)
             current = optix_FindNearestElement(direction, reference, ((struct optix_window_title_bar *) stack[i])->window->widget.child);
-        else current = (stack[i]->child) ? optix_FindNearestElement(direction, reference, stack[i]->child) : stack[i];
+        else if (stack[i]->state.visible) current = (stack[i]->child) ? optix_FindNearestElement(direction, reference, stack[i]->child) : stack[i];
+        else {
+            i++;
+            continue;
+        }
         //I only want to have buttons and window title bars be selectable at this moment
         if (current == optix_cursor.current_selection) {
             i++;

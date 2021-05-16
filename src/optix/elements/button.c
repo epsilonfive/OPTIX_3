@@ -11,6 +11,7 @@ void optix_UpdateButton_default(struct optix_widget *widget) {
     //kb_Scan will be called elsewhere
     if (kb_Data[6] & kb_Enter || kb_Data[1] & kb_2nd) {
         if (!button->pressed && widget->state.selected) {
+            dbg_sprintf(dbgout, "Button pressed.\n");
             if (button->click_action) button->click_action(button->click_args);
             //button->state.color = 224;
             button->pressed = true;
@@ -43,12 +44,12 @@ void optix_RenderButton_default(struct optix_widget *widget) {
     if (widget->state.visible && widget->state.needs_redraw) {
         if (widget->state.selected) {
             if (button->pressed) {
-                optix_OutlinedRectangle(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height, //transform
-                optix_colors.button_bg_pressed, optix_colors.button_border);                                                         //color
+                optix_OutlinedRectangle_WithBevel(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height, //transform
+                optix_colors.button_bg_pressed, optix_colors.border_bevel_dark, optix_colors.border_bevel_light);                              //color
                 optix_SetTextColor(optix_colors.button_text_fg_pressed, optix_colors.button_text_bg_pressed);
             } else {
-                optix_OutlinedRectangle(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height, //transform
-                optix_colors.button_bg_selected, optix_colors.button_border);                                                        //color
+                optix_OutlinedRectangle_WithBevel(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height, //transform
+                optix_colors.button_bg_selected,  optix_colors.border_bevel_light, optix_colors.border_bevel_dark);                  //color
                 optix_SetTextColor(optix_colors.button_text_fg_selected, optix_colors.button_text_bg_selected);
             }
         } else {
@@ -61,5 +62,5 @@ void optix_RenderButton_default(struct optix_widget *widget) {
         if (widget->child) optix_RenderStack(widget->child);
         //set this back
         optix_SetTextColor(optix_colors.text_fg, optix_colors.text_bg);
-    }
+    } //else dbg_sprintf(dbgout, "Button was not visible\n");
 }

@@ -1,15 +1,15 @@
 	section	.text,"ax",@progbits
 	assume	adl = 1
-	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\button.c" md5 0xbca13b491a5f6b2535e2bc2cf29ef555
+	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\button.c" md5 0x3c0e69035216a17d85d63055a77b17d5
 	file	1 "D:\Data\Programming\TI\CEdev\include\stdint.h" md5 0x82cbaa55f693a5a19696046350717638
-	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\globals.h" md5 0xae75058b2ac38408e594dce96e184587
+	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\globals.h" md5 0x70b8a1d50dc6a33a8fdd8a7bbb3f79c5
 	file	3 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/../elements\button.h" md5 0x454909b9ba27e8ad67152663d2ce791e
 	section	.text,"ax",@progbits
 	public	_optix_UpdateButton_default
 _optix_UpdateButton_default:
 	private	func_begin0
 func_begin0:
-	file	4 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\button.c" md5 0xbca13b491a5f6b2535e2bc2cf29ef555
+	file	4 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\button.c" md5 0x3c0e69035216a17d85d63055a77b17d5
 	loc	4 6 0
 	cfi_sections .debug_frame
 	cfi_startproc
@@ -78,11 +78,11 @@ tmp7:
 	jq	nz, BB0_4
 	private	tmp8
 tmp8:
-	loc	4 19 21 is_stmt 1
+	loc	4 20 21 is_stmt 1
 	ld	d, (iy + 32)
 	private	tmp9
 tmp9:
-	loc	4 20 25
+	loc	4 21 25
 	ld	(iy + 32), 0
 	jq	BB0_11
 	private	tmp10
@@ -107,225 +107,243 @@ tmp12:
 	jq	nz, BB0_11
 	private	tmp13
 tmp13:
-	loc	4 14 25 is_stmt 1
-	ld	hl, (iy + 26)
+	loc	4 0 13
+	ld	hl, -327680
+	ld	de, L_.str
 	private	tmp14
 tmp14:
-	loc	4 14 17 is_stmt 0
+	loc	4 14 13 is_stmt 1
+	push	de
+	push	hl
+	call	_sprintf
+	private	tmp15
+tmp15:
+	loc	4 0 13 is_stmt 0
+	ld	iy, (ix + 6)
+	loc	4 14 13
+	pop	hl
+	pop	hl
+	private	tmp16
+tmp16:
+	loc	4 15 25 is_stmt 1
+	ld	hl, (iy + 26)
+	private	tmp17
+tmp17:
+	loc	4 15 17 is_stmt 0
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB0_10
-	private	tmp15
-tmp15:
-	loc	4 14 68
-	ld	de, (iy + 29)
-	loc	4 14 39
-	push	de
-	call	__indcallhl
-	private	tmp16
-tmp16:
-	loc	4 0 39
-	ld	d, 0
-	ld	e, 1
-	ld	iy, (ix + 6)
-	loc	4 14 39
-	pop	hl
-	private	tmp17
-tmp17:
-BB0_10:
-	loc	4 16 29 is_stmt 1
-	ld	(iy + 32), 1
 	private	tmp18
 tmp18:
+	loc	4 15 68
+	ld	de, (iy + 29)
+	loc	4 15 39
+	push	de
+	call	__indcallhl
+	private	tmp19
+tmp19:
+	loc	4 0 39
+	ld	iy, (ix + 6)
+	loc	4 15 39
+	pop	hl
+	private	tmp20
+tmp20:
+BB0_10:
+	loc	4 17 29 is_stmt 1
+	ld	(iy + 32), 1
+	ld	e, 1
+	ld	d, 0
+	private	tmp21
+tmp21:
 BB0_11:
-	loc	4 24 22
+	loc	4 25 22
 	ld	hl, (_optix_cursor+32)
-	loc	4 24 51 is_stmt 0
+	loc	4 25 51 is_stmt 0
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	nz, BB0_15
-	private	tmp19
-tmp19:
+	private	tmp22
+tmp22:
 	loc	4 0 51
 	ld	hl, _optix_cursor
-	loc	4 24 54
+	loc	4 25 54
 	push	iy
 	push	hl
 	ld	(ix + -1), d
 	call	_optix_CheckTransformOverlap
-	private	tmp20
-tmp20:
+	private	tmp23
+tmp23:
 	loc	4 0 54
 	ld	d, (ix + -1)
 	ld	e, 1
 	ld	iy, (ix + 6)
-	loc	4 24 54
+	loc	4 25 54
 	pop	hl
 	pop	hl
-	private	tmp21
-tmp21:
-	loc	4 24 9
+	private	tmp24
+tmp24:
+	loc	4 25 9
 	xor	a, e
 	bit	0, a
 	jq	nz, BB0_15
 	loc	4 0 9
 	ld	hl, 1
-	private	tmp22
-tmp22:
-	loc	4 25 28 is_stmt 1
+	private	tmp25
+tmp25:
+	loc	4 26 28 is_stmt 1
 	ld	a, (iy + 14)
-	private	tmp23
-tmp23:
-	loc	4 26 32
+	private	tmp26
+tmp26:
+	loc	4 27 32
 	ld	(iy + 14), 1
-	loc	4 27 28
+	loc	4 28 28
 	ld	(_optix_cursor+32), hl
-	private	tmp24
-tmp24:
+	private	tmp27
+tmp27:
 	loc	4 0 28 is_stmt 0
 	xor	a, e
 	bit	0, a
 	jq	nz, BB0_17
-	private	tmp25
-tmp25:
-	ld	a, d
-	jq	BB0_16
-	private	tmp26
-tmp26:
-BB0_15:
-	loc	4 29 27 is_stmt 1
-	ld	a, (iy + 14)
-	private	tmp27
-tmp27:
-	loc	4 30 50
-	ld	(iy + 32), 0
-	loc	4 30 32 is_stmt 0
-	ld	(iy + 14), 0
-	or	a, d
 	private	tmp28
 tmp28:
+	ld	a, d
+	jq	BB0_16
+	private	tmp29
+tmp29:
+BB0_15:
+	loc	4 30 27 is_stmt 1
+	ld	a, (iy + 14)
+	private	tmp30
+tmp30:
+	loc	4 31 50
+	ld	(iy + 32), 0
+	loc	4 31 32 is_stmt 0
+	ld	(iy + 14), 0
+	or	a, d
+	private	tmp31
+tmp31:
 BB0_16:
 	loc	4 0 32
 	xor	a, e
-	private	tmp29
-tmp29:
-	bit	0, a
-	jq	nz, BB0_18
-	private	tmp30
-tmp30:
-BB0_17:
-	loc	4 33 36 is_stmt 1
-	ld	(iy + 16), 1
-	loc	4 34 47
-	ld	hl, (iy + 23)
-	loc	4 34 9 is_stmt 0
-	push	hl
-	call	_optix_RecursiveSetNeedsRedraw
-	private	tmp31
-tmp31:
-	pop	hl
 	private	tmp32
 tmp32:
+	bit	0, a
+	jq	nz, BB0_18
+	private	tmp33
+tmp33:
+BB0_17:
+	loc	4 34 36 is_stmt 1
+	ld	(iy + 16), 1
+	loc	4 35 47
+	ld	hl, (iy + 23)
+	loc	4 35 9 is_stmt 0
+	push	hl
+	call	_optix_RecursiveSetNeedsRedraw
+	private	tmp34
+tmp34:
+	pop	hl
+	private	tmp35
+tmp35:
 BB0_18:
-	loc	4 38 1 is_stmt 1
+	loc	4 39 1 is_stmt 1
 	inc	sp
 	pop	ix
 	cfi_def_cfa sp, 3
 	cfi_restore ix
 	ret
-	private	tmp33
-tmp33:
+	private	tmp36
+tmp36:
 	section	.text,"ax",@progbits
 	private	func_end0
 func_end0:
 	cfi_endproc
-	file	5 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\util.h" md5 0x92a3bb02bc803408866c35ed0ca60423
+	file	5 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\util.h" md5 0xae7c04897c4cd8b8be08f9a16b45d62d
 
 	section	.text,"ax",@progbits
 	public	_optix_RenderButton_default
 _optix_RenderButton_default:
 	private	func_begin1
 func_begin1:
-	loc	4 41 0
+	loc	4 42 0
 	cfi_startproc
 	ld	hl, -12
 	call	__frameset
-	private	tmp34
-tmp34:
+	private	tmp37
+tmp37:
 	cfi_def_cfa ix, 6
 	cfi_offset ix, -6
 	ld	iy, (ix + 6)
-	private	tmp35
-tmp35:
-	loc	4 43 23 prologue_end
+	private	tmp38
+tmp38:
+	loc	4 44 23 prologue_end
 	ld	a, (iy + 15)
 	ld	l, 1
 	xor	a, l
-	loc	4 43 31 is_stmt 0
+	loc	4 44 31 is_stmt 0
 	bit	0, a
-	jq	nz, BB1_12
-	private	tmp36
-tmp36:
-	loc	4 43 48
-	ld	a, (iy + 16)
-	xor	a, l
-	private	tmp37
-tmp37:
-	loc	4 43 9
-	bit	0, a
-	jq	nz, BB1_12
-	private	tmp38
-tmp38:
-	loc	4 44 27 is_stmt 1
-	ld	a, (iy + 14)
-	xor	a, l
+	jq	nz, BB1_11
 	private	tmp39
 tmp39:
-	loc	4 44 13 is_stmt 0
-	bit	0, a
-	jq	z, BB1_4
+	loc	4 44 48
+	ld	a, (iy + 16)
+	xor	a, l
 	private	tmp40
 tmp40:
+	loc	4 44 9
+	bit	0, a
+	jq	nz, BB1_11
+	private	tmp41
+tmp41:
+	loc	4 45 27 is_stmt 1
+	ld	a, (iy + 14)
+	xor	a, l
+	private	tmp42
+tmp42:
+	loc	4 45 13 is_stmt 0
+	bit	0, a
+	jq	z, BB1_4
+	private	tmp43
+tmp43:
 	loc	4 0 13
-	ld	hl, _optix_colors+13
+	ld	hl, _optix_colors+14
 	ld	(ix + -3), hl
 	inc	hl
 	ld	(ix + -6), hl
-	private	tmp41
-tmp41:
-	loc	4 56 39 is_stmt 1
-	ld	a, (_optix_colors+9)
+	private	tmp44
+tmp44:
+	loc	4 57 39 is_stmt 1
+	ld	a, (_optix_colors+11)
 	ld	l, a
-	loc	4 56 13 is_stmt 0
+	loc	4 57 13 is_stmt 0
 	push	hl
 	call	_gfx_SetColor
-	private	tmp42
-tmp42:
+	private	tmp45
+tmp45:
 	pop	hl
 	ld	iy, (ix + 6)
-	loc	4 57 49 is_stmt 1
+	loc	4 58 49 is_stmt 1
 	ld	hl, (iy + 1)
-	loc	4 57 70 is_stmt 0
+	loc	4 58 70 is_stmt 0
 	ld	(ix + -9), hl
 	ld	hl, (iy + 4)
-	loc	4 57 91
+	loc	4 58 91
 	ld	(ix + -12), hl
 	ld	c, (iy + 7)
 	ld	b, (iy + 8)
-	loc	4 57 73
+	loc	4 58 73
 	or	a, a
 	sbc	hl, hl
 	push	hl
 	pop	de
 	ld	e, c
 	ld	d, b
-	loc	4 57 116
+	loc	4 58 116
 	ld	a, (iy + 9)
-	loc	4 57 98
+	loc	4 58 98
 	ld	l, a
-	loc	4 57 13
+	loc	4 58 13
 	push	hl
 	push	de
 	ld	hl, (ix + -12)
@@ -333,94 +351,113 @@ tmp42:
 	ld	hl, (ix + -9)
 	push	hl
 	call	_gfx_FillRectangle
-	private	tmp43
-tmp43:
-	loc	4 0 13
+	private	tmp46
+tmp46:
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
 	jq	BB1_8
-	private	tmp44
-tmp44:
+	private	tmp47
+tmp47:
 BB1_4:
-	loc	4 45 25 is_stmt 1
+	loc	4 46 25 is_stmt 1
 	ld	a, (iy + 32)
 	xor	a, l
 	loc	4 0 0 is_stmt 0
-	ld	l, (iy + 1)
-	ld	h, (iy + 2)
-	ld	(ix + -9), hl
+	ld	c, (iy + 1)
+	ld	b, (iy + 2)
 	ld	e, (iy + 4)
-	ld	c, (iy + 7)
-	ld	b, (iy + 8)
+	ld	l, (iy + 7)
+	ld	h, (iy + 8)
+	ld	(ix + -9), hl
 	ld	d, (iy + 9)
-	private	tmp45
-tmp45:
-	loc	4 45 17
-	bit	0, a
-	jq	z, BB1_6
-	private	tmp46
-tmp46:
-	loc	4 0 17
-	ld	hl, _optix_colors+15
-	ld	(ix + -3), hl
-	inc	hl
-	ld	(ix + -6), hl
-	private	tmp47
-tmp47:
-	loc	4 51 30 is_stmt 1
-	ld	a, (_optix_colors+10)
-	ld	iyl, a
 	private	tmp48
 tmp48:
-	loc	4 51 63 is_stmt 0
-	ld	a, (_optix_colors+12)
-	ld	l, a
-	loc	4 50 17 is_stmt 1
-	push	hl
-	push	iy
-	jq	BB1_7
+	loc	4 46 17
+	bit	0, a
+	jq	z, BB1_6
 	private	tmp49
 tmp49:
-BB1_6:
-	loc	4 0 17 is_stmt 0
-	ld	hl, _optix_colors+17
+	loc	4 0 17
+	ld	hl, _optix_colors+16
 	ld	(ix + -3), hl
 	inc	hl
 	ld	(ix + -6), hl
 	private	tmp50
 tmp50:
-	loc	4 47 30 is_stmt 1
-	ld	a, (_optix_colors+11)
-	ld	l, a
-	loc	4 47 62 is_stmt 0
+	loc	4 52 30 is_stmt 1
 	ld	a, (_optix_colors+12)
 	ld	iyl, a
 	private	tmp51
 tmp51:
-	loc	4 46 17 is_stmt 1
-	push	iy
-	push	hl
-	private	tmp52
-tmp52:
-BB1_7:
-	loc	4 0 0 is_stmt 0
-	ld	l, d
-	push	hl
+	loc	4 52 64 is_stmt 0
+	ld	a, (_optix_colors+2)
+	ld	l, a
+	loc	4 52 97
+	ld	a, (_optix_colors+1)
+	ld	(ix + -12), bc
+	ld	c, a
+	loc	4 51 17 is_stmt 1
 	push	bc
-	ld	l, e
+	push	hl
+	push	iy
+	ld	l, d
 	push	hl
 	ld	hl, (ix + -9)
 	push	hl
-	call	_optix_OutlinedRectangle
+	ld	l, e
+	push	hl
+	ld	hl, (ix + -12)
+	push	hl
+	jq	BB1_7
+	private	tmp52
+tmp52:
+BB1_6:
+	loc	4 0 17 is_stmt 0
+	ld	hl, _optix_colors+18
+	ld	(ix + -3), hl
+	inc	hl
+	ld	(ix + -6), hl
 	private	tmp53
 tmp53:
-	pop	hl
-	pop	hl
+	loc	4 48 30 is_stmt 1
+	ld	a, (_optix_colors+13)
+	ld	l, a
+	loc	4 48 62 is_stmt 0
+	ld	(ix + -12), hl
+	ld	a, (_optix_colors+1)
+	ld	iyl, a
 	private	tmp54
 tmp54:
+	loc	4 48 94
+	ld	a, (_optix_colors+2)
+	ld	l, a
+	loc	4 47 17 is_stmt 1
+	push	hl
+	push	iy
+	ld	hl, (ix + -12)
+	push	hl
+	ld	l, d
+	push	hl
+	ld	hl, (ix + -9)
+	push	hl
+	ld	l, e
+	push	hl
+	push	bc
+	private	tmp55
+tmp55:
+BB1_7:
+	loc	4 0 0 is_stmt 0
+	call	_optix_OutlinedRectangle_WithBevel
+	private	tmp56
+tmp56:
+	ld	hl, 21
+	add	hl, sp
+	ld	sp, hl
+	private	tmp57
+tmp57:
 BB1_8:
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
 	ld	hl, (ix + -3)
 	ld	a, (hl)
 	ld	hl, (ix + -6)
@@ -429,64 +466,69 @@ BB1_8:
 	ld	l, a
 	push	hl
 	call	_optix_SetTextColor
-	private	tmp55
-tmp55:
+	private	tmp58
+tmp58:
 	pop	hl
 	pop	hl
-	private	tmp56
-tmp56:
-	loc	4 61 21 is_stmt 1
+	private	tmp59
+tmp59:
+	loc	4 62 21 is_stmt 1
 	ld	iy, (ix + 6)
 	ld	hl, (iy + 23)
-	private	tmp57
-tmp57:
-	loc	4 61 13 is_stmt 0
+	private	tmp60
+tmp60:
+	loc	4 62 13 is_stmt 0
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	private	tmp58
-tmp58:
-	loc	4 61 28
+	private	tmp61
+tmp61:
+	loc	4 62 28
 	push	hl
 	call	nz, _optix_RenderStack
-	private	tmp59
-tmp59:
+	private	tmp62
+tmp62:
 	pop	hl
-	private	tmp60
-tmp60:
-	loc	4 63 41 is_stmt 1
-	ld	a, (_optix_colors+19)
-	ld	l, a
-	loc	4 63 63 is_stmt 0
+	private	tmp63
+tmp63:
+	loc	4 64 41 is_stmt 1
 	ld	a, (_optix_colors+20)
+	ld	l, a
+	loc	4 64 63 is_stmt 0
+	ld	a, (_optix_colors+21)
 	ld	e, a
-	loc	4 63 9
+	loc	4 64 9
 	push	de
 	push	hl
 	call	_optix_SetTextColor
-	private	tmp61
-tmp61:
+	private	tmp64
+tmp64:
 	pop	hl
 	pop	hl
-	private	tmp62
-tmp62:
-BB1_12:
-	loc	4 65 1 is_stmt 1
+	private	tmp65
+tmp65:
+BB1_11:
+	loc	4 66 1 is_stmt 1
 	ld	sp, ix
 	pop	ix
 	cfi_def_cfa sp, 3
 	cfi_restore ix
 	ret
-	private	tmp63
-tmp63:
+	private	tmp66
+tmp66:
 	section	.text,"ax",@progbits
 	private	func_end1
 func_end1:
 	cfi_endproc
 	file	6 "D:\Data\Programming\TI\CEdev\include\graphx.h" md5 0x6fbdcd846ef31912194280a2afa35252
-	file	7 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\shapes.h" md5 0x21eec6621b5133bf18668cf7332b265e
-	file	8 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\colors.h" md5 0xcb9ca3a82edcb38ce6cbf47806228ce5
+	file	7 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\shapes.h" md5 0xce313044b2c16158c91e7a55fd300cf1
+	file	8 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\colors.h" md5 0x97b2f58595d81054a63ca5688bb465d6
 	file	9 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\loop.h" md5 0x8c91efb33eb5c4c489579fb47b736abc
+
+	section	.rodata,"a",@progbits
+	private	L_.str
+L_.str:
+	db	"Button pressed.",012o,000o
 
 	section	.debug_loclists,"",@progbits
 	dd	debug_list_header_end0-debug_list_header_start0
@@ -521,21 +563,21 @@ debug_loc0:
 	db	8
 	db	4
 	uleb128	tmp10-func_begin0
-	uleb128	tmp18-func_begin0
+	uleb128	tmp21-func_begin0
 	db	2
 	db	48
 	db	159
 	db	4
-	uleb128	tmp18-func_begin0
-	uleb128	tmp20-func_begin0
+	uleb128	tmp21-func_begin0
+	uleb128	tmp23-func_begin0
 	db	4
 	db	81
 	db	157
 	db	8
 	db	8
 	db	4
-	uleb128	tmp24-func_begin0
-	uleb128	tmp26-func_begin0
+	uleb128	tmp27-func_begin0
+	uleb128	tmp29-func_begin0
 	db	4
 	db	81
 	db	157
@@ -546,7 +588,7 @@ debug_loc0:
 debug_loc1:
 	db	4
 	uleb128	tmp1-func_begin0
-	uleb128	tmp16-func_begin0
+	uleb128	tmp15-func_begin0
 	db	1
 	db	85
 	db	0
@@ -554,51 +596,51 @@ debug_loc1:
 debug_loc2:
 	db	4
 	uleb128	tmp1-func_begin0
-	uleb128	tmp16-func_begin0
+	uleb128	tmp15-func_begin0
 	db	1
 	db	85
 	db	0
 	private	debug_loc3
 debug_loc3:
 	db	4
-	uleb128	tmp35-func_begin0
-	uleb128	tmp42-func_begin0
+	uleb128	tmp38-func_begin0
+	uleb128	tmp45-func_begin0
 	db	1
 	db	85
 	db	4
-	uleb128	tmp44-func_begin0
-	uleb128	tmp48-func_begin0
-	db	1
-	db	85
-	db	4
-	uleb128	tmp49-func_begin0
+	uleb128	tmp47-func_begin0
 	uleb128	tmp51-func_begin0
+	db	1
+	db	85
+	db	4
+	uleb128	tmp52-func_begin0
+	uleb128	tmp54-func_begin0
 	db	1
 	db	85
 	db	0
 	private	debug_loc4
 debug_loc4:
 	db	4
-	uleb128	tmp35-func_begin0
-	uleb128	tmp42-func_begin0
+	uleb128	tmp38-func_begin0
+	uleb128	tmp45-func_begin0
 	db	1
 	db	85
 	db	4
-	uleb128	tmp44-func_begin0
-	uleb128	tmp48-func_begin0
-	db	1
-	db	85
-	db	4
-	uleb128	tmp49-func_begin0
+	uleb128	tmp47-func_begin0
 	uleb128	tmp51-func_begin0
+	db	1
+	db	85
+	db	4
+	uleb128	tmp52-func_begin0
+	uleb128	tmp54-func_begin0
 	db	1
 	db	85
 	db	0
 	private	debug_list_header_end0
 debug_list_header_end0:
 	section	.debug_abbrev,"",@progbits
-	private	abbrev_start86
-abbrev_start86:
+	private	abbrev_start89
+abbrev_start89:
 	db	1
 	db	17
 	db	1
@@ -853,7 +895,7 @@ debug_info_start0:
 	dw	5
 	db	1
 	db	3
-	dd	abbrev_start86
+	dd	abbrev_start89
 	db	1
 	db	0
 	dw	12
@@ -1087,13 +1129,19 @@ debug_info_start0:
 	dd	356
 	db	10
 	dd	213
+	db	2
+	dd	366
+	db	6
+	db	38
+	db	6
+	db	1
 	db	11
 	db	0
 	dd	func_end0-func_begin0
 	db	1
 	db	84
 
-	db	45
+	db	46
 	db	4
 	db	6
 
@@ -1112,21 +1160,21 @@ debug_info_start0:
 	dd	312
 	db	13
 	db	1
-	db	47
+	db	48
 	db	4
 	db	7
 	dd	39
 	db	14
-	dd	412
+	dd	421
 	db	1
 	db	14
-	dd	431
+	dd	440
 	db	2
 	db	0
 	db	15
-	db	38
+	db	39
 	db	5
-	db	20
+	db	21
 
 	dd	312
 
@@ -1137,9 +1185,9 @@ debug_info_start0:
 	dd	328
 	db	0
 	db	16
-	db	39
+	db	40
 	db	5
-	db	22
+	db	23
 
 
 
@@ -1152,44 +1200,44 @@ debug_info_start0:
 	db	1
 	db	84
 
-	db	46
+	db	47
 	db	4
-	db	41
+	db	42
 
 
 	db	12
 	db	4
 	db	3
 	db	4
-	db	41
+	db	42
 	dd	328
 	db	13
 	db	3
-	db	47
+	db	48
 	db	4
-	db	42
+	db	43
 	dd	39
 	db	14
-	dd	507
+	dd	516
 	db	4
 	db	14
-	dd	522
+	dd	531
 	db	5
 	db	14
-	dd	548
+	dd	557
 	db	6
 	db	14
-	dd	583
+	dd	597
 	db	7
 	db	14
-	dd	598
+	dd	612
 	db	8
 	db	14
-	dd	583
+	dd	597
 	db	9
 	db	0
 	db	17
-	db	40
+	db	41
 	db	6
 	dw	503
 
@@ -1200,7 +1248,7 @@ debug_info_start0:
 	dd	163
 	db	0
 	db	18
-	db	41
+	db	42
 	db	6
 	dw	684
 
@@ -1216,32 +1264,22 @@ debug_info_start0:
 	dd	209
 	db	0
 	db	16
-	db	42
-	db	7
-	db	6
-
-
-
-	db	8
-	dd	221
-	db	8
-	dd	163
-	db	8
-	dd	221
-	db	8
-	dd	163
-	db	8
-	dd	163
-	db	8
-	dd	163
-	db	0
-	db	16
 	db	43
+	db	7
+	db	7
+
+
+
 	db	8
-	db	81
-
-
-
+	dd	221
+	db	8
+	dd	163
+	db	8
+	dd	221
+	db	8
+	dd	163
+	db	8
+	dd	163
 	db	8
 	dd	163
 	db	8
@@ -1249,6 +1287,18 @@ debug_info_start0:
 	db	0
 	db	16
 	db	44
+	db	8
+	db	117
+
+
+
+	db	8
+	dd	163
+	db	8
+	dd	163
+	db	0
+	db	16
+	db	45
 	db	9
 	db	13
 
@@ -1261,7 +1311,7 @@ debug_info_start0:
 	private	debug_info_end0
 debug_info_end0:
 	section	.debug_str_offsets,"",@progbits
-	dd	196
+	dd	200
 	dw	5
 	dw	0
 	private	str_offsets_base0
@@ -1383,33 +1433,36 @@ info_string37:
 	db	"optix_button",000o
 	private	info_string38
 info_string38:
-	db	"optix_CheckTransformOverlap",000o
+	db	"char",000o
 	private	info_string39
 info_string39:
-	db	"optix_RecursiveSetNeedsRedraw",000o
+	db	"optix_CheckTransformOverlap",000o
 	private	info_string40
 info_string40:
-	db	"gfx_SetColor",000o
+	db	"optix_RecursiveSetNeedsRedraw",000o
 	private	info_string41
 info_string41:
-	db	"gfx_FillRectangle",000o
+	db	"gfx_SetColor",000o
 	private	info_string42
 info_string42:
-	db	"optix_OutlinedRectangle",000o
+	db	"gfx_FillRectangle",000o
 	private	info_string43
 info_string43:
-	db	"optix_SetTextColor",000o
+	db	"optix_OutlinedRectangle_WithBevel",000o
 	private	info_string44
 info_string44:
-	db	"optix_RenderStack",000o
+	db	"optix_SetTextColor",000o
 	private	info_string45
 info_string45:
-	db	"optix_UpdateButton_default",000o
+	db	"optix_RenderStack",000o
 	private	info_string46
 info_string46:
-	db	"optix_RenderButton_default",000o
+	db	"optix_UpdateButton_default",000o
 	private	info_string47
 info_string47:
+	db	"optix_RenderButton_default",000o
+	private	info_string48
+info_string48:
 	db	"button",000o
 	section	.debug_str_offsets,"",@progbits
 	dd	info_string0
@@ -1460,6 +1513,7 @@ info_string47:
 	dd	info_string45
 	dd	info_string46
 	dd	info_string47
+	dd	info_string48
 	section	.debug_addr,"",@progbits
 	dd	debug_addr_end0-debug_addr_start0
 	private	debug_addr_start0
@@ -1470,15 +1524,15 @@ debug_addr_start0:
 	private	addr_table_base0
 addr_table_base0:
 	dl	func_begin0
-	dl	tmp20
-	dl	tmp31
+	dl	tmp23
+	dl	tmp34
 	dl	func_begin1
-	dl	tmp42
-	dl	tmp43
-	dl	tmp53
-	dl	tmp55
-	dl	tmp59
-	dl	tmp61
+	dl	tmp45
+	dl	tmp46
+	dl	tmp56
+	dl	tmp58
+	dl	tmp62
+	dl	tmp64
 	private	debug_addr_end0
 debug_addr_end0:
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
@@ -1489,12 +1543,13 @@ line_table_start0:
 	extern	__Unwind_SjLj_Unregister
 	extern	__frameset
 	extern	_gfx_FillRectangle
+	extern	_sprintf
 	extern	_gfx_SetColor
 	extern	_optix_cursor
 	extern	_optix_RenderStack
 	extern	__indcallhl
 	extern	_optix_colors
 	extern	_optix_RecursiveSetNeedsRedraw
+	extern	_optix_OutlinedRectangle_WithBevel
 	extern	_optix_SetTextColor
 	extern	__sand
-	extern	_optix_OutlinedRectangle
