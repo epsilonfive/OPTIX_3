@@ -1,10 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "../globals.h"
-#include "text.h"
 #include "button.h"
-#include "../util.h"
+#include "sprite.h"
 
 /*NOTES:
 This will work best if the width of the menu is evenly divisible by its number of columns,

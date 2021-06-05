@@ -2,11 +2,13 @@
 #define BUTTON_H
 
 //includes
-#include "../globals.h"
+#include <stdbool.h>
+#include <stdint.h>
+#include <graphx.h>
+#include "../gui_control.h"
 #include "../shapes.h"
 #include "../cursor.h"
 #include "../util.h"
-#include "../loop.h"
 
 //typedefs and things
 struct optix_button {

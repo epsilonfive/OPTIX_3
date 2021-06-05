@@ -121,7 +121,6 @@ struct optix_widget *optix_FindNearestElement(uint8_t direction, struct optix_wi
         }*/
         //I only want to have buttons and window title bars be selectable at this moment
         if (current == current_context->cursor->current_selection || !(current->state.selectable)) {
-            dbg_sprintf(dbgout, "Continuing...\n");
             i++;
             continue;
         }
@@ -147,4 +146,11 @@ struct optix_widget *optix_FindNearestElement(uint8_t direction, struct optix_wi
         i++;
     }
     return closest;
+}
+
+void optix_SetCurrentSelection(struct optix_widget *widget) {
+    //we're assuming this is correct
+    current_context->cursor->current_selection = widget;
+    current_context->cursor->widget.transform.x = widget->transform.x;
+    current_context->cursor->widget.transform.y = widget->transform.y;
 }

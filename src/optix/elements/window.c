@@ -6,7 +6,6 @@ void optix_UpdateWindow_default(struct optix_widget *widget) {
     if (widget->state.visible) {
         if (widget->state.selected && widget->child) optix_UpdateStack(widget->child);
         if (kb_Data[6] & kb_Enter || kb_Data[1] & kb_2nd) {
-            dbg_sprintf(dbgout, "This was pressed.\n");
             //rescale it if necessary
             //if the cursor didn't move just continue
             if (widget->state.selected && 
@@ -17,7 +16,6 @@ void optix_UpdateWindow_default(struct optix_widget *widget) {
                 int center_y = widget->transform.y + widget->transform.height / 2;
                 int x_size_change = 0, y_size_change = 0;
                 int x_shift = 0, y_shift = 0;
-                dbg_sprintf(dbgout, "This was true, apparently.\n");
                 //if we're colliding with the left or right edges of the window
                 //left edge
                 if (abs(current_context->cursor->widget.transform.x - widget->transform.x) < OPTIX_CURSOR_RESIZE_WIDTH + 2) {
@@ -42,10 +40,9 @@ void optix_UpdateWindow_default(struct optix_widget *widget) {
             } else if ((!current_context->settings->cursor_active && widget == current_context->cursor->current_selection) ||
             //(current_context->cursor->current_selection->type == OPTIX_WINDOW_TITLE_BAR_TYPE && ((struct optix_window_title_bar *) current_context->cursor->current_selection)->window == widget) ||
             (current_context->settings->cursor_active && optix_CheckTransformOverlap(&current_context->cursor->widget, widget))) {
-                dbg_sprintf(dbgout, "This was true.\n");
-                if (!widget->state.selected) {
+                if (widget->state.selected) {
                     //do this, which I think will be fine?
-                    if (widget->child && widget->child[0]) current_context->cursor->current_selection = widget->child[0];
+                    if (widget->child && widget->child[0]) optix_SetCurrentSelection(widget->child[0]);
                     widget->state.needs_redraw = true;
                 }
                 widget->state.selected = true;
@@ -62,7 +59,6 @@ void optix_RenderWindow_default(struct optix_widget *widget) {
     int element_size = 10;
     if (widget->state.visible) {
         if (widget->state.needs_redraw) {
-            dbg_sprintf(dbgout, "Drawing window.\n");
             optix_OutlinedRectangle_WithBevel(widget->transform.x - 1, widget->transform.y - 1, widget->transform.width + 2, widget->transform.height + 2, 
             WINDOW_BG_COLOR_INDEX, WINDOW_BORDER_BEVEL_LIGHT_INDEX, WINDOW_BORDER_BEVEL_DARK_INDEX);
         }
@@ -150,7 +146,7 @@ void optix_UpdateWindowTitleBar_default(struct optix_widget *widget) {
                     current_context->data->gui_needs_full_redraw = true;
                 } else {
                     //we may need a redraws
-                    if (!window->widget.state.selected) if (window->widget.child && window->widget.child[0]) current_context->cursor->current_selection = window->widget.child[0];
+                    if (!window->widget.state.selected) if (window->widget.child && window->widget.child[0]) optix_SetCurrentSelection(window->widget.child[0]);
                     window_title_bar->window->widget.state.needs_redraw = widget->state.needs_redraw = true;
                     if (window_title_bar->window->widget.child) optix_RecursiveSetNeedsRedraw(window_title_bar->window->widget.child);
                     window_title_bar->window->widget.state.selected = widget->state.selected = true;
@@ -216,6 +212,7 @@ void optix_ResizeWindow(struct optix_widget *widget, uint16_t width, uint8_t hei
                         menu->widget.transform.height = height;
                     }
                 } else {
+                    //tf is this
                     child->transform.width = width;
                     child->transform.height = height;
                 }

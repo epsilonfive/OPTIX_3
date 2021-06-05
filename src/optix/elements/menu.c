@@ -23,7 +23,6 @@ void optix_UpdateMenu_default(struct optix_widget *widget) {
             widget->state.needs_redraw = true;
         }
         widget->state.selected = true;
-        dbg_sprintf(dbgout, "Selected: %d\n", menu->selection);
         //only do this if we have to
         if (current_context->settings->cursor_active) {
             uint16_t option_width = optix_GetMenuOptionWidth(0, menu->rows, menu->columns, widget->transform.width, widget->transform.height);
@@ -122,7 +121,7 @@ void optix_RenderMenu_default(struct optix_widget *widget) {
             (button.widget.transform.height = optix_GetMenuOptionHeight(menu->selection, menu->rows, menu->columns, widget->transform.width, widget->transform.height)));
             optix_RecursiveAlign(&button.widget);
             //set whether it's selected
-            button.widget.state.selected = i == menu->selection;
+            button.widget.state.selected = widget->state.selected && i == menu->selection;
             optix_RecursiveSetNeedsRedraw(button.widget.child);
             button.widget.render(&button.widget);
         }

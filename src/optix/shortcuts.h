@@ -1,7 +1,9 @@
 #ifndef SHORTCUTS_H
 #define SHORTCUTS_H
 
-#include "globals.h"
+#include <stdbool.h>
+#include <keypadc.h>
+#include "gui_control.h"
 #include "util.h"
 
 void optix_HandleShortcuts(struct optix_widget *stack[]);

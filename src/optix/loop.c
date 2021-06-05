@@ -9,14 +9,10 @@ void optix_UpdateGUI(void) {
     current_context->cursor->state = OPTIX_CURSOR_NORMAL;
     kb_Scan();
     //if (!kb_AnyKey()) current_context->data->can_press = true;
-    dbg_sprintf(dbgout, "1 Can press: %d\n", current_context->data->can_press);
     //start with this I suppose
     current_context->cursor->widget.update((struct optix_widget *) current_context->cursor);
-    dbg_sprintf(dbgout, "2 Can press: %d\n", current_context->data->can_press);
-    dbg_sprintf(dbgout, "3 Can press: %d\n", current_context->data->can_press);
     optix_HandleShortcuts(current_context->stack);
     optix_UpdateStack_TopLevel(current_context->stack);
-    dbg_sprintf(dbgout, "4 Can press: %d\n", current_context->data->can_press);
 }
 
 void optix_UpdateStack(struct optix_widget *stack[]) {
@@ -48,7 +44,6 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
     //start things out by doing the thing
     //the value of i at the end will also be the number of elements in the stack
     while ((*stack)[i]) {
-        dbg_sprintf(dbgout, "Type: %d, Can press: %d\n", (*stack)[i]->type, current_context->data->can_press);
         //if this has been selected, we want to loop through and make sure nothing else is selected
         //this is so that what's on top will be selected, or what is rendered last
         //only one window can be selected at a time
@@ -81,7 +76,6 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
         }
         i++;
     }
-    dbg_sprintf(dbgout, "After loop can press: %d\n", current_context->data->can_press);
     //handle this as well
     //start with this, because why not
     if (current_context->data->gui_needs_full_redraw) optix_RecursiveSetNeedsRedraw(*stack);
@@ -101,11 +95,12 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
         //move the cursor to that position
         if (possible_selection) {
             current_context->data->can_press = false;
-            current_context->cursor->current_selection = possible_selection;
+            optix_SetCurrentSelection(possible_selection);
+            /*current_context->cursor->current_selection = possible_selection;
             current_context->cursor->widget.transform.x = current_context->cursor->current_selection->transform.x;
-            current_context->cursor->widget.transform.y = current_context->cursor->current_selection->transform.y;
+            current_context->cursor->widget.transform.y = current_context->cursor->current_selection->transform.y;*/
         }
-    } else dbg_sprintf(dbgout, "Couldn't do it.\n");
+    }
     //if it's already the last entry don't bother
     if (!found_window) return;
     //set everything in the array to unselected, except for the current window

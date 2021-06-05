@@ -1,8 +1,12 @@
 #ifndef TEXT_H
 #define TEXT_H
 
-#include "../globals.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include <string.h>
+#include <graphx.h>
 #include <fontlibc.h>
+#include "../gui_control.h"
 #include "../cursor.h"
 
 #define DEFAULT_FONT_PACK_NAME     "DRSANS"

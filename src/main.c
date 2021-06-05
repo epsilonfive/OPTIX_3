@@ -262,31 +262,33 @@ void main(void) {
    };
    optix_InitializeWidget(&test_title_bar2.widget, OPTIX_WINDOW_TITLE_BAR_TYPE);
    //button
-   struct optix_button test_button = {
-      .widget = {
-         .transform = {
-            .x = 0,
-            .y = 0,
-            .width = 10,
-            .height = 10,
+   bool test_bool = false;
+   struct optix_check_box test_check_box = {
+      .button = {
+         .widget = {
+            .transform = {
+               .x = 0,
+               .y = 0,
+               .width = 10,
+               .height = 10,
+            },
+            .child = NULL,
          },
-         .child = NULL,
       },
-      .click_action = toggle_cursor,
-      .click_args = NULL,
+      .value = &test_bool,
    };
-   optix_InitializeWidget(&test_button.widget, OPTIX_BUTTON_TYPE);
+   optix_InitializeWidget(&test_check_box.button.widget, OPTIX_CHECK_BOX_TYPE);
    //finally, align everything
    optix_RecursiveAlign(&test_title_bar.widget);
    optix_RecursiveAlign(&test_title_bar2.widget);
-   struct optix_widget *test_stack[] = {&test_button.widget, &test_rectangle.widget, &test_title_bar2.widget,  &test_title_bar.widget, NULL};   
-   current_context->cursor->current_selection = &test_button.widget;
+   struct optix_widget *test_stack[] = {&test_rectangle.widget, &test_check_box.button.widget, &test_title_bar2.widget,  &test_title_bar.widget, NULL};   
+   optix_SetCurrentSelection(&test_check_box.button.widget);
    //add it to the context
    context.stack = &test_stack;
    do {
-      gfx_Blit(1);
       optix_UpdateGUI();
       optix_RenderGUI();
+      gfx_Blit(1);
    } while (!(kb_Data[6] & kb_Clear));
    gfx_End();
 }

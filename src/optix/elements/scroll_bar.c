@@ -40,7 +40,7 @@ void optix_RenderScrollBar_default(struct optix_widget *widget) {
     //the inner thing, we want to scale this as well
     optix_OutlinedRectangle_WithBevel(widget->transform.x + (scroll_bar->direction ? 0 : offset) + 1, widget->transform.y + (scroll_bar->direction ? offset : 0) + 1, //x, y
     (scroll_bar->direction ? widget->transform.width : size) - 2, (scroll_bar->direction ? size : widget->transform.height) - 2,                                      //width, height
-    WINDOW_BORDER_BEVEL_DARK_INDEX, WINDOW_BORDER_BEVEL_LIGHT_INDEX, WINDOW_BORDER_BEVEL_DARK_INDEX);
+    WINDOW_BG_COLOR_INDEX, WINDOW_BORDER_BEVEL_LIGHT_INDEX, WINDOW_BORDER_BEVEL_DARK_INDEX);
 }
 
 

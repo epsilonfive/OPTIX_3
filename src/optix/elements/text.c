@@ -166,34 +166,25 @@ void optix_RenderText_default(struct optix_widget *widget) {
 void optix_WrapText(struct optix_widget *widget) {
     struct optix_text *text = (struct optix_text *) widget;
     //all we need to do here is to update the wrap if necessary
-    dbg_sprintf(dbgout, "Wrapping text...\n");
     int num_lines = 0;
     char *str = text->text;
     fontlib_SetWindow(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height);
     fontlib_SetCursorPosition(widget->transform.x, widget->transform.y);
     //basically we don't want to do any of this is the string is already going to fit
     //if (optix_GetStringWidthL(text->text, strlen(text->text)) > widget->transform.width) {
-        dbg_sprintf(dbgout, "Made it here.\n");
         do {
             num_lines++;
             if (num_lines > text->num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
             text->offsets[num_lines - 1] = str;
-            dbg_sprintf(dbgout, "%d %s\n", num_lines, text->offsets[num_lines - 1]);
         } while (*(str = optix_PrintStringWrapped_fontlibc(str, true)) != '\0' && str != text->text);
     //} //else if (num_lines != text->num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
-    dbg_sprintf(dbgout, "Finished the loop.\n");
     //cut it down if we need to
     //or if it has too few lines (if it's one line, maybe)
-    dbg_sprintf(dbgout, "So this is the line that breaks it? %d %d\n", text->num_lines, num_lines);
     if (text->num_lines > num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
-    dbg_sprintf(dbgout, "Yea it is\n");
     text->num_lines = num_lines;
-    dbg_sprintf(dbgout, "This is definitely the one doing it.\n");
     text->offsets[0] = text->text;
-    dbg_sprintf(dbgout, "Maybe this?\n");
     //have this too
     text->needs_offset_update = false;
-    dbg_sprintf(dbgout, "Wrap success.\n");
 }
 
 

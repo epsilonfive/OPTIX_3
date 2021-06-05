@@ -33,7 +33,6 @@ void optix_InitializeColors(struct optix_colors *colors) {
         .highlight =                       HIGHLIGHT_COLOR_DEFAULT,
         .divider =                         DIVIDER_COLOR_DEFAULT,
     };
-    dbg_sprintf(dbgout, "Size: %d\n", sizeof(struct optix_colors));
     memcpy(colors, &default_colors, sizeof(struct optix_colors));
     memcpy(gfx_palette, colors, sizeof(struct optix_colors));
 }

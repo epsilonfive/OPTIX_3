@@ -2,10 +2,16 @@
 #define CURSOR_H
 
 //includes
-#include "globals.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include <tice.h>
+#include <keypadc.h>
+#include <graphx.h>
+#include <debug.h>
 #include "gfx/gfx.h"
+#include "gui_control.h"
+#include "colors.h"
 #include "elements/window.h"
-#include "elements/sprite.h"
 
 //defines
 #define OPTIX_CURSOR_SPEED         3
@@ -57,5 +63,6 @@ void optix_RenderCursor_default(struct optix_widget *widget);
 void optix_RefreshCursorBackground(struct optix_widget *widget);
 void optix_RenderCursorBackground(struct optix_widget *widget);
 struct optix_widget *optix_FindNearestElement(uint8_t direction, struct optix_widget *reference, struct optix_widget *stack[]);
+void optix_SetCurrentSelection(struct optix_widget *widget);
 
 #endif

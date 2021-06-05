@@ -1,7 +1,10 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "../globals.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include <graphx.h>
+#include "../gui_control.h"
 
 //structs
 struct optix_sprite {

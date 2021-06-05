@@ -1,19 +1,14 @@
 #ifndef UTIL_H
 #define UTIL_H
 
-#include "globals.h"
-#include "elements/text.h"
-#include "elements/button.h"
-#include "elements/menu.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include "gui_control.h"
 #include "elements/window.h"
-#include "elements/sprite.h"
-#include "elements/divider.h"
-#include "elements/rectangle.h"
 #include "elements/input_box.h"
-#include "elements/scroll_bar.h"
 
 void optix_CycleSelectedElement(struct optix_widget *stack[]);
-void optix_InitializeWidget(struct optix_widget *widget, uint8_t type);
 void optix_SetObjectTransform(struct optix_widget *widget, int x, int y, uint16_t width, uint8_t height);
 void optix_SetObjectCallbacks(struct optix_widget *widget, void (*render)(struct optix_widget *), void (*update)(struct optix_widget *));
 void optix_SetObjectChildren(struct optix_widget *widget, struct optix_widget **children);

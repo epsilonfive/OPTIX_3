@@ -2,7 +2,10 @@
 #define SCROLL_BAR_H
 
 //includes
-#include "../globals.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include <graphx.h>
+#include "../gui_control.h"
 #include "../shapes.h"
 #include "menu.h"
 #include "text.h"

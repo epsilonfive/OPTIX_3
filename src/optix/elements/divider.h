@@ -1,7 +1,11 @@
 #ifndef DIVIDER_H
 #define DIVIDER_H
 
-#include "../globals.h"
+#include <stdint.h>
+#include <stdbool.h>
+#include <graphx.h>
+#include "../gui_control.h"
+#include "../colors.h"
 
 //defines
 #define DIVIDER_ALIGNMENT_TOP    0
