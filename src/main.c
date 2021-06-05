@@ -54,11 +54,32 @@ void minimize_window(void *args) {
 }
 
 void toggle_cursor(void *args) {
-   optix_settings.cursor_active = !optix_settings.cursor_active;
+   //current_context->settings.cursor_active = !current_context->cursor_active;
 }
 
 void main(void) {
+   struct optix_cursor cursor;
+   struct optix_colors colors;
+   struct optix_settings settings;
+   struct optix_gui_data data;
+   //initialize it
+   //graphics
+   gfx_Begin();
+   gfx_SetDraw(1);
+   optix_InitializeColors(&colors);
+   optix_InitializeCursor(&cursor);
+   optix_InitializeSettings(&settings);
+   optix_InitializeData(&data);
+   //the final context (we'll add the stack last)
+   struct optix_context context = {
+      .settings = &settings,
+      .cursor = &cursor,
+      .data = &data,
+      .colors = &colors,
+   };
+   optix_SetContext(&context);
    optix_InitializeFont();
+   //elements
    struct optix_rectangle test_rectangle = {
       .widget = {
          .transform = {
@@ -73,13 +94,14 @@ void main(void) {
       .fill_color = 0,
    };
    optix_InitializeWidget(&test_rectangle.widget, OPTIX_RECTANGLE_TYPE);
-   char *test_text[] = {"Programs", "Appvars", "Files", "Search", "Settings", "Refresh", "About", "Exit"};
+   char *test_text[] = {"Programs", "Appvars", "Files", "Search", "Settings", "Refresh", "About", "Exit", "More", "Options", "Please", "Work"};
    struct optix_menu test_menu = {
       .widget = {
          .transform = {
-            .width = 100,
+            .width = 50,
             .height = 48,
          },
+         .centering = {.x_centering = OPTIX_CENTERING_LEFT, .y_centering = OPTIX_CENTERING_TOP}
       },
       .resize_info = {
          .resizable = true,
@@ -89,12 +111,10 @@ void main(void) {
          .min_height = 25,
       },
       .text_centering = {.y_centering = OPTIX_CENTERING_CENTERED, .x_centering = OPTIX_CENTERING_CENTERED},
-      .rows = 2,
-      .columns = 2,
-      .num_options = 8,
+      .rows = 4,
+      .columns = 1,
       .text = test_text,
       .spr = NULL,
-      .min = 0,
    };
    optix_InitializeWidget(&test_menu.widget, OPTIX_MENU_TYPE);
    char *test_text_b[] = {"01", "02", "03", "04", "05", "06", "07", "08"};
@@ -115,10 +135,8 @@ void main(void) {
       .text_centering = {.y_centering = OPTIX_CENTERING_CENTERED, .x_centering = OPTIX_CENTERING_CENTERED},
       .rows = 2,
       .columns = 2,
-      .num_options = 8,
       .text = test_text_b,
       .spr = NULL,
-      .min = 0,
    };
    optix_InitializeWidget(&test_menu_b.widget, OPTIX_MENU_TYPE);
    test_menu_b.widget.centering.x_centering = OPTIX_CENTERING_RIGHT;
@@ -135,6 +153,18 @@ void main(void) {
       .reference = &test_menu.widget,
    };
    optix_InitializeWidget(&test_divider2.widget, OPTIX_DIVIDER_TYPE);
+   struct optix_scroll_bar test_scroll_bar = {
+      .widget = {.transform = {
+         .width = 8, .height = 48},
+         .centering = {
+            .x_centering = OPTIX_CENTERING_LEFT, .y_centering = OPTIX_CENTERING_TOP,
+            .x_offset = test_menu.widget.transform.width, .y_offset = 0,
+         }
+      },
+      .direction = SCROLL_BAR_VERT,
+      .mirror = &test_menu.widget,
+   };
+   optix_InitializeWidget(&test_scroll_bar.widget, OPTIX_SCROLL_BAR_TYPE);
    struct optix_window test_window = {
       .widget = {
          .transform = {
@@ -143,7 +173,7 @@ void main(void) {
             .width = 200,
             .height = 100,
          },
-         .child = (struct optix_widget *[]) {&test_menu.widget, &test_divider.widget, &test_divider2.widget, &test_menu_b.widget, NULL},
+         .child = (struct optix_widget *[]) {&test_menu.widget, &test_menu_b.widget, &test_scroll_bar.widget, NULL},
       },
       .resize_info = {
          .resizable = true,
@@ -173,22 +203,23 @@ void main(void) {
    //optix_InitializeMenu(&menu_actions, 2, &button_action_text, NULL);
    //optix_AlignMenu(&menu_actions);
    struct optix_window_title_bar test_title_bar = {
-      .widget = {.child = (struct optix_widget *[]) {&menu_actions.widget, NULL}},
+      .widget = {.child = NULL},
       .window = &test_window,
    };
    optix_InitializeWidget(&test_title_bar.widget, OPTIX_WINDOW_TITLE_BAR_TYPE);
    //another window
    char temp[100] = "NO";
-   char *temp_b = "Here is some test text to see if the word wrapping routine works as it should. Hopefully it does.";
+   char *temp_b = "Here is some test text to see if the word wrapping routine works as it should. Hopefully it does. Does this work? Does it now? I'm just going to keep adding more text and hope it doesn't implode.";
    struct optix_text test_text2 = {
       .widget = {.transform = {.width = 80, .height = 50}},
       .text = temp_b,
       .alignment = OPTIX_CENTERING_CENTERED,
       .x_offset = 0,
+      .min = 1,
       .needs_offset_update = true,
    };
    optix_InitializeWidget(&test_text2.widget, OPTIX_TEXT_TYPE);
-   test_text2.widget.update(&test_text2.widget);
+   //test_text2.widget.update(&test_text2.widget);
    test_text2.widget.centering.x_centering = test_text2.widget.centering.y_centering = OPTIX_CENTERING_CENTERED;
    struct optix_input_box test_input_box = {
       .widget = {
@@ -206,7 +237,7 @@ void main(void) {
       .widget = {
          .transform = {
             .x = 150,
-            .y = 100,
+            .y = 120,
             .width = 100,
             .height = 100,
          },
@@ -221,11 +252,12 @@ void main(void) {
    optix_InitializeWidget(&test_window2.widget, OPTIX_WINDOW_TYPE);
    //title
    struct optix_text test_title_bar2_text = {.text = "FontlibC"};
-   optix_InitializeWidget(&test_title_bar2_text.widget, OPTIX_TEXT_TYPE);
+   //optix_InitializeWidget(&test_title_bar2_text.widget, OPTIX_TEXT_TYPE);
    test_title_bar2_text.widget.centering.x_centering = OPTIX_CENTERING_LEFT;
    test_title_bar2_text.widget.centering.x_offset = 2;
    struct optix_window_title_bar test_title_bar2 = {
-      .widget = {.child = (struct optix_widget *[]) {&test_title_bar2_text.widget, NULL}},
+      //.widget = {.child = (struct optix_widget *[]) {&test_title_bar2_text.widget, NULL}},
+      .widget = {.child = NULL},
       .window = &test_window2,
    };
    optix_InitializeWidget(&test_title_bar2.widget, OPTIX_WINDOW_TITLE_BAR_TYPE);
@@ -248,16 +280,13 @@ void main(void) {
    optix_RecursiveAlign(&test_title_bar.widget);
    optix_RecursiveAlign(&test_title_bar2.widget);
    struct optix_widget *test_stack[] = {&test_button.widget, &test_rectangle.widget, &test_title_bar2.widget,  &test_title_bar.widget, NULL};   
-   optix_InitializeColors();
-   optix_InitializeCursor();
-   optix_cursor.current_selection = &test_button.widget;
-   //graphics
-   gfx_Begin();
-   gfx_SetDraw(1);
+   current_context->cursor->current_selection = &test_button.widget;
+   //add it to the context
+   context.stack = &test_stack;
    do {
-      optix_UpdateGUI(&test_stack);
-      optix_RenderGUI(test_stack);
       gfx_Blit(1);
+      optix_UpdateGUI();
+      optix_RenderGUI();
    } while (!(kb_Data[6] & kb_Clear));
    gfx_End();
 }

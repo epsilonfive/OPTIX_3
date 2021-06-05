@@ -4,7 +4,7 @@
 void optix_InitializeTextTransform(struct optix_text *text) {
     text->widget.transform.x = 0;
     text->widget.transform.y = 0;
-    if (optix_gui_data.font_valid) {
+    if (current_context->data->font_valid) {
         text->widget.transform.width = fontlib_GetStringWidth(text->text);
         text->widget.transform.height = fontlib_GetCurrentFontHeight();
     } else {
@@ -20,7 +20,7 @@ void optix_InitializeTextTransform(struct optix_text *text) {
 //why isn't this a default in graphx
 //obviously the length doesn't include the null
 size_t optix_GetStringWidthL(char *str, size_t max_chars) {
-    if (optix_gui_data.font_valid) return fontlib_GetStringWidthL(str, max_chars);
+    if (current_context->data->font_valid) return fontlib_GetStringWidthL(str, max_chars);
     else if (strlen(str) < max_chars) return gfx_GetStringWidth(str);
     else {
         char temp = str[max_chars + 1];
@@ -118,40 +118,44 @@ char *optix_PrintStringWrapped_fontlibc(const char *string, bool fake_print) {
 
 void optix_UpdateText_default(struct optix_widget *widget) {
     struct optix_text *text = (struct optix_text *) widget;
-    //all we need to do here is to update the wrap if necessary
-    int num_lines = 1;
-    char *str = text->text;
-    if (!text->needs_offset_update) return;
-    fontlib_SetWindow(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height);
-    while (*(str = optix_PrintStringWrapped_fontlibc(str, true)) != '\0') {
-        if (num_lines > text->num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
-        text->offsets[num_lines] = str;
-        num_lines++;
-        dbg_sprintf(dbgout, "Offset %d: %d\n", num_lines - 1, str - text->text);
+    if (current_context->cursor->current_selection == widget || (current_context->settings->cursor_active && optix_CheckTransformOverlap(&current_context->cursor->widget, widget))) {
+        int max_lines = widget->transform.height / TEXT_SPACING;
+        int lines_to_render = max_lines < text->num_lines ? max_lines : text->num_lines;
+        //handle the scrolling of the text
+        bool up_pressed = current_context->settings->cursor_active ? (kb_Data[6] & kb_Sub) : (kb_Data[7] & kb_Up);
+        bool down_pressed = current_context->settings->cursor_active ? (kb_Data[6] & kb_Add) : (kb_Data[7] & kb_Down);
+        if (current_context->data->can_press && down_pressed) {
+            text->min = text->min < text->num_lines - lines_to_render ? text->min + 1 : text->min;
+            current_context->data->can_press = false;
+            widget->state.needs_redraw = true;
+        } else if (current_context->data->can_press && up_pressed) {
+            text->min = text->min > 0 ? text->min - 1 : 0;
+            current_context->data->can_press = false;
+            widget->state.needs_redraw = true;
+        }
     }
-    //cut it down if we need to
-    if (text->num_lines > num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
-    text->num_lines = num_lines;
-    //have this too
-    text->offsets[0] = text->text;
-    text->needs_offset_update = false;
+    //all we need to do here is to update the wrap if necessary
+    //if (current_context->settings->cursor_active) current_context->data->can_press = !kb_AnyKey();
+    if (text->needs_offset_update) optix_WrapText(text);
 }
 
 void optix_RenderText_default(struct optix_widget *widget) {
     struct optix_text *text = (struct optix_text *) widget;
     if (widget->state.visible && widget->state.needs_redraw) {
-        if (optix_gui_data.font_valid) {
+        if (current_context->data->font_valid) {
             int max_lines = widget->transform.height / TEXT_SPACING;
-            int lines_to_render = max_lines < text->num_lines ? max_lines : text->num_lines; 
+            int lines_to_render = max_lines < text->num_lines ? max_lines : text->num_lines;
             fontlib_SetWindow(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height);
-            for (int i = 0; i < lines_to_render; i++) {
+            if (text->background_rectangle)
+                optix_OutlinedRectangle_WithBevel(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height,           //x, y, width, height
+                BUTTON_BG_COLOR_UNSELECTED_INDEX, WINDOW_BORDER_BEVEL_DARK_INDEX, WINDOW_BORDER_BEVEL_LIGHT_INDEX);                                      //bevel (make it look depressed)
+            for (int i = text->min; i < text->min + lines_to_render; i++) {
                 size_t num_chars = i == text->num_lines - 1 ? strlen(text->text) : (size_t) (text->offsets[i + 1] - text->offsets[i]);
                 size_t line_width = optix_GetStringWidthL(text->offsets[i], num_chars);
                 //fontlib_SetCursorPosition((widget->transform.x + line_width / 2) * text->alignment + text->x_offset, widget->transform.y + i * TEXT_SPACING);
-                fontlib_SetCursorPosition(widget->transform.x, widget->transform.y + i * TEXT_SPACING);
+                fontlib_SetCursorPosition(widget->transform.x, widget->transform.y + (i - text->min) * TEXT_SPACING);
                 if (i < text->num_lines) fontlib_DrawStringL(text->offsets[i], num_chars);
                 else fontlib_DrawString(text->offsets[i]);
-                dbg_sprintf(dbgout, "Offset: %d\n", (int) (text->offsets[i] - text->text));
             }
             //fontlib_SetCursorPosition(widget->transform.x, widget->transform.y);
             //fontlib_DrawString(text->text);
@@ -159,16 +163,49 @@ void optix_RenderText_default(struct optix_widget *widget) {
     }
 }
 
+void optix_WrapText(struct optix_widget *widget) {
+    struct optix_text *text = (struct optix_text *) widget;
+    //all we need to do here is to update the wrap if necessary
+    dbg_sprintf(dbgout, "Wrapping text...\n");
+    int num_lines = 0;
+    char *str = text->text;
+    fontlib_SetWindow(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height);
+    fontlib_SetCursorPosition(widget->transform.x, widget->transform.y);
+    //basically we don't want to do any of this is the string is already going to fit
+    //if (optix_GetStringWidthL(text->text, strlen(text->text)) > widget->transform.width) {
+        dbg_sprintf(dbgout, "Made it here.\n");
+        do {
+            num_lines++;
+            if (num_lines > text->num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
+            text->offsets[num_lines - 1] = str;
+            dbg_sprintf(dbgout, "%d %s\n", num_lines, text->offsets[num_lines - 1]);
+        } while (*(str = optix_PrintStringWrapped_fontlibc(str, true)) != '\0' && str != text->text);
+    //} //else if (num_lines != text->num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
+    dbg_sprintf(dbgout, "Finished the loop.\n");
+    //cut it down if we need to
+    //or if it has too few lines (if it's one line, maybe)
+    dbg_sprintf(dbgout, "So this is the line that breaks it? %d %d\n", text->num_lines, num_lines);
+    if (text->num_lines > num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
+    dbg_sprintf(dbgout, "Yea it is\n");
+    text->num_lines = num_lines;
+    dbg_sprintf(dbgout, "This is definitely the one doing it.\n");
+    text->offsets[0] = text->text;
+    dbg_sprintf(dbgout, "Maybe this?\n");
+    //have this too
+    text->needs_offset_update = false;
+    dbg_sprintf(dbgout, "Wrap success.\n");
+}
+
+
 //sets the default font, which is in an appvar
 bool optix_InitializeFont(void) {
     fontlib_font_t *font_pack;
     if (font_pack = fontlib_GetFontByIndex(DEFAULT_FONT_PACK_NAME, 0)) {
         fontlib_SetFont(font_pack, 0);
-        fontlib_SetColors(TEXT_FG_COLOR_DEFAULT, TEXT_BG_COLOR_DEFAULT);
+        fontlib_SetColors(TEXT_FG_COLOR_INDEX, TEXT_BG_COLOR_INDEX);
         fontlib_SetTransparency(true);
     }
-    optix_gui_data.font_valid = (bool) font_pack;
-    dbg_sprintf(dbgout, "Font pack %d\n", (bool) font_pack);
+    current_context->data->font_valid = (bool) font_pack;
     return (bool) font_pack;
 }
 

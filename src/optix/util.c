@@ -8,6 +8,8 @@
 void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
     struct optix_window_title_bar *window_title_bar = (struct optix_window_title_bar *) widget;
     struct optix_window *window = (struct optix_window *) window_title_bar->window;
+    struct optix_menu *menu = (struct optix_menu *) widget;
+    struct optix_text *text = (struct optix_text *) widget;
     void (*update[OPTIX_NUM_TYPES])(struct optix_widget *) = {
         //text
         optix_UpdateText_default,
@@ -27,6 +29,8 @@ void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
         NULL,
         //input box
         optix_UpdateInputBox_default,
+        //scroll bar
+        optix_UpdateScrollBar_default,
     };
     void (*render[OPTIX_NUM_TYPES])(struct optix_widget *) = {
         //text
@@ -47,19 +51,54 @@ void optix_InitializeWidget(struct optix_widget *widget, uint8_t type) {
         optix_RenderRectangle_default,
         //input box
         optix_RenderInputBox_default,
+        //scroll bar
+        optix_RenderScrollBar_default,
+    };
+    bool selectable[OPTIX_NUM_TYPES] = {
+        //text
+        true,
+        //sprite
+        false,
+        //button
+        true,
+        //menu
+        true,
+        //window
+        true,
+        //window title bar
+        true,
+        //divider
+        false,
+        //rectangle
+        false,
+        //input box
+        false,
+        //scroll bar
+        false,
     };
     //if we're adding stuff we probably want this
-    optix_gui_data.gui_needs_full_redraw = true;
+    //current_context->data->gui_needs_full_redraw = true;
     widget->type = type;
     widget->state.selected = false;
     widget->state.needs_redraw = true;
     widget->state.visible = true;
     widget->update = update[type];
     widget->render = render[type];
+    widget->state.selectable = selectable[type];
     //element-specific things
     switch (type) {
+        case OPTIX_MENU_TYPE:
+            menu->min = menu->last_selection = menu->selection = menu->num_options = 0;
+            do menu->num_options++;
+            while ((menu->spr && menu->spr[menu->num_options]) || (menu->text && menu->text[menu->num_options]));
+            menu->num_options--;
+            break;
         case OPTIX_TEXT_TYPE:
             widget->child = NULL;
+            text->num_lines = 0;
+            text->background_rectangle = true;
+            //text->min = 0; 
+            optix_WrapText(widget);
             //optix_InitializeTextTransform((struct optix_text *) widget);
             //no break here, we want it to fall through
         case OPTIX_BUTTON_TYPE:
@@ -135,19 +174,16 @@ void optix_RecursiveAlign(struct optix_widget *widget) {
     else if (widget->type == OPTIX_INPUT_BOX_TYPE) {
         struct optix_input_box *input_box = (struct optix_input_box *) widget;
         optix_AlignTransformToTransform(input_box->text, input_box, input_box->text->widget.centering.x_centering, input_box->text->widget.centering.y_centering);
-        dbg_sprintf(dbgout, "Type was input box\n");
     }
     if (widget->child) {
         int i = 0;
         while (widget->child[i]) {
             struct optix_widget *child = widget->child[i];
-            dbg_sprintf(dbgout, "Type: %d\n", child->type);
             optix_AlignTransformToTransform(child, widget, child->centering.x_centering, child->centering.y_centering);
             //also do this if it's an input box
             if (child->type == OPTIX_INPUT_BOX_TYPE) {
                 struct optix_input_box *input_box = (struct optix_input_box *) child;
                 optix_AlignTransformToTransform(input_box->text, input_box, input_box->text->widget.centering.x_centering, input_box->text->widget.centering.y_centering);
-                dbg_sprintf(dbgout, "Type was input box\n");
             }
             if (child->child) {
                 //if (child->type == OPTIX_MENU_TYPE) optix_AlignMenu((struct optix_menu *) child, 0);
@@ -168,6 +204,7 @@ void optix_RecursiveSetNeedsRedraw(struct optix_widget *stack[]) {
         if (stack[i]->child) optix_RecursiveSetNeedsRedraw(stack[i]->child);
         if (stack[i]->type == OPTIX_WINDOW_TITLE_BAR_TYPE) {
             ((struct optix_window_title_bar *) stack[i])->window->widget.state.needs_redraw = true;
+            dbg_sprintf(dbgout, "This was true.\n");
             optix_RecursiveSetNeedsRedraw(((struct optix_window_title_bar *) stack[i])->window->widget.child);
         }
         i++;
@@ -212,18 +249,20 @@ void optix_CycleSelectedElement(struct optix_widget *stack[]) {
             struct optix_window *window = ((struct optix_window_title_bar *) new_selection)->window;
             window->widget.state.needs_redraw = window->widget.state.selected = true;
         }
-        if (!optix_settings.cursor_active) {
+        if (!current_context->settings->cursor_active) {
             //just have it be the first child I guess
             if (new_selection->type != OPTIX_WINDOW_TITLE_BAR_TYPE && new_selection->child) {
-                optix_cursor.widget.transform.x = new_selection->child[0]->transform.x;
-                optix_cursor.widget.transform.y = new_selection->child[0]->transform.y;
+                current_context->cursor->widget.transform.x = new_selection->child[0]->transform.x;
+                current_context->cursor->widget.transform.y = new_selection->child[0]->transform.y;
+                current_context->cursor->current_selection = new_selection->child[0] ? new_selection->child[0] : current_context->cursor->current_selection;
             } else if (new_selection->type == OPTIX_WINDOW_TITLE_BAR_TYPE && ((struct optix_window_title_bar *) new_selection)->window->widget.child) {
                 struct optix_window_title_bar *window_title_bar = (struct optix_window_title_bar *) new_selection;
-                optix_cursor.widget.transform.x = window_title_bar->window->widget.child[0]->transform.x;
-                optix_cursor.widget.transform.y = window_title_bar->window->widget.child[0]->transform.y;
+                current_context->cursor->widget.transform.x = window_title_bar->window->widget.child[0]->transform.x;
+                current_context->cursor->widget.transform.y = window_title_bar->window->widget.child[0]->transform.y;
+                current_context->cursor->current_selection = window_title_bar->window->widget.child[0] ? window_title_bar->window->widget.child[0] : current_context->cursor->current_selection;
             } else {
-                optix_cursor.widget.transform.x = new_selection->transform.x;
-                optix_cursor.widget.transform.y = new_selection->transform.y;
+                current_context->cursor->widget.transform.x = new_selection->transform.x;
+                current_context->cursor->widget.transform.y = new_selection->transform.y;
             }
         }
     }

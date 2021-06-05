@@ -2,7 +2,7 @@
 	assume	adl = 1
 	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\rectangle.c" md5 0xb28a820001b27f9fcf86983d3c7b5020
 	file	1 "D:\Data\Programming\TI\CEdev\include\stdint.h" md5 0x82cbaa55f693a5a19696046350717638
-	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\globals.h" md5 0x70b8a1d50dc6a33a8fdd8a7bbb3f79c5
+	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\globals.h" md5 0x316e43e64c2063e59389bd847ef283c1
 	file	3 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\rectangle.h" md5 0xf01fb29ee643c84db14ee49ccf278c52
 	section	.text,"ax",@progbits
 	public	_optix_RenderRectangle_default
@@ -32,7 +32,7 @@ tmp1:
 	private	tmp2
 tmp2:
 	loc	4 6 48
-	ld	a, (iy + 16)
+	ld	a, (iy + 17)
 	xor	a, l
 	private	tmp3
 tmp3:
@@ -42,7 +42,7 @@ tmp3:
 	private	tmp4
 tmp4:
 	loc	4 7 24 is_stmt 1
-	ld	a, (iy + 26)
+	ld	a, (iy + 27)
 	xor	a, l
 	private	tmp5
 tmp5:
@@ -52,7 +52,7 @@ tmp5:
 	private	tmp6
 tmp6:
 	loc	4 8 37 is_stmt 1
-	ld	a, (iy + 28)
+	ld	a, (iy + 29)
 	loc	4 8 13 is_stmt 0
 	ld	l, a
 	push	hl
@@ -105,7 +105,7 @@ tmp8:
 tmp9:
 BB0_4:
 	loc	4 11 33 is_stmt 1
-	ld	a, (iy + 27)
+	ld	a, (iy + 28)
 	loc	4 11 9 is_stmt 0
 	ld	l, a
 	push	hl
@@ -196,8 +196,8 @@ debug_loc1:
 	private	debug_list_header_end0
 debug_list_header_end0:
 	section	.debug_abbrev,"",@progbits
-	private	abbrev_start60
-abbrev_start60:
+	private	abbrev_start61
+abbrev_start61:
 	db	1
 	db	17
 	db	1
@@ -404,7 +404,7 @@ debug_info_start0:
 	dw	5
 	db	1
 	db	3
-	dd	abbrev_start60
+	dd	abbrev_start61
 	db	1
 	db	0
 	dw	12
@@ -419,8 +419,8 @@ debug_info_start0:
 	db	2
 	dd	44
 	db	3
-	db	37
-	db	29
+	db	38
+	db	30
 	db	3
 	db	7
 	db	4
@@ -430,71 +430,71 @@ debug_info_start0:
 	db	8
 	db	0
 	db	4
-	db	34
-	dd	312
+	db	35
+	dd	321
 	db	3
 	db	9
-	db	26
-	db	4
-	db	35
-	dd	155
-	db	3
-	db	10
 	db	27
 	db	4
 	db	36
 	dd	155
 	db	3
-	db	11
+	db	10
 	db	28
+	db	4
+	db	37
+	dd	155
+	db	3
+	db	11
+	db	29
 	db	0
 	db	3
-	db	33
-	db	26
+	db	34
+	db	27
 	db	2
-	db	63
+	db	64
 	db	4
 	db	4
 	dd	155
 	db	2
-	db	64
+	db	65
 	db	0
 	db	4
 	db	7
 	dd	167
 	db	2
-	db	65
+	db	66
 	db	1
 	db	4
 	db	16
 	dd	225
 	db	2
-	db	66
+	db	67
 	db	10
 	db	4
 	db	24
 	dd	279
 	db	2
-	db	67
+	db	68
 	db	14
 	db	4
-	db	30
-	dd	316
-	db	2
-	db	68
-	db	17
-	db	4
 	db	31
-	dd	316
+	dd	325
 	db	2
-	db	70
-	db	20
+	db	69
+	db	18
 	db	4
 	db	32
-	dd	333
+	dd	325
 	db	2
-	db	73
-	db	23
+	db	71
+	db	21
+	db	4
+	db	33
+	dd	342
+	db	2
+	db	74
+	db	24
 	db	0
 	db	5
 	dd	163
@@ -588,51 +588,57 @@ debug_info_start0:
 	db	6
 	db	1
 	db	3
-	db	29
-	db	3
+	db	30
+	db	4
 	db	2
 	db	57
 	db	4
 	db	25
-	dd	312
+	dd	321
 	db	2
 	db	58
 	db	0
 	db	4
 	db	27
-	dd	312
+	dd	321
 	db	2
 	db	59
 	db	1
 	db	4
 	db	28
-	dd	312
+	dd	321
 	db	2
 	db	60
 	db	2
+	db	4
+	db	29
+	dd	321
+	db	2
+	db	61
+	db	3
 	db	0
 	db	6
 	db	26
 	db	2
 	db	1
 	db	2
-	dd	321
+	dd	330
 	db	7
 
 	db	8
-	dd	328
+	dd	337
 	db	0
 	db	2
 	dd	86
 	db	2
-	dd	328
+	dd	337
 	db	9
 	db	0
 	dd	func_end0-func_begin0
 	db	1
 	db	84
 
-	db	41
+	db	42
 	db	4
 	db	4
 
@@ -642,28 +648,28 @@ debug_info_start0:
 	db	3
 	db	4
 	db	4
-	dd	328
+	dd	337
 	db	11
 	db	0
-	db	42
+	db	43
 	db	4
 	db	5
 	dd	39
 	db	12
-	dd	392
+	dd	401
 	db	1
 	db	12
-	dd	407
+	dd	416
 	db	2
 	db	12
-	dd	392
+	dd	401
 	db	3
 	db	12
-	dd	433
+	dd	442
 	db	4
 	db	0
 	db	13
-	db	38
+	db	39
 	db	5
 	dw	503
 
@@ -674,7 +680,7 @@ debug_info_start0:
 	dd	163
 	db	0
 	db	14
-	db	39
+	db	40
 	db	5
 	dw	684
 
@@ -690,7 +696,7 @@ debug_info_start0:
 	dd	209
 	db	0
 	db	14
-	db	40
+	db	41
 	db	5
 	dw	656
 
@@ -709,7 +715,7 @@ debug_info_start0:
 	private	debug_info_end0
 debug_info_end0:
 	section	.debug_str_offsets,"",@progbits
-	dd	176
+	dd	180
 	dw	5
 	dw	0
 	private	str_offsets_base0
@@ -801,48 +807,51 @@ info_string27:
 	db	"visible",000o
 	private	info_string28
 info_string28:
-	db	"needs_redraw",000o
+	db	"selectable",000o
 	private	info_string29
 info_string29:
-	db	"optix_state",000o
+	db	"needs_redraw",000o
 	private	info_string30
 info_string30:
-	db	"render",000o
+	db	"optix_state",000o
 	private	info_string31
 info_string31:
-	db	"update",000o
+	db	"render",000o
 	private	info_string32
 info_string32:
-	db	"child",000o
+	db	"update",000o
 	private	info_string33
 info_string33:
-	db	"optix_widget",000o
+	db	"child",000o
 	private	info_string34
 info_string34:
-	db	"filled",000o
+	db	"optix_widget",000o
 	private	info_string35
 info_string35:
-	db	"border_color",000o
+	db	"filled",000o
 	private	info_string36
 info_string36:
-	db	"fill_color",000o
+	db	"border_color",000o
 	private	info_string37
 info_string37:
-	db	"optix_rectangle",000o
+	db	"fill_color",000o
 	private	info_string38
 info_string38:
-	db	"gfx_SetColor",000o
+	db	"optix_rectangle",000o
 	private	info_string39
 info_string39:
-	db	"gfx_FillRectangle",000o
+	db	"gfx_SetColor",000o
 	private	info_string40
 info_string40:
-	db	"gfx_Rectangle",000o
+	db	"gfx_FillRectangle",000o
 	private	info_string41
 info_string41:
-	db	"optix_RenderRectangle_default",000o
+	db	"gfx_Rectangle",000o
 	private	info_string42
 info_string42:
+	db	"optix_RenderRectangle_default",000o
+	private	info_string43
+info_string43:
 	db	"rectangle",000o
 	section	.debug_str_offsets,"",@progbits
 	dd	info_string0
@@ -888,6 +897,7 @@ info_string42:
 	dd	info_string40
 	dd	info_string41
 	dd	info_string42
+	dd	info_string43
 	section	.debug_addr,"",@progbits
 	dd	debug_addr_end0-debug_addr_start0
 	private	debug_addr_start0

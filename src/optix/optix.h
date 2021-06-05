@@ -2,6 +2,7 @@
 #define OPTIX_H
 
 //just some includes
+#include "gui_control.h"
 #include "globals.h"
 #include "cursor.h"
 #include "loop.h"
@@ -16,5 +17,10 @@
 #include "elements/sprite.h"
 #include "elements/divider.h"
 #include "elements/rectangle.h"
+#include "elements/scroll_bar.h"
+
+//we'll need this
+#define OPTIX_VERSION 2
+
 
 #endif

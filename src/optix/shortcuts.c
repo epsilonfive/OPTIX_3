@@ -2,12 +2,14 @@
 
 void optix_HandleShortcuts(struct optix_widget *stack[]) {
     if (kb_Data[1] & kb_Yequ) {
-        if (optix_gui_data.can_press) {
+        dbg_sprintf(dbgout, "Checking shortcut...%d %d\n", current_context->data->can_press, (kb_Data[5] & kb_Tan));
+        if (current_context->data->can_press) {
             if (kb_Data[5] & kb_Tan) {
+                dbg_sprintf(dbgout, "Alt-tabbing...\n");
                 optix_AltTab(stack);
-                optix_gui_data.can_press = false;
+                current_context->data->can_press = false;
             }
-        } //else if (!(kb_Data[5] & kb_Tan)) optix_gui_data.can_press = true;
+        } //else current_context->data->can_press = !kb_AnyKey();
     }
 }
 

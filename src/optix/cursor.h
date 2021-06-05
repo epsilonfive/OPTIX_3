@@ -38,7 +38,7 @@
 #define OPTIX_CURSOR_SPRITE_HEIGHT 16
 
 //structs
-struct optix_cursor_t {
+struct optix_cursor {
     struct optix_widget widget;
     int last_x;
     int last_y;
@@ -49,14 +49,13 @@ struct optix_cursor_t {
     //for partial redraw
     gfx_sprite_t *back;
 };
-extern struct optix_cursor_t optix_cursor;
 
 //functions
-void optix_InitializeCursor(void);
-void optix_UpdateCursor_default(void);
-void optix_RenderCursor_default(void);
-void optix_RefreshCursorBackground(void);
-void optix_RenderCursorBackground(void);
+void optix_InitializeCursor(struct optix_widget *widget);
+void optix_UpdateCursor_default(struct optix_widget *widget);
+void optix_RenderCursor_default(struct optix_widget *widget);
+void optix_RefreshCursorBackground(struct optix_widget *widget);
+void optix_RenderCursorBackground(struct optix_widget *widget);
 struct optix_widget *optix_FindNearestElement(uint8_t direction, struct optix_widget *reference, struct optix_widget *stack[]);
 
 #endif

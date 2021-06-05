@@ -1,18 +1,20 @@
 	section	.text,"ax",@progbits
 	assume	adl = 1
-	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\gui_control.c" md5 0x4474c056c22094862cb06283c7600cb7
-	file	1 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\gui_control.h" md5 0xe95b182a7b95e1d13135b7a9282b47bf
-	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\gui_control.c" md5 0x4474c056c22094862cb06283c7600cb7
-	file	3 "D:\Data\Programming\TI\CEdev\include\stdint.h" md5 0x82cbaa55f693a5a19696046350717638
+	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\gui_control.c" md5 0x67bd5791172f6e4e9e5d1b5cac12b63d
+	file	1 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\gui_control.h" md5 0x1a5bff66e8c5e3c3412698e14a7b9630
+	file	2 "D:\Data\Programming\TI\CEdev\include\stdint.h" md5 0x82cbaa55f693a5a19696046350717638
+	file	3 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\colors.h" md5 0xc2104d2554d323fdc8be3acccd50590c
+	file	4 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\globals.h" md5 0x316e43e64c2063e59389bd847ef283c1
+	file	5 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix\gui_control.c" md5 0x67bd5791172f6e4e9e5d1b5cac12b63d
 	section	.text,"ax",@progbits
 	public	_optix_InitializeGUIState
 _optix_InitializeGUIState:
 	private	func_begin0
 func_begin0:
-	loc	2 7 0
+	loc	5 8 0
 	cfi_sections .debug_frame
 	cfi_startproc
-	loc	2 8 1 prologue_end
+	loc	5 10 1 prologue_end
 	ret
 	private	tmp0
 tmp0:
@@ -21,19 +23,109 @@ tmp0:
 func_end0:
 	cfi_endproc
 
-	section	.bss,"aw",@nobits
-	public	_optix_settings
-_optix_settings:
-	rb	2
+	section	.text,"ax",@progbits
+	public	_optix_InitializeSettings
+_optix_InitializeSettings:
+	private	func_begin1
+func_begin1:
+	loc	5 12 0
+	cfi_startproc
+	call	__frameset0
+	private	tmp1
+tmp1:
+	cfi_def_cfa ix, 6
+	cfi_offset ix, -6
+	ld	iy, (ix + 6)
+	private	tmp2
+tmp2:
+	loc	5 13 29 prologue_end
+	ld	(iy), 0
+	loc	5 14 32
+	ld	(iy + 1), 0
+	loc	5 15 1
+	pop	ix
+	cfi_def_cfa sp, 3
+	cfi_restore ix
+	ret
+	private	tmp3
+tmp3:
+	section	.text,"ax",@progbits
+	private	func_end1
+func_end1:
+	cfi_endproc
+
+	section	.text,"ax",@progbits
+	public	_optix_InitializeData
+_optix_InitializeData:
+	private	func_begin2
+func_begin2:
+	loc	5 17 0
+	cfi_startproc
+	call	__frameset0
+	private	tmp4
+tmp4:
+	cfi_def_cfa ix, 6
+	cfi_offset ix, -6
+	ld	iy, (ix + 6)
+	private	tmp5
+tmp5:
+	loc	5 18 21 prologue_end
+	ld	(iy + 2), 1
+	loc	5 19 22
+	ld	(iy + 1), 0
+	loc	5 20 33
+	ld	(iy), 1
+	loc	5 21 15
+	ld	(iy + 3), 0
+	loc	5 22 1
+	pop	ix
+	cfi_def_cfa sp, 3
+	cfi_restore ix
+	ret
+	private	tmp6
+tmp6:
+	section	.text,"ax",@progbits
+	private	func_end2
+func_end2:
+	cfi_endproc
+
+	section	.text,"ax",@progbits
+	public	_optix_SetContext
+_optix_SetContext:
+	private	func_begin3
+func_begin3:
+	loc	5 24 0
+	cfi_startproc
+	call	__frameset0
+	private	tmp7
+tmp7:
+	cfi_def_cfa ix, 6
+	cfi_offset ix, -6
+	ld	hl, (ix + 6)
+	private	tmp8
+tmp8:
+	loc	5 25 21 prologue_end
+	ld	(_current_context), hl
+	loc	5 26 1
+	pop	ix
+	cfi_def_cfa sp, 3
+	cfi_restore ix
+	ret
+	private	tmp9
+tmp9:
+	section	.text,"ax",@progbits
+	private	func_end3
+func_end3:
+	cfi_endproc
 
 	section	.bss,"aw",@nobits
-	public	_optix_gui_data
-_optix_gui_data:
-	rb	4
+	public	_current_context
+_current_context:
+	rb	3
 
 	section	.debug_abbrev,"",@progbits
-	private	abbrev_start16
-abbrev_start16:
+	private	abbrev_start92
+abbrev_start92:
 	db	1
 	db	17
 	db	1
@@ -75,21 +167,17 @@ abbrev_start16:
 	db	0
 	db	0
 	db	3
-	db	22
+	db	15
 	db	0
 	db	73
 	db	19
-	db	3
-	db	37
-	db	58
-	db	11
-	db	59
-	db	11
 	db	0
 	db	0
 	db	4
 	db	19
 	db	1
+	db	3
+	db	37
 	db	11
 	db	11
 	db	58
@@ -125,6 +213,42 @@ abbrev_start16:
 	db	0
 	db	0
 	db	7
+	db	22
+	db	0
+	db	73
+	db	19
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	0
+	db	0
+	db	8
+	db	19
+	db	0
+	db	3
+	db	37
+	db	60
+	db	25
+	db	0
+	db	0
+	db	9
+	db	21
+	db	1
+	db	39
+	db	25
+	db	0
+	db	0
+	db	10
+	db	5
+	db	0
+	db	73
+	db	19
+	db	0
+	db	0
+	db	11
 	db	46
 	db	0
 	db	17
@@ -147,6 +271,44 @@ abbrev_start16:
 	db	25
 	db	0
 	db	0
+	db	12
+	db	46
+	db	1
+	db	17
+	db	27
+	db	18
+	db	6
+	db	64
+	db	24
+	db	122
+	db	25
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	39
+	db	25
+	db	63
+	db	25
+	db	0
+	db	0
+	db	13
+	db	5
+	db	0
+	db	2
+	db	24
+	db	3
+	db	37
+	db	58
+	db	11
+	db	59
+	db	11
+	db	73
+	db	19
+	db	0
+	db	0
 	db	0
 	section	.debug_info,"",@progbits
 	private	cu_begin0
@@ -157,7 +319,7 @@ debug_info_start0:
 	dw	5
 	db	1
 	db	3
-	dd	abbrev_start16
+	dd	abbrev_start92
 	db	1
 	db	0
 	dw	12
@@ -165,112 +327,536 @@ debug_info_start0:
 	dd	str_offsets_base0
 	dd	line_table_start0
 	db	2
-	db	2
-	dd	func_end0-func_begin0
+	db	1
+	dd	func_end3-func_begin0
 	dd	addr_table_base0
 	db	2
 	db	3
 	dd	46
 
-	db	2
-	db	3
+	db	5
+	db	5
 	db	2
 	db	161
 	db	0
 	db	3
-	dd	54
-	db	7
-	db	1
-	db	36
+	dd	51
 	db	4
-	db	2
-	db	1
-	db	31
-	db	5
-	db	4
-	dd	77
-	db	1
-	db	33
-	db	0
-	db	5
-	db	6
-	dd	77
-	db	1
-	db	35
-	db	1
-	db	0
-	db	6
-	db	5
-	db	2
-	db	1
-	db	2
-	db	8
-	dd	92
-
-	db	2
-	db	4
-	db	2
-	db	161
-	db	1
-	db	3
-	dd	100
+	db	76
 	db	15
-	db	1
-	db	46
-	db	4
-	db	4
-	db	1
-	db	39
-	db	5
-	db	9
-	dd	77
-	db	1
-	db	40
-	db	0
-	db	5
-	db	10
-	dd	77
-	db	1
-	db	42
-	db	1
-	db	5
-	db	11
-	dd	77
-	db	1
-	db	43
-	db	2
-	db	5
-	db	12
-	dd	141
 	db	1
 	db	45
+	db	5
+	db	4
+	dd	102
+	db	1
+	db	46
+	db	0
+	db	5
+	db	9
+	dd	135
+	db	1
+	db	47
+	db	3
+	db	5
+	db	17
+	dd	194
+	db	1
+	db	48
+	db	6
+	db	5
+	db	47
+	dd	451
+	db	1
+	db	49
+	db	9
+	db	5
+	db	49
+	dd	458
+	db	1
+	db	50
+	db	12
+	db	0
+	db	3
+	dd	107
+	db	4
+	db	8
+	db	2
+	db	1
+	db	28
+	db	5
+	db	5
+	dd	131
+	db	1
+	db	30
+	db	0
+	db	5
+	db	7
+	dd	131
+	db	1
+	db	32
+	db	1
+	db	0
+	db	6
+	db	6
+	db	2
+	db	1
+	db	3
+	dd	140
+	db	4
+	db	16
+	db	4
+	db	1
+	db	35
+	db	5
+	db	10
+	dd	131
+	db	1
+	db	36
+	db	0
+	db	5
+	db	11
+	dd	131
+	db	1
+	db	38
+	db	1
+	db	5
+	db	12
+	dd	131
+	db	1
+	db	39
+	db	2
+	db	5
+	db	13
+	dd	182
+	db	1
+	db	41
+	db	3
+	db	0
+	db	7
+	dd	190
+	db	15
+	db	2
+	db	15
+	db	6
+	db	14
+	db	8
+	db	1
+	db	3
+	dd	199
+	db	4
+	db	46
+	db	52
+	db	3
+	db	78
+	db	5
+	db	18
+	dd	439
+	db	3
+	db	80
+	db	0
+	db	5
+	db	21
+	dd	439
+	db	3
+	db	82
+	db	2
+	db	5
+	db	22
+	dd	439
+	db	3
+	db	83
+	db	4
+	db	5
+	db	23
+	dd	439
+	db	3
+	db	84
+	db	6
+	db	5
+	db	24
+	dd	439
+	db	3
+	db	85
+	db	8
+	db	5
+	db	25
+	dd	439
+	db	3
+	db	87
+	db	10
+	db	5
+	db	26
+	dd	439
+	db	3
+	db	88
+	db	12
+	db	5
+	db	27
+	dd	439
+	db	3
+	db	89
+	db	14
+	db	5
+	db	28
+	dd	439
+	db	3
+	db	91
+	db	16
+	db	5
+	db	29
+	dd	439
+	db	3
+	db	92
+	db	18
+	db	5
+	db	30
+	dd	439
+	db	3
+	db	93
+	db	20
+	db	5
+	db	31
+	dd	439
+	db	3
+	db	94
+	db	22
+	db	5
+	db	32
+	dd	439
+	db	3
+	db	96
+	db	24
+	db	5
+	db	33
+	dd	439
+	db	3
+	db	97
+	db	26
+	db	5
+	db	34
+	dd	439
+	db	3
+	db	98
+	db	28
+	db	5
+	db	35
+	dd	439
+	db	3
+	db	99
+	db	30
+	db	5
+	db	36
+	dd	439
+	db	3
+	db	100
+	db	32
+	db	5
+	db	37
+	dd	439
+	db	3
+	db	101
+	db	34
+	db	5
+	db	38
+	dd	439
+	db	3
+	db	102
+	db	36
+	db	5
+	db	39
+	dd	439
+	db	3
+	db	103
+	db	38
+	db	5
+	db	40
+	dd	439
+	db	3
+	db	104
+	db	40
+	db	5
+	db	41
+	dd	439
+	db	3
+	db	105
+	db	42
+	db	5
+	db	42
+	dd	439
+	db	3
+	db	107
+	db	44
+	db	5
+	db	43
+	dd	439
+	db	3
+	db	108
+	db	46
+	db	5
+	db	44
+	dd	439
+	db	3
+	db	110
+	db	48
+	db	5
+	db	45
+	dd	439
+	db	3
+	db	111
+	db	50
+	db	0
+	db	7
+	dd	447
+	db	20
+	db	2
+	db	39
+	db	6
+	db	19
+	db	7
+	db	2
+	db	3
+	dd	456
+	db	8
+	db	48
+
+	db	3
+	dd	463
+	db	3
+	dd	468
+	db	3
+	dd	473
+	db	4
+	db	75
+	db	27
+	db	4
+	db	64
+	db	5
+	db	50
+	dd	182
+	db	4
+	db	65
+	db	0
+	db	5
+	db	51
+	dd	542
+	db	4
+	db	66
+	db	1
+	db	5
+	db	58
+	dd	588
+	db	4
+	db	67
+	db	10
+	db	5
+	db	66
+	dd	642
+	db	4
+	db	68
+	db	14
+	db	5
+	db	72
+	dd	684
+	db	4
+	db	69
+	db	18
+	db	5
+	db	73
+	dd	684
+	db	4
+	db	71
+	db	21
+	db	5
+	db	74
+	dd	463
+	db	4
+	db	74
+	db	24
+	db	0
+	db	4
+	db	57
+	db	9
+	db	4
+	db	49
+	db	5
+	db	52
+	dd	584
+	db	4
+	db	50
+	db	0
+	db	5
+	db	54
+	dd	584
+	db	4
+	db	51
+	db	3
+	db	5
+	db	55
+	dd	439
+	db	4
+	db	52
+	db	6
+	db	5
+	db	56
+	dd	182
+	db	4
+	db	53
+	db	8
+	db	0
+	db	6
+	db	53
+	db	5
+	db	3
+	db	4
+	db	65
+	db	4
+	db	4
+	db	29
+	db	5
+	db	59
+	dd	182
+	db	4
+	db	30
+	db	0
+	db	5
+	db	60
+	dd	182
+	db	4
+	db	31
+	db	1
+	db	5
+	db	61
+	dd	630
+	db	4
+	db	32
+	db	2
+	db	5
+	db	64
+	dd	630
+	db	4
+	db	33
+	db	3
+	db	0
+	db	7
+	dd	638
+	db	63
+	db	2
+	db	10
+	db	6
+	db	62
+	db	6
+	db	1
+	db	4
+	db	71
+	db	4
+	db	4
+	db	57
+	db	5
+	db	67
+	dd	131
+	db	4
+	db	58
+	db	0
+	db	5
+	db	68
+	dd	131
+	db	4
+	db	59
+	db	1
+	db	5
+	db	69
+	dd	131
+	db	4
+	db	60
+	db	2
+	db	5
+	db	70
+	dd	131
+	db	4
+	db	61
 	db	3
 	db	0
 	db	3
-	dd	149
-	db	14
-	db	3
-	db	15
-	db	6
-	db	13
-	db	8
+	dd	689
+	db	9
+
+	db	10
+	dd	468
+	db	0
+	db	11
 	db	1
-	db	7
-	db	2
 	dd	func_end0-func_begin0
 	db	1
 	db	87
 
-	db	16
+	db	77
+	db	5
+	db	8
+
+
+	db	12
 	db	2
-	db	7
+	dd	func_end1-func_begin1
+	db	1
+	db	84
+
+	db	78
+	db	5
+	db	12
 
 
+	db	13
+	db	1
+	db	85
+	db	4
+	db	5
+	db	12
+	dd	102
+	db	0
+	db	12
+	db	3
+	dd	func_end2-func_begin2
+	db	1
+	db	84
+
+	db	79
+	db	5
+	db	17
+
+
+	db	13
+	db	1
+	db	85
+	db	9
+	db	5
+	db	17
+	dd	135
+	db	0
+	db	12
+	db	4
+	dd	func_end3-func_begin3
+	db	1
+	db	84
+
+	db	80
+	db	5
+	db	24
+
+
+	db	13
+	db	1
+	db	82
+	db	81
+	db	5
+	db	24
+	dd	46
+	db	0
 	db	0
 	private	debug_info_end0
 debug_info_end0:
 	section	.debug_str_offsets,"",@progbits
-	dd	72
+	dd	332
 	dw	5
 	dw	0
 	private	str_offsets_base0
@@ -287,46 +873,241 @@ info_string2:
 	db	"D:\Data\Programming\TI\Projects\Main\OPTIX",000o
 	private	info_string3
 info_string3:
-	db	"optix_settings",000o
+	db	"current_context",000o
 	private	info_string4
 info_string4:
-	db	"cursor_active",000o
+	db	"settings",000o
 	private	info_string5
 info_string5:
-	db	"_Bool",000o
+	db	"cursor_active",000o
 	private	info_string6
 info_string6:
-	db	"constant_refresh",000o
+	db	"_Bool",000o
 	private	info_string7
 info_string7:
-	db	"optix_settings_t",000o
+	db	"constant_refresh",000o
 	private	info_string8
 info_string8:
-	db	"optix_gui_data",000o
+	db	"optix_settings",000o
 	private	info_string9
 info_string9:
-	db	"gui_needs_full_redraw",000o
+	db	"data",000o
 	private	info_string10
 info_string10:
-	db	"font_valid",000o
+	db	"gui_needs_full_redraw",000o
 	private	info_string11
 info_string11:
-	db	"can_press",000o
+	db	"font_valid",000o
 	private	info_string12
 info_string12:
-	db	"key",000o
+	db	"can_press",000o
 	private	info_string13
 info_string13:
-	db	"unsigned char",000o
+	db	"key",000o
 	private	info_string14
 info_string14:
-	db	"uint8_t",000o
+	db	"unsigned char",000o
 	private	info_string15
 info_string15:
-	db	"optix_gui_data_t",000o
+	db	"uint8_t",000o
 	private	info_string16
 info_string16:
+	db	"optix_gui_data",000o
+	private	info_string17
+info_string17:
+	db	"colors",000o
+	private	info_string18
+info_string18:
+	db	"bg",000o
+	private	info_string19
+info_string19:
+	db	"unsigned short",000o
+	private	info_string20
+info_string20:
+	db	"uint16_t",000o
+	private	info_string21
+info_string21:
+	db	"window_bg",000o
+	private	info_string22
+info_string22:
+	db	"window_title_bar_unselected",000o
+	private	info_string23
+info_string23:
+	db	"window_title_bar_selected",000o
+	private	info_string24
+info_string24:
+	db	"window_border",000o
+	private	info_string25
+info_string25:
+	db	"border_bevel_dark",000o
+	private	info_string26
+info_string26:
+	db	"border_bevel_light",000o
+	private	info_string27
+info_string27:
+	db	"border_bevel_medium",000o
+	private	info_string28
+info_string28:
+	db	"window_title_text_fg_unselected",000o
+	private	info_string29
+info_string29:
+	db	"window_title_text_bg_unselected",000o
+	private	info_string30
+info_string30:
+	db	"window_title_text_fg_selected",000o
+	private	info_string31
+info_string31:
+	db	"window_title_text_bg_selected",000o
+	private	info_string32
+info_string32:
+	db	"button_bg_unselected",000o
+	private	info_string33
+info_string33:
+	db	"button_bg_selected",000o
+	private	info_string34
+info_string34:
+	db	"button_bg_pressed",000o
+	private	info_string35
+info_string35:
+	db	"button_border",000o
+	private	info_string36
+info_string36:
+	db	"button_text_fg_unselected",000o
+	private	info_string37
+info_string37:
+	db	"button_text_bg_unselected",000o
+	private	info_string38
+info_string38:
+	db	"button_text_fg_selected",000o
+	private	info_string39
+info_string39:
+	db	"button_text_bg_selected",000o
+	private	info_string40
+info_string40:
+	db	"button_text_fg_pressed",000o
+	private	info_string41
+info_string41:
+	db	"button_text_bg_pressed",000o
+	private	info_string42
+info_string42:
+	db	"text_fg",000o
+	private	info_string43
+info_string43:
+	db	"text_bg",000o
+	private	info_string44
+info_string44:
+	db	"highlight",000o
+	private	info_string45
+info_string45:
+	db	"divider",000o
+	private	info_string46
+info_string46:
+	db	"optix_colors",000o
+	private	info_string47
+info_string47:
+	db	"cursor",000o
+	private	info_string48
+info_string48:
+	db	"optix_cursor",000o
+	private	info_string49
+info_string49:
+	db	"stack",000o
+	private	info_string50
+info_string50:
+	db	"type",000o
+	private	info_string51
+info_string51:
+	db	"transform",000o
+	private	info_string52
+info_string52:
+	db	"x",000o
+	private	info_string53
+info_string53:
+	db	"int",000o
+	private	info_string54
+info_string54:
+	db	"y",000o
+	private	info_string55
+info_string55:
+	db	"width",000o
+	private	info_string56
+info_string56:
+	db	"height",000o
+	private	info_string57
+info_string57:
+	db	"optix_transform",000o
+	private	info_string58
+info_string58:
+	db	"centering",000o
+	private	info_string59
+info_string59:
+	db	"x_centering",000o
+	private	info_string60
+info_string60:
+	db	"y_centering",000o
+	private	info_string61
+info_string61:
+	db	"x_offset",000o
+	private	info_string62
+info_string62:
+	db	"signed char",000o
+	private	info_string63
+info_string63:
+	db	"int8_t",000o
+	private	info_string64
+info_string64:
+	db	"y_offset",000o
+	private	info_string65
+info_string65:
+	db	"optix_centering",000o
+	private	info_string66
+info_string66:
+	db	"state",000o
+	private	info_string67
+info_string67:
+	db	"selected",000o
+	private	info_string68
+info_string68:
+	db	"visible",000o
+	private	info_string69
+info_string69:
+	db	"selectable",000o
+	private	info_string70
+info_string70:
+	db	"needs_redraw",000o
+	private	info_string71
+info_string71:
+	db	"optix_state",000o
+	private	info_string72
+info_string72:
+	db	"render",000o
+	private	info_string73
+info_string73:
+	db	"update",000o
+	private	info_string74
+info_string74:
+	db	"child",000o
+	private	info_string75
+info_string75:
+	db	"optix_widget",000o
+	private	info_string76
+info_string76:
+	db	"optix_context",000o
+	private	info_string77
+info_string77:
 	db	"optix_InitializeGUIState",000o
+	private	info_string78
+info_string78:
+	db	"optix_InitializeSettings",000o
+	private	info_string79
+info_string79:
+	db	"optix_InitializeData",000o
+	private	info_string80
+info_string80:
+	db	"optix_SetContext",000o
+	private	info_string81
+info_string81:
+	db	"context",000o
 	section	.debug_str_offsets,"",@progbits
 	dd	info_string0
 	dd	info_string1
@@ -345,6 +1126,71 @@ info_string16:
 	dd	info_string14
 	dd	info_string15
 	dd	info_string16
+	dd	info_string17
+	dd	info_string18
+	dd	info_string19
+	dd	info_string20
+	dd	info_string21
+	dd	info_string22
+	dd	info_string23
+	dd	info_string24
+	dd	info_string25
+	dd	info_string26
+	dd	info_string27
+	dd	info_string28
+	dd	info_string29
+	dd	info_string30
+	dd	info_string31
+	dd	info_string32
+	dd	info_string33
+	dd	info_string34
+	dd	info_string35
+	dd	info_string36
+	dd	info_string37
+	dd	info_string38
+	dd	info_string39
+	dd	info_string40
+	dd	info_string41
+	dd	info_string42
+	dd	info_string43
+	dd	info_string44
+	dd	info_string45
+	dd	info_string46
+	dd	info_string47
+	dd	info_string48
+	dd	info_string49
+	dd	info_string50
+	dd	info_string51
+	dd	info_string52
+	dd	info_string53
+	dd	info_string54
+	dd	info_string55
+	dd	info_string56
+	dd	info_string57
+	dd	info_string58
+	dd	info_string59
+	dd	info_string60
+	dd	info_string61
+	dd	info_string62
+	dd	info_string63
+	dd	info_string64
+	dd	info_string65
+	dd	info_string66
+	dd	info_string67
+	dd	info_string68
+	dd	info_string69
+	dd	info_string70
+	dd	info_string71
+	dd	info_string72
+	dd	info_string73
+	dd	info_string74
+	dd	info_string75
+	dd	info_string76
+	dd	info_string77
+	dd	info_string78
+	dd	info_string79
+	dd	info_string80
+	dd	info_string81
 	section	.debug_addr,"",@progbits
 	dd	debug_addr_end0-debug_addr_start0
 	private	debug_addr_start0
@@ -354,9 +1200,11 @@ debug_addr_start0:
 	db	0
 	private	addr_table_base0
 addr_table_base0:
-	dl	_optix_settings
-	dl	_optix_gui_data
+	dl	_current_context
 	dl	func_begin0
+	dl	func_begin1
+	dl	func_begin2
+	dl	func_begin3
 	private	debug_addr_end0
 debug_addr_end0:
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
@@ -364,3 +1212,4 @@ debug_addr_end0:
 line_table_start0:
 	extern	__Unwind_SjLj_Register
 	extern	__Unwind_SjLj_Unregister
+	extern	__frameset0

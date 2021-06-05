@@ -2,7 +2,7 @@
 	assume	adl = 1
 	file	0 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\sprite.c" md5 0x99fc738b194ad56797a9cf875425881e
 	file	1 "D:\Data\Programming\TI\CEdev\include\stdint.h" md5 0x82cbaa55f693a5a19696046350717638
-	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\globals.h" md5 0x70b8a1d50dc6a33a8fdd8a7bbb3f79c5
+	file	2 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements/..\globals.h" md5 0x316e43e64c2063e59389bd847ef283c1
 	file	3 "D:/Data/Programming/TI/Projects/Main/OPTIX/src/optix/elements\sprite.h" md5 0xcf72d8106dd58f386ba8ec8a2e3021b4
 	file	4 "D:\Data\Programming\TI\CEdev\include\graphx.h" md5 0x6fbdcd846ef31912194280a2afa35252
 	section	.text,"ax",@progbits
@@ -35,7 +35,7 @@ tmp2:
 	private	tmp3
 tmp3:
 	loc	5 6 21 is_stmt 1
-	ld	a, (iy + 31)
+	ld	a, (iy + 32)
 	xor	a, l
 	private	tmp4
 tmp4:
@@ -45,16 +45,16 @@ tmp4:
 	private	tmp5
 tmp5:
 	loc	5 9 48 is_stmt 1
-	ld	hl, (iy + 26)
+	ld	hl, (iy + 27)
 	loc	5 9 71 is_stmt 0
 	ld	(ix + -3), hl
 	ld	de, (iy + 1)
 	loc	5 9 92
 	ld	a, (iy + 4)
 	loc	5 9 103
-	ld	c, (iy + 29)
+	ld	c, (iy + 30)
 	loc	5 9 120
-	ld	b, (iy + 30)
+	ld	b, (iy + 31)
 	loc	5 9 16
 	ld	l, b
 	push	hl
@@ -74,7 +74,7 @@ BB0_3:
 	private	tmp7
 tmp7:
 	loc	5 7 45 is_stmt 1
-	ld	a, (iy + 32)
+	ld	a, (iy + 33)
 	loc	5 7 13 is_stmt 0
 	ld	l, a
 	push	hl
@@ -84,16 +84,16 @@ tmp8:
 	pop	hl
 	ld	iy, (ix + 6)
 	loc	5 8 56 is_stmt 1
-	ld	hl, (iy + 26)
+	ld	hl, (iy + 27)
 	loc	5 8 79 is_stmt 0
 	ld	(ix + -3), hl
 	ld	de, (iy + 1)
 	loc	5 8 100
 	ld	a, (iy + 4)
 	loc	5 8 111
-	ld	c, (iy + 29)
+	ld	c, (iy + 30)
 	loc	5 8 128
-	ld	b, (iy + 30)
+	ld	b, (iy + 31)
 	loc	5 8 13
 	ld	l, b
 	push	hl
@@ -171,8 +171,8 @@ debug_loc1:
 	private	debug_list_header_end0
 debug_list_header_end0:
 	section	.debug_abbrev,"",@progbits
-	private	abbrev_start75
-abbrev_start75:
+	private	abbrev_start76
+abbrev_start76:
 	db	1
 	db	17
 	db	1
@@ -422,7 +422,7 @@ debug_info_start0:
 	dw	5
 	db	1
 	db	3
-	dd	abbrev_start75
+	dd	abbrev_start76
 	db	1
 	db	0
 	dw	12
@@ -437,8 +437,8 @@ debug_info_start0:
 	db	2
 	dd	44
 	db	3
-	db	42
-	db	33
+	db	43
+	db	34
 	db	3
 	db	7
 	db	4
@@ -448,83 +448,83 @@ debug_info_start0:
 	db	8
 	db	0
 	db	4
-	db	34
-	dd	356
+	db	35
+	dd	365
 	db	3
 	db	9
-	db	26
-	db	4
-	db	38
-	dd	173
-	db	3
-	db	11
-	db	29
+	db	27
 	db	4
 	db	39
 	dd	173
 	db	3
-	db	12
+	db	11
 	db	30
 	db	4
 	db	40
-	dd	330
+	dd	173
 	db	3
-	db	14
+	db	12
 	db	31
 	db	4
 	db	41
+	dd	339
+	db	3
+	db	14
+	db	32
+	db	4
+	db	42
 	dd	173
 	db	3
 	db	15
-	db	32
+	db	33
 	db	0
 	db	3
-	db	33
-	db	26
+	db	34
+	db	27
 	db	2
-	db	63
+	db	64
 	db	4
 	db	4
 	dd	173
 	db	2
-	db	64
+	db	65
 	db	0
 	db	4
 	db	7
 	dd	185
 	db	2
-	db	65
+	db	66
 	db	1
 	db	4
 	db	16
 	dd	243
 	db	2
-	db	66
+	db	67
 	db	10
 	db	4
 	db	24
 	dd	297
 	db	2
-	db	67
+	db	68
 	db	14
 	db	4
-	db	30
-	dd	334
-	db	2
-	db	68
-	db	17
-	db	4
 	db	31
-	dd	334
+	dd	343
 	db	2
-	db	70
-	db	20
+	db	69
+	db	18
 	db	4
 	db	32
-	dd	351
+	dd	343
 	db	2
-	db	73
-	db	23
+	db	71
+	db	21
+	db	4
+	db	33
+	dd	360
+	db	2
+	db	74
+	db	24
 	db	0
 	db	5
 	dd	181
@@ -618,49 +618,55 @@ debug_info_start0:
 	db	6
 	db	1
 	db	3
-	db	29
-	db	3
+	db	30
+	db	4
 	db	2
 	db	57
 	db	4
 	db	25
-	dd	330
+	dd	339
 	db	2
 	db	58
 	db	0
 	db	4
 	db	27
-	dd	330
+	dd	339
 	db	2
 	db	59
 	db	1
 	db	4
 	db	28
-	dd	330
+	dd	339
 	db	2
 	db	60
 	db	2
+	db	4
+	db	29
+	dd	339
+	db	2
+	db	61
+	db	3
 	db	0
 	db	6
 	db	26
 	db	2
 	db	1
 	db	2
-	dd	339
+	dd	348
 	db	7
 
 	db	8
-	dd	346
+	dd	355
 	db	0
 	db	2
 	dd	104
 	db	2
-	dd	346
+	dd	355
 	db	2
-	dd	361
+	dd	370
 	db	5
-	dd	369
-	db	37
+	dd	378
+	db	38
 	db	4
 	db	78
 	db	9
@@ -680,8 +686,8 @@ debug_info_start0:
 	db	76
 	db	1
 	db	4
-	db	35
-	dd	401
+	db	36
+	dd	410
 	db	4
 	db	77
 	db	2
@@ -689,10 +695,10 @@ debug_info_start0:
 	db	10
 	dd	173
 	db	11
-	dd	412
+	dd	421
 	db	0
 	db	12
-	db	36
+	db	37
 	db	8
 	db	7
 	db	13
@@ -701,7 +707,7 @@ debug_info_start0:
 	db	1
 	db	84
 
-	db	47
+	db	48
 	db	5
 	db	3
 
@@ -711,34 +717,34 @@ debug_info_start0:
 	db	3
 	db	5
 	db	3
-	dd	346
+	dd	355
 	db	15
 	db	0
-	db	48
+	db	49
 	db	5
 	db	4
 	dd	39
 	db	16
-	dd	464
+	dd	473
 	db	1
 	db	16
-	dd	509
+	dd	518
 	db	2
 	db	16
-	dd	524
+	dd	533
 	db	3
 	db	0
 	db	17
-	db	43
+	db	44
 	db	4
 	dw	1167
 
 
 
 	db	8
-	dd	495
+	dd	504
 	db	8
-	dd	505
+	dd	514
 	db	8
 	dd	181
 	db	8
@@ -747,15 +753,15 @@ debug_info_start0:
 	dd	181
 	db	0
 	db	2
-	dd	500
+	dd	509
 	db	18
-	dd	369
+	dd	378
 	db	6
-	db	44
+	db	45
 	db	7
 	db	3
 	db	19
-	db	45
+	db	46
 	db	4
 	dw	512
 
@@ -766,16 +772,16 @@ debug_info_start0:
 	dd	181
 	db	0
 	db	17
-	db	46
+	db	47
 	db	4
 	dw	1186
 
 
 
 	db	8
-	dd	495
+	dd	504
 	db	8
-	dd	505
+	dd	514
 	db	8
 	dd	181
 	db	8
@@ -787,7 +793,7 @@ debug_info_start0:
 	private	debug_info_end0
 debug_info_end0:
 	section	.debug_str_offsets,"",@progbits
-	dd	200
+	dd	204
 	dw	5
 	dw	0
 	private	str_offsets_base0
@@ -879,66 +885,69 @@ info_string27:
 	db	"visible",000o
 	private	info_string28
 info_string28:
-	db	"needs_redraw",000o
+	db	"selectable",000o
 	private	info_string29
 info_string29:
-	db	"optix_state",000o
+	db	"needs_redraw",000o
 	private	info_string30
 info_string30:
-	db	"render",000o
+	db	"optix_state",000o
 	private	info_string31
 info_string31:
-	db	"update",000o
+	db	"render",000o
 	private	info_string32
 info_string32:
-	db	"child",000o
+	db	"update",000o
 	private	info_string33
 info_string33:
-	db	"optix_widget",000o
+	db	"child",000o
 	private	info_string34
 info_string34:
-	db	"spr",000o
+	db	"optix_widget",000o
 	private	info_string35
 info_string35:
-	db	"data",000o
+	db	"spr",000o
 	private	info_string36
 info_string36:
-	db	"__ARRAY_SIZE_TYPE__",000o
+	db	"data",000o
 	private	info_string37
 info_string37:
-	db	"gfx_sprite_t",000o
+	db	"__ARRAY_SIZE_TYPE__",000o
 	private	info_string38
 info_string38:
-	db	"x_scale",000o
+	db	"gfx_sprite_t",000o
 	private	info_string39
 info_string39:
-	db	"y_scale",000o
+	db	"x_scale",000o
 	private	info_string40
 info_string40:
-	db	"transparent",000o
+	db	"y_scale",000o
 	private	info_string41
 info_string41:
-	db	"transparent_color",000o
+	db	"transparent",000o
 	private	info_string42
 info_string42:
-	db	"optix_sprite",000o
+	db	"transparent_color",000o
 	private	info_string43
 info_string43:
-	db	"gfx_ScaledSprite_NoClip",000o
+	db	"optix_sprite",000o
 	private	info_string44
 info_string44:
-	db	"unsigned int",000o
+	db	"gfx_ScaledSprite_NoClip",000o
 	private	info_string45
 info_string45:
-	db	"gfx_SetTransparentColor",000o
+	db	"unsigned int",000o
 	private	info_string46
 info_string46:
-	db	"gfx_ScaledTransparentSprite_NoClip",000o
+	db	"gfx_SetTransparentColor",000o
 	private	info_string47
 info_string47:
-	db	"optix_RenderSprite_default",000o
+	db	"gfx_ScaledTransparentSprite_NoClip",000o
 	private	info_string48
 info_string48:
+	db	"optix_RenderSprite_default",000o
+	private	info_string49
+info_string49:
 	db	"sprite",000o
 	section	.debug_str_offsets,"",@progbits
 	dd	info_string0
@@ -990,6 +999,7 @@ info_string48:
 	dd	info_string46
 	dd	info_string47
 	dd	info_string48
+	dd	info_string49
 	section	.debug_addr,"",@progbits
 	dd	debug_addr_end0-debug_addr_start0
 	private	debug_addr_start0

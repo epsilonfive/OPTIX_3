@@ -2,6 +2,7 @@
 #define GLOBALS_H
 
 //CE stuff
+//most things are definitely going to need this
 #include <debug.h>
 #include <tice.h>
 #include <stdio.h>
@@ -15,7 +16,6 @@
 #include <keypadc.h>
 #include <intce.h>
 #include <math.h>
-//most things are definitely going to need this
 #include "gui_control.h"
 #include "colors.h"
 //#include "util.h"
@@ -57,6 +57,7 @@ struct optix_transform {
 struct optix_state {
     bool selected;
     bool visible;
+    bool selectable;
     bool needs_redraw;
 };
 

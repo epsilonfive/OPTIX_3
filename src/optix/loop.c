@@ -3,15 +3,20 @@
 //takes an array of optix_widgets as an argument
 //please have a NULL as the last entry in this array, so we'll know when to stop
 //this should be a pointer to an array of pointers
-void optix_UpdateGUI(struct optix_widget *(*stack)[]) {
-    kb_Scan();
-    optix_gui_data.key = os_GetCSC();
+void optix_UpdateGUI(void) {
+    current_context->data->key = os_GetCSC();
     //we need this here unfortunately
-    optix_cursor.state = OPTIX_CURSOR_NORMAL;
+    current_context->cursor->state = OPTIX_CURSOR_NORMAL;
+    kb_Scan();
+    //if (!kb_AnyKey()) current_context->data->can_press = true;
+    dbg_sprintf(dbgout, "1 Can press: %d\n", current_context->data->can_press);
     //start with this I suppose
-    optix_HandleShortcuts(*stack);
-    optix_UpdateStack_TopLevel(stack);
-    optix_cursor.widget.update(NULL);
+    current_context->cursor->widget.update((struct optix_widget *) current_context->cursor);
+    dbg_sprintf(dbgout, "2 Can press: %d\n", current_context->data->can_press);
+    dbg_sprintf(dbgout, "3 Can press: %d\n", current_context->data->can_press);
+    optix_HandleShortcuts(current_context->stack);
+    optix_UpdateStack_TopLevel(current_context->stack);
+    dbg_sprintf(dbgout, "4 Can press: %d\n", current_context->data->can_press);
 }
 
 void optix_UpdateStack(struct optix_widget *stack[]) {
@@ -26,7 +31,7 @@ void optix_UpdateStack(struct optix_widget *stack[]) {
         //this is so that what's on top will be selected, or what is rendered last
         if (stack[i]->state.selected) {
             for (int j = 0; j < i; j++) stack[j]->state.selected = false;
-            break;
+            //break;
         }
         i++;
     }
@@ -43,6 +48,7 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
     //start things out by doing the thing
     //the value of i at the end will also be the number of elements in the stack
     while ((*stack)[i]) {
+        dbg_sprintf(dbgout, "Type: %d, Can press: %d\n", (*stack)[i]->type, current_context->data->can_press);
         //if this has been selected, we want to loop through and make sure nothing else is selected
         //this is so that what's on top will be selected, or what is rendered last
         //only one window can be selected at a time
@@ -75,24 +81,31 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
         }
         i++;
     }
+    dbg_sprintf(dbgout, "After loop can press: %d\n", current_context->data->can_press);
     //handle this as well
     //start with this, because why not
-    if (optix_gui_data.gui_needs_full_redraw) optix_RecursiveSetNeedsRedraw(*stack);
+    if (current_context->data->gui_needs_full_redraw) optix_RecursiveSetNeedsRedraw(*stack);
     //cursor stuff
-    if (!optix_settings.cursor_active && optix_cursor.direction != OPTIX_CURSOR_NO_DIR) {
+    if (!current_context->settings->cursor_active && current_context->data->can_press && current_context->cursor->direction != OPTIX_CURSOR_NO_DIR) {
+        //formerly another condition || curr_window_index + 1 != i)
         struct optix_widget *possible_selection = NULL;
         struct optix_widget **temp = NULL;
-        if (!optix_cursor.current_selection) optix_cursor.current_selection = (*stack)[0];
-        possible_selection = optix_FindNearestElement(optix_cursor.direction, optix_cursor.current_selection,
-        //LINE 69 HAHAHAHAHAAHAHAHAHAHA
-        (temp = (curr_window->type == OPTIX_WINDOW_TYPE ? curr_window->child : ((struct optix_window_title_bar *) curr_window)->window->widget.child)) ? temp : *stack);
+        struct optix_widget **search_stack = NULL;
+        if (curr_window) {
+            if (curr_window->type == OPTIX_WINDOW_TYPE) search_stack = curr_window->child;
+            else if (curr_window->type == OPTIX_WINDOW_TITLE_BAR_TYPE) search_stack = ((struct optix_window_title_bar *) curr_window)->window->widget.child;
+        } else search_stack = current_context->stack;
+        if (!current_context->cursor->current_selection) possible_selection = search_stack[0];
+        if (curr_window_index + 1 != i && found_window) possible_selection = search_stack[0];
+        else possible_selection = optix_FindNearestElement(current_context->cursor->direction, current_context->cursor->current_selection, search_stack);
         //move the cursor to that position
         if (possible_selection) {
-            optix_cursor.current_selection = possible_selection;
-            optix_cursor.widget.transform.x = optix_cursor.current_selection->transform.x;
-            optix_cursor.widget.transform.y = optix_cursor.current_selection->transform.y;
+            current_context->data->can_press = false;
+            current_context->cursor->current_selection = possible_selection;
+            current_context->cursor->widget.transform.x = current_context->cursor->current_selection->transform.x;
+            current_context->cursor->widget.transform.y = current_context->cursor->current_selection->transform.y;
         }
-    }
+    } else dbg_sprintf(dbgout, "Couldn't do it.\n");
     //if it's already the last entry don't bother
     if (!found_window) return;
     //set everything in the array to unselected, except for the current window
@@ -110,13 +123,13 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
 
 //takes an array of optix_widgets
 //please have a NULL as the last entry in this array, so we'll know when to stop
-void optix_RenderGUI(struct optix_widget *stack[]) {
+void optix_RenderGUI(void) {
     //do this first
-    optix_RenderCursorBackground();
-    optix_RenderStack(stack);
+    optix_RenderCursorBackground((struct optix_widget *) current_context->cursor);
+    optix_RenderStack(current_context->stack);
     //the cursor should be on top of everything else
-    optix_cursor.widget.render(NULL);
-    optix_gui_data.gui_needs_full_redraw = false;
+    current_context->cursor->widget.render((struct optix_widget *) current_context->cursor);
+    current_context->data->gui_needs_full_redraw = false;
 }
 
 void optix_RenderStack(struct optix_widget *stack[]) {

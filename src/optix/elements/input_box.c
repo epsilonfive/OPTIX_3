@@ -9,14 +9,14 @@ void optix_UpdateInputBox_default(struct optix_widget *widget) {
     char *text = input_box->text->text;
     size_t length = strlen(text) + 1;
     //conditions for return
-    if (optix_CheckTransformOverlap(&optix_cursor.widget, widget)) {
-        optix_cursor.state = OPTIX_CURSOR_TEXT;
+    if (optix_CheckTransformOverlap(&current_context->cursor->widget, widget)) {
+        current_context->cursor->state = OPTIX_CURSOR_TEXT;
         if (kb_Data[6] & kb_Enter || kb_Data[1] & kb_2nd) widget->state.selected = true;
     } else if (kb_Data[6] & kb_Enter || kb_Data[1] & kb_2nd) widget->state.selected = false;
     if (widget->state.selected) //set the state of the cursor to indicate we're inputting text
-        optix_cursor.state = input_box->mode + OPTIX_CURSOR_TEXT_UPPER;
-    if (!widget->state.selected || !optix_gui_data.key || !text) return;
-    switch (optix_gui_data.key) {
+        current_context->cursor->state = input_box->mode + OPTIX_CURSOR_TEXT_UPPER;
+    if (!widget->state.selected || !current_context->data->key || !text) return;
+    switch (current_context->data->key) {
         case sk_Add:
             if (input_box->cursor_offset < length - 1) input_box->cursor_offset++;
             break;
@@ -39,10 +39,10 @@ void optix_UpdateInputBox_default(struct optix_widget *widget) {
             }
             break;
         default:
-            if (keys[input_box->mode][optix_gui_data.key] && (!input_box->has_max_length || length < input_box->max_length)) {
+            if (keys[input_box->mode][current_context->data->key] && (!input_box->has_max_length || length < input_box->max_length)) {
                 //maybe this will work (shift everything over one)
                 memmove(text + input_box->cursor_offset + 1, text + input_box->cursor_offset, length - input_box->cursor_offset);
-                text[input_box->cursor_offset] = keys[input_box->mode][optix_gui_data.key];
+                text[input_box->cursor_offset] = keys[input_box->mode][current_context->data->key];
                 input_box->cursor_offset++;
             }
             break;
@@ -50,10 +50,10 @@ void optix_UpdateInputBox_default(struct optix_widget *widget) {
     //we need to update some offsets now, of course
     input_box->text->needs_offset_update = true;
     //REMOVE THIS LATER
-    optix_InitializeTextTransform(input_box->text);
+    //optix_InitializeTextTransform(input_box->text);;
     optix_RecursiveAlign(widget);
     input_box->text->widget.state.needs_redraw = widget->state.needs_redraw = true;
-    dbg_sprintf(dbgout, "New is %s\n", text);
+    input_box->widget.update(input_box->text);
 }
 
 void optix_RenderInputBox_default(struct optix_widget *widget) {
@@ -62,16 +62,16 @@ void optix_RenderInputBox_default(struct optix_widget *widget) {
     if (widget->state.visible && widget->state.needs_redraw) {
         //make the outside
         optix_OutlinedRectangle_WithBevel(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height, //x, y, width, height
-        optix_colors.button_bg_unselected, optix_colors.border_bevel_dark, optix_colors.border_bevel_light);                           //bevel (make it look depressed)
+        BUTTON_BG_COLOR_UNSELECTED_INDEX, WINDOW_BORDER_BEVEL_DARK_INDEX, WINDOW_BORDER_BEVEL_LIGHT_INDEX);                            //bevel (make it look depressed)
         //set the color
-        optix_SetTextColor(optix_colors.button_text_fg_unselected, optix_colors.button_text_bg_unselected);
+        optix_SetTextColor(BUTTON_TEXT_FG_COLOR_UNSELECTED_DEFAULT, BUTTON_TEXT_BG_COLOR_UNSELECTED_INDEX);
         //binary search maybe
         if (input_box->text && input_box->text->widget.render) {
             struct optix_text *text = (struct optix_text *) input_box->text;
             text->widget.render((struct optix_widget *) text);
             //do the blinking line thing I guess
             if (widget->state.selected) {
-                gfx_SetColor(optix_colors.button_text_fg_unselected);
+                gfx_SetColor(BUTTON_TEXT_FG_COLOR_UNSELECTED_INDEX);
                 gfx_VertLine(text->widget.transform.x + optix_GetStringWidthL(text->text, input_box->cursor_offset) - 1, text->widget.transform.y, 10);
             }
         }
