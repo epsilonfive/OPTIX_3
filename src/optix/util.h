@@ -1,12 +1,8 @@
 #ifndef UTIL_H
 #define UTIL_H
-
+//includes
 #include <stdint.h>
-#include <stdbool.h>
-#include <stdlib.h>
 #include "gui_control.h"
-#include "elements/window.h"
-#include "elements/input_box.h"
 
 void optix_CycleSelectedElement(struct optix_widget *stack[]);
 void optix_SetObjectTransform(struct optix_widget *widget, int x, int y, uint16_t width, uint8_t height);
@@ -17,6 +13,6 @@ void optix_AlignTransformToTransform(struct optix_widget *transform, struct opti
 bool optix_CheckTransformOverlap(struct optix_widget *test, struct optix_widget *reference);
 void optix_RecursiveAlign(struct optix_widget *widget);
 void optix_RecursiveSetNeedsRedraw(struct optix_widget *stack[]);
-
+uint16_t optix_GetNumElementsInStack(struct optix_widget *stack[]);
 
 #endif

@@ -11,7 +11,7 @@ _optix_InitializeGUIState:
 _optix_InitializeSettings:
 	call	__frameset0
 	ld	iy, (ix + 6)
-	ld	(iy), 0
+	ld	(iy), 1
 	ld	(iy + 1), 0
 	pop	ix
 	ret

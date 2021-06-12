@@ -1,4 +1,13 @@
 #include "menu.h"
+//includes
+#include <stdint.h>
+#include <stdbool.h>
+#include <graphx.h>
+#include <keypadc.h>
+//OPTIX includes
+#include "../gui_control.h"
+#include "../cursor.h"
+#include "../init.h"
 
 //Menu rewrite 1
 //curr_selection must be curr_selection - menu_min, or the option's place in the grid
@@ -91,24 +100,33 @@ void optix_RenderMenu_default(struct optix_widget *widget) {
     if (!widget->state.needs_redraw && menu->selection == menu->last_selection) return;
     //just draw it
     for (int i = menu->min; i < menu->min + menu->rows * menu->columns; i++) {
+        dbg_sprintf(dbgout, "Menu loop: %d/%d\n", i, menu->num_options);
         if (widget->state.needs_redraw || i == menu->selection || i == menu->last_selection) {
             button.widget.child = button_children;
             //create that button widget
             //text
+            dbg_sprintf(dbgout, "Initializing...\n");
+            dbg_sprintf(dbgout, "Initializing text...\n");
             if (menu->text && menu->text[i]) {
                 text.text = menu->text[i];
+                dbg_sprintf(dbgout, "Initializing text transform...\n");
                 optix_InitializeTextTransform(&text);
+                dbg_sprintf(dbgout, "Initializing widget...\n");
                 optix_InitializeWidget(&text.widget, OPTIX_TEXT_TYPE);
+                dbg_sprintf(dbgout, "Setting other stuff...\n");
                 text.background_rectangle = false;
                 text.widget.centering.x_centering = menu->text_centering.x_centering;
                 text.widget.centering.y_centering = menu->text_centering.y_centering;
+                //text.widget.state.needs_redraw = true;
             } else text.text = NULL;
+            dbg_sprintf(dbgout, "Initializing sprite...\n");
             //same for sprites
             if (menu->spr && menu->spr[i]) {
                 sprite.spr = menu->spr[(text.text && text.text[i])];
                 optix_InitializeWidget(&sprite.widget, OPTIX_SPRITE_TYPE);
                 sprite.widget.centering.x_centering = menu->sprite_centering.x_centering;
                 sprite.widget.centering.y_centering = menu->sprite_centering.y_centering;
+                //sprite.widget.state.needs_redraw = true;
             } else sprite.spr = NULL;
             //place the null
             button.widget.child[(text.text != NULL) + (sprite.spr != NULL)] = NULL;
@@ -119,11 +137,15 @@ void optix_RenderMenu_default(struct optix_widget *widget) {
             //y
             button.widget.transform.y = widget->transform.y + ((i - menu->min) / menu->columns * 
             (button.widget.transform.height = optix_GetMenuOptionHeight(menu->selection, menu->rows, menu->columns, widget->transform.width, widget->transform.height)));
+            dbg_sprintf(dbgout, "Aligning...\n");
             optix_RecursiveAlign(&button.widget);
             //set whether it's selected
             button.widget.state.selected = widget->state.selected && i == menu->selection;
+            dbg_sprintf(dbgout, "Setting redraw on menu.\n");
             optix_RecursiveSetNeedsRedraw(button.widget.child);
             button.widget.render(&button.widget);
+            dbg_sprintf(dbgout, "Finished rendering button.\n");
         }
     }
+    dbg_sprintf(dbgout, "Finished rendering menu.\n");
 }

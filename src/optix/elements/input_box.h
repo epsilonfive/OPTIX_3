@@ -5,13 +5,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
-#include <stdlib.h>
-#include <graphx.h>
-#include <fontlibc.h>
-#include <keypadc.h>
 #include "../gui_control.h"
-#include "../util.h"
-#include "../shapes.h"
 
 //defines
 #define INPUT_BOX_MODE_UPPER       0

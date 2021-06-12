@@ -5,6 +5,7 @@
 #include <stdbool.h>
 #include <graphx.h>
 #include "../gui_control.h"
+#include "../loop.h"
 #include "../util.h"
 #include "menu.h"
 #include "text.h"

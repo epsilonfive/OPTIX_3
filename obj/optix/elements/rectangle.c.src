@@ -15,11 +15,11 @@ _optix_RenderRectangle_default:
 	xor	a, l
 	bit	0, a
 	jq	nz, BB0_5
-	ld	a, (iy + 27)
+	ld	a, (iy + 30)
 	xor	a, l
 	bit	0, a
 	jq	nz, BB0_4
-	ld	a, (iy + 29)
+	ld	a, (iy + 32)
 	ld	l, a
 	push	hl
 	call	_gfx_SetColor
@@ -55,7 +55,7 @@ _optix_RenderRectangle_default:
 	pop	hl
 	pop	hl
 BB0_4:
-	ld	a, (iy + 28)
+	ld	a, (iy + 31)
 	ld	l, a
 	push	hl
 	call	_gfx_SetColor

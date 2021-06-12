@@ -150,7 +150,9 @@ struct optix_widget *optix_FindNearestElement(uint8_t direction, struct optix_wi
 
 void optix_SetCurrentSelection(struct optix_widget *widget) {
     //we're assuming this is correct
-    current_context->cursor->current_selection = widget;
-    current_context->cursor->widget.transform.x = widget->transform.x;
-    current_context->cursor->widget.transform.y = widget->transform.y;
+    if (!current_context->settings->cursor_active) {
+        current_context->cursor->current_selection = widget;
+        current_context->cursor->widget.transform.x = widget->transform.x;
+        current_context->cursor->widget.transform.y = widget->transform.y;
+    }
 }

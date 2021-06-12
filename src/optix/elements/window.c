@@ -3,7 +3,9 @@
 //returns true if window size has changed
 void optix_UpdateWindow_default(struct optix_widget *widget) {
     struct optix_window *window = (struct optix_window *) widget;
+    dbg_sprintf(dbgout, "Updating window...");
     if (widget->state.visible) {
+        dbg_sprintf(dbgout, "Updating stack...");
         if (widget->state.selected && widget->child) optix_UpdateStack(widget->child);
         if (kb_Data[6] & kb_Enter || kb_Data[1] & kb_2nd) {
             //rescale it if necessary
@@ -50,7 +52,9 @@ void optix_UpdateWindow_default(struct optix_widget *widget) {
         }
     } else widget->state.selected = false;
     //handle this, I guess
+    dbg_sprintf(dbgout, "Finished.");
     if (widget->state.needs_redraw) optix_RecursiveSetNeedsRedraw(widget->child);
+    dbg_sprintf(dbgout, "Success.");
 }
 
 void optix_RenderWindow_default(struct optix_widget *widget) {

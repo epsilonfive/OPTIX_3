@@ -135,7 +135,7 @@ void optix_UpdateText_default(struct optix_widget *widget) {
         }
     }
     //all we need to do here is to update the wrap if necessary
-    //if (current_context->settings->cursor_active) current_context->data->can_press = !kb_AnyKey();
+    if (current_context->settings->cursor_active) current_context->data->can_press = !kb_AnyKey();
     if (text->needs_offset_update) optix_WrapText(text);
 }
 
@@ -168,15 +168,19 @@ void optix_WrapText(struct optix_widget *widget) {
     //all we need to do here is to update the wrap if necessary
     int num_lines = 0;
     char *str = text->text;
+    bool multiple_lines = true;
     fontlib_SetWindow(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height);
     fontlib_SetCursorPosition(widget->transform.x, widget->transform.y);
     //basically we don't want to do any of this is the string is already going to fit
-    //if (optix_GetStringWidthL(text->text, strlen(text->text)) > widget->transform.width) {
-        do {
-            num_lines++;
-            if (num_lines > text->num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
-            text->offsets[num_lines - 1] = str;
-        } while (*(str = optix_PrintStringWrapped_fontlibc(str, true)) != '\0' && str != text->text);
+    if (optix_GetStringWidthL(text->text, strlen(text->text)) <= widget->transform.width) multiple_lines = false;
+    dbg_sprintf(dbgout, "Multiple lines: %d\n", multiple_lines);
+    do {
+        num_lines++;
+        //dbg_sprintf(dbgout, "Reallocating...%d\n", num_lines);
+        if (num_lines > text->num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
+        //dbg_sprintf(dbgout, "Success.\n");
+        text->offsets[num_lines - 1] = str;
+    } while (multiple_lines && (*(str = optix_PrintStringWrapped_fontlibc(str, true)) != '\0') && str != text->text);
     //} //else if (num_lines != text->num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
     //cut it down if we need to
     //or if it has too few lines (if it's one line, maybe)

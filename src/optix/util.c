@@ -1,5 +1,11 @@
 #include "util.h"
-
+//includes
+#include <stdint.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include "gui_control.h"
+#include "elements/window.h"
+#include "elements/input_box.h"
 
 //helpful GUI functions
 void optix_SetObjectTransform(struct optix_widget *widget, int x, int y, uint16_t width, uint8_t height) {
@@ -86,6 +92,7 @@ void optix_RecursiveSetNeedsRedraw(struct optix_widget *stack[]) {
     int i = 0;
     if (!stack) return;
     while (stack[i]) {
+        dbg_sprintf(dbgout, "i : %d Type: %d\n", i, stack[i]->type);
         stack[i]->state.needs_redraw = true;
         if (stack[i]->child) optix_RecursiveSetNeedsRedraw(stack[i]->child);
         if (stack[i]->type == OPTIX_WINDOW_TITLE_BAR_TYPE) {
@@ -145,3 +152,11 @@ void optix_CycleSelectedElement(struct optix_widget *stack[]) {
     }
 }
 
+uint16_t optix_GetNumElementsInStack(struct optix_widget *stack[]) {
+    int i = 0;
+    while (stack && stack[i]) {
+        dbg_sprintf(dbgout, "%d\n", i);
+        i++;
+    }
+    return i;
+}

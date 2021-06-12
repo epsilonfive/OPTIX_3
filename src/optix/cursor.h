@@ -43,11 +43,23 @@
 #define OPTIX_CURSOR_SPRITE_WIDTH  16
 #define OPTIX_CURSOR_SPRITE_HEIGHT 16
 
+//speed defines
+//acceleration increase, per second
+#define OPTIX_CURSOR_ACCELERATION  1
+//pixels per second again
+#define OPTIX_CURSOR_INITIAL_SPEED 3
+//same here
+#define OPTIX_CURSOR_MAX_SPEED     10
+
+
 //structs
 struct optix_cursor {
     struct optix_widget widget;
     int last_x;
     int last_y;
+    //its real coordinates
+    float true_x;
+    float true_y;
     int state;
     //to be used when in box-based mode
     int direction;

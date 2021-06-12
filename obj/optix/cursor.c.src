@@ -8,7 +8,7 @@ _optix_InitializeCursor:
 	ld	hl, 0
 	ld	de, 160
 	ld	bc, 120
-	ld	(iy + 24), hl
+	ld	(iy + 27), hl
 	ld	(iy + 1), de
 	ld	(iy + 4), bc
 	ld.sis	de, 1
@@ -16,13 +16,13 @@ _optix_InitializeCursor:
 	ld	(iy + 8), d
 	ld	(iy + 9), 1
 	ld	de, _optix_UpdateCursor_default
-	ld	(iy + 21), de
+	ld	(iy + 24), de
 	ld	de, _optix_RenderCursor_default
-	ld	(iy + 18), de
+	ld	(iy + 21), de
 	ld	(iy + 15), 1
-	ld	(iy + 39), hl
+	ld	(iy + 50), hl
 	ld	hl, 4
-	ld	(iy + 36), hl
+	ld	(iy + 47), hl
 	ld	hl, _malloc
 	push	hl
 	ld	hl, 16
@@ -33,7 +33,7 @@ _optix_InitializeCursor:
 	pop	de
 	pop	de
 	ld	iy, (ix + 6)
-	ld	(iy + 42), hl
+	ld	(iy + 53), hl
 	pop	ix
 	ret
 	section	.text,"ax",@progbits
@@ -45,9 +45,9 @@ _optix_UpdateCursor_default:
 	call	__frameset
 	ld	iy, (ix + 6)
 	ld	bc, (iy + 1)
-	ld	(iy + 27), bc
+	ld	(iy + 30), bc
 	ld	de, (iy + 4)
-	ld	(iy + 30), de
+	ld	(iy + 33), de
 	ld	iy, (_current_context)
 	ld	hl, (iy)
 	ld	a, (hl)
@@ -279,7 +279,7 @@ BB1_33:
 BB1_34:
 	ld	hl, 2
 BB1_36:
-	ld	(iy + 36), hl
+	ld	(iy + 47), hl
 BB1_37:
 	ld	sp, ix
 	pop	ix
@@ -301,7 +301,7 @@ _optix_RenderCursor_default:
 	jq	z, BB2_3
 	push	de
 	pop	iy
-	ld	hl, (iy + 39)
+	ld	hl, (iy + 50)
 	ld	(ix + -3), hl
 	call	_gfx_GetDraw
 	ld	l, a
@@ -316,11 +316,11 @@ _optix_RenderCursor_default:
 	call	_gfx_SetColor
 	pop	hl
 	ld	iy, (ix + 6)
-	ld	iy, (iy + 39)
+	ld	iy, (iy + 50)
 	ld	a, (iy)
 	cp	a, 5
 	jq	nz, BB2_6
-	ld	hl, (iy + 27)
+	ld	hl, (iy + 30)
 	ld	(ix + -15), hl
 	ld	iy, (ix + -3)
 	ld	hl, (iy + 1)
@@ -361,7 +361,7 @@ BB2_3:
 	call	_gfx_SetTransparentColor
 	pop	hl
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 33)
+	ld	hl, (iy + 44)
 	ld	bc, 3
 	call	__imulu
 	push	hl
@@ -417,7 +417,7 @@ BB2_9:
 _optix_RefreshCursorBackground:
 	call	__frameset0
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 42)
+	ld	hl, (iy + 53)
 	ld	de, (iy + 1)
 	ld	bc, (iy + 4)
 	push	bc
@@ -441,9 +441,9 @@ _optix_RenderCursorBackground:
 	bit	0, a
 	jq	nz, BB4_2
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 42)
-	ld	de, (iy + 27)
-	ld	bc, (iy + 30)
+	ld	hl, (iy + 53)
+	ld	de, (iy + 30)
+	ld	bc, (iy + 33)
 	push	bc
 	push	de
 	push	hl
@@ -500,7 +500,7 @@ BB5_4:
 	ld	(ix + -6), iy
 	ld	iy, (ix + -9)
 	ld	iy, (iy + 9)
-	ld	bc, (iy + 39)
+	ld	bc, (iy + 50)
 	push	de
 	pop	hl
 	or	a, a
@@ -778,12 +778,19 @@ LJTI5_0:
 	public	_optix_SetCurrentSelection
 _optix_SetCurrentSelection:
 	call	__frameset0
-	ld	hl, (ix + 6)
 	ld	iy, (_current_context)
+	ld	hl, (iy)
+	ld	a, (hl)
+	ld	l, 1
+	xor	a, l
+	xor	a, l
+	bit	0, a
+	jq	nz, BB6_2
+	ld	hl, (ix + 6)
 	ld	iy, (iy + 9)
 	push	hl
 	pop	de
-	ld	(iy + 39), hl
+	ld	(iy + 50), hl
 	lea	bc, iy + 0
 	push	de
 	pop	iy
@@ -797,6 +804,7 @@ _optix_SetCurrentSelection:
 	push	bc
 	pop	iy
 	ld	(iy + 4), hl
+BB6_2:
 	pop	ix
 	ret
 	section	.text,"ax",@progbits

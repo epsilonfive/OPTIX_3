@@ -1,4 +1,18 @@
 #include "input_box.h"
+//includes
+#include <stdint.h>
+#include <stdbool.h>
+#include <string.h>
+#include <stdlib.h>
+#include <graphx.h>
+#include <fontlibc.h>
+#include <keypadc.h>
+//OPTIX includes
+#include "../gui_control.h"
+#include "../cursor.h"
+#include "../util.h"
+#include "../shapes.h"
+#include "text.h"
 
 void optix_UpdateInputBox_default(struct optix_widget *widget) {
     struct optix_input_box *input_box = (struct optix_input_box *) widget;

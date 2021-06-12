@@ -10,7 +10,7 @@ _optix_InitializeWidget:
 	or	a, a
 	sbc	hl, hl
 	ld	(ix + -3), hl
-	ld	hl, (iy + 27)
+	ld	hl, (iy + 30)
 	ld	(ix + -6), hl
 	ld	(iy), a
 	ld	(iy + 14), 0
@@ -27,12 +27,12 @@ _optix_InitializeWidget:
 	ld	hl, L___const.optix_InitializeWidget.update
 	add	hl, bc
 	ld	hl, (hl)
-	ld	(iy + 21), hl
+	ld	(iy + 24), hl
 	ld	hl, L___const.optix_InitializeWidget.render
 	add	hl, bc
 	ld	hl, (hl)
-	ld	(iy + 18), hl
-	ld	hl, 1085
+	ld	(iy + 21), hl
+	ld	hl, 3133
 	ld	c, e
 	call	__ishru
 	ld	a, l
@@ -49,9 +49,9 @@ _optix_InitializeWidget:
 	jp	(hl)
 BB0_9:
 	ld	hl, 0
-	ld	(iy + 24), hl
-	ld	(iy + 38), hl
-	ld	(iy + 42), 1
+	ld	(iy + 27), hl
+	ld	(iy + 41), hl
+	ld	(iy + 45), 1
 	push	iy
 	call	_optix_WrapText
 	ld	iy, (ix + 6)
@@ -64,10 +64,10 @@ BB0_2:
 	ld	bc, 3
 	or	a, a
 	sbc	hl, hl
-	ld	(iy + 53), hl
-	ld	(iy + 68), hl
 	ld	(iy + 56), hl
-	ld	de, (iy + 50)
+	ld	(iy + 71), hl
+	ld	(iy + 59), hl
+	ld	de, (iy + 53)
 	push	bc
 	pop	iy
 BB0_3:
@@ -89,7 +89,7 @@ BB0_3:
 BB0_5:
 	lea	bc, iy + 0
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 47)
+	ld	hl, (iy + 50)
 	push	bc
 	pop	iy
 	add	hl, bc
@@ -136,13 +136,13 @@ BB0_11:
 BB0_8:
 	ld	hl, (ix + -3)
 	ld	iy, (ix + 6)
-	ld	(iy + 65), hl
+	ld	(iy + 68), hl
 	jq	BB0_13
 BB0_12:
 	ld	hl, _optix_CheckBoxValueXOR
-	ld	(iy + 27), hl
-	lea	hl, iy + 0
 	ld	(iy + 30), hl
+	lea	hl, iy + 0
+	ld	(iy + 33), hl
 BB0_13:
 	ld	sp, ix
 	pop	ix
@@ -164,6 +164,229 @@ LJTI0_0:
 	dl	BB0_13
 	dl	BB0_12
 
+	section	.text,"ax",@progbits
+	public	_optix_GetSize
+_optix_GetSize:
+	call	__frameset0
+	ld	iy, (ix + 6)
+	ld	a, (iy + 18)
+	ld	l, 1
+	xor	a, l
+	bit	0, a
+	jq	z, BB1_3
+	ld	a, (iy)
+	cp	a, 12
+	jq	nc, BB1_4
+	ld	iy, L_switch.table.optix_GetSize
+	ld	l, a
+	rlc	l
+	sbc	hl, hl
+	ld	l, a
+	add	hl, hl
+	ex	de, hl
+	add	iy, de
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	jq	BB1_5
+BB1_3:
+	ld	l, (iy + 19)
+	ld	h, (iy + 20)
+	jq	BB1_5
+BB1_4:
+	ld.sis	hl, 0
+BB1_5:
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_optix_CopyElementHandleSpecialCase
+_optix_CopyElementHandleSpecialCase:
+	call	__frameset0
+	ld	iy, (ix + 6)
+	ld	hl, (ix + 9)
+	ld	a, (hl)
+	cp	a, 5
+	jq	z, BB2_3
+	cp	a, 8
+	jq	nz, BB2_5
+BB2_3:
+	ex	de, hl
+	ld	iy, (iy)
+	lea	hl, iy + 30
+	push	de
+	pop	iy
+	ld	de, (iy + 30)
+	push	de
+	push	hl
+	call	_optix_CopyElement
+	pop	hl
+	pop	hl
+BB2_5:
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_optix_CopyElement
+_optix_CopyElement:
+	ld	hl, -9
+	call	__frameset
+	ld	de, (ix + 9)
+	or	a, a
+	sbc	hl, hl
+	ld	(ix + -3), hl
+	push	de
+	call	_optix_GetSize
+	ld	(ix + -9), l
+	ld	(ix + -8), h
+	pop	hl
+	ld	iy, (ix + 9)
+	ld	hl, (iy + 27)
+	push	hl
+	call	_optix_GetNumElementsInStack
+	ld	(ix + -6), l
+	ld	(ix + -5), h
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	ex	de, hl
+	ld	l, (ix + -9)
+	ld	h, (ix + -8)
+	ld	e, l
+	ld	d, h
+	ld	(ix + -9), de
+	push	de
+	call	_malloc
+	pop	de
+	ld	iy, (ix + 6)
+	ld	(iy), hl
+	ld	de, (ix + -9)
+	push	de
+	ld	de, (ix + 9)
+	push	de
+	push	hl
+	call	_memcpy
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, (ix + 9)
+	push	hl
+	ld	hl, (ix + 6)
+	push	hl
+	call	_optix_CopyElementHandleSpecialCase
+	ld	e, (ix + -6)
+	ld	d, (ix + -5)
+	pop	hl
+	pop	hl
+	ld	l, e
+	ld	h, d
+	add.sis	hl, bc
+	or	a, a
+	sbc.sis	hl, bc
+	jq	nz, BB3_1
+	ld	hl, (ix + 6)
+	ld	iy, (hl)
+	ld	hl, 0
+	ld	(iy + 27), hl
+	jq	BB3_3
+BB3_1:
+	or	a, a
+	sbc	hl, hl
+	ld	l, e
+	ld	h, d
+	ld	(ix + -6), hl
+	ld	bc, 3
+	call	__imulu
+	ld	(ix + -9), hl
+	push	hl
+	pop	iy
+	add	iy, bc
+	push	iy
+	call	_malloc
+	pop	de
+	ld	de, (ix + 6)
+	push	de
+	pop	iy
+	ld	iy, (iy)
+	ld	(iy + 27), hl
+	ex	de, hl
+	ld	iy, (hl)
+	ld	hl, (iy + 27)
+	ld	iy, (ix + 9)
+	ld	de, (iy + 27)
+	ld	bc, (ix + -9)
+	push	bc
+	push	de
+	push	hl
+	call	_memcpy
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, (ix + 6)
+	ld	iy, (hl)
+	ld	iy, (iy + 27)
+	ld	hl, (ix + -6)
+	ld	bc, 3
+	call	__imulu
+	push	hl
+	pop	de
+	add	iy, de
+	ld	hl, 0
+	ld	(iy), hl
+BB3_3:
+BB3_4:
+	ld	iy, (ix + 9)
+	ld	hl, (iy + 27)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB3_7
+	ld	de, (ix + -3)
+	add	hl, de
+	ld	hl, (hl)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB3_7
+	ld	iy, (ix + 6)
+	ld	iy, (iy)
+	ld	iy, (iy + 27)
+	ld	de, (ix + -3)
+	ld	(ix + -6), de
+	add	iy, de
+	push	hl
+	push	iy
+	call	_optix_CopyElement
+	pop	hl
+	pop	hl
+	ld	hl, (ix + 6)
+	ld	iy, (hl)
+	ld	hl, (iy + 27)
+	ld	de, (ix + -6)
+	add	hl, de
+	push	hl
+	pop	bc
+	ld	iy, (ix + 9)
+	ld	hl, (iy + 27)
+	add	hl, de
+	ld	hl, (hl)
+	push	hl
+	push	bc
+	call	_optix_CopyElementHandleSpecialCase
+	pop	hl
+	pop	hl
+	ld	de, 3
+	ld	hl, (ix + -3)
+	add	hl, de
+	ld	(ix + -3), hl
+	jq	BB3_4
+BB3_7:
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
 	section	.rodata,"a",@progbits
 	private	L___const.optix_InitializeWidget.update
 L___const.optix_InitializeWidget.update:
@@ -178,6 +401,7 @@ L___const.optix_InitializeWidget.update:
 	dl	_optix_UpdateInputBox_default
 	dl	_optix_UpdateScrollBar_default
 	dl	_optix_UpdateButton_default
+	dl	_optix_UpdateSlider_default
 
 	section	.rodata,"a",@progbits
 	private	L___const.optix_InitializeWidget.render
@@ -193,15 +417,36 @@ L___const.optix_InitializeWidget.render:
 	dl	_optix_RenderInputBox_default
 	dl	_optix_RenderScrollBar_default
 	dl	_optix_RenderCheckBox_default
+	dl	_optix_RenderSlider_default
+
+	section	.rodata,"a",@progbits
+	private	L_switch.table.optix_GetSize
+L_switch.table.optix_GetSize:
+	dw	46
+	dw	37
+	dw	37
+	dw	74
+	dw	43
+	dw	33
+	dw	36
+	dw	33
+	dw	41
+	dw	34
+	dw	40
+	dw	42
 
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"
 	extern	__Unwind_SjLj_Register
 	extern	__frameset
+	extern	_malloc
 	extern	_optix_UpdateText_default
 	extern	_optix_UpdateMenu_default
 	extern	_optix_UpdateInputBox_default
+	extern	_optix_RenderSlider_default
+	extern	_optix_UpdateSlider_default
 	extern	_optix_RenderCheckBox_default
 	extern	__ishru
+	extern	_memcpy
 	extern	_optix_RenderRectangle_default
 	extern	_optix_RenderWindow_default
 	extern	_optix_UpdateWindow_default
@@ -212,6 +457,7 @@ L___const.optix_InitializeWidget.render:
 	extern	_optix_RenderButton_default
 	extern	_optix_RenderDivider_default
 	extern	__imulu
+	extern	_optix_GetNumElementsInStack
 	extern	_optix_RenderWindowTitleBar_default
 	extern	_optix_UpdateWindowTitleBar_default
 	extern	_optix_RenderSprite_default
@@ -219,4 +465,5 @@ L___const.optix_InitializeWidget.render:
 	extern	_optix_RenderText_default
 	extern	_optix_RenderScrollBar_default
 	extern	_optix_RenderMenu_default
+	extern	__frameset0
 	extern	_optix_UpdateScrollBar_default

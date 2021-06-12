@@ -15,6 +15,7 @@
 #include "elements/divider.h"
 #include "elements/rectangle.h"
 #include "elements/scroll_bar.h"
+#include "elements/slider.h"
 
 //we'll need this
 #define OPTIX_VERSION 2

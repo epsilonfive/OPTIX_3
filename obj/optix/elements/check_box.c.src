@@ -5,7 +5,7 @@
 _optix_CheckBoxValueXOR:
 	call	__frameset0
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 34)
+	ld	hl, (iy + 37)
 	ld	a, (hl)
 	xor	a, 1
 	ld	(hl), a
@@ -29,26 +29,33 @@ _optix_RenderCheckBox_default:
 	bit	0, a
 	jq	nz, BB1_5
 	ld	iy, (ix + 6)
-	ld	l, (iy + 1)
-	ld	h, (iy + 2)
+	ld	hl, (iy + 1)
 	ld	(ix + -3), hl
 	ld	iy, (ix + 6)
-	ld	a, (iy + 4)
+	ld	hl, (iy + 4)
+	ld	(ix + -6), hl
 	ld	iy, (ix + 6)
 	ld	e, (iy + 7)
 	ld	d, (iy + 8)
+	ld	bc, 0
+	push	bc
+	pop	hl
+	ld	l, e
+	ld	h, d
 	ld	iy, (ix + 6)
-	ld	c, (iy + 9)
-	ld	hl, 5
-	push	hl
-	inc	hl
-	push	hl
-	ld	hl, 12
-	push	hl
-	ld	l, c
-	push	hl
+	ld	a, (iy + 9)
+	push	bc
+	pop	de
+	ld	e, a
+	ld	bc, 5
+	push	bc
+	inc	bc
+	push	bc
+	ld	bc, 12
+	push	bc
 	push	de
-	ld	l, a
+	push	hl
+	ld	hl, (ix + -6)
 	push	hl
 	ld	hl, (ix + -3)
 	push	hl
@@ -57,14 +64,14 @@ _optix_RenderCheckBox_default:
 	ld	hl, 21
 	add	hl, sp
 	ld	sp, hl
-	ld	hl, (iy + 34)
+	ld	hl, (iy + 37)
 	ld	a, (hl)
 	ld	l, 1
 	xor	a, l
 	xor	a, l
 	bit	0, a
 	jq	nz, BB1_4
-	ld	a, (iy + 33)
+	ld	a, (iy + 36)
 	xor	a, l
 	bit	0, a
 	jq	nz, BB1_5

@@ -236,8 +236,8 @@ void main(void) {
    struct optix_window test_window2 = {
       .widget = {
          .transform = {
-            .x = 150,
-            .y = 120,
+            .x = 1,
+            .y = 40,
             .width = 100,
             .height = 100,
          },
@@ -278,15 +278,41 @@ void main(void) {
       .value = &test_bool,
    };
    optix_InitializeWidget(&test_check_box.button.widget, OPTIX_CHECK_BOX_TYPE);
+   int test_int = 0;
+   struct optix_slider test_slider = {
+      .widget = {
+         .transform = {
+            .x = 0,
+            .y = 30,
+            .width = 50,
+            .height = 8,
+         },
+      },
+      .min = 0,
+      .max = 10,
+      .value = &test_int,
+      .disp_current_value = false,
+   };
+   optix_InitializeWidget(&test_slider.widget, OPTIX_SLIDER_TYPE);
    //finally, align everything
    optix_RecursiveAlign(&test_title_bar.widget);
    optix_RecursiveAlign(&test_title_bar2.widget);
-   struct optix_widget *test_stack[] = {&test_rectangle.widget, &test_check_box.button.widget, &test_title_bar2.widget,  &test_title_bar.widget, NULL};   
+
+   struct optix_widget *widget;
+   optix_CopyElement(&widget, &test_title_bar2.widget);
+   optix_SetPosition(&test_window.widget, 50, 30);
+   optix_SetPosition(&test_window2.widget, 120, 60);
+   current_context->data->gui_needs_full_redraw = true;
+   dbg_sprintf(dbgout, "X: %d, Y: %d\n", widget->transform.x, widget->transform.y);
+   dbg_sprintf(dbgout, "We finished?!\n");
+   struct optix_widget *test_stack[] = {&test_rectangle.widget, &test_check_box.button.widget, &test_slider.widget, widget, &test_title_bar2.widget, &test_title_bar.widget, NULL};   
    optix_SetCurrentSelection(&test_check_box.button.widget);
    //add it to the context
    context.stack = &test_stack;
    do {
+      dbg_sprintf(dbgout, "Updating...\n");
       optix_UpdateGUI();
+      dbg_sprintf(dbgout, "Rendering...\n");
       optix_RenderGUI();
       gfx_Blit(1);
    } while (!(kb_Data[6] & kb_Clear));

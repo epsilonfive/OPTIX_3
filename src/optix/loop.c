@@ -18,6 +18,7 @@ void optix_UpdateGUI(void) {
 void optix_UpdateStack(struct optix_widget *stack[]) {
     int i = 0;
     while (stack[i]) {
+        dbg_sprintf(dbgout, "Level type: %d\n", stack[i]->type);
         if (stack[i]->update) stack[i]->update(stack[i]);
         if (stack[i]->state.needs_redraw && stack[i]->child) {
             optix_RecursiveSetNeedsRedraw(stack[i]->child);
@@ -44,10 +45,12 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
     //start things out by doing the thing
     //the value of i at the end will also be the number of elements in the stack
     while ((*stack)[i]) {
+        dbg_sprintf(dbgout, "Top level type: %d Updating...", (*stack)[i]->type);
         //if this has been selected, we want to loop through and make sure nothing else is selected
         //this is so that what's on top will be selected, or what is rendered last
         //only one window can be selected at a time
         if ((*stack)[i]->update) (*stack)[i]->update((*stack)[i]);
+        dbg_sprintf(dbgout, "Success.\n");
         //if it needs to be redrawn handle that
         if ((*stack)[i]->state.needs_redraw && (*stack)[i]->child) {
             optix_RecursiveSetNeedsRedraw((*stack)[i]->child);
@@ -121,7 +124,9 @@ void optix_UpdateStack_TopLevel(struct optix_widget *(*stack)[]) {
 void optix_RenderGUI(void) {
     //do this first
     optix_RenderCursorBackground((struct optix_widget *) current_context->cursor);
+    dbg_sprintf(dbgout, "Rendering stack...\n");
     optix_RenderStack(current_context->stack);
+    dbg_sprintf(dbgout, "Finished.\n");
     //the cursor should be on top of everything else
     current_context->cursor->widget.render((struct optix_widget *) current_context->cursor);
     current_context->data->gui_needs_full_redraw = false;
@@ -130,10 +135,14 @@ void optix_RenderGUI(void) {
 void optix_RenderStack(struct optix_widget *stack[]) {
     int i = 0;
     while (stack[i]) {
+        dbg_sprintf(dbgout, "Render type: %d\n", stack[i]->type);
         if (stack[i]->render) {
+            dbg_sprintf(dbgout, "Rendering...\n");
             stack[i]->render(stack[i]);
+            dbg_sprintf(dbgout, "We made it back.\n");
             stack[i]->state.needs_redraw = false;
         }
         i++;
     }
+    dbg_sprintf(dbgout, "Finished rendering stack.\n");
 }

@@ -38,11 +38,11 @@ _optix_UpdateButton_default:
 	ld	a, l
 	bit	5, a
 	jq	nz, BB0_4
-	ld	d, (iy + 33)
-	ld	(iy + 33), 0
+	ld	d, (iy + 36)
+	ld	(iy + 36), 0
 	jq	BB0_11
 BB0_4:
-	ld	a, (iy + 33)
+	ld	a, (iy + 36)
 	xor	a, e
 	xor	a, e
 	bit	0, a
@@ -51,12 +51,12 @@ BB0_4:
 	xor	a, e
 	bit	0, a
 	jq	nz, BB0_11
-	ld	hl, (iy + 27)
+	ld	hl, (iy + 30)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB0_10
-	ld	de, (iy + 30)
+	ld	de, (iy + 33)
 	push	de
 	call	__indcallhl
 	ld	d, 0
@@ -64,11 +64,11 @@ BB0_4:
 	ld	iy, (ix + 6)
 	pop	hl
 BB0_10:
-	ld	(iy + 33), 1
+	ld	(iy + 36), 1
 BB0_11:
 	ld	iy, (_current_context)
 	ld	iy, (iy + 9)
-	ld	hl, (iy + 33)
+	ld	hl, (iy + 44)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -95,7 +95,7 @@ BB0_11:
 	ld	iy, (_current_context)
 	ld	iy, (iy + 9)
 	ld	hl, 1
-	ld	(iy + 33), hl
+	ld	(iy + 44), hl
 	ld	iy, (ix + 6)
 	xor	a, e
 	bit	0, a
@@ -105,7 +105,7 @@ BB0_11:
 BB0_15:
 	ld	iy, (ix + 6)
 	ld	a, (iy + 14)
-	ld	(iy + 33), 0
+	ld	(iy + 36), 0
 	ld	(iy + 14), 0
 	or	a, d
 BB0_16:
@@ -114,7 +114,7 @@ BB0_16:
 	jq	nz, BB0_18
 BB0_17:
 	ld	(iy + 17), 1
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	push	hl
 	call	_optix_RecursiveSetNeedsRedraw
 	pop	hl
@@ -183,7 +183,7 @@ _optix_RenderButton_default:
 	pop	hl
 	jq	BB1_8
 BB1_4:
-	ld	a, (iy + 33)
+	ld	a, (iy + 36)
 	xor	a, l
 	ld	l, (iy + 1)
 	ld	h, (iy + 2)
@@ -243,7 +243,7 @@ BB1_7:
 	push	hl
 	pop	iy
 BB1_8:
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc

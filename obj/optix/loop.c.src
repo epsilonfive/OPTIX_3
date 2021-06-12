@@ -14,11 +14,11 @@ _optix_UpdateGUI:
 	ld	iy, (iy + 9)
 	or	a, a
 	sbc	hl, hl
-	ld	(iy + 33), hl
+	ld	(iy + 44), hl
 	call	_kb_Scan
 	ld	iy, (_current_context)
 	ld	iy, (iy + 9)
-	ld	hl, (iy + 21)
+	ld	hl, (iy + 24)
 	push	iy
 	call	__indcallhl
 	pop	hl
@@ -78,7 +78,7 @@ BB1_2:
 	sbc	hl, bc
 	ld	(ix + -12), de
 	jq	z, BB1_23
-	ld	hl, (iy + 21)
+	ld	hl, (iy + 24)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -96,7 +96,7 @@ BB1_6:
 	xor	a, l
 	bit	0, a
 	jq	nz, BB1_10
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -110,8 +110,8 @@ BB1_6:
 	ld	a, (iy)
 	cp	a, 5
 	jq	nz, BB1_10
-	ld	iy, (iy + 27)
-	ld	hl, (iy + 24)
+	ld	iy, (iy + 30)
+	ld	hl, (iy + 27)
 	push	hl
 	call	_optix_RecursiveSetNeedsRedraw
 	ld	de, (ix + -12)
@@ -141,7 +141,7 @@ BB1_12:
 	jq	nz, BB1_14
 	push	hl
 	pop	iy
-	lea	iy, iy + 39
+	lea	iy, iy + 42
 	ld	hl, (ix + -15)
 	jq	BB1_16
 BB1_14:
@@ -151,8 +151,8 @@ BB1_14:
 	ld	a, (ix + -29)
 	jq	nz, BB1_17
 	ld	iy, (ix + -6)
-	ld	iy, (iy + 27)
-	lea	iy, iy + 39
+	ld	iy, (iy + 30)
+	lea	iy, iy + 42
 BB1_16:
 	ld	a, (iy)
 	ld	(iy), 0
@@ -233,7 +233,7 @@ BB1_25:
 	push	de
 	pop	iy
 	ld	iy, (iy + 9)
-	ld	hl, (iy + 36)
+	ld	hl, (iy + 47)
 	ld	bc, 4
 	ld	(ix + -15), hl
 	or	a, a
@@ -262,9 +262,9 @@ BB1_32:
 	ld	iy, 0
 	jq	nz, BB1_36
 	ld	iy, (ix + -32)
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 BB1_34:
-	lea	hl, iy + 24
+	lea	hl, iy + 27
 BB1_35:
 	ld	iy, (hl)
 BB1_36:
@@ -281,7 +281,7 @@ BB1_36:
 BB1_38:
 	lea	bc, iy + 0
 	ld	iy, (ix + -21)
-	ld	hl, (iy + 39)
+	ld	hl, (iy + 50)
 	push	bc
 	push	hl
 	ld	hl, (ix + -15)
@@ -357,7 +357,7 @@ BB1_52:
 	ld	hl, (ix + -15)
 	push	hl
 	pop	iy
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 	and	a, 1
 	ld	(iy + 14), a
 	push	hl
@@ -430,7 +430,7 @@ BB2_1:
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB2_17
-	ld	hl, (iy + 21)
+	ld	hl, (iy + 24)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -448,7 +448,7 @@ BB2_5:
 	xor	a, l
 	bit	0, a
 	jq	nz, BB2_12
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -461,8 +461,8 @@ BB2_5:
 	ld	a, (iy)
 	cp	a, 5
 	jq	nz, BB2_11
-	ld	iy, (iy + 27)
-	ld	hl, (iy + 24)
+	ld	iy, (iy + 30)
+	ld	hl, (iy + 27)
 	push	hl
 	call	_optix_RecursiveSetNeedsRedraw
 	pop	hl
@@ -520,7 +520,7 @@ _optix_RenderGUI:
 	pop	hl
 	ld	iy, (_current_context)
 	ld	iy, (iy + 9)
-	ld	hl, (iy + 18)
+	ld	hl, (iy + 21)
 	push	iy
 	call	__indcallhl
 	pop	hl
@@ -544,7 +544,7 @@ BB4_1:
 	or	a, a
 	sbc	hl, bc
 	jq	z, BB4_5
-	ld	hl, (iy + 18)
+	ld	hl, (iy + 21)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc

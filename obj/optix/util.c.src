@@ -26,8 +26,8 @@ _optix_SetObjectCallbacks:
 	ld	iy, (ix + 6)
 	ld	hl, (ix + 9)
 	ld	de, (ix + 12)
-	ld	(iy + 18), hl
-	ld	(iy + 21), de
+	ld	(iy + 21), hl
+	ld	(iy + 24), de
 	pop	ix
 	ret
 	section	.text,"ax",@progbits
@@ -38,7 +38,7 @@ _optix_SetObjectChildren:
 	call	__frameset0
 	ld	iy, (ix + 6)
 	ld	hl, (ix + 9)
-	ld	(iy + 24), hl
+	ld	(iy + 27), hl
 	pop	ix
 	ret
 	section	.text,"ax",@progbits
@@ -69,7 +69,7 @@ _optix_SetPosition:
 	ld	hl, (ix + 9)
 	ld	(iy + 1), hl
 	ld	(iy + 4), bc
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -106,7 +106,7 @@ BB3_3:
 	pop	hl
 	pop	hl
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	ld	iy, (ix + -3)
 	ld	de, 3
 	add	iy, de
@@ -366,7 +366,7 @@ _optix_RecursiveAlign:
 	ld	a, (iy)
 	cp	a, 5
 	jq	nz, BB6_2
-	ld	hl, (iy + 27)
+	ld	hl, (iy + 30)
 	push	hl
 	call	_optix_RecursiveAlign
 	ld	iy, (ix + 6)
@@ -375,7 +375,7 @@ BB6_2:
 	cp	a, 8
 	jq	nz, BB6_5
 	ld	iy, (ix + 6)
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 	ld	a, (iy + 10)
 	ld	l, (iy + 11)
 	push	hl
@@ -393,7 +393,7 @@ BB6_4:
 	pop	hl
 BB6_5:
 	lea	bc, iy + 0
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -432,7 +432,7 @@ BB6_8:
 	cp	a, 8
 	jq	nz, BB6_11
 	ld	iy, (ix + -3)
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 	ld	a, (iy + 10)
 	ld	l, (iy + 11)
 	push	hl
@@ -448,7 +448,7 @@ BB6_8:
 	pop	hl
 	pop	hl
 BB6_11:
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -457,7 +457,7 @@ BB6_11:
 	pop	hl
 	ld	iy, (ix + 6)
 	lea	bc, iy + 0
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	ld	iy, (ix + -6)
 	ld	de, 3
 	add	iy, de
@@ -496,7 +496,7 @@ BB7_2:
 	push	hl
 	pop	iy
 	ld	(iy + 17), 1
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -516,12 +516,12 @@ BB7_5:
 	jq	nz, BB7_7
 	push	de
 	pop	iy
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 	ld	(iy + 17), 1
 	push	de
 	pop	iy
-	ld	iy, (iy + 27)
-	ld	hl, (iy + 24)
+	ld	iy, (iy + 30)
+	ld	hl, (iy + 27)
 	push	hl
 	call	_optix_RecursiveSetNeedsRedraw
 	ld	bc, (ix + -3)
@@ -637,7 +637,7 @@ BB8_11:
 	ld	a, (iy)
 	cp	a, 5
 	jq	nz, BB8_14
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 	ld	(iy + 14), 0
 BB8_14:
 	ld	iy, (ix + -3)
@@ -649,7 +649,7 @@ BB8_14:
 	ld	e, 1
 	jq	nz, BB8_16
 	ld	iy, (ix + -3)
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 	ld	(iy + 14), 1
 	ld	(iy + 17), 1
 	ld	iy, (ix + -3)
@@ -665,8 +665,8 @@ BB8_16:
 	cp	a, 5
 	jq	nz, BB8_21
 	ld	iy, (ix + -3)
-	ld	iy, (iy + 27)
-	ld	hl, (iy + 24)
+	ld	iy, (iy + 30)
+	ld	hl, (iy + 27)
 	ld	iy, (ix + -3)
 	add	hl, bc
 	or	a, a
@@ -680,7 +680,7 @@ BB8_16:
 	call	nz, _optix_SetCurrentSelection
 	jq	BB8_25
 BB8_21:
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -703,6 +703,47 @@ BB8_26:
 BB8_27:
 	push	hl
 	jq	BB8_24
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_optix_GetNumElementsInStack
+_optix_GetNumElementsInStack:
+	ld	hl, -3
+	call	__frameset
+	ld	hl, (ix + 6)
+	ld	de, 0
+	push	hl
+	pop	iy
+	ld	(ix + -3), de
+BB9_1:
+	push	hl
+	pop	bc
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB9_5
+	ld	hl, (iy)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jq	z, BB9_6
+	ld	hl, (ix + -3)
+	inc	hl
+	ld	(ix + -3), hl
+	lea	iy, iy + 3
+	push	bc
+	pop	hl
+	jq	BB9_1
+BB9_5:
+	jq	BB9_4
+BB9_6:
+	ld	de, (ix + -3)
+BB9_4:
+	ld	l, e
+	ld	h, d
+	ld	sp, ix
+	pop	ix
+	ret
 	section	.text,"ax",@progbits
 
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"

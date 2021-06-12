@@ -8,6 +8,9 @@
         "optix.h": "c",
         "colors.h": "c",
         "globals.h": "c",
-        "util.h": "c"
+        "util.h": "c",
+        "slider.h": "c",
+        "check_box.h": "c",
+        "input_box.h": "c"
     }
 }

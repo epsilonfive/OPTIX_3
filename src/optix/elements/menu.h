@@ -31,7 +31,6 @@ struct optix_menu {
     //for partial redraw (overridden if the needs_redraw thing is set)
     int last_selection;
     //array of strings and sprites
-
 };
 
 //functions

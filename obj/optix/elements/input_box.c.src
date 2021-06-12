@@ -6,8 +6,8 @@ _optix_UpdateInputBox_default:
 	ld	hl, -12
 	call	__frameset
 	ld	iy, (ix + 6)
-	ld	iy, (iy + 27)
-	ld	hl, (iy + 29)
+	ld	iy, (iy + 30)
+	ld	hl, (iy + 32)
 	ld	(ix + -3), hl
 	push	hl
 	call	_strlen
@@ -28,7 +28,7 @@ _optix_UpdateInputBox_default:
 	ld	hl, 5
 	ld	iy, (_current_context)
 	ld	iy, (iy + 9)
-	ld	(iy + 33), hl
+	ld	(iy + 44), hl
 	ld	hl, -720868
 	push	de
 	ld	e, (hl)
@@ -95,7 +95,7 @@ BB0_7:
 	bit	0, a
 	jq	nz, BB0_32
 	ld	bc, 6
-	ld	e, (iy + 33)
+	ld	e, (iy + 36)
 	or	a, a
 	sbc	hl, hl
 	ld	l, e
@@ -104,7 +104,7 @@ BB0_7:
 	ld	iy, (_current_context)
 	lea	bc, iy + 0
 	ld	iy, (iy + 9)
-	ld	(iy + 33), hl
+	ld	(iy + 44), hl
 	ld	hl, (ix + -3)
 	add	hl, bc
 	or	a, a
@@ -121,7 +121,7 @@ BB0_7:
 	ld	a, l
 	cp	a, 10
 	jq	nz, BB0_14
-	ld	de, (iy + 30)
+	ld	de, (iy + 33)
 	push	de
 	pop	hl
 	ld	bc, (ix + -6)
@@ -134,7 +134,7 @@ BB0_14:
 	ld	a, l
 	cp	a, 11
 	jq	nz, BB0_17
-	ld	de, (iy + 30)
+	ld	de, (iy + 33)
 	ld	bc, 1
 	push	de
 	pop	hl
@@ -144,7 +144,7 @@ BB0_14:
 	jq	m, BB0_31
 	dec	de
 BB0_13:
-	ld	(iy + 30), de
+	ld	(iy + 33), de
 	jq	BB0_31
 BB0_17:
 	ld	a, l
@@ -152,7 +152,7 @@ BB0_17:
 	jq	nz, BB0_19
 	or	a, a
 	sbc	hl, hl
-	ld	(iy + 30), hl
+	ld	(iy + 33), hl
 	ld	hl, (ix + -3)
 	ld	(hl), 0
 	jq	BB0_31
@@ -167,7 +167,7 @@ BB0_19:
 	jq	c, BB0_22
 	ld	l, 0
 BB0_22:
-	ld	(iy + 33), l
+	ld	(iy + 36), l
 	jq	BB0_31
 BB0_23:
 	ld	bc, (ix + -6)
@@ -176,7 +176,7 @@ BB0_23:
 	ld	a, l
 	cp	a, 56
 	jq	nz, BB0_26
-	ld	de, (iy + 30)
+	ld	de, (iy + 33)
 	ld	bc, 1
 	push	de
 	pop	hl
@@ -201,7 +201,7 @@ BB0_23:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	hl, (iy + 30)
+	ld	hl, (iy + 33)
 	dec	hl
 	jq	BB0_30
 BB0_26:
@@ -221,17 +221,17 @@ BB0_26:
 	ld	a, (hl)
 	or	a, a
 	jq	z, BB0_31
-	ld	a, (iy + 34)
+	ld	a, (iy + 37)
 	xor	a, d
 	bit	0, a
 	jq	nz, BB0_29
-	ld	de, (iy + 35)
+	ld	de, (iy + 38)
 	ld	hl, (ix + -6)
 	or	a, a
 	sbc	hl, de
 	jq	nc, BB0_31
 BB0_29:
-	ld	de, (iy + 30)
+	ld	de, (iy + 33)
 	ld	iy, (ix + -3)
 	add	iy, de
 	lea	hl, iy + 0
@@ -249,7 +249,7 @@ BB0_29:
 	pop	hl
 	pop	hl
 	ld	iy, (ix + 6)
-	ld	a, (iy + 33)
+	ld	a, (iy + 36)
 	or	a, a
 	sbc	hl, hl
 	ld	l, a
@@ -268,25 +268,25 @@ BB0_29:
 	ld	e, a
 	add	hl, de
 	ld	a, (hl)
-	ld	de, (iy + 30)
+	ld	de, (iy + 33)
 	ld	hl, (ix + -3)
 	add	hl, de
 	ld	(hl), a
-	ld	hl, (iy + 30)
+	ld	hl, (iy + 33)
 	inc	hl
 BB0_30:
-	ld	(iy + 30), hl
+	ld	(iy + 33), hl
 BB0_31:
 	ld	iy, (ix + 6)
-	ld	iy, (iy + 27)
-	ld	(iy + 41), 1
+	ld	iy, (iy + 30)
+	ld	(iy + 44), 1
 	ld	hl, (ix + 6)
 	push	hl
 	call	_optix_RecursiveAlign
 	pop	hl
 	ld	iy, (ix + 6)
 	ld	(iy + 17), 1
-	ld	hl, (iy + 27)
+	ld	hl, (iy + 30)
 	lea	de, iy + 0
 	push	hl
 	pop	bc
@@ -295,7 +295,7 @@ BB0_31:
 	ld	(iy + 17), 1
 	push	de
 	pop	iy
-	ld	hl, (iy + 21)
+	ld	hl, (iy + 24)
 	push	bc
 	call	__indcallhl
 	pop	hl
@@ -356,7 +356,7 @@ _optix_RenderInputBox_default:
 	ld	iy, (ix + 6)
 	pop	hl
 	pop	hl
-	ld	hl, (iy + 27)
+	ld	hl, (iy + 30)
 	ld	(ix + -3), hl
 	add	hl, bc
 	or	a, a
@@ -364,7 +364,7 @@ _optix_RenderInputBox_default:
 	jq	z, BB1_6
 	lea	de, iy + 0
 	ld	iy, (ix + -3)
-	ld	hl, (iy + 18)
+	ld	hl, (iy + 21)
 	push	de
 	pop	iy
 	add	hl, bc
@@ -388,9 +388,9 @@ _optix_RenderInputBox_default:
 	ld	iy, (ix + -3)
 	ld	hl, (iy + 1)
 	ld	(ix + -6), hl
-	ld	hl, (iy + 29)
+	ld	hl, (iy + 32)
 	ld	iy, (ix + 6)
-	ld	de, (iy + 30)
+	ld	de, (iy + 33)
 	push	de
 	push	hl
 	call	_optix_GetStringWidthL
@@ -415,7 +415,7 @@ _optix_RenderInputBox_default:
 	pop	hl
 	pop	hl
 BB1_6:
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc

@@ -3,12 +3,7 @@
 
 //includes
 #include <stdbool.h>
-#include <stdint.h>
-#include <graphx.h>
 #include "../gui_control.h"
-#include "../shapes.h"
-#include "../cursor.h"
-#include "../util.h"
 
 //typedefs and things
 struct optix_button {

@@ -21,7 +21,7 @@ BB0_2:
 	xor	a, l
 	bit	0, a
 	jq	nz, BB0_5
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -138,7 +138,7 @@ BB0_7:
 	call	__setflag
 	jq	p, BB0_14
 	ld	iy, (ix + -18)
-	ld	de, (iy + 27)
+	ld	de, (iy + 30)
 	ld	iy, (ix + -6)
 	ld	hl, (ix + -12)
 	ld	(ix + -30), de
@@ -147,7 +147,7 @@ BB0_7:
 	ld	de, (ix + -15)
 	jq	nz, BB0_28
 	ld	iy, (ix + -18)
-	ld	hl, (iy + 30)
+	ld	hl, (iy + 33)
 	ld	iy, (ix + -6)
 	or	a, a
 	sbc	hl, de
@@ -160,7 +160,7 @@ BB0_14:
 	xor	a, c
 	bit	0, a
 	jq	nz, BB0_16
-	ld	hl, (iy + 39)
+	ld	hl, (iy + 50)
 	ld	iy, (ix + 6)
 	lea	de, iy + 0
 	or	a, a
@@ -186,7 +186,7 @@ BB0_18:
 	xor	a, c
 	bit	0, a
 	jq	nz, BB0_23
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -209,7 +209,7 @@ BB0_25:
 	xor	a, c
 	bit	0, a
 	jq	nz, BB0_27
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	push	hl
 	call	_optix_RecursiveSetNeedsRedraw
 	pop	hl
@@ -260,7 +260,7 @@ BB0_28:
 	ld	(ix + -3), hl
 	ld	iy, (ix + -18)
 	ld	hl, 3
-	ld	(iy + 33), hl
+	ld	(iy + 44), hl
 	ld	iy, (ix + 6)
 	ex	de, hl
 	jq	BB0_39
@@ -291,7 +291,7 @@ BB0_31:
 	ld	(ix + -3), hl
 	ld	iy, (ix + -18)
 	ld	hl, 3
-	ld	(iy + 33), hl
+	ld	(iy + 44), hl
 	or	a, a
 	sbc	hl, hl
 	push	hl
@@ -326,13 +326,13 @@ BB0_34:
 	jq	nc, BB0_36
 	ld	de, 4
 	ld	iy, (ix + -18)
-	ld	bc, (iy + 30)
+	ld	bc, (iy + 33)
 	ld	hl, (ix + -15)
 	or	a, a
 	sbc	hl, bc
 	push	hl
 	pop	bc
-	ld	(iy + 33), de
+	ld	(iy + 44), de
 	or	a, a
 	sbc	hl, hl
 	jq	BB0_37
@@ -409,7 +409,7 @@ _optix_ResizeWindow:
 	ld	hl, -5
 	call	__frameset
 	ld	iy, (ix + 6)
-	ld	a, (iy + 27)
+	ld	a, (iy + 30)
 	ld	c, 1
 	xor	a, c
 	bit	0, a
@@ -417,8 +417,8 @@ _optix_ResizeWindow:
 	ld	l, (ix + 9)
 	ld	h, (ix + 10)
 	ld	a, (ix + 12)
-	ld	e, (iy + 36)
-	ld	d, (iy + 37)
+	ld	e, (iy + 39)
+	ld	d, (iy + 40)
 	ld	(ix + -2), e
 	ld	(ix + -1), d
 	or	a, a
@@ -429,7 +429,7 @@ _optix_ResizeWindow:
 	ld	(ix + -2), l
 	ld	(ix + -1), h
 BB1_3:
-	ld	b, (iy + 38)
+	ld	b, (iy + 41)
 	cp	a, b
 	jq	c, BB1_5
 	ld	b, a
@@ -439,7 +439,7 @@ BB1_5:
 	ld	(iy + 7), l
 	ld	(iy + 8), h
 	ld	(iy + 9), b
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -472,14 +472,14 @@ BB1_7:
 	ld	a, (iy)
 	cp	a, 3
 	jq	nz, BB1_13
-	ld	a, (iy + 28)
+	ld	a, (iy + 31)
 	xor	a, c
 	xor	a, c
 	bit	0, a
 	jq	nz, BB1_11
 	ld	a, b
-	ld	c, (iy + 36)
-	ld	b, (iy + 37)
+	ld	c, (iy + 39)
+	ld	b, (iy + 40)
 	ld	e, (ix + -2)
 	ld	d, (ix + -1)
 	ld	l, e
@@ -488,25 +488,25 @@ BB1_7:
 	ld	bc, 0
 	ld	c, l
 	ld	b, h
-	ld	(iy + 62), bc
+	ld	(iy + 65), bc
 	ld	b, a
 	ld	c, 1
 	ld	(iy + 7), e
 	ld	(iy + 8), d
 BB1_11:
-	ld	a, (iy + 29)
+	ld	a, (iy + 32)
 	xor	a, c
 	xor	a, c
 	bit	0, a
 	jq	nz, BB1_15
 	ld	l, c
-	ld	c, (iy + 38)
+	ld	c, (iy + 41)
 	call	__bdivu
 	ld	c, l
 	or	a, a
 	sbc	hl, hl
 	ld	l, a
-	ld	(iy + 59), hl
+	ld	(iy + 62), hl
 	jq	BB1_14
 BB1_13:
 	ld	l, (ix + -2)
@@ -524,7 +524,7 @@ BB1_15:
 	section	.text,"ax",@progbits
 	public	_optix_RenderWindow_default
 _optix_RenderWindow_default:
-	ld	hl, -6
+	ld	hl, -3
 	call	__frameset
 	ld	iy, (ix + 6)
 	ld	a, (iy + 15)
@@ -536,31 +536,33 @@ _optix_RenderWindow_default:
 	xor	a, l
 	bit	0, a
 	jq	nz, BB2_3
-	ld.sis	bc, 2
-	ld	l, (iy + 1)
-	ld	h, (iy + 2)
-	dec.sis	hl
+	ld	hl, (iy + 1)
+	dec	hl
 	ld	(ix + -3), hl
-	ld	e, (iy + 4)
-	dec	e
-	ld	l, (iy + 7)
-	ld	h, (iy + 8)
-	add.sis	hl, bc
+	ld	de, (iy + 4)
+	dec	de
+	ld	c, (iy + 7)
+	ld	b, (iy + 8)
+	or	a, a
+	sbc	hl, hl
+	ld	l, c
+	ld	h, b
+	ld	bc, 2
+	add	hl, bc
+	ld	iy, (ix + 6)
 	ld	a, (iy + 9)
-	add	a, 2
-	ld	c, a
-	ld	(ix + -6), bc
-	ld	iy, 6
-	push	iy
-	ld	bc, 5
+	ld	iy, 0
+	ld	iyl, a
+	add	iy, bc
+	ld	bc, 6
+	push	bc
+	dec	bc
 	push	bc
 	ld	bc, 1
 	push	bc
-	ld	bc, (ix + -6)
-	push	bc
+	push	iy
 	push	hl
-	ld	l, e
-	push	hl
+	push	de
 	ld	hl, (ix + -3)
 	push	hl
 	call	_optix_OutlinedRectangle_WithBevel
@@ -569,7 +571,7 @@ _optix_RenderWindow_default:
 	add	hl, sp
 	ld	sp, hl
 BB2_3:
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -577,7 +579,7 @@ BB2_3:
 	call	nz, _optix_RenderStack
 	pop	hl
 BB2_5:
-	ld	sp, ix
+	pop	hl
 	pop	ix
 	ret
 	section	.text,"ax",@progbits
@@ -590,7 +592,7 @@ _optix_UpdateWindowTitleBar_default:
 	ld	bc, (ix + 6)
 	push	bc
 	pop	iy
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 	ld	a, (iy + 14)
 	ld	(ix + -4), a
 	ld	(ix + -3), iy
@@ -610,7 +612,7 @@ _optix_UpdateWindowTitleBar_default:
 	ld	iy, (ix + -3)
 	jq	nz, BB3_4
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -620,9 +622,9 @@ _optix_UpdateWindowTitleBar_default:
 	call	_optix_UpdateStack
 	pop	hl
 	ld	iy, (ix + 6)
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 BB3_4:
-	ld	hl, (iy + 21)
+	ld	hl, (iy + 24)
 	push	iy
 	call	__indcallhl
 	ld	d, 1
@@ -631,7 +633,7 @@ BB3_4:
 	ld	a, (iy + 17)
 	ld	e, 1
 	xor	a, e
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 	xor	a, e
 	bit	0, a
 	ld	a, d
@@ -709,7 +711,7 @@ BB3_14:
 	lea	bc, iy + 0
 	ld	iy, (iy + 9)
 	ld	(ix + -10), iy
-	ld	hl, (iy + 39)
+	ld	hl, (iy + 50)
 	ld	de, (ix + 6)
 	or	a, a
 	sbc	hl, de
@@ -755,7 +757,7 @@ BB3_18:
 	xor	a, e
 	bit	0, a
 	jq	nz, BB3_22
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -773,9 +775,9 @@ BB3_22:
 	push	hl
 	pop	iy
 	ld	(iy + 17), 1
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 	ld	(iy + 17), 1
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -785,7 +787,7 @@ BB3_22:
 	ld	e, 1
 	pop	hl
 	ld	iy, (ix + 6)
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 BB3_24:
 	lea	hl, iy + 0
 	ld	iy, (ix + 6)
@@ -817,14 +819,14 @@ BB3_25:
 BB3_27:
 	ld	iy, (_current_context)
 	ld	iy, (iy + 9)
-	ld	bc, (iy + 27)
+	ld	bc, (iy + 30)
 	ld	de, (iy + 1)
 	push	de
 	pop	hl
 	or	a, a
 	sbc	hl, bc
 	jq	nz, BB3_29
-	ld	hl, (iy + 30)
+	ld	hl, (iy + 33)
 	ld	(ix + -13), bc
 	ld	bc, (iy + 4)
 	ld	(ix + -7), hl
@@ -837,7 +839,7 @@ BB3_27:
 BB3_29:
 	ld	hl, (iy + 4)
 	ld	(ix + -10), hl
-	ld	hl, (iy + 30)
+	ld	hl, (iy + 33)
 	ld	(ix + -7), hl
 BB3_30:
 	ld	iy, (ix + 6)
@@ -871,7 +873,7 @@ BB3_30:
 	ld	(ix + -27), c
 	ld	(ix + -26), b
 	ld	e, c
-	ld	bc, (iy + 27)
+	ld	bc, (iy + 30)
 	ld	hl, (ix + -3)
 	push	bc
 	pop	iy
@@ -881,7 +883,7 @@ BB3_30:
 	call	__setflag
 	ld	(ix + -7), iy
 	jq	p, BB3_33
-	ld	a, (iy + 27)
+	ld	a, (iy + 30)
 	ld	l, 1
 	xor	a, l
 	bit	0, a
@@ -923,7 +925,7 @@ BB3_34:
 	ld	(ix + -22), de
 	jq	m, BB3_37
 	ld	de, 160
-	ld	a, (iy + 27)
+	ld	a, (iy + 30)
 	ld	l, 1
 	xor	a, l
 	bit	0, a
@@ -1128,7 +1130,7 @@ BB3_51:
 	jq	BB3_51
 BB3_53:
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 27)
+	ld	hl, (iy + 30)
 	ld	de, (ix + -10)
 	push	de
 	ld	de, (ix + -13)
@@ -1150,7 +1152,7 @@ BB3_54:
 	pop	hl
 	pop	hl
 	ld	iy, (ix + 6)
-	ld	bc, (iy + 27)
+	ld	bc, (iy + 30)
 	ld	de, 0
 	ld	e, (iy + 9)
 	ld	hl, (ix + -7)
@@ -1175,13 +1177,13 @@ BB3_56:
 	jq	nz, BB3_59
 	ld	iy, (_current_context)
 	ld	iy, (iy + 9)
-	ld	hl, (iy + 33)
+	ld	hl, (iy + 44)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
 	jq	nz, BB3_59
 	ld	hl, 2
-	ld	(iy + 33), hl
+	ld	(iy + 44), hl
 BB3_59:
 	ld	sp, ix
 	pop	ix
@@ -1198,7 +1200,7 @@ _optix_RefreshWindowTitleBarTransform:
 	push	hl
 	pop	iy
 	ld	(ix + -3), iy
-	ld	de, (iy + 27)
+	ld	de, (iy + 30)
 	push	de
 	pop	iy
 	ld	bc, (iy + 1)
@@ -1229,7 +1231,7 @@ _optix_RefreshWindowTitleBarTransform:
 	section	.text,"ax",@progbits
 	public	_optix_RenderWindowTitleBar_default
 _optix_RenderWindowTitleBar_default:
-	ld	hl, -1
+	ld	hl, -6
 	call	__frameset
 	ld	iy, (ix + 6)
 	ld	a, (iy + 15)
@@ -1237,7 +1239,7 @@ _optix_RenderWindowTitleBar_default:
 	xor	a, e
 	bit	0, a
 	jq	nz, BB5_12
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 	lea	hl, iy + 0
 	add	hl, bc
 	or	a, a
@@ -1246,13 +1248,13 @@ _optix_RenderWindowTitleBar_default:
 	ld	hl, 0
 	jq	BB5_4
 BB5_3:
-	ld	hl, (iy + 18)
+	ld	hl, (iy + 21)
 	push	iy
 	call	__indcallhl
 	ld	e, 1
 	pop	hl
 	ld	iy, (ix + 6)
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 	lea	hl, iy + 0
 	ld	(iy + 17), 0
 BB5_4:
@@ -1265,33 +1267,40 @@ BB5_4:
 	pop	iy
 	ld	a, (iy + 14)
 	xor	a, e
+	ld	hl, (ix + 6)
+	push	hl
+	pop	iy
+	ld	hl, (iy + 1)
+	dec	hl
+	ld	(ix + -6), hl
+	ld	de, (iy + 4)
+	ld	(ix + -3), de
+	ld	c, (iy + 7)
+	ld	b, (iy + 8)
+	ld	de, 0
+	push	de
+	pop	hl
+	ld	l, c
+	ld	h, b
+	ld	bc, 2
+	add	hl, bc
 	ld	iy, (ix + 6)
-	ld	c, (iy + 1)
-	ld	b, (iy + 2)
-	dec.sis	bc
-	ld	l, (iy + 4)
-	ld	(ix + -1), l
-	ld	l, (iy + 7)
-	ld	h, (iy + 8)
-	ld.sis	de, 2
-	add.sis	hl, de
-	ld	e, (iy + 9)
-	ld	iyl, e
+	ld	c, (iy + 9)
+	ld	e, c
 	bit	0, a
 	jq	z, BB5_7
-	ld	de, 6
-	push	de
-	dec	de
-	push	de
-	ld	de, 2
-	push	de
-	ld	e, iyl
-	push	de
-	push	hl
-	ld	a, (ix + -1)
-	ld	l, a
-	push	hl
+	ld	bc, 6
 	push	bc
+	dec	bc
+	push	bc
+	ld	bc, 2
+	push	bc
+	push	de
+	push	hl
+	ld	de, (ix + -3)
+	push	de
+	ld	hl, (ix + -6)
+	push	hl
 	call	_optix_OutlinedRectangle_WithBevel
 	ld	hl, 21
 	add	hl, sp
@@ -1299,19 +1308,18 @@ BB5_4:
 	ld	hl, 9
 	jq	BB5_8
 BB5_7:
-	ld	de, 6
-	push	de
-	dec	de
-	push	de
-	ld	de, 3
-	push	de
-	ld	e, iyl
-	push	de
-	push	hl
-	ld	a, (ix + -1)
-	ld	l, a
-	push	hl
+	ld	iy, 3
+	ld	bc, 6
 	push	bc
+	dec	bc
+	push	bc
+	push	iy
+	push	de
+	push	hl
+	ld	de, (ix + -3)
+	push	de
+	ld	hl, (ix + -6)
+	push	hl
 	call	_optix_OutlinedRectangle_WithBevel
 	ld	hl, 21
 	add	hl, sp
@@ -1326,7 +1334,7 @@ BB5_8:
 	pop	hl
 BB5_9:
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 24)
+	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
@@ -1341,7 +1349,7 @@ BB5_9:
 	pop	hl
 	pop	hl
 BB5_12:
-	inc	sp
+	ld	sp, ix
 	pop	ix
 	ret
 	section	.text,"ax",@progbits

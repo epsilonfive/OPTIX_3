@@ -12,20 +12,20 @@ _optix_RenderDivider_default:
 	bit	0, a
 	jq	nz, BB0_16
 	ld	l, 6
-	ld	a, (iy + 30)
+	ld	a, (iy + 33)
 	cp	a, 1
 	jq	z, BB0_5
 	cp	a, 3
 	jq	z, BB0_5
 	ld	l, 25
 BB0_5:
-	ld	de, (iy + 27)
+	ld	de, (iy + 30)
 	ld	(ix + -3), de
 	push	hl
 	call	_gfx_SetColor
 	pop	hl
 	ld	iy, (ix + 6)
-	ld	l, (iy + 30)
+	ld	l, (iy + 33)
 	ld	a, l
 	cp	a, 2
 	jq	nc, BB0_8
@@ -69,7 +69,7 @@ BB0_14:
 	ld	bc, (iy + 4)
 	ld	e, (iy + 9)
 	ld	iy, (ix + 6)
-	ld	a, (iy + 32)
+	ld	a, (iy + 35)
 	ld	l, a
 	rlc	l
 	sbc	hl, hl
@@ -95,7 +95,7 @@ BB0_12:
 	ld	e, (iy + 7)
 	ld	d, (iy + 8)
 	ld	iy, (ix + 6)
-	ld	a, (iy + 31)
+	ld	a, (iy + 34)
 	ld	l, a
 	rlc	l
 	sbc	hl, hl

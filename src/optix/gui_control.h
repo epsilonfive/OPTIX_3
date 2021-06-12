@@ -6,7 +6,7 @@
 #include <stdbool.h>
 
 //definitions
-#define OPTIX_NUM_TYPES             11
+#define OPTIX_NUM_TYPES             12
 #define OPTIX_TEXT_TYPE             0
 #define OPTIX_SPRITE_TYPE           1
 #define OPTIX_BUTTON_TYPE           2
@@ -18,6 +18,7 @@
 #define OPTIX_INPUT_BOX_TYPE        8
 #define OPTIX_SCROLL_BAR_TYPE       9
 #define OPTIX_CHECK_BOX_TYPE        10
+#define OPTIX_SLIDER_TYPE           11
 //centering types
 //always the same
 #define OPTIX_CENTERING_CENTERED    1
@@ -62,6 +63,10 @@ struct optix_state {
     bool visible;
     bool selectable;
     bool needs_redraw;
+    //sizing info (override size in bytes, if so desired)
+    //mostly intended for the CopyStack function, once that's made
+    bool override_size;
+    uint16_t size;
 };
 
 struct optix_widget {

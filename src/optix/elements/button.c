@@ -1,4 +1,12 @@
 #include "button.h"
+//includes
+#include <stdbool.h>
+#include <stdint.h>
+#include <graphx.h>
+#include "../gui_control.h"
+#include "../shapes.h"
+#include "../cursor.h"
+#include "../util.h"
 
 //functions
 //update button

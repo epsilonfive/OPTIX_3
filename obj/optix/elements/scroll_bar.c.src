@@ -7,7 +7,7 @@ _optix_UpdateScrollBar_default:
 	ld	hl, (ix + 6)
 	push	hl
 	pop	iy
-	ld	iy, (iy + 27)
+	ld	iy, (iy + 30)
 	ld	a, (iy + 17)
 	push	hl
 	pop	iy
@@ -31,7 +31,7 @@ _optix_RenderScrollBar_default:
 	xor	a, c
 	bit	0, a
 	jq	nz, BB1_20
-	ld	hl, (iy + 27)
+	ld	hl, (iy + 30)
 	ld	(ix + -3), hl
 	ld	l, (hl)
 	ld	a, l
@@ -41,33 +41,33 @@ _optix_RenderScrollBar_default:
 	cp	a, 3
 	jq	nz, BB1_20
 	ld	iy, (ix + -3)
-	ld	hl, (iy + 59)
-	ld	de, (iy + 65)
+	ld	hl, (iy + 62)
+	ld	de, (iy + 68)
 	ld	(ix + -15), de
 	ld	(ix + -6), hl
 	ld	de, 1
 	or	a, a
 	sbc	hl, de
 	jq	nz, BB1_6
-	ld	hl, (iy + 56)
+	ld	hl, (iy + 59)
 	ld	(ix + -21), hl
-	ld	hl, (iy + 62)
+	ld	hl, (iy + 65)
 	ld	(ix + -6), hl
 	jq	BB1_7
 BB1_6:
 	ld	a, c
-	ld	bc, (iy + 62)
+	ld	bc, (iy + 65)
 	ld	hl, (ix + -15)
 	call	__idivs
 	ld	(ix + -15), hl
-	ld	hl, (iy + 56)
+	ld	hl, (iy + 59)
 	call	__idivs
 	ld	c, a
 	ld	(ix + -21), hl
 BB1_7:
 	ld	iy, (ix + 6)
 BB1_8:
-	ld	a, (iy + 30)
+	ld	a, (iy + 33)
 	xor	a, c
 	bit	0, a
 	jq	z, BB1_10
@@ -149,7 +149,7 @@ BB1_11:
 	ld	sp, hl
 	ld	iy, (ix + 6)
 	ld	bc, (iy + 1)
-	ld	a, (iy + 30)
+	ld	a, (iy + 33)
 	ld	l, 1
 	xor	a, l
 	ld	e, a
