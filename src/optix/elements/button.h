@@ -10,10 +10,17 @@ struct optix_button {
     struct optix_widget widget;
     //the idea with this part is that you could pass whatever kind of arguments you want into that
     //probably a struct
-    void (*click_action)(void *);
-    void *click_args;
+    struct optix_click_action click_action;
     //whether or not it has been pressed (falling edge)
     bool pressed;
+    //will be activated if this key is pressed too
+    uint8_t alternate_key;
+    //if this option is enabled, there will not be a rectangle drawn in the unselected BG color when unselected
+    //so the background will show behind it
+    bool transparent_background;
+    bool hide_selection_box;
+    //saves the last selection status
+    bool selected_save;
 };
 
 //functions

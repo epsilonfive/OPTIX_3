@@ -3,10 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include <graphx.h>
 #include "../gui_control.h"
-#include "../cursor.h"
-#include "text.h"
 
 struct optix_slider {
     struct optix_widget widget;

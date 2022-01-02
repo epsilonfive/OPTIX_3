@@ -1,6 +1,11 @@
+palettes:
+  - name: palette
+    images: automatic
+    max-entries: 3
+
 converts:
-  - name: myimages
-    palette: xlibc
+  - name: cursor
+    palette: palette
     images:
       - cursor_normal.png
       - cursor_pointer.png
@@ -14,6 +19,6 @@ converts:
 
 outputs:
   - type: c
-    include-file: gfx.h
+    include-file: optix_gfx.h
     converts:
-      - myimages
+      - cursor

@@ -2,13 +2,8 @@
 #define SCROLL_BAR_H
 
 //includes
-#include <stdint.h>
 #include <stdbool.h>
-#include <graphx.h>
 #include "../gui_control.h"
-#include "../shapes.h"
-#include "menu.h"
-#include "text.h"
 
 //defines
 #define SCROLL_BAR_HORIZ (bool) 0

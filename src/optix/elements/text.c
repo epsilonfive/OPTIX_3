@@ -1,5 +1,17 @@
 #include "text.h"
 
+#include <debug.h>
+#include <graphx.h>
+#include <fontlibc.h>
+
+#include "../shapes.h"
+#include "../cursor.h"
+#include "../colors.h"
+#include "../util.h"
+
+#include "input_box.h"
+
+
 //sets a text object's width and height according to the text's width and height
 void optix_InitializeTextTransform(struct optix_text *text) {
     text->widget.transform.x = 0;
@@ -25,12 +37,31 @@ size_t optix_GetStringWidthL(char *str, size_t max_chars) {
     else {
         char temp = str[max_chars + 1];
         size_t size;
-        str[max_chars + 1] = NULL;
+        str[max_chars + 1] = '\0';
         size = gfx_GetStringWidth(str);
         str[max_chars + 1] = temp;
         return size;
     }
 }
+
+size_t optix_GetStringWidth(char *str) {
+    if (current_context->data->font_valid) return fontlib_GetStringWidth(str);
+    else return gfx_GetStringWidth(str);
+}
+
+void optix_DrawStringL(char *str, size_t max_chars) {
+    if (current_context->data->font_valid) fontlib_DrawStringL(str, max_chars);
+    else {
+        char temp = str[max_chars + 1];
+        str[max_chars + 1] = '\0';
+        //since we know the fontlib cursor position will always be set regardless of whether
+        //or not the font is valid
+        gfx_PrintStringXY(str, fontlib_GetCursorX(), fontlib_GetCursorY());
+        str[max_chars + 1] = temp;
+    }
+}
+
+
 
 //stolen and modified from DrDnar
 //link: https://github.com/drdnar/open-adventure-ce/blob/db326b80753669cddf4a86697e14cdade8f49899/style.c#L186
@@ -49,14 +80,15 @@ char *optix_PrintStringWrapped_fontlibc(const char *string, bool fake_print) {
     do {
         /* Check if the next word can fit on the current line */
         str_width = fontlib_GetStringWidth(string);
-        if (x + str_width < right)
+        if (x + str_width <= right)
             if (!fake_print) x = fontlib_DrawString(string);
             else x += str_width;
         else {
             /* If the word is super-long such that it won't fit in the window,
              * then forcibly print it starting on a new line. */
             if (str_width != 0) {
-                if (str_width > width && x == left)
+                //altered to make this greater than or equal to
+                if (str_width >= width && x == left)
                     if (!fake_print) x = fontlib_DrawString(string);
                     else {
                         do x += (str_width = fontlib_GetGlyphWidth(*string++));
@@ -96,7 +128,7 @@ char *optix_PrintStringWrapped_fontlibc(const char *string, bool fake_print) {
             string++;
             /* We do actually need to check if there's space to print the
              * space. */
-            if (x + space_width < right) {
+            if (x + space_width <= right) {
                 if (!fake_print) fontlib_DrawGlyph(' ');
                 x += space_width;
             }
@@ -113,7 +145,7 @@ char *optix_PrintStringWrapped_fontlibc(const char *string, bool fake_print) {
     } while (true);
     if (!fake_print) fontlib_ClearEOL();
     fontlib_SetAlternateStopCode(old_stop);
-    return string;
+    return (char *) string;
 }
 
 void optix_UpdateText_default(struct optix_widget *widget) {
@@ -122,83 +154,94 @@ void optix_UpdateText_default(struct optix_widget *widget) {
         int max_lines = widget->transform.height / TEXT_SPACING;
         int lines_to_render = max_lines < text->num_lines ? max_lines : text->num_lines;
         //handle the scrolling of the text
-        bool up_pressed = current_context->settings->cursor_active ? (kb_Data[6] & kb_Sub) : (kb_Data[7] & kb_Up);
-        bool down_pressed = current_context->settings->cursor_active ? (kb_Data[6] & kb_Add) : (kb_Data[7] & kb_Down);
-        if (current_context->data->can_press && down_pressed) {
+        bool up_pressed = current_context->settings->cursor_active ? optix_DefaultKeyIsDown(KEY_SUB) & KEY_PRESSED : optix_DefaultKeyIsDown(KEY_UP) & KEY_PRESSED;
+        bool down_pressed = current_context->settings->cursor_active ? optix_DefaultKeyIsDown(KEY_ADD) & KEY_PRESSED : optix_DefaultKeyIsDown(KEY_DOWN) & KEY_PRESSED;
+        if (down_pressed) {
             text->min = text->min < text->num_lines - lines_to_render ? text->min + 1 : text->min;
-            current_context->data->can_press = false;
             widget->state.needs_redraw = true;
-        } else if (current_context->data->can_press && up_pressed) {
+        }
+        if (up_pressed) {
             text->min = text->min > 0 ? text->min - 1 : 0;
-            current_context->data->can_press = false;
             widget->state.needs_redraw = true;
         }
     }
-    //all we need to do here is to update the wrap if necessary
-    if (current_context->settings->cursor_active) current_context->data->can_press = !kb_AnyKey();
-    if (text->needs_offset_update) optix_WrapText(text);
 }
 
 void optix_RenderText_default(struct optix_widget *widget) {
     struct optix_text *text = (struct optix_text *) widget;
     if (widget->state.visible && widget->state.needs_redraw) {
+        if (text->use_custom_color) optix_SetTextColor(text->custom_fg_color, text->custom_bg_color);
         if (current_context->data->font_valid) {
             int max_lines = widget->transform.height / TEXT_SPACING;
             int lines_to_render = max_lines < text->num_lines ? max_lines : text->num_lines;
+            int i = 0;
+            char *str = text->text;
             fontlib_SetWindow(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height);
             if (text->background_rectangle)
                 optix_OutlinedRectangle_WithBevel(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height,           //x, y, width, height
                 BUTTON_BG_COLOR_UNSELECTED_INDEX, WINDOW_BORDER_BEVEL_DARK_INDEX, WINDOW_BORDER_BEVEL_LIGHT_INDEX);                                      //bevel (make it look depressed)
-            for (int i = text->min; i < text->min + lines_to_render; i++) {
-                size_t num_chars = i == text->num_lines - 1 ? strlen(text->text) : (size_t) (text->offsets[i + 1] - text->offsets[i]);
-                size_t line_width = optix_GetStringWidthL(text->offsets[i], num_chars);
-                //fontlib_SetCursorPosition((widget->transform.x + line_width / 2) * text->alignment + text->x_offset, widget->transform.y + i * TEXT_SPACING);
-                fontlib_SetCursorPosition(widget->transform.x, widget->transform.y + (i - text->min) * TEXT_SPACING);
-                if (i < text->num_lines) fontlib_DrawStringL(text->offsets[i], num_chars);
-                else fontlib_DrawString(text->offsets[i]);
+            //if the text is only one line, I think it's fair to make the assumption that it can just be printed (this will fix some issues with the
+            //optix_PrintStringWrapped_fontlibc function not working correctly for single-line text with a window the same width as the string as well)
+            while (i < text->min + lines_to_render) {
+                char *old_str = str;
+                bool special_character_processed = false;
+                //only print if we're past  the text min
+                fontlib_SetCursorPosition(widget->transform.x, widget->transform.y + (i < text->min ? 0 : i - text->min) * TEXT_SPACING);
+                str = optix_PrintStringWrapped_fontlibc(str, true);
+                switch (*str) {
+                    case '\n':
+                    //add more here later if necessary
+                        special_character_processed = true;
+                        break;
+                    default:
+                        break;
+                }
+                //we should print with the appropriate alignment
+                if (i >= text->min) {
+                    size_t str_length = optix_GetStringWidthL(old_str, (size_t) (str - old_str + (!special_character_processed)));
+                    unsigned int new_x_pos = widget->transform.x + (text->alignment * ((widget->transform.width - str_length) / 2));
+                    fontlib_SetCursorPosition(new_x_pos, fontlib_GetCursorY());
+                    optix_DrawStringL(old_str, (size_t) (str - old_str + (!special_character_processed)));
+                }
+                if (special_character_processed) str++;
+                i++;
+                if (*str == '\0' || str == text->text) {
+                    if (str == text->text) dbg_sprintf(dbgout, "WE'RE BREAKING, TAKE NOTICE!!!!!!\n");
+                    break;
+                }
             }
-            //fontlib_SetCursorPosition(widget->transform.x, widget->transform.y);
-            //fontlib_DrawString(text->text);
         } else gfx_PrintStringXY(text->text, widget->transform.x, widget->transform.y);
     }
 }
 
-void optix_WrapText(struct optix_widget *widget) {
+
+void optix_GetTextNumLines(struct optix_widget *widget) {
     struct optix_text *text = (struct optix_text *) widget;
+    //struct optix_input_box *input_box = (struct optix_input_box *) widget;
     //all we need to do here is to update the wrap if necessary
-    int num_lines = 0;
     char *str = text->text;
-    bool multiple_lines = true;
+    char *last_str = text->text;
+    text->num_lines = 0;
     fontlib_SetWindow(widget->transform.x, widget->transform.y, widget->transform.width, widget->transform.height);
     fontlib_SetCursorPosition(widget->transform.x, widget->transform.y);
-    //basically we don't want to do any of this is the string is already going to fit
-    if (optix_GetStringWidthL(text->text, strlen(text->text)) <= widget->transform.width) multiple_lines = false;
-    dbg_sprintf(dbgout, "Multiple lines: %d\n", multiple_lines);
-    do {
-        num_lines++;
-        //dbg_sprintf(dbgout, "Reallocating...%d\n", num_lines);
-        if (num_lines > text->num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
-        //dbg_sprintf(dbgout, "Success.\n");
-        text->offsets[num_lines - 1] = str;
-    } while (multiple_lines && (*(str = optix_PrintStringWrapped_fontlibc(str, true)) != '\0') && str != text->text);
-    //} //else if (num_lines != text->num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
-    //cut it down if we need to
-    //or if it has too few lines (if it's one line, maybe)
-    if (text->num_lines > num_lines) text->offsets = realloc(text->offsets, sizeof(char *) * num_lines);
-    text->num_lines = num_lines;
-    text->offsets[0] = text->text;
-    //have this too
-    text->needs_offset_update = false;
+    while (true) {
+        last_str = str;
+        str = optix_PrintStringWrapped_fontlibc(str, true);
+        if (*str == '\n') str++;
+        text->num_lines++;
+        if (*str == '\0' || str == text->text || str == last_str) break;
+    }
 }
 
 
 //sets the default font, which is in an appvar
 bool optix_InitializeFont(void) {
     fontlib_font_t *font_pack;
-    if (font_pack = fontlib_GetFontByIndex(DEFAULT_FONT_PACK_NAME, 0)) {
+    if ((font_pack = fontlib_GetFontByIndex(DEFAULT_FONT_PACK_NAME, 0))) {
         fontlib_SetFont(font_pack, 0);
         fontlib_SetColors(TEXT_FG_COLOR_INDEX, TEXT_BG_COLOR_INDEX);
         fontlib_SetTransparency(true);
+        //fontlib_SetNewlineOptions(FONTLIB_AUTO_CLEAR_TO_EOL);
     }
     current_context->data->font_valid = (bool) font_pack;
     return (bool) font_pack;

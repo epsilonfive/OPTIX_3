@@ -58,222 +58,227 @@ _toggle_cursor:
 	section	.text,"ax",@progbits
 	public	_main
 _main:
-	ld	hl, -943
+	ld	hl, -1959
 	call	__frameset
-	ld	bc, -169
+	ld	bc, -139
 	lea	hl, ix + 0
 	add	hl, bc
-	ld	bc, -901
+	ld	bc, -1938
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	(iy + 0), hl
-	ld	bc, -324
+	ld	bc, -279
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	bc, -1881
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	(hl), iy
+	ld	bc, -419
+	lea	hl, ix + 0
+	add	hl, bc
+	push	ix
+	ld	bc, -1875
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	ld	bc, -571
 	lea	hl, ix + 0
 	add	hl, bc
 	push	hl
 	pop	de
 	push	ix
-	ld	bc, -868
+	ld	bc, -1896
 	add	ix, bc
 	ld	(ix + 0), de
 	pop	ix
-	ld	bc, -453
-	lea	hl, ix + 0
-	add	hl, bc
-	push	ix
-	ld	bc, -859
-	add	ix, bc
-	ld	(ix + 0), hl
-	pop	ix
 	ld	(ix + -3), de
-	ld	de, -582
-	lea	hl, ix + 0
-	add	hl, de
-	push	hl
-	pop	bc
 	push	ix
-	ld	de, -865
+	ld	de, -1587
+	add	ix, de
+	lea	bc, ix + 0
+	pop	ix
+	push	ix
+	ld	de, -1917
 	add	ix, de
 	ld	(ix + 0), bc
 	pop	ix
-	ld	de, -710
+	ld	de, -1726
 	lea	hl, ix + 0
 	add	hl, de
 	push	ix
-	ld	de, -862
+	ld	de, -1872
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
-	ld	de, -850
+	ld	de, -1863
 	lea	hl, ix + 0
 	add	hl, de
 	push	ix
-	ld	de, -853
+	ld	de, -1869
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
 	lea	hl, ix + -62
 	push	ix
-	ld	de, -919
+	ld	de, -1941
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
 	lea	hl, ix + -114
 	push	ix
-	ld	de, -922
+	ld	de, -1944
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
 	lea	hl, ix + -116
 	push	ix
-	ld	de, -928
+	ld	de, -1908
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
 	lea	hl, ix + -121
 	push	ix
-	ld	de, -925
+	ld	de, -1947
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
-	ld	de, -901
-	lea	hl, ix + 0
-	add	hl, de
-	ld	iy, (hl)
+	lea	hl, iy + 110
+	push	ix
+	ld	de, -1899
+	add	ix, de
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 74
+	push	ix
+	ld	de, -1935
+	add	ix, de
+	ld	(ix + 0), hl
+	pop	ix
 	lea	hl, iy + 0
-	ld	de, -889
+	ld	de, -1866
 	lea	iy, ix + 0
 	add	iy, de
 	ld	(iy + 0), hl
+	ld	de, -1875
+	lea	hl, ix + 0
+	add	hl, de
+	ld	iy, (hl)
+	lea	hl, iy + 116
+	push	ix
+	ld	de, -1932
+	add	ix, de
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 42
+	push	ix
+	ld	de, -1893
+	add	ix, de
+	ld	(ix + 0), hl
+	pop	ix
 	ld	de, (ix + -3)
+	lea	hl, iy + 6
+	ld	(ix + -3), bc
+	ld	bc, -1929
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	(iy + 0), hl
 	push	de
 	pop	iy
-	lea	hl, iy + 119
+	lea	hl, iy + 122
 	push	ix
-	ld	de, -916
+	ld	de, -1926
+	add	ix, de
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 88
+	push	ix
+	ld	de, -1920
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
 	lea	hl, iy + 45
 	push	ix
-	ld	de, -856
+	ld	de, -1887
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
-	lea	hl, iy + 21
-	ld	de, -913
+	lea	hl, iy + 33
+	push	ix
+	ld	de, -1959
+	add	ix, de
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 0
+	ld	de, -1884
 	lea	iy, ix + 0
 	add	iy, de
 	ld	(iy + 0), hl
-	ld	de, -859
-	lea	hl, ix + 0
-	add	hl, de
-	ld	iy, (hl)
-	lea	hl, iy + 76
-	push	ix
-	ld	de, -886
-	add	ix, de
-	ld	(ix + 0), hl
-	pop	ix
-	lea	hl, iy + 40
-	push	ix
-	ld	de, -910
-	add	ix, de
-	ld	(ix + 0), hl
-	pop	ix
-	lea	hl, iy + 4
-	ld	de, -907
-	lea	iy, ix + 0
-	add	iy, de
-	ld	(iy + 0), hl
+	ld	bc, (ix + -3)
 	push	bc
 	pop	iy
-	lea	hl, iy + 99
-	push	ix
-	ld	bc, -898
-	add	ix, bc
-	ld	(ix + 0), hl
-	pop	ix
-	lea	hl, iy + 56
-	push	ix
-	ld	bc, -880
-	add	ix, bc
-	ld	(ix + 0), hl
-	pop	ix
-	lea	hl, iy + 44
-	push	ix
-	ld	bc, -943
-	add	ix, bc
-	ld	(ix + 0), hl
-	pop	ix
-	lea	hl, iy + 11
-	ld	bc, -874
+	lea	hl, iy + 16
+	ld	bc, -1923
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	(iy + 0), hl
-	ld	bc, -862
+	ld	bc, -1872
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
-	lea	hl, iy + 93
+	lea	hl, iy + 109
 	push	ix
-	ld	bc, -883
+	ld	bc, -1914
 	add	ix, bc
 	ld	(ix + 0), hl
 	pop	ix
 	lea	hl, iy + 52
 	push	ix
-	ld	bc, -904
+	ld	bc, -1911
 	add	ix, bc
 	ld	(ix + 0), hl
 	pop	ix
 	lea	hl, iy + 9
 	push	ix
-	ld	bc, -877
+	ld	bc, -1890
 	add	ix, bc
 	ld	(ix + 0), hl
 	pop	ix
 	lea	hl, iy + 3
-	ld	bc, -940
+	ld	bc, -1956
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	(iy + 0), hl
-	ld	bc, -853
+	ld	bc, -1869
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
-	lea	hl, iy + 110
+	lea	hl, iy + 107
 	push	ix
-	ld	bc, -871
-	add	ix, bc
-	ld	(ix + 0), hl
-	pop	ix
-	lea	hl, iy + 109
-	push	ix
-	ld	bc, -937
-	add	ix, bc
-	ld	(ix + 0), hl
-	pop	ix
-	lea	hl, iy + 69
-	push	ix
-	ld	bc, -892
+	ld	bc, -1878
 	add	ix, bc
 	ld	(ix + 0), hl
 	pop	ix
 	lea	hl, iy + 66
 	push	ix
-	ld	bc, -934
+	ld	bc, -1902
 	add	ix, bc
 	ld	(ix + 0), hl
 	pop	ix
-	lea	hl, iy + 24
+	lea	hl, iy + 63
 	push	ix
-	ld	bc, -895
+	ld	bc, -1953
+	add	ix, bc
+	ld	(ix + 0), hl
+	pop	ix
+	lea	hl, iy + 21
+	push	ix
+	ld	bc, -1905
 	add	ix, bc
 	ld	(ix + 0), hl
 	pop	ix
 	lea	hl, iy + 0
-	ld	bc, -931
+	ld	bc, -1950
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	(iy + 0), hl
@@ -282,45 +287,45 @@ _main:
 	push	hl
 	call	_gfx_SetDraw
 	pop	hl
-	ld	bc, -922
+	ld	bc, -1944
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	push	hl
 	call	_optix_InitializeColors
 	pop	hl
-	ld	bc, -919
+	ld	bc, -1941
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	push	hl
 	call	_optix_InitializeCursor
 	pop	hl
-	ld	bc, -928
+	ld	bc, -1908
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	push	hl
 	call	_optix_InitializeSettings
 	pop	hl
-	ld	bc, -925
+	ld	bc, -1947
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	push	hl
 	call	_optix_InitializeData
 	pop	hl
-	ld	bc, -901
+	ld	bc, -1908
 	lea	hl, ix + 0
 	add	hl, bc
-	ld	iy, (hl)
+	ld	hl, (hl)
 	push	ix
-	ld	bc, -928
+	ld	bc, -1938
 	add	ix, bc
-	ld	hl, (ix + 0)
+	ld	iy, (ix + 0)
 	pop	ix
-	ld	(iy + 33), hl
-	ld	bc, -925
+	ld	(iy + 3), hl
+	ld	bc, -1947
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -329,7 +334,7 @@ _main:
 	add	ix, bc
 	ld	(ix + 0), hl
 	pop	ix
-	ld	bc, -922
+	ld	bc, -1944
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -338,14 +343,14 @@ _main:
 	add	ix, bc
 	ld	(ix + 0), hl
 	pop	ix
-	ld	bc, -919
+	ld	bc, -1941
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	ld	(ix + -127), hl
 	ld	hl, 0
 	ld	(ix + -124), hl
-	pea	iy + 33
+	pea	iy + 3
 	call	_optix_SetContext
 	pop	hl
 	call	_optix_InitializeFont
@@ -354,7 +359,7 @@ _main:
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -889
+	ld	bc, -1899
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -364,17 +369,21 @@ _main:
 	pop	hl
 	pop	hl
 	ld	hl, 7
-	ld	bc, -901
+	ld	bc, -1881
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
 	ld.sis	de, 320
-	ld	(iy + 7), e
-	ld	(iy + 8), d
-	ld	(iy + 9), -16
-	ld	(iy + 30), 1
+	ld	(iy + 117), e
+	ld	(iy + 118), d
+	ld	(iy + 119), -16
+	ld	bc, -1938
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	iy, (iy + 0)
+	ld	(iy + 0), 1
 	push	hl
-	ld	bc, -889
+	ld	bc, -1899
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -386,7 +395,7 @@ _main:
 	push	hl
 	ld	hl, L___const.main.test_text
 	push	hl
-	ld	bc, -916
+	ld	bc, -1935
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -400,7 +409,7 @@ _main:
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -856
+	ld	bc, -1866
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -410,20 +419,20 @@ _main:
 	pop	hl
 	pop	hl
 	ld.sis	hl, 50
-	ld	bc, -868
+	ld	bc, -1881
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
-	ld	(iy + 52), l
-	ld	(iy + 53), h
-	ld	(iy + 54), 48
-	ld	bc, -856
+	ld	(iy + 7), l
+	ld	(iy + 8), h
+	ld	(iy + 9), 48
+	ld	bc, -1866
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	push	hl
 	pop	iy
-	ld	bc, -901
+	ld	bc, -1938
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	(hl), iy
@@ -437,24 +446,24 @@ _main:
 	pop	hl
 	pop	hl
 	ld	hl, 0
-	ld	bc, -868
+	ld	bc, -1881
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
-	ld	(iy + 78), hl
-	ld	(iy + 81), hl
+	ld	(iy + 33), hl
+	ld	(iy + 36), hl
 	ld.sis	hl, 25
-	ld	(iy + 84), l
-	ld	(iy + 85), h
-	ld	(iy + 86), 25
-	ld	(iy + 87), 1
-	ld	(iy + 88), 1
+	ld	(iy + 39), l
+	ld	(iy + 40), h
+	ld	(iy + 41), 25
+	ld	(iy + 42), 1
+	ld	(iy + 43), 1
 	ld	hl, 6
 	push	hl
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -901
+	ld	bc, -1938
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
@@ -463,30 +472,30 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -868
+	ld	bc, -1881
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
 	push	ix
-	ld	bc, -916
+	ld	bc, -1935
 	add	ix, bc
 	ld	hl, (ix + 0)
 	pop	ix
-	ld	(iy + 95), hl
+	ld	(iy + 50), hl
 	ld	hl, 0
-	ld	(iy + 98), hl
+	ld	(iy + 53), hl
 	ld	de, 0
-	ld	(iy + 101), de
-	ld	(iy + 104), de
+	ld	(iy + 56), de
+	ld	(iy + 59), de
 	ld	hl, 4
-	ld	(iy + 107), hl
+	ld	(iy + 62), hl
 	ld	hl, 1
-	ld	(iy + 110), hl
-	ld	(iy + 113), de
-	ld	(iy + 116), de
+	ld	(iy + 65), hl
+	ld	(iy + 68), de
+	ld	(iy + 71), de
 	ld	hl, 3
 	push	hl
-	ld	bc, -856
+	ld	bc, -1866
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -498,7 +507,7 @@ _main:
 	push	hl
 	ld	hl, L___const.main.test_text_b
 	push	hl
-	ld	bc, -913
+	ld	bc, -1932
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -512,7 +521,7 @@ _main:
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -886
+	ld	bc, -1893
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -522,23 +531,17 @@ _main:
 	pop	hl
 	pop	hl
 	ld.sis	hl, 50
-	ld	bc, -859
+	ld	bc, -1875
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
-	ld	(iy + 83), l
-	ld	(iy + 84), h
-	ld	(iy + 85), 24
-	ld	bc, -886
+	ld	(iy + 49), l
+	ld	(iy + 50), h
+	ld	(iy + 51), 24
+	ld	bc, -1893
 	lea	hl, ix + 0
 	add	hl, bc
-	ld	hl, (hl)
-	push	hl
-	pop	iy
-	ld	bc, -901
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	(hl), iy
+	ld	iy, (hl)
 	ld	hl, 3
 	push	hl
 	ld	hl, 1
@@ -549,57 +552,44 @@ _main:
 	pop	hl
 	pop	hl
 	ld	hl, 0
-	ld	bc, -859
+	ld	bc, -1875
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
-	ld	(iy + 109), hl
-	ld	(iy + 112), hl
+	ld	(iy + 75), hl
+	ld	(iy + 78), hl
+	ex	de, hl
 	ld.sis	hl, 25
-	ld	(iy + 115), l
-	ld	(iy + 116), h
-	ld	(iy + 117), 25
-	ld	(iy + 118), 1
-	ld	(iy + 119), 1
-	ld	hl, 6
-	push	hl
-	or	a, a
-	sbc	hl, hl
-	push	hl
-	ld	bc, -901
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	iy, (hl)
-	pea	iy + 44
-	call	_memset
-	pop	hl
-	pop	hl
-	pop	hl
-	ld	bc, -913
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	hl, (hl)
-	ld	bc, -859
-	lea	iy, ix + 0
-	add	iy, bc
-	ld	iy, (iy + 0)
-	ld	(iy + 126), hl
+	ld	(iy + 81), l
+	ld	(iy + 82), h
+	ld	(iy + 83), 25
+	ld	(iy + 84), 1
+	ld	(iy + 85), 0
+	ld	(iy + 86), 4
+	ld	(iy + 87), 0
 	ld	hl, 0
-	ld	bc, -868
-	lea	iy, ix + 0
-	add	iy, bc
-	ld	iy, (iy + 0)
-	ld	(iy + 0), hl
-	ld	(iy + 3), hl
-	ld	(iy + 6), hl
+	ld	(iy + 88), hl
+	ld	a, 0
+	ld	(iy + 91), a
+	ld	(ix + -3), de
+	push	ix
+	ld	de, -1932
+	add	ix, de
+	ld	bc, (ix + 0)
+	pop	ix
+	ld	(iy + 92), bc
+	ld	de, (ix + -3)
+	ld	(iy + 95), de
+	ld	(iy + 98), hl
+	ld	(iy + 101), hl
 	ld	de, 2
-	ld	(iy + 9), de
-	ld	(iy + 12), de
-	ld	(iy + 15), hl
-	ld	(iy + 18), hl
+	ld	(iy + 104), de
+	ld	(iy + 107), de
+	ld	(iy + 110), hl
+	ld	(iy + 113), hl
 	ld	hl, 3
 	push	hl
-	ld	bc, -886
+	ld	bc, -1893
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -607,18 +597,18 @@ _main:
 	call	_optix_InitializeWidget
 	pop	hl
 	pop	hl
-	ld	bc, -868
+	ld	bc, -1875
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
-	ld	(iy + -43), 2
-	ld	(iy + -42), 0
+	ld	(iy + 52), 2
+	ld	(iy + 53), 0
 	ld	hl, 35
 	push	hl
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -910
+	ld	bc, -1929
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -627,20 +617,20 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -856
+	ld	bc, -1866
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	bc, -859
+	ld	bc, -1875
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
-	ld	(iy + 70), hl
-	ld	(iy + 73), 3
-	ld	(iy + 75), 1
+	ld	(iy + 36), hl
+	ld	(iy + 39), 3
+	ld	(iy + 41), 1
 	ld	hl, 6
 	push	hl
-	ld	bc, -910
+	ld	bc, -1929
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -653,7 +643,7 @@ _main:
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -907
+	ld	bc, -1926
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -662,19 +652,19 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -856
+	ld	bc, -1866
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	bc, -859
+	ld	bc, -1875
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
-	ld	(iy + 34), hl
-	ld	(iy + 37), 1
+	ld	(iy + 0), hl
+	ld	(iy + 3), 1
 	ld	hl, 6
 	push	hl
-	ld	bc, -907
+	ld	bc, -1926
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -687,7 +677,7 @@ _main:
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -898
+	ld	bc, -1920
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -696,36 +686,32 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -865
+	ld	bc, -1896
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
 	ld.sis	hl, 8
-	ld	(iy + 106), l
-	ld	(iy + 107), h
-	ld	(iy + 108), 48
+	ld	(iy + 95), l
+	ld	(iy + 96), h
+	ld	(iy + 97), 48
 	lea	hl, iy + 0
-	ld	bc, -868
+	ld	bc, -1881
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
-	ld	a, (iy + 52)
+	ld	a, (iy + 7)
 	push	hl
 	pop	iy
-	ld	(iy + 111), a
-	ld	bc, -856
+	ld	(iy + 100), a
+	ld	bc, -1866
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	bc, -859
-	lea	iy, ix + 0
-	add	iy, bc
-	ld	iy, (iy + 0)
-	ld	(iy + 0), hl
-	ld	(iy + 3), 1
+	ld	(iy + 118), hl
+	ld	(iy + 121), 1
 	ld	hl, 9
 	push	hl
-	ld	bc, -898
+	ld	bc, -1920
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -733,20 +719,20 @@ _main:
 	call	_optix_InitializeWidget
 	pop	hl
 	pop	hl
-	ld	bc, -865
+	ld	bc, -1896
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
-	ld	(iy + 56), 0
+	ld	(iy + 45), 0
 	ld	hl, 10
-	ld	(iy + 57), hl
+	ld	(iy + 46), hl
 	ld	hl, 100
-	ld	(iy + 60), hl
+	ld	(iy + 49), hl
 	ld.sis	hl, 200
-	ld	(iy + 63), l
-	ld	(iy + 64), h
-	ld	(iy + 65), 100
-	ld	bc, -880
+	ld	(iy + 52), l
+	ld	(iy + 53), h
+	ld	(iy + 54), 100
+	ld	bc, -1887
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
@@ -760,47 +746,47 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -865
+	ld	bc, -1896
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
 	push	ix
-	ld	bc, -856
+	ld	bc, -1866
 	add	ix, bc
 	ld	hl, (ix + 0)
 	pop	ix
-	ld	(iy + 44), hl
-	ld	bc, -886
+	ld	(iy + 33), hl
+	ld	bc, -1893
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	(iy + 47), hl
-	ld	bc, -898
+	ld	(iy + 36), hl
+	ld	bc, -1920
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	(iy + 50), hl
+	ld	(iy + 39), hl
 	ld	hl, 0
-	ld	(iy + 53), hl
-	ld	bc, -943
+	ld	(iy + 42), hl
+	ld	bc, -1959
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	(iy + 83), hl
-	ld	(iy + 86), 1
+	ld	(iy + 72), hl
+	ld	(iy + 75), 1
 	ld	hl, 0
-	ld	(iy + 87), hl
-	ld	(iy + 90), hl
-	ld	(iy + 93), l
-	ld	(iy + 94), h
+	ld	(iy + 76), hl
+	ld	(iy + 79), hl
+	ld	(iy + 82), l
+	ld	(iy + 83), h
 	ld.sis	hl, 50
-	ld	(iy + 95), l
-	ld	(iy + 96), h
-	ld	(iy + 97), 50
-	ld	(iy + 98), 0
+	ld	(iy + 84), l
+	ld	(iy + 85), h
+	ld	(iy + 86), 50
+	ld	(iy + 87), 0
 	ld	hl, 4
 	push	hl
-	ld	bc, -880
+	ld	bc, -1887
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -813,7 +799,7 @@ _main:
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -874
+	ld	bc, -1884
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -822,18 +808,18 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -880
+	ld	bc, -1887
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	bc, -865
+	ld	bc, -1896
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
-	ld	(iy + 41), hl
+	ld	(iy + 30), hl
 	ld	hl, 5
 	push	hl
-	ld	bc, -874
+	ld	bc, -1884
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -841,12 +827,32 @@ _main:
 	call	_optix_InitializeWidget
 	pop	hl
 	pop	hl
+	ld	bc, -1923
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	iy, (hl)
+	ld	hl, 998
+	push	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	pea	iy + 2
+	call	_memset
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	bc, -1917
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	iy, (hl)
+	ld	(iy + 16), 78
+	ld	(iy + 17), 79
 	ld	hl, 46
 	push	hl
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -883
+	ld	bc, -1914
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -855,27 +861,27 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -862
+	ld	bc, -1872
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
 	ld.sis	hl, 80
-	ld	(iy + 100), l
-	ld	(iy + 101), h
-	ld	(iy + 102), 50
-	ld	(iy + 123), 1
+	ld	(iy + 116), l
+	ld	(iy + 117), h
+	ld	(iy + 118), 50
+	ld	bc, -1917
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	iy, (hl)
+	ld	(iy + 0), 1
 	ld	hl, L_.str.22
-	ld	(iy + 125), hl
+	ld	(iy + 2), hl
 	ld	hl, 1
-	ld	bc, -865
-	lea	iy, ix + 0
-	add	iy, bc
-	ld	iy, (iy + 0)
-	ld	(iy + 0), hl
-	ld	(iy + 9), 1
+	ld	(iy + 5), hl
+	ld	(iy + 14), 1
 	dec	hl
 	push	hl
-	ld	bc, -883
+	ld	bc, -1914
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -883,43 +889,52 @@ _main:
 	call	_optix_InitializeWidget
 	pop	hl
 	pop	hl
-	ld	bc, -865
+	ld	bc, -1917
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
-	ld	(iy + -24), 1
-	ld	(iy + -25), 1
-	ld	hl, 41
-	push	hl
-	or	a, a
-	sbc	hl, hl
-	push	hl
-	ld	bc, -904
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	hl, (hl)
+	ld	(iy + -19), 1
+	ld	(iy + -20), 1
+	ld	bc, -1911
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	hl, (iy + 0)
+	inc	hl
+	ld	de, 56
+	push	de
+	ld	de, 0
+	push	de
 	push	hl
 	call	_memset
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -862
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	iy, (hl)
-	ld.sis	hl, 100
-	ld	(iy + 59), l
-	ld	(iy + 60), h
-	ld	(iy + 61), 12
-	ld	(iy + 62), 1
-	ld	bc, -883
+	ld	bc, -1914
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	(iy + 82), hl
+	ld	a, l
+	ld	bc, -1872
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	iy, (hl)
+	ld	(iy + 52), a
+	ld.sis	hl, 80
+	ld	(iy + 59), l
+	ld	(iy + 60), h
+	ld	(iy + 61), 60
+	ld	(iy + 62), 1
+	ld	(iy + 82), 1
+	ld	bc, -1923
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
+	ld	(iy + 84), hl
+	ld	(iy + 96), 1
+	ld	(iy + 97), 1
 	ld	hl, 8
 	push	hl
-	ld	bc, -904
+	ld	bc, -1911
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -927,7 +942,7 @@ _main:
 	call	_optix_InitializeWidget
 	pop	hl
 	pop	hl
-	ld	bc, -862
+	ld	bc, -1872
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
@@ -940,7 +955,7 @@ _main:
 	ld	(iy + 16), l
 	ld	(iy + 17), h
 	ld	(iy + 18), 100
-	ld	bc, -877
+	ld	bc, -1890
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
@@ -954,19 +969,19 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -862
+	ld	bc, -1872
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
 	push	ix
-	ld	bc, -883
+	ld	bc, -1911
 	add	ix, bc
 	ld	hl, (ix + 0)
 	pop	ix
 	ld	(iy + 3), hl
 	ld	hl, 0
 	ld	(iy + 6), hl
-	ld	bc, -940
+	ld	bc, -1956
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -985,7 +1000,7 @@ _main:
 	ld	(iy + 51), 0
 	ld	hl, 4
 	push	hl
-	ld	bc, -877
+	ld	bc, -1890
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -998,7 +1013,7 @@ _main:
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -871
+	ld	bc, -1878
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -1007,18 +1022,18 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -877
+	ld	bc, -1890
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	bc, -862
+	ld	bc, -1872
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
 	ld	(iy + 0), hl
 	ld	hl, 5
 	push	hl
-	ld	bc, -871
+	ld	bc, -1878
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -1026,17 +1041,12 @@ _main:
 	call	_optix_InitializeWidget
 	pop	hl
 	pop	hl
-	ld	bc, -853
-	lea	hl, ix + 0
-	add	hl, bc
-	ld	iy, (hl)
-	ld	(iy + 109), 0
-	ld	hl, 37
+	ld	hl, 38
 	push	hl
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -892
+	ld	bc, -1902
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -1045,22 +1055,22 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -853
+	ld	bc, -1869
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
 	ld.sis	hl, 10
-	ld	(iy + 76), l
-	ld	(iy + 77), h
-	ld	(iy + 78), 10
-	ld	bc, -937
+	ld	(iy + 73), l
+	ld	(iy + 74), h
+	ld	(iy + 75), 10
+	ld	bc, -1908
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	(iy + 106), hl
+	ld	(iy + 104), hl
 	ld	hl, 10
 	push	hl
-	ld	bc, -892
+	ld	bc, -1902
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -1069,15 +1079,15 @@ _main:
 	pop	hl
 	pop	hl
 	ld	de, 0
-	ld	bc, -853
+	ld	bc, -1869
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
-	ld	(iy + 66), de
+	ld	(iy + 63), de
 	ld	hl, 30
 	push	hl
 	push	de
-	ld	bc, -895
+	ld	bc, -1905
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -1086,33 +1096,33 @@ _main:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -853
+	ld	bc, -1869
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
 	ld	hl, 30
-	ld	(iy + 28), hl
+	ld	(iy + 25), hl
 	ld.sis	hl, 50
-	ld	(iy + 31), l
-	ld	(iy + 32), h
-	ld	(iy + 33), 8
+	ld	(iy + 28), l
+	ld	(iy + 29), h
+	ld	(iy + 30), 8
 	or	a, a
 	sbc	hl, hl
-	ld	(iy + 54), hl
+	ld	(iy + 51), hl
 	ld	hl, 10
-	ld	(iy + 57), hl
-	ld	bc, -934
+	ld	(iy + 54), hl
+	ld	bc, -1953
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	(iy + 60), hl
-	ld	(iy + 63), 0
+	ld	(iy + 57), hl
+	ld	(iy + 60), 0
 	ld.sis	hl, 0
-	ld	(iy + 64), l
-	ld	(iy + 65), h
+	ld	(iy + 61), l
+	ld	(iy + 62), h
 	ld	hl, 11
 	push	hl
-	ld	bc, -895
+	ld	bc, -1905
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -1120,30 +1130,30 @@ _main:
 	call	_optix_InitializeWidget
 	pop	hl
 	pop	hl
-	ld	bc, -874
+	ld	bc, -1884
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	push	hl
 	call	_optix_RecursiveAlign
 	pop	hl
-	ld	bc, -871
+	ld	bc, -1878
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	push	hl
 	call	_optix_RecursiveAlign
 	pop	hl
-	ld	bc, -871
+	ld	bc, -1878
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	push	hl
-	ld	bc, -853
+	ld	bc, -1869
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	iy, (hl)
-	pea	iy + 21
+	pea	iy + 18
 	call	_optix_CopyElement
 	pop	hl
 	pop	hl
@@ -1151,7 +1161,7 @@ _main:
 	push	hl
 	ld	hl, 50
 	push	hl
-	ld	bc, -880
+	ld	bc, -1887
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -1164,7 +1174,7 @@ _main:
 	push	hl
 	ld	hl, 120
 	push	hl
-	ld	bc, -877
+	ld	bc, -1890
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -1176,47 +1186,56 @@ _main:
 	ld	iy, (_current_context)
 	ld	hl, (iy + 3)
 	ld	(hl), 1
-	ld	bc, -889
+	ld	bc, -1899
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	bc, -853
+	ld	bc, -1869
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
 	ld	(iy + 0), hl
-	ld	bc, -892
+	ld	bc, -1902
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	de, (hl)
 	ld	(iy + 3), de
 	push	ix
-	ld	bc, -895
+	ld	bc, -1905
 	add	ix, bc
 	ld	hl, (ix + 0)
 	pop	ix
 	ld	(iy + 6), hl
-	ld	hl, (iy + 21)
+	ld	bc, -1878
+	lea	hl, ix + 0
+	add	hl, bc
+	ld	hl, (hl)
 	ld	(iy + 9), hl
-	ld	bc, -871
+	ld	bc, -1884
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	ld	(iy + 12), hl
-	ld	bc, -874
+	ld	hl, 0
+	ld	(iy + 15), hl
+	ld	a, (ix + -116)
+	ld	bc, -1866
 	lea	hl, ix + 0
 	add	hl, bc
-	ld	hl, (hl)
-	ld	(iy + 15), hl
-	ld	hl, 0
-	ld	(iy + 18), hl
+	ld	(hl), a
+	ld	(ix + -116), 0
 	push	de
 	call	_optix_SetCurrentSelection
 	pop	hl
-	ld	bc, -931
+	ld	bc, -1866
 	lea	hl, ix + 0
 	add	hl, bc
-	ld	hl, (hl)
+	ld	a, (hl)
+	ld	(ix + -116), a
+	ld	bc, -1950
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	hl, (iy + 0)
 	ld	(ix + -124), hl
 BB4_1:
 	call	_optix_UpdateGUI

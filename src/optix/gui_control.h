@@ -4,8 +4,12 @@
 //includes
 #include <stdint.h>
 #include <stdbool.h>
+#include "input.h"
 
 //definitions
+//this is needed
+#define TIMER_FREQUENCY             32768
+//everything else
 #define OPTIX_NUM_TYPES             12
 #define OPTIX_TEXT_TYPE             0
 #define OPTIX_SPRITE_TYPE           1
@@ -37,17 +41,32 @@ struct optix_centering {
     int8_t y_offset;
 };
 
-//I'll just keep this in the window and menu objects for now
+//eventual addition: resizing "rules"-elements can hide themselves/scale differently when different scales
 struct optix_resize_info {
     bool resizable;
     //set to true to lock x or y to the original x/y
+    //if this is set, size will not be changed
     bool x_lock;
     bool y_lock;
-    //a reference transform, width will be subtracted to determine new scale (maybe if you wanted to have a fixed-size sidebar or something)
-    struct optix_transform *x_reference_transform;
-    struct optix_transform *y_reference_transform;
+    //both are floats from 0-1, and are relative to the size of the parent
+    float relative_width;
+    float relative_height;
+    //floats from 0-1, relative position within the parent object itself
+    //so with right centering and a relative size of 0.5, you'd want this to be -0.5
+    //with left centering and a relative size of 0.5, if you wanted it at the left edge it would be 0
+    //this is basically intelligent offset setting, as it'll shift things in a direction relative to the width/height of the parent
+    //you can use it with the x and y offsets in optix_centering as well, if you want it to be constant
+    //again, this is relative to the centering dictated by optix_centering
+    float relative_x_shift;
+    float relative_y_shift;
+    //simply the minimum width and height an object can have, and it will not go lower than
+    //probably only useful for windows, as this would break positioning otherwise
     uint16_t min_width;
     uint8_t min_height;
+    //and a constant number of pixels the resulting width and height should be changed by
+    //possibly useful if there's a constant size sidebar or something similar
+    int16_t x_size_change;
+    int8_t y_size_change;
 };
 
 struct optix_transform {
@@ -74,12 +93,27 @@ struct optix_widget {
     struct optix_transform transform;
     struct optix_centering centering;
     struct optix_state state;
+    struct optix_resize_info resize_info;
     void (*render)(struct optix_widget *);
     //the callback for updating
     void (*update)(struct optix_widget *);
     //array of child pointers (basically just substacks)
     //please make NULL if it isn't used
     struct optix_widget **child;
+};
+
+//for buttons and menus, and maybe others later as well
+struct optix_click_action {
+    void (*click_action)(void *);
+    void *click_args;
+};
+
+//so this will probably be in an array within the button/menu, and every loop, if it is selected,
+//the button/menu will check to see if any of these were pressed and if so run the action
+//should be fairly fast, I hope
+struct optix_alternate_key_click_action {
+    struct optix_click_action click_action;
+    uint8_t alternate_key;
 };
 
 //other structs
@@ -95,9 +129,10 @@ struct optix_gui_data {
     bool needs_blit;
     //if the font was loaded correctly, if not then the library should just use graphx for the text rendering
     bool font_valid;
-    bool can_press;
     //skKey
     uint8_t key;
+    //number of ticks
+    long ticks;
 };
 
 //do this later
@@ -106,7 +141,8 @@ struct optix_context {
     struct optix_gui_data *data;
     struct optix_colors *colors;
     struct optix_cursor *cursor;
-    struct optix_widget ***stack;
+    struct optix_input *input;
+    struct optix_widget **stack;
 };
 
 //functions

@@ -1,5 +1,13 @@
 #include "scroll_bar.h"
 
+#include <stdint.h>
+
+#include "../colors.h"
+#include "../shapes.h"
+
+#include "menu.h"
+
+
 //functions
 //we probably don't need this actually, unless more functionality needs to be added later on
 void optix_UpdateScrollBar_default(struct optix_widget *widget) {
@@ -12,8 +20,8 @@ void optix_UpdateScrollBar_default(struct optix_widget *widget) {
 void optix_RenderScrollBar_default(struct optix_widget *widget) {
     struct optix_scroll_bar *scroll_bar = (struct optix_scroll_bar *) widget;
     struct optix_menu *menu = (struct optix_menu *) scroll_bar->mirror;
-    struct optix_text *text = (struct optix_text *) scroll_bar->mirror;
-    int num_positions, current_position, displayed_positions;
+    //struct optix_text *text = (struct optix_text *) scroll_bar->mirror;
+    int num_positions = 0, current_position = 0, displayed_positions = 0;
     uint16_t offset;
     uint16_t size;
     //initialize these things, depending on the type

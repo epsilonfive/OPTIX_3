@@ -533,11 +533,11 @@ BB3_35:
 	section	.text,"ax",@progbits
 	public	_optix_WrapText
 _optix_WrapText:
-	ld	hl, -21
+	ld	hl, -25
 	call	__frameset
 	ld	iy, (ix + 6)
 	ld	hl, (iy + 32)
-	ld	(ix + -9), hl
+	ld	(ix + -12), hl
 	ld	hl, (iy + 1)
 	ld	a, (iy + 4)
 	ld	e, (iy + 7)
@@ -575,24 +575,56 @@ _optix_WrapText:
 	ld	hl, (ix + -3)
 	push	hl
 	call	_optix_GetStringWidthL
+	ld	(ix + -19), hl
+	pop	hl
+	pop	hl
 	ld	iy, (ix + 6)
-	ld	(ix + -12), hl
-	pop	hl
-	pop	hl
 	ld	l, (iy + 7)
 	ld	h, (iy + 8)
 	ld	de, 0
 	ld	e, l
 	ld	d, h
-	or	a, a
-	sbc	hl, hl
-	ld	(ix + -15), de
-	push	hl
-	pop	de
+	ld	h, 1
+	ld	l, 0
+	ld	(ix + -16), de
+	ld	de, 0
+	push	de
+	pop	iy
+	ld	(ix + -25), de
+	ld	bc, (ix + -12)
+	ld	(ix + -9), bc
 BB4_1:
 	push	de
 	pop	bc
-	ld	(ix + -3), hl
+	ld	(ix + -3), iy
+	ld	a, l
+	and	a, 1
+	xor	a, h
+	xor	a, h
+	bit	0, a
+	ld	(ix + -13), l
+	jq	nz, BB4_5
+	ld	iy, (ix + 6)
+	ld	a, (iy)
+	cp	a, 8
+	jq	nz, BB4_7
+	ld	hl, (iy + 32)
+	ld	de, (iy + 46)
+	add	hl, de
+	ld	de, (ix + -9)
+	or	a, a
+	sbc	hl, de
+	jq	nc, BB4_7
+	push	bc
+	pop	hl
+	dec	hl
+	ld	(iy + 49), hl
+	ld	a, 1
+	ld	(ix + -13), a
+	jq	BB4_7
+BB4_5:
+	ld	iy, (ix + 6)
+BB4_7:
 	ld	de, (iy + 41)
 	push	bc
 	pop	hl
@@ -600,10 +632,11 @@ BB4_1:
 	sbc	hl, de
 	call	__setflag
 	ld	(ix + -6), bc
-	jq	p, BB4_3
+	jq	p, BB4_9
 	ld	hl, (iy + 38)
-	jq	BB4_4
-BB4_3:
+	ld	de, (ix + -3)
+	jq	BB4_10
+BB4_9:
 	ld	de, (iy + 38)
 	ld	hl, (ix + -3)
 	ld	bc, 3
@@ -614,52 +647,89 @@ BB4_3:
 	ld	iy, (ix + 6)
 	pop	de
 	pop	de
-	ld	(iy + 38), hl
-BB4_4:
 	ld	de, (ix + -3)
+	ld	(iy + 38), hl
+BB4_10:
+	ld	bc, (ix + -19)
 	add	hl, de
 	ld	de, (ix + -9)
 	ld	(hl), de
-	ld	hl, (ix + -15)
-	ld	bc, (ix + -12)
+	ld	hl, (ix + -16)
 	or	a, a
 	sbc	hl, bc
-	jq	nc, BB4_7
+	jq	nc, BB4_15
 	ld	hl, 1
 	push	hl
 	push	de
 	call	_optix_PrintStringWrapped_fontlibc
-	ld	iy, (ix + 6)
 	pop	de
 	pop	de
-	ld	(ix + -9), hl
 	ld	a, (hl)
 	or	a, a
-	jq	z, BB4_7
+	ld	(ix + -22), hl
+	jq	z, BB4_16
 	ld	de, (ix + -6)
 	inc	de
-	ld	hl, (iy + 32)
-	ld	(ix + -18), hl
-	ld	hl, (ix + -3)
+	ld	iy, (ix + 6)
+	ld	bc, (iy + 32)
+	ld	(ix + -9), bc
+	ld	iy, (ix + -3)
 	ld	bc, 3
-	add	hl, bc
-	ld	(ix + -21), hl
-	ld	hl, (ix + -9)
-	ld	bc, (ix + -18)
+	add	iy, bc
+	ld	bc, (ix + -9)
 	or	a, a
 	sbc	hl, bc
-	ld	hl, (ix + -21)
+	ld	hl, (ix + -22)
+	ld	(ix + -9), hl
+	ld	l, (ix + -13)
+	ld	a, 1
+	ld	h, a
 	jq	nz, BB4_1
-BB4_7:
+	ld	bc, (ix + -6)
+	ld	(ix + -25), bc
+	ld	iy, (ix + 6)
+	ld	a, l
+	jq	BB4_18
+BB4_15:
+	ld	hl, (ix + -12)
+	ld	(ix + -22), hl
+	ld	bc, (ix + -6)
+	jq	BB4_17
+BB4_16:
+	ld	bc, (ix + -6)
+	ld	(ix + -25), bc
+	ld	iy, (ix + 6)
+BB4_17:
+	ld	a, (ix + -13)
+BB4_18:
+	and	a, 1
+	ld	l, 1
+	xor	a, l
+	inc	bc
+	xor	a, l
+	bit	0, a
+	jq	nz, BB4_22
+	ld	a, (iy)
+	cp	a, 8
+	jq	nz, BB4_22
+	ld	hl, (iy + 32)
+	ld	de, (iy + 46)
+	add	hl, de
+	ex	de, hl
+	ld	hl, (ix + -22)
+	or	a, a
+	sbc	hl, de
+	jq	c, BB4_22
+	ld	hl, (ix + -25)
+	ld	(iy + 49), hl
+BB4_22:
 	ld	de, (iy + 41)
-	ld	hl, (ix + -6)
-	inc	hl
-	push	hl
-	pop	bc
+	push	bc
+	pop	hl
 	or	a, a
 	sbc	hl, de
 	call	__setflag
-	jq	p, BB4_8
+	jq	p, BB4_24
 	ld	iy, (iy + 38)
 	ld	de, 3
 	ld	hl, (ix + -3)
@@ -673,10 +743,10 @@ BB4_7:
 	pop	de
 	pop	de
 	ld	(iy + 38), hl
-	jq	BB4_10
-BB4_8:
+	jq	BB4_25
+BB4_24:
 	ld	hl, (iy + 38)
-BB4_10:
+BB4_25:
 	ld	(iy + 41), bc
 	ld	de, (iy + 32)
 	ld	(hl), de

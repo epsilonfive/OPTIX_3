@@ -5,7 +5,7 @@
 _optix_CheckBoxValueXOR:
 	call	__frameset0
 	ld	iy, (ix + 6)
-	ld	hl, (iy + 37)
+	ld	hl, (iy + 38)
 	ld	a, (hl)
 	xor	a, 1
 	ld	(hl), a
@@ -64,7 +64,7 @@ _optix_RenderCheckBox_default:
 	ld	hl, 21
 	add	hl, sp
 	ld	sp, hl
-	ld	hl, (iy + 37)
+	ld	hl, (iy + 38)
 	ld	a, (hl)
 	ld	l, 1
 	xor	a, l

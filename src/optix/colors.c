@@ -3,6 +3,10 @@
 void optix_InitializeColors(struct optix_colors *colors) {
     struct optix_colors default_colors = {
         .bg =                              BG_COLOR_DEFAULT,
+        //cursor colors
+        .cursor_fill =                     CURSOR_FILL_DEFAULT,
+        .cursor_outline =                  CURSOR_OUTLINE_DEFAULT,
+        //window borders
         .border_bevel_dark =               WINDOW_BORDER_BEVEL_DARK_DEFAULT,
         .border_bevel_light =              WINDOW_BORDER_BEVEL_LIGHT_DEFAULT,
         .border_bevel_medium =             WINDOW_BORDER_BEVEL_MEDIUM_DEFAULT,

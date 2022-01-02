@@ -602,40 +602,43 @@ BB2_17:
 	section	.text,"ax",@progbits
 	public	_optix_RenderMenu_default
 _optix_RenderMenu_default:
-	ld	hl, -171
+	ld	hl, -175
 	call	__frameset
-	ld	iy, 46
+	ld	de, -136
+	lea	iy, ix + 0
+	add	iy, de
 	ld	bc, 0
 	lea	hl, ix + -52
 	push	ix
-	ld	de, -156
+	ld	de, -157
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
 	lea	de, ix + -89
 	ld	(ix + -3), bc
 	push	ix
-	ld	bc, -144
+	ld	bc, -145
 	add	ix, bc
 	ld	(ix + 0), de
 	pop	ix
 	lea	de, ix + -98
 	push	ix
-	ld	bc, -153
+	ld	bc, -154
 	add	ix, bc
 	ld	(ix + 0), de
 	pop	ix
 	push	ix
-	ld	bc, -135
+	ld	bc, -160
 	add	ix, bc
-	lea	de, ix + 0
+	ld	(ix + 0), iy
 	pop	ix
-	push	ix
-	ld	bc, -141
-	add	ix, bc
-	ld	(ix + 0), de
-	pop	ix
-	push	iy
+	lea	de, iy + 0
+	ld	bc, -142
+	lea	iy, ix + 0
+	add	iy, bc
+	ld	(iy + 0), de
+	ld	de, 46
+	push	de
 	ld	bc, (ix + -3)
 	push	bc
 	push	hl
@@ -648,7 +651,7 @@ _optix_RenderMenu_default:
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -144
+	ld	bc, -145
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -657,24 +660,24 @@ _optix_RenderMenu_default:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -156
+	ld	bc, -157
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	ld	(ix + -98), hl
-	ld	bc, -144
+	ld	bc, -145
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
 	ld	(ix + -95), hl
 	ld	hl, 0
 	ld	(ix + -92), hl
-	ld	hl, 37
+	ld	hl, 38
 	push	hl
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -141
+	ld	bc, -142
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -683,14 +686,14 @@ _optix_RenderMenu_default:
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	bc, -153
+	ld	bc, -154
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	(ix + -108), hl
+	ld	(ix + -109), hl
 	ld	hl, 2
 	push	hl
-	ld	bc, -141
+	ld	bc, -142
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -722,12 +725,12 @@ BB3_2:
 	call	__imulu
 	ld	(ix + -3), bc
 	push	ix
-	ld	bc, -147
+	ld	bc, -148
 	add	ix, bc
 	ld	(ix + 0), hl
 	pop	ix
 	push	ix
-	ld	bc, -150
+	ld	bc, -151
 	add	ix, bc
 	ld	(ix + 0), de
 	pop	ix
@@ -737,7 +740,7 @@ BB3_3:
 	ld	hl, (iy + 65)
 	call	__imulu
 	ld	(ix + -3), de
-	ld	de, -150
+	ld	de, -151
 	lea	iy, ix + 0
 	add	iy, de
 	ld	bc, (iy + 0)
@@ -746,7 +749,7 @@ BB3_3:
 	pop	bc
 	ld	de, (ix + -3)
 	ld	(ix + -3), bc
-	ld	bc, -138
+	ld	bc, -139
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	(hl), de
@@ -765,7 +768,7 @@ BB3_3:
 	jq	nz, BB3_7
 	ld	iy, (ix + 6)
 	ld	bc, (iy + 56)
-	ld	de, -138
+	ld	de, -139
 	lea	hl, ix + 0
 	add	hl, de
 	ld	hl, (hl)
@@ -774,7 +777,7 @@ BB3_3:
 	jq	z, BB3_7
 	ld	iy, (ix + 6)
 	ld	bc, (iy + 71)
-	ld	de, -138
+	ld	de, -139
 	lea	hl, ix + 0
 	add	hl, de
 	ld	hl, (hl)
@@ -782,11 +785,11 @@ BB3_3:
 	sbc	hl, bc
 	jq	nz, BB3_32
 BB3_7:
-	ld	bc, -153
+	ld	bc, -154
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
-	ld	(ix + -108), hl
+	ld	(ix + -109), hl
 	ld	iy, (ix + 6)
 	ld	hl, (iy + 50)
 	add	hl, bc
@@ -794,7 +797,7 @@ BB3_7:
 	sbc	hl, bc
 	jq	z, BB3_10
 	push	ix
-	ld	bc, -147
+	ld	bc, -148
 	add	ix, bc
 	ld	de, (ix + 0)
 	pop	ix
@@ -810,7 +813,7 @@ BB3_10:
 	jq	BB3_11
 BB3_9:
 	ld	(ix + -20), hl
-	ld	bc, -156
+	ld	bc, -157
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -820,7 +823,7 @@ BB3_9:
 	or	a, a
 	sbc	hl, hl
 	push	hl
-	ld	bc, -156
+	ld	bc, -157
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -841,7 +844,7 @@ BB3_11:
 	or	a, a
 	sbc	hl, bc
 	push	ix
-	ld	de, -138
+	ld	de, -139
 	push	af
 	add	ix, de
 	pop	af
@@ -849,7 +852,7 @@ BB3_11:
 	pop	ix
 	jq	z, BB3_18
 	ld	(ix + -3), bc
-	ld	bc, -147
+	ld	bc, -148
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	de, (hl)
@@ -899,7 +902,7 @@ BB3_17:
 	ld	(ix + -59), hl
 	ld	hl, 1
 	push	hl
-	ld	de, -144
+	ld	de, -145
 	lea	hl, ix + 0
 	add	hl, de
 	ld	hl, (hl)
@@ -916,8 +919,8 @@ BB3_17:
 	ld	(ix + -78), a
 	ld	de, (ix + -59)
 BB3_19:
-	ld	hl, (ix + -108)
-	ld	bc, -150
+	ld	hl, (ix + -109)
+	ld	bc, -151
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	(iy + 0), hl
@@ -950,7 +953,7 @@ BB3_23:
 	push	hl
 	pop	de
 	ld	(ix + -3), bc
-	ld	bc, -150
+	ld	bc, -151
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	iy, (iy + 0)
@@ -962,19 +965,19 @@ BB3_23:
 	pop	iy
 	ld	hl, (iy + 1)
 	push	ix
-	ld	de, -162
+	ld	de, -166
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
 	ld	bc, (ix + -3)
 	ld	bc, (iy + 65)
-	ld	de, -138
+	ld	de, -139
 	lea	hl, ix + 0
 	add	hl, de
 	ld	hl, (hl)
 	call	__irems
 	push	ix
-	ld	de, -165
+	ld	de, -169
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
@@ -984,7 +987,7 @@ BB3_23:
 	ld	l, (iy + 7)
 	ld	h, (iy + 8)
 	ld	(ix + -3), de
-	ld	de, -168
+	ld	de, -172
 	lea	iy, ix + 0
 	add	iy, de
 	ld	(iy + 0), hl
@@ -994,7 +997,7 @@ BB3_23:
 	ld	de, (ix + -3)
 	ld	(ix + -3), bc
 	push	ix
-	ld	bc, -159
+	ld	bc, -163
 	add	ix, bc
 	ld	(ix + 0), de
 	pop	ix
@@ -1004,7 +1007,7 @@ BB3_23:
 	ld	bc, (ix + -3)
 	call	__irems
 	ld	(ix + -3), bc
-	ld	bc, -171
+	ld	bc, -175
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	(iy + 0), hl
@@ -1013,7 +1016,7 @@ BB3_23:
 	ld	bc, (ix + -3)
 	ld	(ix + -3), de
 	push	ix
-	ld	de, -150
+	ld	de, -151
 	add	ix, de
 	ld	(ix + 0), bc
 	pop	ix
@@ -1021,7 +1024,7 @@ BB3_23:
 	push	hl
 	pop	bc
 	push	ix
-	ld	de, -168
+	ld	de, -172
 	add	ix, de
 	ld	hl, (ix + 0)
 	pop	ix
@@ -1030,7 +1033,7 @@ BB3_23:
 	push	hl
 	pop	iy
 	push	ix
-	ld	bc, -171
+	ld	bc, -175
 	add	ix, bc
 	ld	hl, (ix + 0)
 	pop	ix
@@ -1046,34 +1049,39 @@ BB3_25:
 	ld	e, iyl
 	ld	d, iyh
 	ex	de, hl
-	ld	(ix + -128), l
-	ld	(ix + -127), h
+	push	ix
+	ld	de, -129
+	add	ix, de
+	ld	(ix + 0), l
+	ld	(ix + 1), h
+	pop	ix
 	lea	hl, iy + 0
 	ld	bc, 65535
 	call	__iand
-	ld	de, -165
+	ld	de, -169
 	lea	iy, ix + 0
 	add	iy, de
 	ld	bc, (iy + 0)
 	call	__imulu
 	ld	(ix + -3), bc
 	push	ix
-	ld	bc, -162
+	ld	bc, -166
 	add	ix, bc
 	ld	de, (ix + 0)
 	pop	ix
 	add	hl, de
 	push	ix
-	ld	bc, -134
+	ld	bc, -160
 	add	ix, bc
-	ld	(ix + 0), hl
+	ld	iy, (ix + 0)
 	pop	ix
+	ld	(iy + 1), hl
 	ld	hl, (ix + 6)
 	push	hl
 	pop	iy
 	ld	hl, (iy + 4)
 	push	ix
-	ld	bc, -162
+	ld	bc, -166
 	add	ix, bc
 	ld	(ix + 0), hl
 	pop	ix
@@ -1085,20 +1093,20 @@ BB3_25:
 	push	hl
 	pop	de
 	push	ix
-	ld	bc, -138
+	ld	bc, -139
 	add	ix, bc
 	ld	hl, (ix + 0)
 	pop	ix
 	add	hl, de
 	ld	bc, (ix + -3)
 	push	ix
-	ld	de, -150
+	ld	de, -151
 	add	ix, de
 	ld	bc, (ix + 0)
 	pop	ix
 	call	__idivs
 	push	ix
-	ld	de, -165
+	ld	de, -169
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
@@ -1109,7 +1117,7 @@ BB3_25:
 	sbc	hl, hl
 	ld	l, a
 	ld	(ix + -3), bc
-	ld	bc, -168
+	ld	bc, -172
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	(iy + 0), hl
@@ -1121,18 +1129,18 @@ BB3_25:
 	pop	iy
 	ld	(ix + -3), de
 	push	ix
-	ld	de, -159
+	ld	de, -163
 	add	ix, de
 	ld	hl, (ix + 0)
 	pop	ix
 	push	ix
-	ld	de, -150
+	ld	de, -151
 	add	ix, de
 	ld	bc, (ix + 0)
 	pop	ix
 	call	__idivs
 	push	ix
-	ld	de, -159
+	ld	de, -163
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
@@ -1142,7 +1150,7 @@ BB3_25:
 	dec	de
 	ld	(ix + -3), de
 	push	ix
-	ld	de, -150
+	ld	de, -151
 	add	ix, de
 	ld	(ix + 0), iy
 	pop	ix
@@ -1150,7 +1158,7 @@ BB3_25:
 	call	__imulu
 	push	hl
 	pop	bc
-	ld	de, -168
+	ld	de, -172
 	lea	iy, ix + 0
 	add	iy, de
 	ld	hl, (iy + 0)
@@ -1159,7 +1167,7 @@ BB3_25:
 	push	hl
 	pop	iy
 	push	ix
-	ld	bc, -159
+	ld	bc, -163
 	add	ix, bc
 	ld	hl, (ix + 0)
 	pop	ix
@@ -1169,34 +1177,34 @@ BB3_25:
 	jq	z, BB3_27
 	ld	iy, 0
 BB3_27:
-	ld	bc, -150
+	ld	bc, -151
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	de, (hl)
 	add	iy, de
 	ld	a, iyl
-	ld	(ix + -126), a
+	ld	(ix + -127), a
 	lea	hl, iy + 0
 	ld	bc, 255
 	call	__iand
-	ld	de, -165
+	ld	de, -169
 	lea	iy, ix + 0
 	add	iy, de
 	ld	bc, (iy + 0)
 	call	__imulu
 	ld	(ix + -3), bc
 	push	ix
-	ld	bc, -162
+	ld	bc, -166
 	add	ix, bc
 	ld	de, (ix + 0)
 	pop	ix
 	add	hl, de
 	push	ix
-	ld	de, -131
+	ld	de, -132
 	add	ix, de
 	ld	(ix + 0), hl
 	pop	ix
-	ld	de, -141
+	ld	de, -142
 	lea	hl, ix + 0
 	add	hl, de
 	ld	hl, (hl)
@@ -1212,7 +1220,7 @@ BB3_27:
 	ld	a, 0
 	jq	nz, BB3_31
 	ld	de, (iy + 56)
-	ld	bc, -138
+	ld	bc, -139
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	hl, (hl)
@@ -1224,13 +1232,13 @@ BB3_27:
 BB3_30:
 BB3_31:
 	and	a, 1
-	ld	(ix + -121), a
-	ld	hl, (ix + -108)
+	ld	(ix + -122), a
+	ld	hl, (ix + -109)
 	push	hl
 	call	_optix_RecursiveSetNeedsRedraw
 	pop	hl
-	ld	hl, (ix + -114)
-	ld	bc, -141
+	ld	hl, (ix + -115)
+	ld	bc, -142
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	de, (iy + 0)
@@ -1239,25 +1247,25 @@ BB3_31:
 	ld	iy, (ix + 6)
 	pop	hl
 	ld	hl, (iy + 59)
-	ld	bc, -150
+	ld	bc, -151
 	lea	iy, ix + 0
 	add	iy, bc
 	ld	(iy + 0), hl
 BB3_32:
-	ld	bc, -138
+	ld	bc, -139
 	lea	hl, ix + 0
 	add	hl, bc
 	ld	de, (hl)
 	inc	de
 	ld	bc, 3
 	ld	(ix + -3), de
-	ld	de, -147
+	ld	de, -148
 	lea	iy, ix + 0
 	add	iy, de
 	ld	hl, (iy + 0)
 	add	hl, bc
 	push	ix
-	ld	bc, -147
+	ld	bc, -148
 	add	ix, bc
 	ld	(ix + 0), hl
 	pop	ix

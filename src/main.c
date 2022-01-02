@@ -132,7 +132,7 @@ void main(void) {
          .min_width = 25,
          .min_height = 25,
       },
-      .text_centering = {.y_centering = OPTIX_CENTERING_CENTERED, .x_centering = OPTIX_CENTERING_CENTERED},
+      .text_centering = {.y_centering = OPTIX_CENTERING_LEFT, .x_centering = OPTIX_CENTERING_CENTERED, .x_offset = 4},
       .rows = 2,
       .columns = 2,
       .text = test_text_b,
@@ -208,7 +208,7 @@ void main(void) {
    };
    optix_InitializeWidget(&test_title_bar.widget, OPTIX_WINDOW_TITLE_BAR_TYPE);
    //another window
-   char temp[100] = "NO";
+   char temp[1000] = "NO";
    char *temp_b = "Here is some test text to see if the word wrapping routine works as it should. Hopefully it does. Does this work? Does it now? I'm just going to keep adding more text and hope it doesn't implode.";
    struct optix_text test_text2 = {
       .widget = {.transform = {.width = 80, .height = 50}},
@@ -221,18 +221,27 @@ void main(void) {
    optix_InitializeWidget(&test_text2.widget, OPTIX_TEXT_TYPE);
    //test_text2.widget.update(&test_text2.widget);
    test_text2.widget.centering.x_centering = test_text2.widget.centering.y_centering = OPTIX_CENTERING_CENTERED;
+   char *temp_c = "Test text, edit me! I'll make this a little longer so that it wraps.";
    struct optix_input_box test_input_box = {
-      .widget = {
-         .transform = {.width = 100, .height = 12},
-         .child = NULL,
-         .centering = {.x_centering = OPTIX_CENTERING_CENTERED, .y_centering = OPTIX_CENTERING_TOP},
+      .text = {
+         .widget = {
+            .transform = {.width = 80, .height = 60},
+            .centering = {.x_centering = OPTIX_CENTERING_CENTERED, .y_centering = OPTIX_CENTERING_TOP},
+         },
+         .text = temp,
+         .alignment = OPTIX_CENTERING_CENTERED,
+         .x_offset = 0,
+         .min = 0,
+         .needs_offset_update = true,
+         .background_rectangle = true,
       },
       .cursor_offset = 0,
+      .current_line = 0,
       .has_max_length = false,
       .mode = 0,
       .text = &test_text2,
    };
-   optix_InitializeWidget(&test_input_box.widget, OPTIX_INPUT_BOX_TYPE);
+   optix_InitializeWidget(&test_input_box.text.widget, OPTIX_INPUT_BOX_TYPE);
    struct optix_window test_window2 = {
       .widget = {
          .transform = {
@@ -241,7 +250,7 @@ void main(void) {
             .width = 100,
             .height = 100,
          },
-         .child = (struct optix_widget *[]) {&test_text2.widget, NULL},
+         .child = (struct optix_widget *[]) {&test_input_box.text.widget, NULL},
       },
       .resize_info = {
          .resizable = true,
@@ -275,7 +284,7 @@ void main(void) {
             .child = NULL,
          },
       },
-      .value = &test_bool,
+      .value = &settings.cursor_active,
    };
    optix_InitializeWidget(&test_check_box.button.widget, OPTIX_CHECK_BOX_TYPE);
    int test_int = 0;
@@ -303,16 +312,19 @@ void main(void) {
    optix_SetPosition(&test_window.widget, 50, 30);
    optix_SetPosition(&test_window2.widget, 120, 60);
    current_context->data->gui_needs_full_redraw = true;
-   dbg_sprintf(dbgout, "X: %d, Y: %d\n", widget->transform.x, widget->transform.y);
-   dbg_sprintf(dbgout, "We finished?!\n");
-   struct optix_widget *test_stack[] = {&test_rectangle.widget, &test_check_box.button.widget, &test_slider.widget, widget, &test_title_bar2.widget, &test_title_bar.widget, NULL};   
+   //dbg_sprintf(dbgout, "X: %d, Y: %d\n", widget->transform.x, widget->transform.y);
+   //dbg_sprintf(dbgout, "We finished?!\n");
+   struct optix_widget *test_stack[] = {&test_rectangle.widget, &test_check_box.button.widget, &test_slider.widget, &test_title_bar2.widget, &test_title_bar.widget, NULL};
+   bool active = settings.cursor_active;
+   settings.cursor_active = false;
    optix_SetCurrentSelection(&test_check_box.button.widget);
+   settings.cursor_active = active;
    //add it to the context
    context.stack = &test_stack;
    do {
-      dbg_sprintf(dbgout, "Updating...\n");
+      //dbg_sprintf(dbgout, "Updating...\n");
       optix_UpdateGUI();
-      dbg_sprintf(dbgout, "Rendering...\n");
+      //dbg_sprintf(dbgout, "Rendering...\n");
       optix_RenderGUI();
       gfx_Blit(1);
    } while (!(kb_Data[6] & kb_Clear));

@@ -203,26 +203,21 @@ BB1_5:
 	public	_optix_CopyElementHandleSpecialCase
 _optix_CopyElementHandleSpecialCase:
 	call	__frameset0
-	ld	iy, (ix + 6)
-	ld	hl, (ix + 9)
-	ld	a, (hl)
+	ld	iy, (ix + 9)
+	ld	a, (iy)
 	cp	a, 5
-	jq	z, BB2_3
-	cp	a, 8
-	jq	nz, BB2_5
-BB2_3:
-	ex	de, hl
-	ld	iy, (iy)
-	lea	hl, iy + 30
+	jq	nz, BB2_2
+	ld	hl, (ix + 6)
+	ld	de, (hl)
+	ld	hl, (iy + 30)
+	push	hl
 	push	de
 	pop	iy
-	ld	de, (iy + 30)
-	push	de
-	push	hl
+	pea	iy + 30
 	call	_optix_CopyElement
 	pop	hl
 	pop	hl
-BB2_5:
+BB2_2:
 	pop	ix
 	ret
 	section	.text,"ax",@progbits
@@ -424,15 +419,15 @@ L___const.optix_InitializeWidget.render:
 L_switch.table.optix_GetSize:
 	dw	46
 	dw	37
-	dw	37
+	dw	38
 	dw	74
 	dw	43
 	dw	33
 	dw	36
 	dw	33
-	dw	41
+	dw	57
 	dw	34
-	dw	40
+	dw	41
 	dw	42
 
 	ident	"clang version 12.0.0 (https://github.com/jacobly0/llvm-project 170be88120e3aa88c20eea5615ba76b8f1d6c647)"

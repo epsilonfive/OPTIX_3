@@ -1,25 +1,30 @@
 #include "slider.h"
 
+#include "../gui_control.h"
+#include "../shapes.h"
+#include "../colors.h"
+#include "../cursor.h"
+#include "../input.h"
+#include "../util.h"
+
+
 //functions
 void optix_UpdateSlider_default(struct optix_widget *widget) {
     struct optix_slider *slider = (struct optix_slider *) widget;
-    //dbg_sprintf(dbgout, "Updating slider...\n");
     if (widget->state.visible && optix_CheckTransformOverlap(&current_context->cursor->widget, widget)) {
         //too easy
-        bool left_pressed = current_context->settings->cursor_active ? (kb_Data[6] & kb_Sub) : (kb_Data[7] & kb_Left);
-        bool right_pressed = current_context->settings->cursor_active ? (kb_Data[6] & kb_Add) : (kb_Data[7] & kb_Right);
+        bool left_pressed = current_context->settings->cursor_active ? optix_DefaultKeyIsDown(KEY_SUB) : optix_DefaultKeyIsDown(KEY_LEFT);
+        bool right_pressed = current_context->settings->cursor_active ? optix_DefaultKeyIsDown(KEY_ADD) : optix_DefaultKeyIsDown(KEY_RIGHT);
         if (left_pressed || right_pressed) {
+            if (left_pressed) *(slider->value) -= 1;
+            if (right_pressed) *(slider->value) += 1;
             widget->state.needs_redraw = true;
-            current_context->data->can_press = false;
         }
-        if (left_pressed) *(slider->value) -= 1;
-        if (right_pressed) *(slider->value) += 1;
+
         //handle out of bounds
         if (*slider->value > slider->max) *slider->value = slider->max;
         if (*slider->value < slider->min) *slider->value = slider->min;
-        dbg_sprintf(dbgout, "Current value: %d\n", *slider->value);
     }
-    //dbg_sprintf(dbgout, "Finished.\n");
 }
 
 void optix_RenderSlider_default(struct optix_widget *widget) {

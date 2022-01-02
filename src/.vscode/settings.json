@@ -11,6 +11,7 @@
         "util.h": "c",
         "slider.h": "c",
         "check_box.h": "c",
-        "input_box.h": "c"
+        "input_box.h": "c",
+        "gui_control.h": "c"
     }
 }

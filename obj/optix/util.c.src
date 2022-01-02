@@ -370,42 +370,22 @@ _optix_RecursiveAlign:
 	push	hl
 	call	_optix_RecursiveAlign
 	ld	iy, (ix + 6)
-	jq	BB6_4
+	pop	hl
 BB6_2:
-	cp	a, 8
-	jq	nz, BB6_5
-	ld	iy, (ix + 6)
-	ld	iy, (iy + 30)
-	ld	a, (iy + 10)
-	ld	l, (iy + 11)
-	push	hl
-	ld	l, a
-	push	hl
-	ld	hl, (ix + 6)
-	push	hl
-	push	iy
-	call	_optix_AlignTransformToTransform
-	ld	iy, (ix + 6)
-	pop	hl
-	pop	hl
-	pop	hl
-BB6_4:
-	pop	hl
-BB6_5:
 	lea	bc, iy + 0
 	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	nz, BB6_7
-BB6_6:
+	jq	nz, BB6_3
+BB6_8:
 	ld	sp, ix
 	pop	ix
 	ret
-BB6_7:
+BB6_3:
 	ld	iy, 0
-BB6_8:
-	ld	(ix + -6), iy
+BB6_4:
+	ld	(ix + -3), iy
 	lea	de, iy + 0
 	add	hl, de
 	ld	iy, (hl)
@@ -413,7 +393,7 @@ BB6_8:
 	add	hl, bc
 	or	a, a
 	sbc	hl, bc
-	jq	z, BB6_6
+	jq	z, BB6_8
 	ld	a, (iy + 10)
 	ld	l, (iy + 11)
 	push	hl
@@ -421,33 +401,13 @@ BB6_8:
 	push	hl
 	push	bc
 	push	iy
-	ld	(ix + -3), iy
+	ld	(ix + -6), iy
 	call	_optix_AlignTransformToTransform
-	ld	iy, (ix + -3)
+	ld	iy, (ix + -6)
 	pop	hl
 	pop	hl
 	pop	hl
 	pop	hl
-	ld	a, (iy)
-	cp	a, 8
-	jq	nz, BB6_11
-	ld	iy, (ix + -3)
-	ld	iy, (iy + 30)
-	ld	a, (iy + 10)
-	ld	l, (iy + 11)
-	push	hl
-	ld	l, a
-	push	hl
-	ld	hl, (ix + -3)
-	push	hl
-	push	iy
-	call	_optix_AlignTransformToTransform
-	ld	iy, (ix + -3)
-	pop	hl
-	pop	hl
-	pop	hl
-	pop	hl
-BB6_11:
 	ld	hl, (iy + 27)
 	add	hl, bc
 	or	a, a
@@ -458,10 +418,10 @@ BB6_11:
 	ld	iy, (ix + 6)
 	lea	bc, iy + 0
 	ld	hl, (iy + 27)
-	ld	iy, (ix + -6)
+	ld	iy, (ix + -3)
 	ld	de, 3
 	add	iy, de
-	jq	BB6_8
+	jq	BB6_4
 	section	.text,"ax",@progbits
 
 	section	.text,"ax",@progbits
@@ -540,6 +500,7 @@ _optix_CycleSelectedElement:
 	ld	hl, -9
 	call	__frameset
 	ld	iy, (ix + 6)
+	ld	bc, 0
 	lea	hl, iy + 0
 	add	hl, bc
 	or	a, a
@@ -554,7 +515,7 @@ _optix_CycleSelectedElement:
 	jq	z, BB8_26
 	lea	hl, iy + 3
 	ld	(ix + -3), hl
-	ld	bc, 0
+	ld	(ix + -6), bc
 BB8_3:
 	push	de
 	pop	iy
@@ -569,23 +530,25 @@ BB8_3:
 	xor	a, l
 	bit	0, a
 	jq	nz, BB8_7
-	inc	bc
+	ld	hl, (ix + -6)
+	inc	hl
+	ld	(ix + -6), hl
 	ld	iy, (ix + -3)
 	ld	de, (iy)
 	lea	iy, iy + 3
 	ld	(ix + -3), iy
 	jq	BB8_3
 BB8_6:
-	ld	de, 0
+	push	bc
+	pop	de
 	ld	iy, (ix + 6)
 	jq	BB8_8
 BB8_7:
 	ld	iy, (ix + 6)
-	push	bc
-	pop	de
+	ld	de, (ix + -6)
 BB8_8:
 	ld	bc, 3
-	ld	(ix + -9), de
+	ld	(ix + -6), de
 BB8_9:
 	inc	de
 	push	de
@@ -602,7 +565,7 @@ BB8_9:
 	jq	z, BB8_11
 	ex	de, hl
 BB8_11:
-	ld	(ix + -6), hl
+	ld	(ix + -9), hl
 	ld	de, 3
 	push	de
 	pop	bc
@@ -614,20 +577,18 @@ BB8_11:
 	pop	iy
 	add	iy, de
 	ld	iy, (iy)
-	lea	hl, iy + 0
-	ld	(ix + -3), hl
-	ld	l, (iy)
-	ld	a, l
-	and	a, -2
-	cp	a, 4
-	ld	de, (ix + -6)
+	ld	(ix + -3), iy
+	ld	a, (iy + 16)
+	ld	l, 1
+	xor	a, l
+	bit	0, a
+	ld	de, (ix + -9)
 	push	bc
 	pop	iy
 	ld	bc, 3
 	jq	nz, BB8_9
-	ld	(ix + -6), l
 	ld	bc, 3
-	ld	hl, (ix + -9)
+	ld	hl, (ix + -6)
 	call	__imulu
 	push	hl
 	pop	de
@@ -643,10 +604,9 @@ BB8_14:
 	ld	iy, (ix + -3)
 	ld	(iy + 17), 1
 	ld	(iy + 14), 1
-	ld	c, (ix + -6)
-	ld	a, c
+	ld	e, (iy)
+	ld	a, e
 	cp	a, 5
-	ld	e, 1
 	jq	nz, BB8_16
 	ld	iy, (ix + -3)
 	ld	iy, (iy + 30)
@@ -657,11 +617,12 @@ BB8_16:
 	ld	hl, (_current_context)
 	ld	hl, (hl)
 	ld	a, (hl)
-	xor	a, e
-	xor	a, e
+	ld	l, 1
+	xor	a, l
+	xor	a, l
 	bit	0, a
 	jq	nz, BB8_26
-	ld	a, c
+	ld	a, e
 	cp	a, 5
 	jq	nz, BB8_21
 	ld	iy, (ix + -3)
